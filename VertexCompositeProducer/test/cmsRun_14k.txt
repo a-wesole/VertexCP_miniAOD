@@ -1,0 +1,238 @@
+11-Jul-2025 14:13:03 EDT  Initiating request to open file root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/757/00000/a5619779-08dc-44e2-b21d-03f27b4ef2a9.root
+11-Jul-2025 14:13:25 EDT  Successfully opened file root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/757/00000/a5619779-08dc-44e2-b21d-03f27b4ef2a9.root
+/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/data/XGBoost_Model_0428_0_OnlyPrompt.onnx
+the following should be path to csv file
+cuts filename: /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeAnalyzer/data/bdt_cuts.csv
+ &&&&&&&&&&&&&&&&&& 
+isCentrality_ = 1
+ &&&&&&&&&&&&&&&&&& 
+%MSG-w FastCloningDisabled:  AfterModBeginStream 11-Jul-2025 14:13:39 EDT  BeforeEvents
+Fast copying of file root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/757/00000/a5619779-08dc-44e2-b21d-03f27b4ef2a9.root to file edm.root is disabled because:
+a run or a lumi is not contiguous in the input file.
+
+%MSG
+Begin processing the 1st record. Run 374757, Event 4768, LumiSection 1 on stream 0 at 11-Jul-2025 14:13:49.200 EDT
+Begin processing the 101st record. Run 374757, Event 49781, LumiSection 4 on stream 0 at 11-Jul-2025 14:13:56.658 EDT
+Begin processing the 201st record. Run 374757, Event 123431, LumiSection 9 on stream 0 at 11-Jul-2025 14:13:57.016 EDT
+Begin processing the 301st record. Run 374757, Event 201328, LumiSection 14 on stream 0 at 11-Jul-2025 14:13:57.377 EDT
+Begin processing the 401st record. Run 374757, Event 253728, LumiSection 18 on stream 0 at 11-Jul-2025 14:13:57.605 EDT
+Begin processing the 501st record. Run 374757, Event 319104, LumiSection 22 on stream 0 at 11-Jul-2025 14:13:58.281 EDT
+Begin processing the 601st record. Run 374757, Event 388448, LumiSection 27 on stream 0 at 11-Jul-2025 14:13:59.127 EDT
+Begin processing the 701st record. Run 374757, Event 451207, LumiSection 31 on stream 0 at 11-Jul-2025 14:13:59.324 EDT
+Begin processing the 801st record. Run 374757, Event 512480, LumiSection 35 on stream 0 at 11-Jul-2025 14:13:59.519 EDT
+Begin processing the 901st record. Run 374757, Event 565127, LumiSection 39 on stream 0 at 11-Jul-2025 14:14:24.219 EDT
+Begin processing the 1001st record. Run 374757, Event 618741, LumiSection 43 on stream 0 at 11-Jul-2025 14:14:25.047 EDT
+Begin processing the 1101st record. Run 374757, Event 698529, LumiSection 48 on stream 0 at 11-Jul-2025 14:14:25.144 EDT
+Begin processing the 1201st record. Run 374757, Event 766750, LumiSection 53 on stream 0 at 11-Jul-2025 14:14:25.249 EDT
+Begin processing the 1301st record. Run 374757, Event 848901, LumiSection 58 on stream 0 at 11-Jul-2025 14:14:25.359 EDT
+Begin processing the 1401st record. Run 374757, Event 911905, LumiSection 63 on stream 0 at 11-Jul-2025 14:14:25.476 EDT
+Begin processing the 1501st record. Run 374757, Event 971378, LumiSection 67 on stream 0 at 11-Jul-2025 14:14:25.576 EDT
+Begin processing the 1601st record. Run 374757, Event 1047584, LumiSection 72 on stream 0 at 11-Jul-2025 14:14:25.683 EDT
+Begin processing the 1701st record. Run 374757, Event 1120505, LumiSection 77 on stream 0 at 11-Jul-2025 14:14:25.857 EDT
+Begin processing the 1801st record. Run 374757, Event 1184224, LumiSection 81 on stream 0 at 11-Jul-2025 14:14:26.048 EDT
+Begin processing the 1901st record. Run 374757, Event 1260953, LumiSection 86 on stream 0 at 11-Jul-2025 14:14:26.529 EDT
+Begin processing the 2001st record. Run 374757, Event 1329985, LumiSection 91 on stream 0 at 11-Jul-2025 14:14:26.627 EDT
+Begin processing the 2101st record. Run 374757, Event 1413525, LumiSection 97 on stream 0 at 11-Jul-2025 14:14:26.729 EDT
+Begin processing the 2201st record. Run 374757, Event 1468888, LumiSection 101 on stream 0 at 11-Jul-2025 14:14:26.844 EDT
+Begin processing the 2301st record. Run 374757, Event 1555217, LumiSection 106 on stream 0 at 11-Jul-2025 14:14:26.960 EDT
+Begin processing the 2401st record. Run 374757, Event 1599769, LumiSection 110 on stream 0 at 11-Jul-2025 14:14:27.069 EDT
+Begin processing the 2501st record. Run 374757, Event 1679333, LumiSection 115 on stream 0 at 11-Jul-2025 14:14:27.271 EDT
+Begin processing the 2601st record. Run 374757, Event 1763401, LumiSection 121 on stream 0 at 11-Jul-2025 14:14:27.373 EDT
+Begin processing the 2701st record. Run 374757, Event 1819695, LumiSection 125 on stream 0 at 11-Jul-2025 14:14:27.478 EDT
+Begin processing the 2801st record. Run 374757, Event 1893412, LumiSection 130 on stream 0 at 11-Jul-2025 14:14:27.943 EDT
+Begin processing the 2901st record. Run 374757, Event 1972019, LumiSection 135 on stream 0 at 11-Jul-2025 14:14:28.041 EDT
+Begin processing the 3001st record. Run 374757, Event 2040045, LumiSection 140 on stream 0 at 11-Jul-2025 14:14:28.148 EDT
+Begin processing the 3101st record. Run 374757, Event 2108201, LumiSection 144 on stream 0 at 11-Jul-2025 14:14:28.256 EDT
+Begin processing the 3201st record. Run 374757, Event 2180448, LumiSection 149 on stream 0 at 11-Jul-2025 14:14:28.372 EDT
+Begin processing the 3301st record. Run 374757, Event 2257711, LumiSection 155 on stream 0 at 11-Jul-2025 14:14:28.467 EDT
+Begin processing the 3401st record. Run 374757, Event 2329136, LumiSection 159 on stream 0 at 11-Jul-2025 14:14:28.561 EDT
+Begin processing the 3501st record. Run 374757, Event 2388728, LumiSection 164 on stream 0 at 11-Jul-2025 14:14:28.731 EDT
+Begin processing the 3601st record. Run 374757, Event 2461295, LumiSection 169 on stream 0 at 11-Jul-2025 14:14:29.206 EDT
+Begin processing the 3701st record. Run 374757, Event 2537991, LumiSection 174 on stream 0 at 11-Jul-2025 14:14:29.814 EDT
+Begin processing the 3801st record. Run 374757, Event 2611151, LumiSection 179 on stream 0 at 11-Jul-2025 14:14:29.915 EDT
+Begin processing the 3901st record. Run 374757, Event 2691599, LumiSection 184 on stream 0 at 11-Jul-2025 14:14:30.015 EDT
+Begin processing the 4001st record. Run 374757, Event 2755985, LumiSection 189 on stream 0 at 11-Jul-2025 14:14:30.145 EDT
+Begin processing the 4101st record. Run 374757, Event 2835768, LumiSection 194 on stream 0 at 11-Jul-2025 14:14:30.256 EDT
+Begin processing the 4201st record. Run 374757, Event 2904132, LumiSection 199 on stream 0 at 11-Jul-2025 14:14:30.360 EDT
+Begin processing the 4301st record. Run 374757, Event 2982858, LumiSection 204 on stream 0 at 11-Jul-2025 14:14:30.462 EDT
+Begin processing the 4401st record. Run 374757, Event 3045317, LumiSection 209 on stream 0 at 11-Jul-2025 14:14:30.632 EDT
+Begin processing the 4501st record. Run 374757, Event 3119722, LumiSection 214 on stream 0 at 11-Jul-2025 14:14:30.743 EDT
+Begin processing the 4601st record. Run 374757, Event 3213769, LumiSection 220 on stream 0 at 11-Jul-2025 14:14:32.576 EDT
+Begin processing the 4701st record. Run 374757, Event 3294859, LumiSection 225 on stream 0 at 11-Jul-2025 14:14:32.732 EDT
+Begin processing the 4801st record. Run 374757, Event 3356987, LumiSection 230 on stream 0 at 11-Jul-2025 14:14:32.910 EDT
+Begin processing the 4901st record. Run 374757, Event 3424214, LumiSection 234 on stream 0 at 11-Jul-2025 14:14:33.130 EDT
+Begin processing the 5001st record. Run 374757, Event 3494604, LumiSection 239 on stream 0 at 11-Jul-2025 14:14:33.318 EDT
+Begin processing the 5101st record. Run 374757, Event 3566792, LumiSection 244 on stream 0 at 11-Jul-2025 14:14:33.654 EDT
+Begin processing the 5201st record. Run 374757, Event 3636880, LumiSection 249 on stream 0 at 11-Jul-2025 14:14:33.784 EDT
+Begin processing the 5301st record. Run 374757, Event 3695880, LumiSection 253 on stream 0 at 11-Jul-2025 14:14:33.981 EDT
+Begin processing the 5401st record. Run 374757, Event 3795483, LumiSection 259 on stream 0 at 11-Jul-2025 14:14:34.145 EDT
+Begin processing the 5501st record. Run 374757, Event 3867236, LumiSection 264 on stream 0 at 11-Jul-2025 14:14:34.457 EDT
+Begin processing the 5601st record. Run 374757, Event 3951637, LumiSection 270 on stream 0 at 11-Jul-2025 14:14:34.547 EDT
+Begin processing the 5701st record. Run 374757, Event 4039909, LumiSection 276 on stream 0 at 11-Jul-2025 14:14:34.733 EDT
+Begin processing the 5801st record. Run 374757, Event 4107131, LumiSection 281 on stream 0 at 11-Jul-2025 14:14:34.929 EDT
+Begin processing the 5901st record. Run 374757, Event 4197310, LumiSection 287 on stream 0 at 11-Jul-2025 14:14:35.091 EDT
+Begin processing the 6001st record. Run 374757, Event 4269485, LumiSection 292 on stream 0 at 11-Jul-2025 14:14:35.246 EDT
+Begin processing the 6101st record. Run 374757, Event 4363378, LumiSection 298 on stream 0 at 11-Jul-2025 14:14:35.472 EDT
+Begin processing the 6201st record. Run 374757, Event 4437246, LumiSection 303 on stream 0 at 11-Jul-2025 14:14:35.653 EDT
+Begin processing the 6301st record. Run 374757, Event 4497645, LumiSection 307 on stream 0 at 11-Jul-2025 14:14:35.826 EDT
+Begin processing the 6401st record. Run 374757, Event 4564865, LumiSection 312 on stream 0 at 11-Jul-2025 14:14:35.992 EDT
+Begin processing the 6501st record. Run 374757, Event 4621027, LumiSection 316 on stream 0 at 11-Jul-2025 14:14:36.132 EDT
+Begin processing the 6601st record. Run 374757, Event 4692473, LumiSection 321 on stream 0 at 11-Jul-2025 14:14:36.589 EDT
+Begin processing the 6701st record. Run 374757, Event 4772915, LumiSection 326 on stream 0 at 11-Jul-2025 14:14:36.675 EDT
+Begin processing the 6801st record. Run 374757, Event 4863908, LumiSection 332 on stream 0 at 11-Jul-2025 14:14:36.776 EDT
+Begin processing the 6901st record. Run 374757, Event 4951239, LumiSection 338 on stream 0 at 11-Jul-2025 14:14:36.896 EDT
+Begin processing the 7001st record. Run 374757, Event 5013942, LumiSection 343 on stream 0 at 11-Jul-2025 14:14:37.053 EDT
+Begin processing the 7101st record. Run 374757, Event 5125913, LumiSection 350 on stream 0 at 11-Jul-2025 14:14:37.163 EDT
+Begin processing the 7201st record. Run 374757, Event 5191319, LumiSection 355 on stream 0 at 11-Jul-2025 14:14:37.252 EDT
+Begin processing the 7301st record. Run 374757, Event 5301431, LumiSection 361 on stream 0 at 11-Jul-2025 14:14:37.338 EDT
+Begin processing the 7401st record. Run 374757, Event 5379927, LumiSection 365 on stream 0 at 11-Jul-2025 14:14:37.476 EDT
+Begin processing the 7501st record. Run 374757, Event 5430594, LumiSection 368 on stream 0 at 11-Jul-2025 14:14:37.892 EDT
+Begin processing the 7601st record. Run 374757, Event 5517833, LumiSection 373 on stream 0 at 11-Jul-2025 14:14:37.981 EDT
+Begin processing the 7701st record. Run 374757, Event 5598515, LumiSection 377 on stream 0 at 11-Jul-2025 14:14:38.066 EDT
+Begin processing the 7801st record. Run 374757, Event 5671713, LumiSection 381 on stream 0 at 11-Jul-2025 14:14:38.165 EDT
+Begin processing the 7901st record. Run 374757, Event 5758173, LumiSection 386 on stream 0 at 11-Jul-2025 14:14:38.270 EDT
+Begin processing the 8001st record. Run 374757, Event 5869612, LumiSection 391 on stream 0 at 11-Jul-2025 14:14:38.363 EDT
+Begin processing the 8101st record. Run 374757, Event 5940906, LumiSection 395 on stream 0 at 11-Jul-2025 14:14:38.450 EDT
+Begin processing the 8201st record. Run 374757, Event 6006129, LumiSection 399 on stream 0 at 11-Jul-2025 14:14:38.535 EDT
+Begin processing the 8301st record. Run 374757, Event 6082308, LumiSection 403 on stream 0 at 11-Jul-2025 14:14:38.628 EDT
+Begin processing the 8401st record. Run 374757, Event 6195834, LumiSection 408 on stream 0 at 11-Jul-2025 14:14:39.486 EDT
+Begin processing the 8501st record. Run 374757, Event 6268830, LumiSection 411 on stream 0 at 11-Jul-2025 14:14:39.567 EDT
+Begin processing the 8601st record. Run 374757, Event 6338545, LumiSection 414 on stream 0 at 11-Jul-2025 14:14:39.644 EDT
+Begin processing the 8701st record. Run 374757, Event 6429184, LumiSection 417 on stream 0 at 11-Jul-2025 14:14:39.725 EDT
+Begin processing the 8801st record. Run 374757, Event 6536696, LumiSection 421 on stream 0 at 11-Jul-2025 14:14:39.806 EDT
+Begin processing the 8901st record. Run 374757, Event 6606031, LumiSection 424 on stream 0 at 11-Jul-2025 14:14:39.884 EDT
+Begin processing the 9001st record. Run 374757, Event 6688467, LumiSection 427 on stream 0 at 11-Jul-2025 14:14:39.962 EDT
+Begin processing the 9101st record. Run 374757, Event 6769433, LumiSection 430 on stream 0 at 11-Jul-2025 14:14:40.044 EDT
+Begin processing the 9201st record. Run 374757, Event 6844924, LumiSection 433 on stream 0 at 11-Jul-2025 14:14:40.120 EDT
+Begin processing the 9301st record. Run 374757, Event 6934830, LumiSection 436 on stream 0 at 11-Jul-2025 14:14:40.879 EDT
+Begin processing the 9401st record. Run 374757, Event 7005026, LumiSection 439 on stream 0 at 11-Jul-2025 14:14:40.949 EDT
+Begin processing the 9501st record. Run 374757, Event 7080490, LumiSection 442 on stream 0 at 11-Jul-2025 14:14:41.028 EDT
+Begin processing the 9601st record. Run 374757, Event 7190410, LumiSection 446 on stream 0 at 11-Jul-2025 14:14:41.111 EDT
+Begin processing the 9701st record. Run 374757, Event 7286387, LumiSection 449 on stream 0 at 11-Jul-2025 14:14:41.186 EDT
+Begin processing the 9801st record. Run 374757, Event 7353281, LumiSection 452 on stream 0 at 11-Jul-2025 14:14:41.280 EDT
+Begin processing the 9901st record. Run 374757, Event 7431922, LumiSection 455 on stream 0 at 11-Jul-2025 14:14:41.355 EDT
+Begin processing the 10001st record. Run 374757, Event 7509266, LumiSection 458 on stream 0 at 11-Jul-2025 14:14:41.955 EDT
+Begin processing the 10101st record. Run 374757, Event 7554853, LumiSection 460 on stream 0 at 11-Jul-2025 14:14:42.768 EDT
+Begin processing the 10201st record. Run 374757, Event 7657264, LumiSection 464 on stream 0 at 11-Jul-2025 14:15:15.459 EDT
+Begin processing the 10301st record. Run 374757, Event 7756291, LumiSection 467 on stream 0 at 11-Jul-2025 14:15:15.612 EDT
+Begin processing the 10401st record. Run 374757, Event 7813649, LumiSection 470 on stream 0 at 11-Jul-2025 14:15:15.750 EDT
+Begin processing the 10501st record. Run 374757, Event 7915122, LumiSection 473 on stream 0 at 11-Jul-2025 14:15:15.888 EDT
+Begin processing the 10601st record. Run 374757, Event 7997509, LumiSection 477 on stream 0 at 11-Jul-2025 14:15:15.970 EDT
+Begin processing the 10701st record. Run 374757, Event 8086992, LumiSection 480 on stream 0 at 11-Jul-2025 14:15:16.050 EDT
+Begin processing the 10801st record. Run 374757, Event 8163173, LumiSection 483 on stream 0 at 11-Jul-2025 14:15:16.125 EDT
+Begin processing the 10901st record. Run 374757, Event 8254199, LumiSection 487 on stream 0 at 11-Jul-2025 14:15:16.210 EDT
+Begin processing the 11001st record. Run 374757, Event 8352608, LumiSection 492 on stream 0 at 11-Jul-2025 14:15:16.290 EDT
+Begin processing the 11101st record. Run 374757, Event 8474127, LumiSection 499 on stream 0 at 11-Jul-2025 14:15:16.469 EDT
+Begin processing the 11201st record. Run 374757, Event 8573321, LumiSection 505 on stream 0 at 11-Jul-2025 14:15:16.564 EDT
+11-Jul-2025 14:15:16 EDT  Closed file root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/757/00000/a5619779-08dc-44e2-b21d-03f27b4ef2a9.root
+
+TrigReport ---------- Event  Summary ------------
+TrigReport Events total = 11243 passed = 0 failed = 11243
+
+TrigReport ---------- Path   Summary ------------
+TrigReport  Trig Bit#   Executed     Passed     Failed      Error Name
+TrigReport     1    0      11243          0      11243          0 EventSelections
+
+TrigReport -------End-Path   Summary ------------
+TrigReport  Trig Bit#   Executed     Passed     Failed      Error Name
+TrigReport     0    0      11243      11243          0          0 EventInfoAnalysis
+TrigReport     0    1      11243      11243          0          0 outputPath
+
+TrigReport ---------- Modules in Path: EventSelections ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     1    0      11243      11243          0          0 unpackedTracksAndVertices
+TrigReport     1    1      11243      11243          0          0 centralityBin
+TrigReport     1    2      11243       5504       5739          0 hltFilter
+TrigReport     1    3       5504          0       5504          0 primaryVertexFilter
+TrigReport     1    4          0          0          0          0 clusterCompatibilityFilter
+TrigReport     1    5          0          0          0          0 phfCoincFilter2Th4
+TrigReport     1    6          0          0          0          0 generalD0CandidatesNew
+TrigReport     1    7          0          0          0          0 d0selectorNewReduced
+TrigReport     1    8          0          0          0          0 d0ana_newreduced
+
+TrigReport ------ Modules in End-Path: EventInfoAnalysis ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     0    0      11243      11243          0          0 eventinfoana
+
+TrigReport ------ Modules in End-Path: outputPath ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     0    0      11243      11243          0          0 output
+
+TrigReport ---------- Module Summary ------------
+TrigReport    Visited   Executed     Passed     Failed      Error Name
+TrigReport      11243      11243      11243          0          0 EventInfoAnalysis
+TrigReport      11243      11243      11243          0          0 EventSelections
+TrigReport      11243      11243      11243          0          0 TriggerResults
+TrigReport      11243      11243      11243          0          0 centralityBin
+TrigReport          0          0          0          0          0 clusterCompatibilityFilter
+TrigReport          0          0          0          0          0 d0ana_newreduced
+TrigReport          0          0          0          0          0 d0selectorNewReduced
+TrigReport      11243      11243      11243          0          0 eventinfoana
+TrigReport          0          0          0          0          0 generalD0CandidatesNew
+TrigReport      11243      11243       5504       5739          0 hltFilter
+TrigReport      11243      11243      11243          0          0 output
+TrigReport      11243      11243      11243          0          0 outputPath
+TrigReport          0          0          0          0          0 phfCoincFilter2Th4
+TrigReport       5504       5504          0       5504          0 primaryVertexFilter
+TrigReport      11243      11243      11243          0          0 unpackedTracksAndVertices
+
+TimeReport ---------- Event  Summary ---[sec]----
+TimeReport       event loop CPU/event = 0.002118
+TimeReport      event loop Real/event = 0.008726
+TimeReport     sum Streams Real/event = 0.007595
+TimeReport efficiency CPU/Real/thread = 0.242732
+
+TimeReport ---------- Path   Summary ---[Real sec]----
+TimeReport  per event     per exec  Name
+TimeReport   0.007249     0.007249  EventSelections
+TimeReport  per event     per exec  Name
+
+TimeReport -------End-Path   Summary ---[Real sec]----
+TimeReport  per event     per exec  Name
+TimeReport   0.007268     0.007268  EventInfoAnalysis
+TimeReport   0.007540     0.007540  outputPath
+TimeReport  per event     per exec  Name
+
+TimeReport ---------- Modules in Path: EventSelections ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.000035     0.000035  unpackedTracksAndVertices
+TimeReport   0.000003     0.000003  centralityBin
+TimeReport   0.000002     0.000002  hltFilter
+TimeReport   0.000003     0.000006  primaryVertexFilter
+TimeReport   0.000000     0.000000  clusterCompatibilityFilter
+TimeReport   0.000000     0.000000  phfCoincFilter2Th4
+TimeReport   0.000000     0.000000  generalD0CandidatesNew
+TimeReport   0.000000     0.000000  d0selectorNewReduced
+TimeReport   0.000000     0.000000  d0ana_newreduced
+TimeReport  per event    per visit  Name
+
+TimeReport ------ Modules in End-Path: EventInfoAnalysis ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.000002     0.000002  eventinfoana
+
+TimeReport ------ Modules in End-Path: outputPath ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.000062     0.000062  output
+TimeReport  per event    per visit  Name
+
+TimeReport ---------- Module Summary ---[Real sec]----
+TimeReport  per event     per exec    per visit  Name
+TimeReport   0.000001     0.000001     0.000001  EventInfoAnalysis
+TimeReport   0.000001     0.000001     0.000001  EventSelections
+TimeReport   0.000001     0.000001     0.000001  TriggerResults
+TimeReport   0.000003     0.000003     0.000003  centralityBin
+TimeReport   0.000000     0.000000     0.000000  clusterCompatibilityFilter
+TimeReport   0.000000     0.000000     0.000000  d0ana_newreduced
+TimeReport   0.000000     0.000000     0.000000  d0selectorNewReduced
+TimeReport   0.000002     0.000002     0.000002  eventinfoana
+TimeReport   0.000000     0.000000     0.000000  generalD0CandidatesNew
+TimeReport   0.000002     0.000002     0.000002  hltFilter
+TimeReport   0.000062     0.000062     0.000062  output
+TimeReport   0.000003     0.000003     0.000003  outputPath
+TimeReport   0.000000     0.000000     0.000000  phfCoincFilter2Th4
+TimeReport   0.000003     0.000006     0.000006  primaryVertexFilter
+TimeReport   0.000035     0.000035     0.000035  unpackedTracksAndVertices
+TimeReport  per event     per exec    per visit  Name
+
+T---Report end!
+

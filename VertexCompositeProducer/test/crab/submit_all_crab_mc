@@ -1,0 +1,10 @@
+crab submit -c Dpt0_submit.py
+crab submit -c Dpt10_submit.py
+crab submit -c Dpt1_submit.py
+crab submit -c Dpt20_submit.py
+crab submit -c Dpt30_submit.py
+crab submit -c Dpt40_submit.py
+crab submit -c Dpt60_submit.py
+crab submit -c Dpt80_submit.py
+crab submit -c Dpt8_submit.py
+

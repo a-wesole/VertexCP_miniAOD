@@ -1,0 +1,456 @@
+DEBUG 2025-07-11 18:52:59.012 UTC: 	 CRAB Client version: v3.250522
+DEBUG 2025-07-11 18:52:59.012 UTC: 	 Running on: Linux cms-fe00.rcac.purdue.edu 4.18.0-513.18.1.el8_9.x86_64 #1 SMP Wed Feb 21 21:34:36 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+DEBUG 2025-07-11 18:52:59.012 UTC: 	 Not using Singularity
+DEBUG 2025-07-11 18:52:59.012 UTC: 	 Operating System: Rocky Linux 8.9 (Green Obsidian)
+DEBUG 2025-07-11 18:52:59.012 UTC: 	 Executing command: 'submit'
+DEBUG 2025-07-11 18:52:59.013 UTC: 	 Found CRAB cache file /home/awesole/.crab3
+INFO 2025-07-11 18:52:59.014 UTC: 	 Will use CRAB configuration file D0_data_lumiTest.py
+DEBUG 2025-07-11 18:52:59.014 UTC: 	 Loading CRAB configuration file.
+DEBUG 2025-07-11 18:52:59.017 UTC: 	 Will use CRAB plugin ANALYSIS (i.e. will run an analysis job type).
+DEBUG 2025-07-11 18:52:59.090 UTC: 	 Checking credentials
+DEBUG 2025-07-11 18:52:59.090 UTC: 	 Found proxy file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:52:59.090 UTC: 	 Making sure it has proper VOMS extension
+DEBUG 2025-07-11 18:52:59.090 UTC: 	 Executing command :
+ voms-proxy-info --vo --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:52:59.136 UTC: 	 output : cms
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:52:59.136 UTC: 	 Getting proxy life time left
+DEBUG 2025-07-11 18:52:59.136 UTC: 	 Executing command :
+ voms-proxy-info --actimeleft --timeleft --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:52:59.181 UTC: 	 output : 265993
+265993
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:52:59.181 UTC: 	 Proxy valid for 73:53:13 hours
+DEBUG 2025-07-11 18:52:59.181 UTC: 	 Encoded data for curl request: subresource=delegatedn
+DEBUG 2025-07-11 18:52:59.553 UTC: 	 Registering user credentials on myproxy for /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+DEBUG 2025-07-11 18:52:59.553 UTC: 	 Executing command :
+ voms-proxy-info --identity --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:52:59.604 UTC: 	 output : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:52:59.604 UTC: 	 Getting myproxy life time left for 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-11 18:52:59.605 UTC: 	 Executing command :
+ myproxy-info -s myproxy.cern.ch -l 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-11 18:53:01.299 UTC: 	 output : username: 5ecefdd9bea902c90adb814aee6716dd0f360701
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  timeleft: 468:23:25  (19.5 days)
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:53:01.299 UTC: 	 Myproxy is valid: 1686180
+DEBUG 2025-07-11 18:53:01.299 UTC: 	 Result of myproxy credential check:
+  Credential exists on myproxy: username: 5ecefdd9bea902c90adb814aee6716dd0f360701  - validity: 19 days, 12:23:00
+DEBUG 2025-07-11 18:53:01.300 UTC: 	 Command use: submit
+DEBUG 2025-07-11 18:53:01.300 UTC: 	 Options use: ['-c', 'D0_data_lumiTest.py']
+DEBUG 2025-07-11 18:53:01.300 UTC: 	 Encoded data for curl request: subresource=version
+DEBUG 2025-07-11 18:53:01.701 UTC: 	 CRABClient version: v3.250522
+DEBUG 2025-07-11 18:53:01.701 UTC: 	 Instance is prod
+DEBUG 2025-07-11 18:53:01.701 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2025-07-11 18:53:01.701 UTC: 	 Command api workflow
+DEBUG 2025-07-11 18:53:01.701 UTC: 	 Started submission
+DEBUG 2025-07-11 18:53:01.701 UTC: 	 Working on /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test
+DEBUG 2025-07-11 18:53:01.702 UTC: 	 Encoded data for curl request: subresource=backendurls
+DEBUG 2025-07-11 18:53:02.106 UTC: 	 Loading required information from the environment
+DEBUG 2025-07-11 18:53:02.106 UTC: 	 Found CMSSW_13_2_11 for el8_amd64_gcc11 with base /home/awesole/VertexCP_2/CMSSW_13_2_11
+DEBUG 2025-07-11 18:53:02.106 UTC: 	 Loading required information from the environment
+DEBUG 2025-07-11 18:53:02.106 UTC: 	 Found CMSSW_13_2_11 for el8_amd64_gcc11 with base /home/awesole/VertexCP_2/CMSSW_13_2_11
+DEBUG 2025-07-11 18:53:02.106 UTC: 	 UNIQUE NAME: tarUUID e5a31393-3455-41b2-9c28-d6da85ad8e9c 
+DEBUG 2025-07-11 18:53:02.106 UTC: 	 self.config: from WMCore.Configuration import Configuration
+config = Configuration()
+config.section_('General')
+config.General.transferLogs = True
+config.General.workArea = 'data_lumi_test'
+config.General.transferOutputs = True
+config.General.requestName = 'data_lumi_test'
+config.section_('JobType')
+config.JobType.psetName = '/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_DATA.py'
+config.JobType.pluginName = 'Analysis'
+config.JobType.allowUndistributedCMSSW = True
+config.section_('Data')
+config.Data.splitting = 'LumiBased'
+config.Data.unitsPerJob = 1
+config.Data.publication = False
+config.Data.lumiMask = 'mini.json'
+config.Data.outputDatasetTag = 'data_lumi_test'
+config.Data.inputDBS = 'global'
+config.Data.outLFNDirBase = '/store/user/awesolek/data_lumi_test'
+config.Data.inputDataset = '/HIPhysicsRawPrime0/HIRun2023A-PromptReco-v2/MINIAOD'
+config.section_('Site')
+config.Site.storageSite = 'T2_US_Purdue'
+config.section_('User')
+config.section_('Debug')
+
+DEBUG 2025-07-11 18:53:02.106 UTC: 	 self.config.JobType.psetName: /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_DATA.py
+INFO 2025-07-11 18:53:02.107 UTC: 	 Importing CMSSW configuration /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_DATA.py
+INFO 2025-07-11 18:53:07.875 UTC: 	 Finished importing CMSSW configuration /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_DATA.py
+DEBUG 2025-07-11 18:53:07.876 UTC: 	 Writing CMSSW configuration to /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/inputs/PSet.py
+DEBUG 2025-07-11 18:53:10.012 UTC: 	 The following EDM output files will be collected: ['edm.root']
+DEBUG 2025-07-11 18:53:10.012 UTC: 	 The following TFile output files will be collected: ['TTree.root']
+DEBUG 2025-07-11 18:53:10.012 UTC: 	 The following user output files (not listed as PoolOuputModule or TFileService in the CMSSW PSet) will be collected: 
+DEBUG 2025-07-11 18:53:10.012 UTC: 	 Loading required information from the environment
+DEBUG 2025-07-11 18:53:10.012 UTC: 	 Found CMSSW_13_2_11 for el8_amd64_gcc11 with base /home/awesole/VertexCP_2/CMSSW_13_2_11
+DEBUG 2025-07-11 18:53:10.012 UTC: 	 Making tarball in /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/inputs/e5a31393-3455-41b2-9c28-d6da85ad8e9cdefault.tgz
+DEBUG 2025-07-11 18:53:10.038 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/bin
+DEBUG 2025-07-11 18:53:10.038 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/bin to tarball
+DEBUG 2025-07-11 18:53:10.041 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/python
+DEBUG 2025-07-11 18:53:10.041 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/python to tarball
+DEBUG 2025-07-11 18:53:10.062 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/cfipython
+DEBUG 2025-07-11 18:53:10.062 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/cfipython to tarball
+DEBUG 2025-07-11 18:53:10.074 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/lib
+DEBUG 2025-07-11 18:53:10.074 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/lib to tarball
+DEBUG 2025-07-11 18:53:10.298 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/biglib
+DEBUG 2025-07-11 18:53:10.298 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/biglib to tarball
+DEBUG 2025-07-11 18:53:10.300 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/module
+DEBUG 2025-07-11 18:53:10.300 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/config/SCRAM/hooks
+DEBUG 2025-07-11 18:53:10.300 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/config/SCRAM/hooks to tarball
+DEBUG 2025-07-11 18:53:10.313 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeAnalyzer/python to tarball
+DEBUG 2025-07-11 18:53:10.325 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeAnalyzer/data to tarball
+DEBUG 2025-07-11 18:53:10.327 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/python to tarball
+DEBUG 2025-07-11 18:53:10.349 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/interface to tarball
+DEBUG 2025-07-11 18:53:10.413 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/data to tarball
+DEBUG 2025-07-11 18:53:12.223 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/TrackAnalysis/python to tarball
+DEBUG 2025-07-11 18:53:12.228 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/TrackAnalysis/interface to tarball
+DEBUG 2025-07-11 18:53:12.268 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/EventAnalysis/python to tarball
+DEBUG 2025-07-11 18:53:12.289 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/Configuration/python to tarball
+DEBUG 2025-07-11 18:53:12.304 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/Configuration/data to tarball
+DEBUG 2025-07-11 18:53:15.201 UTC: 	 Uploading archive /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/inputs/e5a31393-3455-41b2-9c28-d6da85ad8e9cdefault.tgz (8.580078.1 MB) to the CRAB cache. Using URI https://cmsweb.cern.ch/S3/crabcache_prod
+DEBUG 2025-07-11 18:53:17.691 UTC: 	 Encoded data for curl request: subresource=upload&objecttype=sandbox&tarballname=119950ffd8e8ac6af7e063413d54294853c8cb7f7fa354d8d36285c51dae01f4.tar.gz
+DEBUG 2025-07-11 18:53:18.112 UTC: 	 Will execute:
+curl -f -v -X POST  -H "User-Agent: CRAB" -F "key=awesolek/sandboxes/119950ffd8e8ac6af7e063413d54294853c8cb7f7fa354d8d36285c51dae01f4.tar.gz" -F "AWSAccessKeyId=715203df6482458ba839e73e6dab634b" -F "policy=eyJleHBpcmF0aW9uIjogIjIwMjUtMDctMTFUMTk6NTM6MThaIiwgImNvbmRpdGlvbnMiOiBbeyJidWNrZXQiOiAiY3JhYmNhY2hlX3Byb2QifSwgeyJrZXkiOiAiYXdlc29sZWsvc2FuZGJveGVzLzExOTk1MGZmZDhlOGFjNmFmN2UwNjM0MTNkNTQyOTQ4NTNjOGNiN2Y3ZmEzNTRkOGQzNjI4NWM1MWRhZTAxZjQudGFyLmd6In1dfQ==" -F "signature=am11C/rfESaU5YZKiLdJ4O2VaLc=" -F "file=@/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/inputs/e5a31393-3455-41b2-9c28-d6da85ad8e9cdefault.tgz" "https://s3.cern.ch/crabcache_prod"
+DEBUG 2025-07-11 18:53:21.365 UTC: 	 exitcode: 0
+stdout: b''
+DEBUG 2025-07-11 18:53:21.366 UTC: 	 upload to S3 of sandbox /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/inputs/e5a31393-3455-41b2-9c28-d6da85ad8e9cdefault.tgz completed
+DEBUG 2025-07-11 18:53:21.366 UTC: 	 make sure that object is ready for retrieve
+DEBUG 2025-07-11 18:53:22.367 UTC: 	 Encoded data for curl request: subresource=download&objecttype=sandbox&tarballname=119950ffd8e8ac6af7e063413d54294853c8cb7f7fa354d8d36285c51dae01f4.tar.gz&clientmethod=head_object
+DEBUG 2025-07-11 18:53:22.731 UTC: 	 PreSignedUrl to download sandbox received OK
+DEBUG 2025-07-11 18:53:22.735 UTC: 	 Will execute:
+ curl -v -s -f -o /dev/null --head  "https://s3.cern.ch/crabcache_prod/awesolek/sandboxes/119950ffd8e8ac6af7e063413d54294853c8cb7f7fa354d8d36285c51dae01f4.tar.gz?AWSAccessKeyId=715203df6482458ba839e73e6dab634b&Signature=7xv34e50zWWZ4XldKzLEjHbPLoQ%3D&Expires=1752263602"
+DEBUG 2025-07-11 18:53:23.172 UTC: 	 exitcode: 0
+stdout: b''
+DEBUG 2025-07-11 18:53:23.172 UTC: 	 sandbox /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/inputs/e5a31393-3455-41b2-9c28-d6da85ad8e9cdefault.tgz successfully uploaded to S3
+DEBUG 2025-07-11 18:53:23.172 UTC: 	 Loading required information from the environment
+DEBUG 2025-07-11 18:53:23.172 UTC: 	 Found CMSSW_13_2_11 for el8_amd64_gcc11 with base /home/awesole/VertexCP_2/CMSSW_13_2_11
+DEBUG 2025-07-11 18:53:23.172 UTC: 	 Making tarball in /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/inputs/debugFiles.tgz
+DEBUG 2025-07-11 18:53:23.202 UTC: 	 Uploading archive /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/inputs/debugFiles.tgz (3 KB) to the CRAB cache. Using URI https://cmsweb.cern.ch/S3/crabcache_prod
+DEBUG 2025-07-11 18:53:23.206 UTC: 	 Encoded data for curl request: subresource=upload&objecttype=sandbox&tarballname=48e46a35f8749232c4a7e3ff78f0d6a53d7cc79bccf0ec1736391b7b6b3bd3c8.tar.gz
+DEBUG 2025-07-11 18:53:23.636 UTC: 	 Will execute:
+curl -f -v -X POST  -H "User-Agent: CRAB" -F "key=awesolek/sandboxes/48e46a35f8749232c4a7e3ff78f0d6a53d7cc79bccf0ec1736391b7b6b3bd3c8.tar.gz" -F "AWSAccessKeyId=715203df6482458ba839e73e6dab634b" -F "policy=eyJleHBpcmF0aW9uIjogIjIwMjUtMDctMTFUMTk6NTM6MjNaIiwgImNvbmRpdGlvbnMiOiBbeyJidWNrZXQiOiAiY3JhYmNhY2hlX3Byb2QifSwgeyJrZXkiOiAiYXdlc29sZWsvc2FuZGJveGVzLzQ4ZTQ2YTM1Zjg3NDkyMzJjNGE3ZTNmZjc4ZjBkNmE1M2Q3Y2M3OWJjY2YwZWMxNzM2MzkxYjdiNmIzYmQzYzgudGFyLmd6In1dfQ==" -F "signature=UHzhPhBoCSlrxB8rFTjw2Ix171I=" -F "file=@/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/inputs/debugFiles.tgz" "https://s3.cern.ch/crabcache_prod"
+DEBUG 2025-07-11 18:53:24.019 UTC: 	 exitcode: 0
+stdout: b''
+DEBUG 2025-07-11 18:53:24.020 UTC: 	 upload to S3 of sandbox /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/inputs/debugFiles.tgz completed
+DEBUG 2025-07-11 18:53:24.020 UTC: 	 make sure that object is ready for retrieve
+DEBUG 2025-07-11 18:53:25.021 UTC: 	 Encoded data for curl request: subresource=download&objecttype=sandbox&tarballname=48e46a35f8749232c4a7e3ff78f0d6a53d7cc79bccf0ec1736391b7b6b3bd3c8.tar.gz&clientmethod=head_object
+DEBUG 2025-07-11 18:53:25.422 UTC: 	 PreSignedUrl to download sandbox received OK
+DEBUG 2025-07-11 18:53:25.426 UTC: 	 Will execute:
+ curl -v -s -f -o /dev/null --head  "https://s3.cern.ch/crabcache_prod/awesolek/sandboxes/48e46a35f8749232c4a7e3ff78f0d6a53d7cc79bccf0ec1736391b7b6b3bd3c8.tar.gz?AWSAccessKeyId=715203df6482458ba839e73e6dab634b&Signature=cWjjG4m49l107LJ9UbwLTFAk8WQ%3D&Expires=1752263605"
+DEBUG 2025-07-11 18:53:25.771 UTC: 	 exitcode: 0
+stdout: b''
+DEBUG 2025-07-11 18:53:25.771 UTC: 	 sandbox /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/inputs/debugFiles.tgz successfully uploaded to S3
+DEBUG 2025-07-11 18:53:25.772 UTC: 	 Result uploading input files: 119950ffd8e8ac6af7e063413d54294853c8cb7f7fa354d8d36285c51dae01f4.tar.gz 
+DEBUG 2025-07-11 18:53:25.772 UTC: 	 Attaching lumi mask mini.json to the request
+DEBUG 2025-07-11 18:53:25.772 UTC: 	 Reading lumi-mask from mini.json
+DEBUG 2025-07-11 18:53:25.772 UTC: 	 submit() - self.configuration from WMCore.Configuration import Configuration
+config = Configuration()
+config.section_('General')
+config.General.transferLogs = True
+config.General.workArea = 'data_lumi_test'
+config.General.transferOutputs = True
+config.General.requestName = 'data_lumi_test'
+config.section_('JobType')
+config.JobType.psetName = '/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_DATA.py'
+config.JobType.pluginName = 'Analysis'
+config.JobType.allowUndistributedCMSSW = True
+config.section_('Data')
+config.Data.splitting = 'LumiBased'
+config.Data.unitsPerJob = 1
+config.Data.publication = False
+config.Data.lumiMask = 'mini.json'
+config.Data.outputDatasetTag = 'data_lumi_test'
+config.Data.inputDBS = 'global'
+config.Data.outLFNDirBase = '/store/user/awesolek/data_lumi_test'
+config.Data.inputDataset = '/HIPhysicsRawPrime0/HIRun2023A-PromptReco-v2/MINIAOD'
+config.section_('Site')
+config.Site.storageSite = 'T2_US_Purdue'
+config.section_('User')
+config.section_('Debug')
+
+DEBUG 2025-07-11 18:53:25.773 UTC: 	 submit() - self.configreq {'dryrun': 0, 'workflow': 'crab_data_lumi_test', 'saveoutput': 1, 'savelogsflag': 1, 'inputdata': '/HIPhysicsRawPrime0/HIRun2023A-PromptReco-v2/MINIAOD', 'nonvaliddata': 0, 'userfiles': [], 'dbsurl': 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', 'useparent': 0, 'ignorelocality': 0, 'splitalgo': 'LumiBased', 'algoargs': 1, 'totalunits': 0, 'lfn': '/store/user/awesolek/data_lumi_test', 'publication': 0, 'publishdbsurl': 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', 'publishname2': 'data_lumi_test', 'jobtype': 'Analysis', 'generator': 'pythia', 'addoutputfiles': [], 'maxjobruntime': 1250, 'numcores': 1, 'maxmemory': 2000, 'priority': 10, 'nonprodsw': 1, 'asyncdest': 'T2_US_Purdue', 'requireaccelerator': 0, 'oneEventMode': 0, 'extrajdl': [], 'ignoreglobalblacklist': 0, 'partialdataset': 0, 'inputblocks': []}
+DEBUG 2025-07-11 18:53:25.773 UTC: 	 submit() - jobconfig {'addoutputfiles': [], 'tfileoutfiles': ['TTree.root'], 'edmoutfiles': ['edm.root'], 'jobarch': 'el8_amd64_gcc11', 'jobminuarch': 'any', 'jobsw': 'CMSSW_13_2_11', 'inputdata': '/HIPhysicsRawPrime0/HIRun2023A-PromptReco-v2/MINIAOD', 'cacheurl': 'https://cmsweb.cern.ch/S3/crabcache_prod', 'cachefilename': '119950ffd8e8ac6af7e063413d54294853c8cb7f7fa354d8d36285c51dae01f4.tar.gz', 'debugfilename': '48e46a35f8749232c4a7e3ff78f0d6a53d7cc79bccf0ec1736391b7b6b3bd3c8.tar.gz', 'runs': ['374668'], 'lumis': ['12,12'], 'jobtype': 'Analysis'}
+INFO 2025-07-11 18:53:25.773 UTC: 	 Sending the request to the server at cmsweb.cern.ch
+DEBUG 2025-07-11 18:53:25.773 UTC: 	 Submitting {'dryrun': 0, 'workflow': 'crab_data_lumi_test', 'saveoutput': 1, 'savelogsflag': 1, 'inputdata': '/HIPhysicsRawPrime0/HIRun2023A-PromptReco-v2/MINIAOD', 'nonvaliddata': 0, 'userfiles': [], 'dbsurl': 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', 'useparent': 0, 'ignorelocality': 0, 'splitalgo': 'LumiBased', 'algoargs': 1, 'totalunits': 0, 'lfn': '/store/user/awesolek/data_lumi_test', 'publication': 0, 'publishdbsurl': 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', 'publishname2': 'data_lumi_test', 'jobtype': 'Analysis', 'generator': 'pythia', 'addoutputfiles': [], 'maxjobruntime': 1250, 'numcores': 1, 'maxmemory': 2000, 'priority': 10, 'nonprodsw': 1, 'asyncdest': 'T2_US_Purdue', 'requireaccelerator': 0, 'oneEventMode': 0, 'extrajdl': [], 'ignoreglobalblacklist': 0, 'partialdataset': 0, 'inputblocks': [], 'tfileoutfiles': ['TTree.root'], 'edmoutfiles': ['edm.root'], 'jobarch': 'el8_amd64_gcc11', 'jobminuarch': 'any', 'jobsw': 'CMSSW_13_2_11', 'cacheurl': 'https://cmsweb.cern.ch/S3/crabcache_prod', 'cachefilename': '119950ffd8e8ac6af7e063413d54294853c8cb7f7fa354d8d36285c51dae01f4.tar.gz', 'debugfilename': '48e46a35f8749232c4a7e3ff78f0d6a53d7cc79bccf0ec1736391b7b6b3bd3c8.tar.gz', 'runs': ['374668'], 'lumis': ['12,12']} 
+DEBUG 2025-07-11 18:53:25.773 UTC: 	 Encoded data for curl request: dryrun=0&workflow=crab_data_lumi_test&saveoutput=1&savelogsflag=1&inputdata=%2FHIPhysicsRawPrime0%2FHIRun2023A-PromptReco-v2%2FMINIAOD&nonvaliddata=0&dbsurl=https%3A%2F%2Fcmsweb.cern.ch%2Fdbs%2Fprod%2Fglobal%2FDBSReader&useparent=0&ignorelocality=0&splitalgo=LumiBased&algoargs=1&totalunits=0&lfn=%2Fstore%2Fuser%2Fawesolek%2Fdata_lumi_test&publication=0&publishdbsurl=https%3A%2F%2Fcmsweb.cern.ch%2Fdbs%2Fprod%2Fphys03%2FDBSWriter&publishname2=data_lumi_test&jobtype=Analysis&generator=pythia&maxjobruntime=1250&numcores=1&maxmemory=2000&priority=10&nonprodsw=1&asyncdest=T2_US_Purdue&requireaccelerator=0&oneEventMode=0&ignoreglobalblacklist=0&partialdataset=0&jobarch=el8_amd64_gcc11&jobminuarch=any&jobsw=CMSSW_13_2_11&cacheurl=https%3A%2F%2Fcmsweb.cern.ch%2FS3%2Fcrabcache_prod&cachefilename=119950ffd8e8ac6af7e063413d54294853c8cb7f7fa354d8d36285c51dae01f4.tar.gz&debugfilename=48e46a35f8749232c4a7e3ff78f0d6a53d7cc79bccf0ec1736391b7b6b3bd3c8.tar.gz&tfileoutfiles=TTree.root&edmoutfiles=edm.root&runs=374668&lumis=12%2C12
+DEBUG 2025-07-11 18:53:26.479 UTC: 	 Result: {'result': [{'RequestName': '250711_185326:awesolek_crab_data_lumi_test'}]}
+INFO 2025-07-11 18:53:26.498 UTC: 	 Success: Your task has been delivered to the prod CRAB3 server.
+INFO 2025-07-11 18:53:26.498 UTC: 	 Task name: 250711_185326:awesolek_crab_data_lumi_test
+INFO 2025-07-11 18:53:26.498 UTC: 	 Project dir: data_lumi_test/crab_data_lumi_test
+INFO 2025-07-11 18:53:26.499 UTC: 	 Please use ' crab status -d data_lumi_test/crab_data_lumi_test ' to check how the submission process proceeds.
+DEBUG 2025-07-11 18:53:26.499 UTC: 	 About to return
+INFO 2025-07-11 18:53:26.519 UTC: 	 Log file is /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/crab.log
+DEBUG 2025-07-11 18:53:49.653 UTC: 	 CRAB Client version: v3.250522
+DEBUG 2025-07-11 18:53:49.654 UTC: 	 Running on: Linux cms-fe00.rcac.purdue.edu 4.18.0-513.18.1.el8_9.x86_64 #1 SMP Wed Feb 21 21:34:36 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+DEBUG 2025-07-11 18:53:49.654 UTC: 	 Not using Singularity
+DEBUG 2025-07-11 18:53:49.654 UTC: 	 Operating System: Rocky Linux 8.9 (Green Obsidian)
+DEBUG 2025-07-11 18:53:49.654 UTC: 	 Executing command: 'status'
+DEBUG 2025-07-11 18:53:49.655 UTC: 	 Found CRAB cache file /home/awesole/.crab3
+DEBUG 2025-07-11 18:53:49.695 UTC: 	 Checking credentials
+DEBUG 2025-07-11 18:53:49.695 UTC: 	 Found proxy file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:53:49.695 UTC: 	 Making sure it has proper VOMS extension
+DEBUG 2025-07-11 18:53:49.695 UTC: 	 Executing command :
+ voms-proxy-info --vo --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:53:49.748 UTC: 	 output : cms
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:53:49.748 UTC: 	 Getting proxy life time left
+DEBUG 2025-07-11 18:53:49.748 UTC: 	 Executing command :
+ voms-proxy-info --actimeleft --timeleft --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:53:49.802 UTC: 	 output : 265943
+265943
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:53:49.802 UTC: 	 Proxy valid for 73:52:23 hours
+DEBUG 2025-07-11 18:53:49.803 UTC: 	 Encoded data for curl request: subresource=delegatedn
+DEBUG 2025-07-11 18:53:50.204 UTC: 	 Registering user credentials on myproxy for /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+DEBUG 2025-07-11 18:53:50.204 UTC: 	 Executing command :
+ voms-proxy-info --identity --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:53:50.258 UTC: 	 output : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:53:50.258 UTC: 	 Getting myproxy life time left for 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-11 18:53:50.258 UTC: 	 Executing command :
+ myproxy-info -s myproxy.cern.ch -l 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-11 18:53:51.148 UTC: 	 output : username: 5ecefdd9bea902c90adb814aee6716dd0f360701
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  timeleft: 468:22:35  (19.5 days)
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:53:51.149 UTC: 	 Myproxy is valid: 1686120
+DEBUG 2025-07-11 18:53:51.149 UTC: 	 Result of myproxy credential check:
+  Credential exists on myproxy: username: 5ecefdd9bea902c90adb814aee6716dd0f360701  - validity: 19 days, 12:22:00
+DEBUG 2025-07-11 18:53:51.149 UTC: 	 Retrieving username ...
+DEBUG 2025-07-11 18:53:51.149 UTC: 	 Retrieving username from CRIC...
+DEBUG 2025-07-11 18:53:54.004 UTC: 	 username is awesolek
+INFO 2025-07-11 18:53:55.809 UTC: 	 Rucio client intialized for account awesolek
+DEBUG 2025-07-11 18:53:55.811 UTC: 	 Command use: status
+DEBUG 2025-07-11 18:53:55.811 UTC: 	 Options use: ['-d', 'data_lumi_test/crab_data_lumi_test']
+DEBUG 2025-07-11 18:53:55.811 UTC: 	 Encoded data for curl request: subresource=version
+DEBUG 2025-07-11 18:53:56.229 UTC: 	 CRABClient version: v3.250522
+DEBUG 2025-07-11 18:53:56.229 UTC: 	 Instance is prod
+DEBUG 2025-07-11 18:53:56.229 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2025-07-11 18:53:56.229 UTC: 	 Command api workflow
+DEBUG 2025-07-11 18:53:56.230 UTC: 	 Encoded data for curl request: subresource=search&workflow=250711_185326%3Aawesolek_crab_data_lumi_test
+DEBUG 2025-07-11 18:53:56.612 UTC: 	 Got information from server oracle database: {'desc': {'columns': ['tm_taskname', 'tm_activity', 'tm_task_status', 'tm_task_command', 'tm_start_time', 'tm_start_injection', 'tm_end_injection', 'tm_task_failure', 'tm_job_sw', 'tm_job_arch', 'tm_input_dataset', 'tm_nonvalid_input_dataset', 'tm_use_parent', 'tm_site_whitelist', 'tm_site_blacklist', 'tm_split_algo', 'tm_split_args', 'tm_user_sandbox', 'tm_cache_url', 'tm_username', 'tm_user_dn', 'tm_user_vo', 'tm_user_role', 'tm_user_group', 'tm_publish_name', 'tm_publish_groupname', 'tm_asyncdest', 'tm_dbs_url', 'tm_publish_dbs_url', 'tm_publication', 'tm_outfiles', 'tm_tfile_outfiles', 'tm_edm_outfiles', 'tm_job_type', 'tm_generator', 'tm_events_per_lumi', 'tm_arguments', 'tm_save_logs', 'tw_name', 'tm_user_infiles', 'tm_maxjobruntime', 'tm_numcores', 'tm_maxmemory', 'tm_priority', 'tm_output_dataset', 'tm_task_warnings', 'tm_user_webdir', 'tm_scriptexe', 'tm_scriptargs', 'tm_extrajdl', 'tm_collector', 'tm_schedd', 'tm_dry_run', 'tm_user_files', 'tm_transfer_outputs', 'tm_output_lfn', 'tm_ignore_locality', 'tm_fail_limit', 'tm_one_event_mode', 'tm_secondary_input_dataset', 'tm_primary_dataset', 'tm_last_publication', 'tm_debug_files', 'clusterid', 'tm_ignore_global_blacklist', 'tm_submitter_ip_addr', 'tm_totalunits', 'tm_ddm_reqid', 'tm_user_config', 'tm_transfer_container', 'tm_transfer_rule', 'tm_publish_rule', 'tm_multipub_rule', 'tm_job_min_microarch', 'tm_dagman_status', 'tm_num_jobs', 'tm_uploaded']}, 'result': ['250711_185326:awesolek_crab_data_lumi_test', 'None', 'WAITING', 'SUBMIT', '2025-07-11 18:53:26.414151', 'None', 'None', 'None', 'CMSSW_13_2_11', 'el8_amd64_gcc11', '/HIPhysicsRawPrime0/HIRun2023A-PromptReco-v2/MINIAOD', 'F', '0', '[]', '[]', 'LumiBased', "{'halt_job_on_file_boundaries': False, 'splitOnRun': False, 'lumis_per_job': 1, 'runs': ['374668'], 'lumis': ['12,12']}", '119950ffd8e8ac6af7e063413d54294853c8cb7f7fa354d8d36285c51dae01f4.tar.gz', 'https://cmsweb.cern.ch/S3/crabcache_prod', 'awesolek', '/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek', 'cms', 'None', 'None', 'data_lumi_test-00000000000000000000000000000000', 'F', 'T2_US_Purdue', 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', 'F', '[]', "['TTree.root']", "['edm.root']", 'Analysis', 'pythia', 'None', '{}', 'T', 'NotKnownYet', '[]', '1250', '1', '2000', '10', 'None', '[]', 'None', 'None', '[]', '[]', 'cmsgwms-collector-global.cern.ch:9620,cmsgwms-collector-global.fnal.gov:9620', 'None', 'F', '[]', 'T', '/store/user/awesolek/data_lumi_test', 'F', 'None', 'F', 'None', 'HIPhysicsRawPrime0', 'None', '48e46a35f8749232c4a7e3ff78f0d6a53d7cc79bccf0ec1736391b7b6b3bd3c8.tar.gz', 'None', 'F', '188.185.89.194', '0.0', 'None', '{"partialdataset": false, "requireaccelerator": false, "acceleratorparams": null, "inputblocks": null}', 'None', 'None', 'None', 'None', 'any', 'NOT_READY', '0', 'F']}
+INFO 2025-07-11 18:53:56.612 UTC: 	 CRAB project directory:		/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test
+INFO 2025-07-11 18:53:56.613 UTC: 	 Task name:			250711_185326:awesolek_crab_data_lumi_test
+INFO 2025-07-11 18:53:56.613 UTC: 	 Grid scheduler - Task Worker:	N/A yet - NotKnownYet
+INFO 2025-07-11 18:53:56.613 UTC: 	 Status on the CRAB server:	WAITING on command SUBMIT
+INFO 2025-07-11 18:53:56.613 UTC: 	 Task URL to use for HELP:	https://cmsweb.cern.ch/crabserver/ui/task/250711_185326%3Aawesolek_crab_data_lumi_test
+INFO 2025-07-11 18:53:56.635 UTC: 	 Dashboard monitoring URL:	https://monit-grafana.cern.ch/d/cmsTMDetail/cms-task-monitoring-task-view?orgId=11&var-user=awesolek&var-task=250711_185326%3Aawesolek_crab_data_lumi_test&from=1752256406000&to=now
+DEBUG 2025-07-11 18:53:56.635 UTC: 	 The task has not been submitted to the Grid scheduler yet. Not printing job information.
+INFO 2025-07-11 18:53:56.640 UTC: 	 Log file is /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/crab.log
+DEBUG 2025-07-11 18:54:36.000 UTC: 	 CRAB Client version: v3.250522
+DEBUG 2025-07-11 18:54:36.000 UTC: 	 Running on: Linux cms-fe00.rcac.purdue.edu 4.18.0-513.18.1.el8_9.x86_64 #1 SMP Wed Feb 21 21:34:36 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+DEBUG 2025-07-11 18:54:36.000 UTC: 	 Not using Singularity
+DEBUG 2025-07-11 18:54:36.000 UTC: 	 Operating System: Rocky Linux 8.9 (Green Obsidian)
+DEBUG 2025-07-11 18:54:36.000 UTC: 	 Executing command: 'status'
+DEBUG 2025-07-11 18:54:36.001 UTC: 	 Found CRAB cache file /home/awesole/.crab3
+DEBUG 2025-07-11 18:54:36.073 UTC: 	 Checking credentials
+DEBUG 2025-07-11 18:54:36.073 UTC: 	 Found proxy file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:54:36.073 UTC: 	 Making sure it has proper VOMS extension
+DEBUG 2025-07-11 18:54:36.073 UTC: 	 Executing command :
+ voms-proxy-info --vo --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:54:36.100 UTC: 	 output : cms
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:54:36.100 UTC: 	 Getting proxy life time left
+DEBUG 2025-07-11 18:54:36.100 UTC: 	 Executing command :
+ voms-proxy-info --actimeleft --timeleft --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:54:36.126 UTC: 	 output : 265896
+265896
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:54:36.127 UTC: 	 Proxy valid for 73:51:36 hours
+DEBUG 2025-07-11 18:54:36.127 UTC: 	 Encoded data for curl request: subresource=delegatedn
+DEBUG 2025-07-11 18:54:36.482 UTC: 	 Registering user credentials on myproxy for /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+DEBUG 2025-07-11 18:54:36.482 UTC: 	 Executing command :
+ voms-proxy-info --identity --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:54:36.507 UTC: 	 output : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:54:36.508 UTC: 	 Getting myproxy life time left for 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-11 18:54:36.508 UTC: 	 Executing command :
+ myproxy-info -s myproxy.cern.ch -l 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-11 18:54:38.017 UTC: 	 output : username: 5ecefdd9bea902c90adb814aee6716dd0f360701
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  timeleft: 468:21:48  (19.5 days)
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:54:38.017 UTC: 	 Myproxy is valid: 1686060
+DEBUG 2025-07-11 18:54:38.017 UTC: 	 Result of myproxy credential check:
+  Credential exists on myproxy: username: 5ecefdd9bea902c90adb814aee6716dd0f360701  - validity: 19 days, 12:21:00
+DEBUG 2025-07-11 18:54:38.018 UTC: 	 Retrieving username ...
+DEBUG 2025-07-11 18:54:38.018 UTC: 	 Retrieving username from CRIC...
+DEBUG 2025-07-11 18:54:39.796 UTC: 	 username is awesolek
+INFO 2025-07-11 18:54:40.754 UTC: 	 Rucio client intialized for account awesolek
+DEBUG 2025-07-11 18:54:40.755 UTC: 	 Command use: status
+DEBUG 2025-07-11 18:54:40.755 UTC: 	 Options use: ['-d', 'data_lumi_test/crab_data_lumi_test']
+DEBUG 2025-07-11 18:54:40.755 UTC: 	 Encoded data for curl request: subresource=version
+DEBUG 2025-07-11 18:54:41.112 UTC: 	 CRABClient version: v3.250522
+DEBUG 2025-07-11 18:54:41.112 UTC: 	 Instance is prod
+DEBUG 2025-07-11 18:54:41.112 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2025-07-11 18:54:41.112 UTC: 	 Command api workflow
+DEBUG 2025-07-11 18:54:41.112 UTC: 	 Encoded data for curl request: subresource=search&workflow=250711_185326%3Aawesolek_crab_data_lumi_test
+DEBUG 2025-07-11 18:54:41.526 UTC: 	 Got information from server oracle database: {'desc': {'columns': ['tm_taskname', 'tm_activity', 'tm_task_status', 'tm_task_command', 'tm_start_time', 'tm_start_injection', 'tm_end_injection', 'tm_task_failure', 'tm_job_sw', 'tm_job_arch', 'tm_input_dataset', 'tm_nonvalid_input_dataset', 'tm_use_parent', 'tm_site_whitelist', 'tm_site_blacklist', 'tm_split_algo', 'tm_split_args', 'tm_user_sandbox', 'tm_cache_url', 'tm_username', 'tm_user_dn', 'tm_user_vo', 'tm_user_role', 'tm_user_group', 'tm_publish_name', 'tm_publish_groupname', 'tm_asyncdest', 'tm_dbs_url', 'tm_publish_dbs_url', 'tm_publication', 'tm_outfiles', 'tm_tfile_outfiles', 'tm_edm_outfiles', 'tm_job_type', 'tm_generator', 'tm_events_per_lumi', 'tm_arguments', 'tm_save_logs', 'tw_name', 'tm_user_infiles', 'tm_maxjobruntime', 'tm_numcores', 'tm_maxmemory', 'tm_priority', 'tm_output_dataset', 'tm_task_warnings', 'tm_user_webdir', 'tm_scriptexe', 'tm_scriptargs', 'tm_extrajdl', 'tm_collector', 'tm_schedd', 'tm_dry_run', 'tm_user_files', 'tm_transfer_outputs', 'tm_output_lfn', 'tm_ignore_locality', 'tm_fail_limit', 'tm_one_event_mode', 'tm_secondary_input_dataset', 'tm_primary_dataset', 'tm_last_publication', 'tm_debug_files', 'clusterid', 'tm_ignore_global_blacklist', 'tm_submitter_ip_addr', 'tm_totalunits', 'tm_ddm_reqid', 'tm_user_config', 'tm_transfer_container', 'tm_transfer_rule', 'tm_publish_rule', 'tm_multipub_rule', 'tm_job_min_microarch', 'tm_dagman_status', 'tm_num_jobs', 'tm_uploaded']}, 'result': ['250711_185326:awesolek_crab_data_lumi_test', 'None', 'QUEUED', 'SUBMIT', '2025-07-11 18:53:26.414151', 'None', 'None', 'None', 'CMSSW_13_2_11', 'el8_amd64_gcc11', '/HIPhysicsRawPrime0/HIRun2023A-PromptReco-v2/MINIAOD', 'F', '0', '[]', '[]', 'LumiBased', "{'halt_job_on_file_boundaries': False, 'splitOnRun': False, 'lumis_per_job': 1, 'runs': ['374668'], 'lumis': ['12,12']}", '119950ffd8e8ac6af7e063413d54294853c8cb7f7fa354d8d36285c51dae01f4.tar.gz', 'https://cmsweb.cern.ch/S3/crabcache_prod', 'awesolek', '/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek', 'cms', 'None', 'None', 'data_lumi_test-00000000000000000000000000000000', 'F', 'T2_US_Purdue', 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', 'F', '[]', "['TTree.root']", "['edm.root']", 'Analysis', 'pythia', 'None', '{}', 'T', 'crab-prod-tw01', '[]', '1250', '1', '2000', '10', 'None', '[]', 'None', 'None', '[]', '[]', 'cmsgwms-collector-global.cern.ch:9620,cmsgwms-collector-global.fnal.gov:9620', 'None', 'F', '[]', 'T', '/store/user/awesolek/data_lumi_test', 'F', 'None', 'F', 'None', 'HIPhysicsRawPrime0', 'None', '48e46a35f8749232c4a7e3ff78f0d6a53d7cc79bccf0ec1736391b7b6b3bd3c8.tar.gz', 'None', 'F', '188.185.89.194', '0.0', 'None', '{"partialdataset": false, "requireaccelerator": false, "acceleratorparams": null, "inputblocks": null}', 'None', 'None', 'None', 'None', 'any', 'NOT_READY', '0', 'F']}
+INFO 2025-07-11 18:54:41.527 UTC: 	 CRAB project directory:		/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test
+INFO 2025-07-11 18:54:41.527 UTC: 	 Task name:			250711_185326:awesolek_crab_data_lumi_test
+INFO 2025-07-11 18:54:41.527 UTC: 	 Grid scheduler - Task Worker:	N/A yet - crab-prod-tw01
+INFO 2025-07-11 18:54:41.527 UTC: 	 Status on the CRAB server:	QUEUED on command SUBMIT
+INFO 2025-07-11 18:54:41.527 UTC: 	 Task URL to use for HELP:	https://cmsweb.cern.ch/crabserver/ui/task/250711_185326%3Aawesolek_crab_data_lumi_test
+INFO 2025-07-11 18:54:41.537 UTC: 	 Dashboard monitoring URL:	https://monit-grafana.cern.ch/d/cmsTMDetail/cms-task-monitoring-task-view?orgId=11&var-user=awesolek&var-task=250711_185326%3Aawesolek_crab_data_lumi_test&from=1752256406000&to=now
+DEBUG 2025-07-11 18:54:41.537 UTC: 	 The task has not been submitted to the Grid scheduler yet. Not printing job information.
+INFO 2025-07-11 18:54:41.540 UTC: 	 Log file is /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/crab.log
+DEBUG 2025-07-11 18:55:28.664 UTC: 	 CRAB Client version: v3.250522
+DEBUG 2025-07-11 18:55:28.665 UTC: 	 Running on: Linux cms-fe00.rcac.purdue.edu 4.18.0-513.18.1.el8_9.x86_64 #1 SMP Wed Feb 21 21:34:36 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+DEBUG 2025-07-11 18:55:28.665 UTC: 	 Not using Singularity
+DEBUG 2025-07-11 18:55:28.665 UTC: 	 Operating System: Rocky Linux 8.9 (Green Obsidian)
+DEBUG 2025-07-11 18:55:28.665 UTC: 	 Executing command: 'status'
+DEBUG 2025-07-11 18:55:28.665 UTC: 	 Found CRAB cache file /home/awesole/.crab3
+DEBUG 2025-07-11 18:55:28.700 UTC: 	 Checking credentials
+DEBUG 2025-07-11 18:55:28.700 UTC: 	 Found proxy file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:55:28.700 UTC: 	 Making sure it has proper VOMS extension
+DEBUG 2025-07-11 18:55:28.701 UTC: 	 Executing command :
+ voms-proxy-info --vo --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:55:28.727 UTC: 	 output : cms
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:55:28.727 UTC: 	 Getting proxy life time left
+DEBUG 2025-07-11 18:55:28.727 UTC: 	 Executing command :
+ voms-proxy-info --actimeleft --timeleft --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:55:28.754 UTC: 	 output : 265844
+265844
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:55:28.755 UTC: 	 Proxy valid for 73:50:44 hours
+DEBUG 2025-07-11 18:55:28.755 UTC: 	 Encoded data for curl request: subresource=delegatedn
+DEBUG 2025-07-11 18:55:29.131 UTC: 	 Registering user credentials on myproxy for /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+DEBUG 2025-07-11 18:55:29.131 UTC: 	 Executing command :
+ voms-proxy-info --identity --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:55:29.157 UTC: 	 output : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:55:29.157 UTC: 	 Getting myproxy life time left for 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-11 18:55:29.157 UTC: 	 Executing command :
+ myproxy-info -s myproxy.cern.ch -l 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-11 18:55:30.066 UTC: 	 output : username: 5ecefdd9bea902c90adb814aee6716dd0f360701
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  timeleft: 468:20:56  (19.5 days)
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:55:30.067 UTC: 	 Myproxy is valid: 1686000
+DEBUG 2025-07-11 18:55:30.067 UTC: 	 Result of myproxy credential check:
+  Credential exists on myproxy: username: 5ecefdd9bea902c90adb814aee6716dd0f360701  - validity: 19 days, 12:20:00
+DEBUG 2025-07-11 18:55:30.067 UTC: 	 Retrieving username ...
+DEBUG 2025-07-11 18:55:30.067 UTC: 	 Retrieving username from CRIC...
+DEBUG 2025-07-11 18:55:31.853 UTC: 	 username is awesolek
+INFO 2025-07-11 18:55:32.797 UTC: 	 Rucio client intialized for account awesolek
+DEBUG 2025-07-11 18:55:32.799 UTC: 	 Command use: status
+DEBUG 2025-07-11 18:55:32.799 UTC: 	 Options use: ['-d', 'data_lumi_test/crab_data_lumi_test']
+DEBUG 2025-07-11 18:55:32.799 UTC: 	 Encoded data for curl request: subresource=version
+DEBUG 2025-07-11 18:55:33.168 UTC: 	 CRABClient version: v3.250522
+DEBUG 2025-07-11 18:55:33.169 UTC: 	 Instance is prod
+DEBUG 2025-07-11 18:55:33.169 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2025-07-11 18:55:33.169 UTC: 	 Command api workflow
+DEBUG 2025-07-11 18:55:33.169 UTC: 	 Encoded data for curl request: subresource=search&workflow=250711_185326%3Aawesolek_crab_data_lumi_test
+DEBUG 2025-07-11 18:55:33.542 UTC: 	 Got information from server oracle database: {'desc': {'columns': ['tm_taskname', 'tm_activity', 'tm_task_status', 'tm_task_command', 'tm_start_time', 'tm_start_injection', 'tm_end_injection', 'tm_task_failure', 'tm_job_sw', 'tm_job_arch', 'tm_input_dataset', 'tm_nonvalid_input_dataset', 'tm_use_parent', 'tm_site_whitelist', 'tm_site_blacklist', 'tm_split_algo', 'tm_split_args', 'tm_user_sandbox', 'tm_cache_url', 'tm_username', 'tm_user_dn', 'tm_user_vo', 'tm_user_role', 'tm_user_group', 'tm_publish_name', 'tm_publish_groupname', 'tm_asyncdest', 'tm_dbs_url', 'tm_publish_dbs_url', 'tm_publication', 'tm_outfiles', 'tm_tfile_outfiles', 'tm_edm_outfiles', 'tm_job_type', 'tm_generator', 'tm_events_per_lumi', 'tm_arguments', 'tm_save_logs', 'tw_name', 'tm_user_infiles', 'tm_maxjobruntime', 'tm_numcores', 'tm_maxmemory', 'tm_priority', 'tm_output_dataset', 'tm_task_warnings', 'tm_user_webdir', 'tm_scriptexe', 'tm_scriptargs', 'tm_extrajdl', 'tm_collector', 'tm_schedd', 'tm_dry_run', 'tm_user_files', 'tm_transfer_outputs', 'tm_output_lfn', 'tm_ignore_locality', 'tm_fail_limit', 'tm_one_event_mode', 'tm_secondary_input_dataset', 'tm_primary_dataset', 'tm_last_publication', 'tm_debug_files', 'clusterid', 'tm_ignore_global_blacklist', 'tm_submitter_ip_addr', 'tm_totalunits', 'tm_ddm_reqid', 'tm_user_config', 'tm_transfer_container', 'tm_transfer_rule', 'tm_publish_rule', 'tm_multipub_rule', 'tm_job_min_microarch', 'tm_dagman_status', 'tm_num_jobs', 'tm_uploaded']}, 'result': ['250711_185326:awesolek_crab_data_lumi_test', 'None', 'SUBMITTED', 'SUBMIT', '2025-07-11 18:53:26.414151', 'None', '2025-07-11 18:54:47.763458', 'None', 'CMSSW_13_2_11', 'el8_amd64_gcc11', '/HIPhysicsRawPrime0/HIRun2023A-PromptReco-v2/MINIAOD', 'F', '0', '[]', '[]', 'LumiBased', "{'halt_job_on_file_boundaries': False, 'splitOnRun': False, 'lumis_per_job': 1, 'runs': ['374668'], 'lumis': ['12,12']}", '119950ffd8e8ac6af7e063413d54294853c8cb7f7fa354d8d36285c51dae01f4.tar.gz', 'https://cmsweb.cern.ch/S3/crabcache_prod', 'awesolek', '/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek', 'cms', 'None', 'None', 'data_lumi_test-00000000000000000000000000000000', 'F', 'T2_US_Purdue', 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', 'F', '[]', "['TTree.root']", "['edm.root']", 'Analysis', 'pythia', 'None', '{}', 'T', 'crab-prod-tw01', '[]', '1250', '1', '2000', '10', 'None', '[]', 'None', 'None', '[]', '[]', 'cmsgwms-collector-global.cern.ch:9620,cmsgwms-collector-global.fnal.gov:9620', 'crab3@vocms0199.cern.ch', 'F', '[]', 'T', '/store/user/awesolek/data_lumi_test', 'F', 'None', 'F', 'None', 'HIPhysicsRawPrime0', 'None', '48e46a35f8749232c4a7e3ff78f0d6a53d7cc79bccf0ec1736391b7b6b3bd3c8.tar.gz', '86595592', 'F', '188.185.89.194', '0.0', 'None', '{"partialdataset": false, "requireaccelerator": false, "acceleratorparams": null, "inputblocks": null}', 'None', 'None', 'None', 'None', 'any', 'NOT_READY', '1', 'T']}
+INFO 2025-07-11 18:55:33.543 UTC: 	 CRAB project directory:		/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test
+INFO 2025-07-11 18:55:33.543 UTC: 	 Task name:			250711_185326:awesolek_crab_data_lumi_test
+INFO 2025-07-11 18:55:33.543 UTC: 	 Grid scheduler - Task Worker:	crab3@vocms0199.cern.ch - crab-prod-tw01
+INFO 2025-07-11 18:55:33.543 UTC: 	 Status on the CRAB server:	SUBMITTED
+INFO 2025-07-11 18:55:33.544 UTC: 	 Task URL to use for HELP:	https://cmsweb.cern.ch/crabserver/ui/task/250711_185326%3Aawesolek_crab_data_lumi_test
+INFO 2025-07-11 18:55:33.562 UTC: 	 Dashboard monitoring URL:	https://monit-grafana.cern.ch/d/cmsTMDetail/cms-task-monitoring-task-view?orgId=11&var-user=awesolek&var-task=250711_185326%3Aawesolek_crab_data_lumi_test&from=1752256406000&to=now
+DEBUG 2025-07-11 18:55:33.562 UTC: 	 The CRAB server submitted your task to the Grid scheduler (cluster ID: 86595592)
+INFO 2025-07-11 18:55:33.562 UTC: 	 Waiting for the Grid scheduler to bootstrap your task
+DEBUG 2025-07-11 18:55:33.562 UTC: 	 Schedd has not reported back the webdir (yet)
+INFO 2025-07-11 18:55:33.566 UTC: 	 Log file is /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/crab.log
+DEBUG 2025-07-11 18:59:37.126 UTC: 	 CRAB Client version: v3.250522
+DEBUG 2025-07-11 18:59:37.126 UTC: 	 Running on: Linux cms-fe00.rcac.purdue.edu 4.18.0-513.18.1.el8_9.x86_64 #1 SMP Wed Feb 21 21:34:36 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+DEBUG 2025-07-11 18:59:37.126 UTC: 	 Not using Singularity
+DEBUG 2025-07-11 18:59:37.126 UTC: 	 Operating System: Rocky Linux 8.9 (Green Obsidian)
+DEBUG 2025-07-11 18:59:37.127 UTC: 	 Executing command: 'kill'
+DEBUG 2025-07-11 18:59:37.127 UTC: 	 Found CRAB cache file /home/awesole/.crab3
+DEBUG 2025-07-11 18:59:37.130 UTC: 	 Checking credentials
+DEBUG 2025-07-11 18:59:37.131 UTC: 	 Found proxy file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:59:37.131 UTC: 	 Making sure it has proper VOMS extension
+DEBUG 2025-07-11 18:59:37.131 UTC: 	 Executing command :
+ voms-proxy-info --vo --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:59:37.156 UTC: 	 output : cms
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:59:37.156 UTC: 	 Getting proxy life time left
+DEBUG 2025-07-11 18:59:37.156 UTC: 	 Executing command :
+ voms-proxy-info --actimeleft --timeleft --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:59:37.181 UTC: 	 output : 265595
+265595
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:59:37.181 UTC: 	 Proxy valid for 73:46:35 hours
+DEBUG 2025-07-11 18:59:37.182 UTC: 	 Encoded data for curl request: subresource=delegatedn
+DEBUG 2025-07-11 18:59:37.558 UTC: 	 Registering user credentials on myproxy for /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+DEBUG 2025-07-11 18:59:37.558 UTC: 	 Executing command :
+ voms-proxy-info --identity --file /tmp/x509up_u875172
+DEBUG 2025-07-11 18:59:37.583 UTC: 	 output : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:59:37.583 UTC: 	 Getting myproxy life time left for 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-11 18:59:37.584 UTC: 	 Executing command :
+ myproxy-info -s myproxy.cern.ch -l 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-11 18:59:38.533 UTC: 	 output : username: 5ecefdd9bea902c90adb814aee6716dd0f360701
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  timeleft: 468:16:48  (19.5 days)
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-11 18:59:38.533 UTC: 	 Myproxy is valid: 1685760
+DEBUG 2025-07-11 18:59:38.533 UTC: 	 Result of myproxy credential check:
+  Credential exists on myproxy: username: 5ecefdd9bea902c90adb814aee6716dd0f360701  - validity: 19 days, 12:16:00
+DEBUG 2025-07-11 18:59:38.535 UTC: 	 Command use: kill
+DEBUG 2025-07-11 18:59:38.535 UTC: 	 Options use: ['data_lumi_test/crab_data_lumi_test']
+DEBUG 2025-07-11 18:59:38.535 UTC: 	 Encoded data for curl request: subresource=version
+DEBUG 2025-07-11 18:59:38.910 UTC: 	 CRABClient version: v3.250522
+DEBUG 2025-07-11 18:59:38.910 UTC: 	 Instance is prod
+DEBUG 2025-07-11 18:59:38.910 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2025-07-11 18:59:38.910 UTC: 	 Command api workflow
+DEBUG 2025-07-11 18:59:38.911 UTC: 	 Killing task 250711_185326:awesolek_crab_data_lumi_test
+DEBUG 2025-07-11 18:59:38.911 UTC: 	 Encoded data for curl request: workflow=250711_185326%3Aawesolek_crab_data_lumi_test
+DEBUG 2025-07-11 18:59:39.453 UTC: 	 Result: {'desc': {'columns': ['tm_taskname', 'tm_task_status', 'tm_task_command', 'tm_user_role', 'tm_user_group', 'tm_task_failure', 'tm_split_algo', 'tm_split_args', 'tm_save_logs', 'tm_username', 'tm_user_dn', 'tm_arguments', 'tm_input_dataset', 'tm_dbs_url', 'tm_task_warnings', 'tm_publication', 'tm_user_webdir', 'tm_output_dataset', 'tm_collector', 'tm_schedd', 'tm_dry_run', 'clusterid', 'tm_start_time', 'tw_name', 'tm_dagman_status', 'tm_num_jobs', 'tm_uploaded']}, 'result': [{'result': 'ok'}]}
+INFO 2025-07-11 18:59:39.454 UTC: 	 Kill request successfully sent
+INFO 2025-07-11 18:59:39.458 UTC: 	 Log file is /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/data_lumi_test/crab_data_lumi_test/crab.log

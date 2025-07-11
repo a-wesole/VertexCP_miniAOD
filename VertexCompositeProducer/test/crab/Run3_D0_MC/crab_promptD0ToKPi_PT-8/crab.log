@@ -1,0 +1,181 @@
+DEBUG 2025-07-02 19:46:56.141 UTC: 	 CRAB Client version: v3.250522
+DEBUG 2025-07-02 19:46:56.141 UTC: 	 Running on: Linux cms-fe01.rcac.purdue.edu 4.18.0-513.18.1.el8_9.x86_64 #1 SMP Wed Feb 21 21:34:36 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+DEBUG 2025-07-02 19:46:56.141 UTC: 	 Not using Singularity
+DEBUG 2025-07-02 19:46:56.141 UTC: 	 Operating System: Rocky Linux 8.9 (Green Obsidian)
+DEBUG 2025-07-02 19:46:56.141 UTC: 	 Executing command: 'submit'
+DEBUG 2025-07-02 19:46:56.142 UTC: 	 Found CRAB cache file /home/awesole/.crab3
+INFO 2025-07-02 19:46:56.143 UTC: 	 Will use CRAB configuration file Dpt8_submit.py
+DEBUG 2025-07-02 19:46:56.143 UTC: 	 Loading CRAB configuration file.
+DEBUG 2025-07-02 19:46:56.231 UTC: 	 Will use CRAB plugin ANALYSIS (i.e. will run an analysis job type).
+DEBUG 2025-07-02 19:46:56.367 UTC: 	 Checking credentials
+DEBUG 2025-07-02 19:46:56.367 UTC: 	 Found proxy file /tmp/x509up_u875172
+DEBUG 2025-07-02 19:46:56.367 UTC: 	 Making sure it has proper VOMS extension
+DEBUG 2025-07-02 19:46:56.367 UTC: 	 Executing command :
+ voms-proxy-info --vo --file /tmp/x509up_u875172
+DEBUG 2025-07-02 19:46:56.400 UTC: 	 output : cms
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 19:46:56.400 UTC: 	 Getting proxy life time left
+DEBUG 2025-07-02 19:46:56.400 UTC: 	 Executing command :
+ voms-proxy-info --actimeleft --timeleft --file /tmp/x509up_u875172
+DEBUG 2025-07-02 19:46:56.431 UTC: 	 output : 518183
+518183
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 19:46:56.431 UTC: 	 Proxy valid for 143:56:23 hours
+DEBUG 2025-07-02 19:46:56.432 UTC: 	 Encoded data for curl request: subresource=delegatedn
+DEBUG 2025-07-02 19:46:56.838 UTC: 	 Registering user credentials on myproxy for /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+DEBUG 2025-07-02 19:46:56.838 UTC: 	 Executing command :
+ voms-proxy-info --identity --file /tmp/x509up_u875172
+DEBUG 2025-07-02 19:46:56.871 UTC: 	 output : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 19:46:56.871 UTC: 	 Getting myproxy life time left for 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-02 19:46:56.871 UTC: 	 Executing command :
+ myproxy-info -s myproxy.cern.ch -l 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-02 19:46:57.728 UTC: 	 output : username: 5ecefdd9bea902c90adb814aee6716dd0f360701
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  timeleft: 683:29:29  (28.5 days)
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 19:46:57.728 UTC: 	 Myproxy is valid: 2460540
+DEBUG 2025-07-02 19:46:57.729 UTC: 	 Result of myproxy credential check:
+  Credential exists on myproxy: username: 5ecefdd9bea902c90adb814aee6716dd0f360701  - validity: 28 days, 11:29:00
+DEBUG 2025-07-02 19:46:57.729 UTC: 	 Command use: submit
+DEBUG 2025-07-02 19:46:57.729 UTC: 	 Options use: ['-c', 'Dpt8_submit.py']
+DEBUG 2025-07-02 19:46:57.729 UTC: 	 Encoded data for curl request: subresource=version
+DEBUG 2025-07-02 19:46:58.086 UTC: 	 CRABClient version: v3.250522
+DEBUG 2025-07-02 19:46:58.086 UTC: 	 Instance is prod
+DEBUG 2025-07-02 19:46:58.086 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2025-07-02 19:46:58.086 UTC: 	 Command api workflow
+DEBUG 2025-07-02 19:46:58.086 UTC: 	 Started submission
+DEBUG 2025-07-02 19:46:58.086 UTC: 	 Working on /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-8
+DEBUG 2025-07-02 19:46:58.086 UTC: 	 Encoded data for curl request: subresource=backendurls
+DEBUG 2025-07-02 19:46:58.468 UTC: 	 Loading required information from the environment
+DEBUG 2025-07-02 19:46:58.468 UTC: 	 Found CMSSW_13_2_11 for el8_amd64_gcc11 with base /home/awesole/VertexCP_2/CMSSW_13_2_11
+DEBUG 2025-07-02 19:46:58.468 UTC: 	 Loading required information from the environment
+DEBUG 2025-07-02 19:46:58.468 UTC: 	 Found CMSSW_13_2_11 for el8_amd64_gcc11 with base /home/awesole/VertexCP_2/CMSSW_13_2_11
+DEBUG 2025-07-02 19:46:58.468 UTC: 	 UNIQUE NAME: tarUUID cd2f9983-2931-4229-8bc2-aae59b236cfb 
+DEBUG 2025-07-02 19:46:58.468 UTC: 	 self.config: from WMCore.Configuration import Configuration
+config = Configuration()
+config.section_('General')
+config.General.transferLogs = True
+config.General.transferOutputs = True
+config.General.workArea = 'Run3_D0_MC'
+config.General.requestName = 'promptD0ToKPi_PT-8'
+config.section_('JobType')
+config.JobType.allowUndistributedCMSSW = True
+config.JobType.pluginName = 'Analysis'
+config.JobType.psetName = '/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_MC.py'
+config.section_('Data')
+config.Data.splitting = 'LumiBased'
+config.Data.unitsPerJob = 1
+config.Data.inputDataset = '/promptD0ToKPi_PT-8_TuneCP5_5p36TeV_pythia8-evtgen/HINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v2/MINIAODSIM'
+config.Data.inputDBS = 'global'
+config.Data.lumiMask = ''
+config.Data.outLFNDirBase = '/store/user/awesolek/Run3_D0_MC'
+config.Data.publication = False
+config.Data.outputDatasetTag = 'Run3_D0_MC'
+config.section_('Site')
+config.Site.storageSite = 'T2_US_Purdue'
+config.section_('User')
+config.section_('Debug')
+
+DEBUG 2025-07-02 19:46:58.469 UTC: 	 self.config.JobType.psetName: /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_MC.py
+INFO 2025-07-02 19:46:58.469 UTC: 	 Importing CMSSW configuration /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_MC.py
+INFO 2025-07-02 19:47:02.758 UTC: 	 Finished importing CMSSW configuration /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_MC.py
+DEBUG 2025-07-02 19:47:02.758 UTC: 	 Writing CMSSW configuration to /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-8/inputs/PSet.py
+DEBUG 2025-07-02 19:47:04.283 UTC: 	 The following EDM output files will be collected: ['edm_MC.root']
+DEBUG 2025-07-02 19:47:04.283 UTC: 	 The following TFile output files will be collected: ['TTree_MC.root']
+DEBUG 2025-07-02 19:47:04.283 UTC: 	 The following user output files (not listed as PoolOuputModule or TFileService in the CMSSW PSet) will be collected: 
+DEBUG 2025-07-02 19:47:04.283 UTC: 	 Loading required information from the environment
+DEBUG 2025-07-02 19:47:04.283 UTC: 	 Found CMSSW_13_2_11 for el8_amd64_gcc11 with base /home/awesole/VertexCP_2/CMSSW_13_2_11
+DEBUG 2025-07-02 19:47:04.283 UTC: 	 Making tarball in /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-8/inputs/cd2f9983-2931-4229-8bc2-aae59b236cfbdefault.tgz
+DEBUG 2025-07-02 19:47:04.352 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/bin
+DEBUG 2025-07-02 19:47:04.352 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/bin to tarball
+DEBUG 2025-07-02 19:47:04.354 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/python
+DEBUG 2025-07-02 19:47:04.354 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/python to tarball
+DEBUG 2025-07-02 19:47:04.376 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/cfipython
+DEBUG 2025-07-02 19:47:04.376 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/cfipython to tarball
+DEBUG 2025-07-02 19:47:04.388 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/lib
+DEBUG 2025-07-02 19:47:04.388 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/lib to tarball
+DEBUG 2025-07-02 19:47:04.591 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/biglib
+DEBUG 2025-07-02 19:47:04.591 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/biglib to tarball
+DEBUG 2025-07-02 19:47:04.593 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/module
+DEBUG 2025-07-02 19:47:04.593 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/config/SCRAM/hooks
+DEBUG 2025-07-02 19:47:04.593 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/config/SCRAM/hooks to tarball
+DEBUG 2025-07-02 19:47:04.604 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeAnalyzer/python to tarball
+DEBUG 2025-07-02 19:47:04.615 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeAnalyzer/data to tarball
+DEBUG 2025-07-02 19:47:04.617 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/python to tarball
+DEBUG 2025-07-02 19:47:04.639 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/interface to tarball
+DEBUG 2025-07-02 19:47:04.665 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/data to tarball
+DEBUG 2025-07-02 19:47:05.955 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/TrackAnalysis/python to tarball
+DEBUG 2025-07-02 19:47:05.960 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/TrackAnalysis/interface to tarball
+DEBUG 2025-07-02 19:47:05.986 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/EventAnalysis/python to tarball
+DEBUG 2025-07-02 19:47:06.005 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/Configuration/python to tarball
+DEBUG 2025-07-02 19:47:06.019 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/Configuration/data to tarball
+DEBUG 2025-07-02 19:47:08.953 UTC: 	 Uploading archive /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-8/inputs/cd2f9983-2931-4229-8bc2-aae59b236cfbdefault.tgz (8.581055.1 MB) to the CRAB cache. Using URI https://cmsweb.cern.ch/S3/crabcache_prod
+DEBUG 2025-07-02 19:47:11.169 UTC: 	 Encoded data for curl request: subresource=upload&objecttype=sandbox&tarballname=1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz
+DEBUG 2025-07-02 19:47:11.565 UTC: 	 sandbox 1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz is already in the S3 store, will not upload again
+DEBUG 2025-07-02 19:47:11.565 UTC: 	 Loading required information from the environment
+DEBUG 2025-07-02 19:47:11.565 UTC: 	 Found CMSSW_13_2_11 for el8_amd64_gcc11 with base /home/awesole/VertexCP_2/CMSSW_13_2_11
+DEBUG 2025-07-02 19:47:11.565 UTC: 	 Making tarball in /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-8/inputs/debugFiles.tgz
+DEBUG 2025-07-02 19:47:11.622 UTC: 	 Uploading archive /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-8/inputs/debugFiles.tgz (3 KB) to the CRAB cache. Using URI https://cmsweb.cern.ch/S3/crabcache_prod
+DEBUG 2025-07-02 19:47:11.626 UTC: 	 Encoded data for curl request: subresource=upload&objecttype=sandbox&tarballname=2b8182e2b8f82c9799a2d56446bb1657a36f142a1cd0b740de85bd1533de8e3d.tar.gz
+DEBUG 2025-07-02 19:47:13.792 UTC: 	 Will execute:
+curl -f -v -X POST  -H "User-Agent: CRAB" -F "key=awesolek/sandboxes/2b8182e2b8f82c9799a2d56446bb1657a36f142a1cd0b740de85bd1533de8e3d.tar.gz" -F "AWSAccessKeyId=715203df6482458ba839e73e6dab634b" -F "policy=eyJleHBpcmF0aW9uIjogIjIwMjUtMDctMDJUMjA6NDc6MTNaIiwgImNvbmRpdGlvbnMiOiBbeyJidWNrZXQiOiAiY3JhYmNhY2hlX3Byb2QifSwgeyJrZXkiOiAiYXdlc29sZWsvc2FuZGJveGVzLzJiODE4MmUyYjhmODJjOTc5OWEyZDU2NDQ2YmIxNjU3YTM2ZjE0MmExY2QwYjc0MGRlODViZDE1MzNkZThlM2QudGFyLmd6In1dfQ==" -F "signature=tsVK373paNiMXrSfw+ATx5zlNqM=" -F "file=@/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-8/inputs/debugFiles.tgz" "https://s3.cern.ch/crabcache_prod"
+DEBUG 2025-07-02 19:47:14.143 UTC: 	 exitcode: 0
+stdout: b''
+DEBUG 2025-07-02 19:47:14.143 UTC: 	 upload to S3 of sandbox /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-8/inputs/debugFiles.tgz completed
+DEBUG 2025-07-02 19:47:14.143 UTC: 	 make sure that object is ready for retrieve
+DEBUG 2025-07-02 19:47:15.144 UTC: 	 Encoded data for curl request: subresource=download&objecttype=sandbox&tarballname=2b8182e2b8f82c9799a2d56446bb1657a36f142a1cd0b740de85bd1533de8e3d.tar.gz&clientmethod=head_object
+DEBUG 2025-07-02 19:47:15.553 UTC: 	 PreSignedUrl to download sandbox received OK
+DEBUG 2025-07-02 19:47:15.558 UTC: 	 Will execute:
+ curl -v -s -f -o /dev/null --head  "https://s3.cern.ch/crabcache_prod/awesolek/sandboxes/2b8182e2b8f82c9799a2d56446bb1657a36f142a1cd0b740de85bd1533de8e3d.tar.gz?AWSAccessKeyId=715203df6482458ba839e73e6dab634b&Signature=gNq2jvTan7HZSqxzmDvljbWsgRo%3D&Expires=1751489235"
+DEBUG 2025-07-02 19:47:15.915 UTC: 	 exitcode: 0
+stdout: b''
+DEBUG 2025-07-02 19:47:15.916 UTC: 	 sandbox /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-8/inputs/debugFiles.tgz successfully uploaded to S3
+DEBUG 2025-07-02 19:47:15.916 UTC: 	 Result uploading input files: 1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz 
+DEBUG 2025-07-02 19:47:15.916 UTC: 	 submit() - self.configuration from WMCore.Configuration import Configuration
+config = Configuration()
+config.section_('General')
+config.General.transferLogs = True
+config.General.transferOutputs = True
+config.General.workArea = 'Run3_D0_MC'
+config.General.requestName = 'promptD0ToKPi_PT-8'
+config.section_('JobType')
+config.JobType.allowUndistributedCMSSW = True
+config.JobType.pluginName = 'Analysis'
+config.JobType.psetName = '/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_MC.py'
+config.section_('Data')
+config.Data.splitting = 'LumiBased'
+config.Data.unitsPerJob = 1
+config.Data.inputDataset = '/promptD0ToKPi_PT-8_TuneCP5_5p36TeV_pythia8-evtgen/HINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v2/MINIAODSIM'
+config.Data.inputDBS = 'global'
+config.Data.lumiMask = ''
+config.Data.outLFNDirBase = '/store/user/awesolek/Run3_D0_MC'
+config.Data.publication = False
+config.Data.outputDatasetTag = 'Run3_D0_MC'
+config.section_('Site')
+config.Site.storageSite = 'T2_US_Purdue'
+config.section_('User')
+config.section_('Debug')
+
+DEBUG 2025-07-02 19:47:15.916 UTC: 	 submit() - self.configreq {'dryrun': 0, 'workflow': 'crab_promptD0ToKPi_PT-8', 'saveoutput': 1, 'savelogsflag': 1, 'inputdata': '/promptD0ToKPi_PT-8_TuneCP5_5p36TeV_pythia8-evtgen/HINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v2/MINIAODSIM', 'nonvaliddata': 0, 'userfiles': [], 'dbsurl': 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', 'useparent': 0, 'ignorelocality': 0, 'splitalgo': 'LumiBased', 'algoargs': 1, 'totalunits': 0, 'lfn': '/store/user/awesolek/Run3_D0_MC', 'publication': 0, 'publishdbsurl': 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', 'publishname2': 'Run3_D0_MC', 'jobtype': 'Analysis', 'generator': 'pythia', 'addoutputfiles': [], 'maxjobruntime': 1250, 'numcores': 1, 'maxmemory': 2000, 'priority': 10, 'nonprodsw': 1, 'asyncdest': 'T2_US_Purdue', 'requireaccelerator': 0, 'oneEventMode': 0, 'extrajdl': [], 'ignoreglobalblacklist': 0, 'partialdataset': 0, 'inputblocks': []}
+DEBUG 2025-07-02 19:47:15.916 UTC: 	 submit() - jobconfig {'addoutputfiles': [], 'tfileoutfiles': ['TTree_MC.root'], 'edmoutfiles': ['edm_MC.root'], 'jobarch': 'el8_amd64_gcc11', 'jobminuarch': 'any', 'jobsw': 'CMSSW_13_2_11', 'inputdata': '/promptD0ToKPi_PT-8_TuneCP5_5p36TeV_pythia8-evtgen/HINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v2/MINIAODSIM', 'cacheurl': 'https://cmsweb.cern.ch/S3/crabcache_prod', 'cachefilename': '1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz', 'debugfilename': '2b8182e2b8f82c9799a2d56446bb1657a36f142a1cd0b740de85bd1533de8e3d.tar.gz', 'jobtype': 'Analysis'}
+INFO 2025-07-02 19:47:15.916 UTC: 	 Sending the request to the server at cmsweb.cern.ch
+DEBUG 2025-07-02 19:47:15.916 UTC: 	 Submitting {'dryrun': 0, 'workflow': 'crab_promptD0ToKPi_PT-8', 'saveoutput': 1, 'savelogsflag': 1, 'inputdata': '/promptD0ToKPi_PT-8_TuneCP5_5p36TeV_pythia8-evtgen/HINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v2/MINIAODSIM', 'nonvaliddata': 0, 'userfiles': [], 'dbsurl': 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', 'useparent': 0, 'ignorelocality': 0, 'splitalgo': 'LumiBased', 'algoargs': 1, 'totalunits': 0, 'lfn': '/store/user/awesolek/Run3_D0_MC', 'publication': 0, 'publishdbsurl': 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', 'publishname2': 'Run3_D0_MC', 'jobtype': 'Analysis', 'generator': 'pythia', 'addoutputfiles': [], 'maxjobruntime': 1250, 'numcores': 1, 'maxmemory': 2000, 'priority': 10, 'nonprodsw': 1, 'asyncdest': 'T2_US_Purdue', 'requireaccelerator': 0, 'oneEventMode': 0, 'extrajdl': [], 'ignoreglobalblacklist': 0, 'partialdataset': 0, 'inputblocks': [], 'tfileoutfiles': ['TTree_MC.root'], 'edmoutfiles': ['edm_MC.root'], 'jobarch': 'el8_amd64_gcc11', 'jobminuarch': 'any', 'jobsw': 'CMSSW_13_2_11', 'cacheurl': 'https://cmsweb.cern.ch/S3/crabcache_prod', 'cachefilename': '1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz', 'debugfilename': '2b8182e2b8f82c9799a2d56446bb1657a36f142a1cd0b740de85bd1533de8e3d.tar.gz'} 
+DEBUG 2025-07-02 19:47:15.917 UTC: 	 Encoded data for curl request: dryrun=0&workflow=crab_promptD0ToKPi_PT-8&saveoutput=1&savelogsflag=1&inputdata=%2FpromptD0ToKPi_PT-8_TuneCP5_5p36TeV_pythia8-evtgen%2FHINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v2%2FMINIAODSIM&nonvaliddata=0&dbsurl=https%3A%2F%2Fcmsweb.cern.ch%2Fdbs%2Fprod%2Fglobal%2FDBSReader&useparent=0&ignorelocality=0&splitalgo=LumiBased&algoargs=1&totalunits=0&lfn=%2Fstore%2Fuser%2Fawesolek%2FRun3_D0_MC&publication=0&publishdbsurl=https%3A%2F%2Fcmsweb.cern.ch%2Fdbs%2Fprod%2Fphys03%2FDBSWriter&publishname2=Run3_D0_MC&jobtype=Analysis&generator=pythia&maxjobruntime=1250&numcores=1&maxmemory=2000&priority=10&nonprodsw=1&asyncdest=T2_US_Purdue&requireaccelerator=0&oneEventMode=0&ignoreglobalblacklist=0&partialdataset=0&jobarch=el8_amd64_gcc11&jobminuarch=any&jobsw=CMSSW_13_2_11&cacheurl=https%3A%2F%2Fcmsweb.cern.ch%2FS3%2Fcrabcache_prod&cachefilename=1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz&debugfilename=2b8182e2b8f82c9799a2d56446bb1657a36f142a1cd0b740de85bd1533de8e3d.tar.gz&tfileoutfiles=TTree_MC.root&edmoutfiles=edm_MC.root
+DEBUG 2025-07-02 19:47:16.292 UTC: 	 Result: {'result': [{'RequestName': '250702_194716:awesolek_crab_promptD0ToKPi_PT-8'}]}
+INFO 2025-07-02 19:47:16.341 UTC: 	 Success: Your task has been delivered to the prod CRAB3 server.
+INFO 2025-07-02 19:47:16.341 UTC: 	 Task name: 250702_194716:awesolek_crab_promptD0ToKPi_PT-8
+INFO 2025-07-02 19:47:16.341 UTC: 	 Project dir: Run3_D0_MC/crab_promptD0ToKPi_PT-8
+INFO 2025-07-02 19:47:16.341 UTC: 	 Please use ' crab status -d Run3_D0_MC/crab_promptD0ToKPi_PT-8 ' to check how the submission process proceeds.
+DEBUG 2025-07-02 19:47:16.341 UTC: 	 About to return
+INFO 2025-07-02 19:47:16.346 UTC: 	 Log file is /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-8/crab.log

@@ -1,0 +1,347 @@
+DEBUG 2025-07-02 19:45:53.266 UTC: 	 CRAB Client version: v3.250522
+DEBUG 2025-07-02 19:45:53.267 UTC: 	 Running on: Linux cms-fe01.rcac.purdue.edu 4.18.0-513.18.1.el8_9.x86_64 #1 SMP Wed Feb 21 21:34:36 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+DEBUG 2025-07-02 19:45:53.267 UTC: 	 Not using Singularity
+DEBUG 2025-07-02 19:45:53.267 UTC: 	 Operating System: Rocky Linux 8.9 (Green Obsidian)
+DEBUG 2025-07-02 19:45:53.267 UTC: 	 Executing command: 'submit'
+DEBUG 2025-07-02 19:45:53.267 UTC: 	 Found CRAB cache file /home/awesole/.crab3
+INFO 2025-07-02 19:45:53.273 UTC: 	 Will use CRAB configuration file Dpt40_submit.py
+DEBUG 2025-07-02 19:45:53.273 UTC: 	 Loading CRAB configuration file.
+DEBUG 2025-07-02 19:45:53.333 UTC: 	 Will use CRAB plugin ANALYSIS (i.e. will run an analysis job type).
+DEBUG 2025-07-02 19:45:53.525 UTC: 	 Checking credentials
+DEBUG 2025-07-02 19:45:53.525 UTC: 	 Found proxy file /tmp/x509up_u875172
+DEBUG 2025-07-02 19:45:53.525 UTC: 	 Making sure it has proper VOMS extension
+DEBUG 2025-07-02 19:45:53.526 UTC: 	 Executing command :
+ voms-proxy-info --vo --file /tmp/x509up_u875172
+DEBUG 2025-07-02 19:45:53.559 UTC: 	 output : cms
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 19:45:53.559 UTC: 	 Getting proxy life time left
+DEBUG 2025-07-02 19:45:53.559 UTC: 	 Executing command :
+ voms-proxy-info --actimeleft --timeleft --file /tmp/x509up_u875172
+DEBUG 2025-07-02 19:45:53.592 UTC: 	 output : 518246
+518246
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 19:45:53.592 UTC: 	 Proxy valid for 143:57:26 hours
+DEBUG 2025-07-02 19:45:53.593 UTC: 	 Encoded data for curl request: subresource=delegatedn
+DEBUG 2025-07-02 19:45:53.961 UTC: 	 Registering user credentials on myproxy for /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+DEBUG 2025-07-02 19:45:53.961 UTC: 	 Executing command :
+ voms-proxy-info --identity --file /tmp/x509up_u875172
+DEBUG 2025-07-02 19:45:53.994 UTC: 	 output : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 19:45:53.994 UTC: 	 Getting myproxy life time left for 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-02 19:45:53.994 UTC: 	 Executing command :
+ myproxy-info -s myproxy.cern.ch -l 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-02 19:45:54.825 UTC: 	 output : username: 5ecefdd9bea902c90adb814aee6716dd0f360701
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  timeleft: 683:30:32  (28.5 days)
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 19:45:54.825 UTC: 	 Myproxy is valid: 2460600
+DEBUG 2025-07-02 19:45:54.825 UTC: 	 Result of myproxy credential check:
+  Credential exists on myproxy: username: 5ecefdd9bea902c90adb814aee6716dd0f360701  - validity: 28 days, 11:30:00
+DEBUG 2025-07-02 19:45:54.825 UTC: 	 Command use: submit
+DEBUG 2025-07-02 19:45:54.825 UTC: 	 Options use: ['-c', 'Dpt40_submit.py']
+DEBUG 2025-07-02 19:45:54.826 UTC: 	 Encoded data for curl request: subresource=version
+DEBUG 2025-07-02 19:45:55.192 UTC: 	 CRABClient version: v3.250522
+DEBUG 2025-07-02 19:45:55.192 UTC: 	 Instance is prod
+DEBUG 2025-07-02 19:45:55.192 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2025-07-02 19:45:55.192 UTC: 	 Command api workflow
+DEBUG 2025-07-02 19:45:55.192 UTC: 	 Started submission
+DEBUG 2025-07-02 19:45:55.192 UTC: 	 Working on /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-40
+DEBUG 2025-07-02 19:45:55.192 UTC: 	 Encoded data for curl request: subresource=backendurls
+DEBUG 2025-07-02 19:45:55.635 UTC: 	 Loading required information from the environment
+DEBUG 2025-07-02 19:45:55.635 UTC: 	 Found CMSSW_13_2_11 for el8_amd64_gcc11 with base /home/awesole/VertexCP_2/CMSSW_13_2_11
+DEBUG 2025-07-02 19:45:55.635 UTC: 	 Loading required information from the environment
+DEBUG 2025-07-02 19:45:55.635 UTC: 	 Found CMSSW_13_2_11 for el8_amd64_gcc11 with base /home/awesole/VertexCP_2/CMSSW_13_2_11
+DEBUG 2025-07-02 19:45:55.635 UTC: 	 UNIQUE NAME: tarUUID 1f3a81d6-1e79-4a42-aad5-d72e21606978 
+DEBUG 2025-07-02 19:45:55.636 UTC: 	 self.config: from WMCore.Configuration import Configuration
+config = Configuration()
+config.section_('General')
+config.General.transferOutputs = True
+config.General.requestName = 'promptD0ToKPi_PT-40'
+config.General.workArea = 'Run3_D0_MC'
+config.General.transferLogs = True
+config.section_('JobType')
+config.JobType.pluginName = 'Analysis'
+config.JobType.allowUndistributedCMSSW = True
+config.JobType.psetName = '/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_MC.py'
+config.section_('Data')
+config.Data.inputDBS = 'global'
+config.Data.lumiMask = ''
+config.Data.splitting = 'LumiBased'
+config.Data.outputDatasetTag = 'Run3_D0_MC'
+config.Data.publication = False
+config.Data.inputDataset = '/promptD0ToKPi_PT-40_TuneCP5_5p36TeV_pythia8-evtgen/HINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v1/MINIAODSIM'
+config.Data.unitsPerJob = 1
+config.Data.outLFNDirBase = '/store/user/awesolek/Run3_D0_MC'
+config.section_('Site')
+config.Site.storageSite = 'T2_US_Purdue'
+config.section_('User')
+config.section_('Debug')
+
+DEBUG 2025-07-02 19:45:55.636 UTC: 	 self.config.JobType.psetName: /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_MC.py
+INFO 2025-07-02 19:45:55.636 UTC: 	 Importing CMSSW configuration /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_MC.py
+INFO 2025-07-02 19:45:59.858 UTC: 	 Finished importing CMSSW configuration /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_MC.py
+DEBUG 2025-07-02 19:45:59.858 UTC: 	 Writing CMSSW configuration to /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-40/inputs/PSet.py
+DEBUG 2025-07-02 19:46:01.425 UTC: 	 The following EDM output files will be collected: ['edm_MC.root']
+DEBUG 2025-07-02 19:46:01.425 UTC: 	 The following TFile output files will be collected: ['TTree_MC.root']
+DEBUG 2025-07-02 19:46:01.425 UTC: 	 The following user output files (not listed as PoolOuputModule or TFileService in the CMSSW PSet) will be collected: 
+DEBUG 2025-07-02 19:46:01.425 UTC: 	 Loading required information from the environment
+DEBUG 2025-07-02 19:46:01.426 UTC: 	 Found CMSSW_13_2_11 for el8_amd64_gcc11 with base /home/awesole/VertexCP_2/CMSSW_13_2_11
+DEBUG 2025-07-02 19:46:01.426 UTC: 	 Making tarball in /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-40/inputs/1f3a81d6-1e79-4a42-aad5-d72e21606978default.tgz
+DEBUG 2025-07-02 19:46:01.485 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/bin
+DEBUG 2025-07-02 19:46:01.485 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/bin to tarball
+DEBUG 2025-07-02 19:46:01.487 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/python
+DEBUG 2025-07-02 19:46:01.488 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/python to tarball
+DEBUG 2025-07-02 19:46:01.509 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/cfipython
+DEBUG 2025-07-02 19:46:01.509 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/cfipython to tarball
+DEBUG 2025-07-02 19:46:01.521 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/lib
+DEBUG 2025-07-02 19:46:01.521 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/lib to tarball
+DEBUG 2025-07-02 19:46:01.725 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/biglib
+DEBUG 2025-07-02 19:46:01.725 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/biglib to tarball
+DEBUG 2025-07-02 19:46:01.727 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/module
+DEBUG 2025-07-02 19:46:01.727 UTC: 	 Checking directory /home/awesole/VertexCP_2/CMSSW_13_2_11/config/SCRAM/hooks
+DEBUG 2025-07-02 19:46:01.727 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/config/SCRAM/hooks to tarball
+DEBUG 2025-07-02 19:46:01.737 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeAnalyzer/python to tarball
+DEBUG 2025-07-02 19:46:01.749 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeAnalyzer/data to tarball
+DEBUG 2025-07-02 19:46:01.751 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/python to tarball
+DEBUG 2025-07-02 19:46:01.772 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/interface to tarball
+DEBUG 2025-07-02 19:46:01.815 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/data to tarball
+DEBUG 2025-07-02 19:46:03.153 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/TrackAnalysis/python to tarball
+DEBUG 2025-07-02 19:46:03.159 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/TrackAnalysis/interface to tarball
+DEBUG 2025-07-02 19:46:03.187 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/EventAnalysis/python to tarball
+DEBUG 2025-07-02 19:46:03.206 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/Configuration/python to tarball
+DEBUG 2025-07-02 19:46:03.219 UTC: 	 Adding directory /home/awesole/VertexCP_2/CMSSW_13_2_11/src/HeavyIonsAnalysis/Configuration/data to tarball
+DEBUG 2025-07-02 19:46:05.931 UTC: 	 Uploading archive /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-40/inputs/1f3a81d6-1e79-4a42-aad5-d72e21606978default.tgz (8.581055.1 MB) to the CRAB cache. Using URI https://cmsweb.cern.ch/S3/crabcache_prod
+DEBUG 2025-07-02 19:46:08.232 UTC: 	 Encoded data for curl request: subresource=upload&objecttype=sandbox&tarballname=1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz
+DEBUG 2025-07-02 19:46:08.641 UTC: 	 sandbox 1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz is already in the S3 store, will not upload again
+DEBUG 2025-07-02 19:46:08.642 UTC: 	 Loading required information from the environment
+DEBUG 2025-07-02 19:46:08.642 UTC: 	 Found CMSSW_13_2_11 for el8_amd64_gcc11 with base /home/awesole/VertexCP_2/CMSSW_13_2_11
+DEBUG 2025-07-02 19:46:08.642 UTC: 	 Making tarball in /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-40/inputs/debugFiles.tgz
+DEBUG 2025-07-02 19:46:08.701 UTC: 	 Uploading archive /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-40/inputs/debugFiles.tgz (3 KB) to the CRAB cache. Using URI https://cmsweb.cern.ch/S3/crabcache_prod
+DEBUG 2025-07-02 19:46:08.705 UTC: 	 Encoded data for curl request: subresource=upload&objecttype=sandbox&tarballname=bacf639d57685af57710df540debd3b25cb9757009a2b739100004745406ff0c.tar.gz
+DEBUG 2025-07-02 19:46:09.096 UTC: 	 Will execute:
+curl -f -v -X POST  -H "User-Agent: CRAB" -F "key=awesolek/sandboxes/bacf639d57685af57710df540debd3b25cb9757009a2b739100004745406ff0c.tar.gz" -F "AWSAccessKeyId=715203df6482458ba839e73e6dab634b" -F "policy=eyJleHBpcmF0aW9uIjogIjIwMjUtMDctMDJUMjA6NDY6MDlaIiwgImNvbmRpdGlvbnMiOiBbeyJidWNrZXQiOiAiY3JhYmNhY2hlX3Byb2QifSwgeyJrZXkiOiAiYXdlc29sZWsvc2FuZGJveGVzL2JhY2Y2MzlkNTc2ODVhZjU3NzEwZGY1NDBkZWJkM2IyNWNiOTc1NzAwOWEyYjczOTEwMDAwNDc0NTQwNmZmMGMudGFyLmd6In1dfQ==" -F "signature=0CLkzDkd/Vx4a/Bjw+ysn70pVoM=" -F "file=@/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-40/inputs/debugFiles.tgz" "https://s3.cern.ch/crabcache_prod"
+DEBUG 2025-07-02 19:46:09.458 UTC: 	 exitcode: 0
+stdout: b''
+DEBUG 2025-07-02 19:46:09.458 UTC: 	 upload to S3 of sandbox /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-40/inputs/debugFiles.tgz completed
+DEBUG 2025-07-02 19:46:09.458 UTC: 	 make sure that object is ready for retrieve
+DEBUG 2025-07-02 19:46:10.460 UTC: 	 Encoded data for curl request: subresource=download&objecttype=sandbox&tarballname=bacf639d57685af57710df540debd3b25cb9757009a2b739100004745406ff0c.tar.gz&clientmethod=head_object
+DEBUG 2025-07-02 19:46:10.863 UTC: 	 PreSignedUrl to download sandbox received OK
+DEBUG 2025-07-02 19:46:10.867 UTC: 	 Will execute:
+ curl -v -s -f -o /dev/null --head  "https://s3.cern.ch/crabcache_prod/awesolek/sandboxes/bacf639d57685af57710df540debd3b25cb9757009a2b739100004745406ff0c.tar.gz?AWSAccessKeyId=715203df6482458ba839e73e6dab634b&Signature=LQKImbCsB56XPDNdNwWAcDLUbnE%3D&Expires=1751489170"
+DEBUG 2025-07-02 19:46:11.228 UTC: 	 exitcode: 0
+stdout: b''
+DEBUG 2025-07-02 19:46:11.228 UTC: 	 sandbox /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-40/inputs/debugFiles.tgz successfully uploaded to S3
+DEBUG 2025-07-02 19:46:11.228 UTC: 	 Result uploading input files: 1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz 
+DEBUG 2025-07-02 19:46:11.228 UTC: 	 submit() - self.configuration from WMCore.Configuration import Configuration
+config = Configuration()
+config.section_('General')
+config.General.transferOutputs = True
+config.General.requestName = 'promptD0ToKPi_PT-40'
+config.General.workArea = 'Run3_D0_MC'
+config.General.transferLogs = True
+config.section_('JobType')
+config.JobType.pluginName = 'Analysis'
+config.JobType.allowUndistributedCMSSW = True
+config.JobType.psetName = '/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_MC.py'
+config.section_('Data')
+config.Data.inputDBS = 'global'
+config.Data.lumiMask = ''
+config.Data.splitting = 'LumiBased'
+config.Data.outputDatasetTag = 'Run3_D0_MC'
+config.Data.publication = False
+config.Data.inputDataset = '/promptD0ToKPi_PT-40_TuneCP5_5p36TeV_pythia8-evtgen/HINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v1/MINIAODSIM'
+config.Data.unitsPerJob = 1
+config.Data.outLFNDirBase = '/store/user/awesolek/Run3_D0_MC'
+config.section_('Site')
+config.Site.storageSite = 'T2_US_Purdue'
+config.section_('User')
+config.section_('Debug')
+
+DEBUG 2025-07-02 19:46:11.228 UTC: 	 submit() - self.configreq {'dryrun': 0, 'workflow': 'crab_promptD0ToKPi_PT-40', 'saveoutput': 1, 'savelogsflag': 1, 'inputdata': '/promptD0ToKPi_PT-40_TuneCP5_5p36TeV_pythia8-evtgen/HINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v1/MINIAODSIM', 'nonvaliddata': 0, 'userfiles': [], 'dbsurl': 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', 'useparent': 0, 'ignorelocality': 0, 'splitalgo': 'LumiBased', 'algoargs': 1, 'totalunits': 0, 'lfn': '/store/user/awesolek/Run3_D0_MC', 'publication': 0, 'publishdbsurl': 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', 'publishname2': 'Run3_D0_MC', 'jobtype': 'Analysis', 'generator': 'pythia', 'addoutputfiles': [], 'maxjobruntime': 1250, 'numcores': 1, 'maxmemory': 2000, 'priority': 10, 'nonprodsw': 1, 'asyncdest': 'T2_US_Purdue', 'requireaccelerator': 0, 'oneEventMode': 0, 'extrajdl': [], 'ignoreglobalblacklist': 0, 'partialdataset': 0, 'inputblocks': []}
+DEBUG 2025-07-02 19:46:11.228 UTC: 	 submit() - jobconfig {'addoutputfiles': [], 'tfileoutfiles': ['TTree_MC.root'], 'edmoutfiles': ['edm_MC.root'], 'jobarch': 'el8_amd64_gcc11', 'jobminuarch': 'any', 'jobsw': 'CMSSW_13_2_11', 'inputdata': '/promptD0ToKPi_PT-40_TuneCP5_5p36TeV_pythia8-evtgen/HINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v1/MINIAODSIM', 'cacheurl': 'https://cmsweb.cern.ch/S3/crabcache_prod', 'cachefilename': '1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz', 'debugfilename': 'bacf639d57685af57710df540debd3b25cb9757009a2b739100004745406ff0c.tar.gz', 'jobtype': 'Analysis'}
+INFO 2025-07-02 19:46:11.229 UTC: 	 Sending the request to the server at cmsweb.cern.ch
+DEBUG 2025-07-02 19:46:11.229 UTC: 	 Submitting {'dryrun': 0, 'workflow': 'crab_promptD0ToKPi_PT-40', 'saveoutput': 1, 'savelogsflag': 1, 'inputdata': '/promptD0ToKPi_PT-40_TuneCP5_5p36TeV_pythia8-evtgen/HINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v1/MINIAODSIM', 'nonvaliddata': 0, 'userfiles': [], 'dbsurl': 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', 'useparent': 0, 'ignorelocality': 0, 'splitalgo': 'LumiBased', 'algoargs': 1, 'totalunits': 0, 'lfn': '/store/user/awesolek/Run3_D0_MC', 'publication': 0, 'publishdbsurl': 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', 'publishname2': 'Run3_D0_MC', 'jobtype': 'Analysis', 'generator': 'pythia', 'addoutputfiles': [], 'maxjobruntime': 1250, 'numcores': 1, 'maxmemory': 2000, 'priority': 10, 'nonprodsw': 1, 'asyncdest': 'T2_US_Purdue', 'requireaccelerator': 0, 'oneEventMode': 0, 'extrajdl': [], 'ignoreglobalblacklist': 0, 'partialdataset': 0, 'inputblocks': [], 'tfileoutfiles': ['TTree_MC.root'], 'edmoutfiles': ['edm_MC.root'], 'jobarch': 'el8_amd64_gcc11', 'jobminuarch': 'any', 'jobsw': 'CMSSW_13_2_11', 'cacheurl': 'https://cmsweb.cern.ch/S3/crabcache_prod', 'cachefilename': '1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz', 'debugfilename': 'bacf639d57685af57710df540debd3b25cb9757009a2b739100004745406ff0c.tar.gz'} 
+DEBUG 2025-07-02 19:46:11.229 UTC: 	 Encoded data for curl request: dryrun=0&workflow=crab_promptD0ToKPi_PT-40&saveoutput=1&savelogsflag=1&inputdata=%2FpromptD0ToKPi_PT-40_TuneCP5_5p36TeV_pythia8-evtgen%2FHINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v1%2FMINIAODSIM&nonvaliddata=0&dbsurl=https%3A%2F%2Fcmsweb.cern.ch%2Fdbs%2Fprod%2Fglobal%2FDBSReader&useparent=0&ignorelocality=0&splitalgo=LumiBased&algoargs=1&totalunits=0&lfn=%2Fstore%2Fuser%2Fawesolek%2FRun3_D0_MC&publication=0&publishdbsurl=https%3A%2F%2Fcmsweb.cern.ch%2Fdbs%2Fprod%2Fphys03%2FDBSWriter&publishname2=Run3_D0_MC&jobtype=Analysis&generator=pythia&maxjobruntime=1250&numcores=1&maxmemory=2000&priority=10&nonprodsw=1&asyncdest=T2_US_Purdue&requireaccelerator=0&oneEventMode=0&ignoreglobalblacklist=0&partialdataset=0&jobarch=el8_amd64_gcc11&jobminuarch=any&jobsw=CMSSW_13_2_11&cacheurl=https%3A%2F%2Fcmsweb.cern.ch%2FS3%2Fcrabcache_prod&cachefilename=1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz&debugfilename=bacf639d57685af57710df540debd3b25cb9757009a2b739100004745406ff0c.tar.gz&tfileoutfiles=TTree_MC.root&edmoutfiles=edm_MC.root
+DEBUG 2025-07-02 19:46:11.849 UTC: 	 Result: {'result': [{'RequestName': '250702_194611:awesolek_crab_promptD0ToKPi_PT-40'}]}
+INFO 2025-07-02 19:46:11.880 UTC: 	 Success: Your task has been delivered to the prod CRAB3 server.
+INFO 2025-07-02 19:46:11.880 UTC: 	 Task name: 250702_194611:awesolek_crab_promptD0ToKPi_PT-40
+INFO 2025-07-02 19:46:11.880 UTC: 	 Project dir: Run3_D0_MC/crab_promptD0ToKPi_PT-40
+INFO 2025-07-02 19:46:11.880 UTC: 	 Please use ' crab status -d Run3_D0_MC/crab_promptD0ToKPi_PT-40 ' to check how the submission process proceeds.
+DEBUG 2025-07-02 19:46:11.880 UTC: 	 About to return
+INFO 2025-07-02 19:46:11.885 UTC: 	 Log file is /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-40/crab.log
+DEBUG 2025-07-02 21:26:04.513 UTC: 	 CRAB Client version: v3.250522
+DEBUG 2025-07-02 21:26:04.513 UTC: 	 Running on: Linux cms-fe00.rcac.purdue.edu 4.18.0-513.18.1.el8_9.x86_64 #1 SMP Wed Feb 21 21:34:36 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+DEBUG 2025-07-02 21:26:04.513 UTC: 	 Not using Singularity
+DEBUG 2025-07-02 21:26:04.513 UTC: 	 Operating System: Rocky Linux 8.9 (Green Obsidian)
+DEBUG 2025-07-02 21:26:04.513 UTC: 	 Executing command: 'resubmit'
+DEBUG 2025-07-02 21:26:04.514 UTC: 	 Found CRAB cache file /home/awesole/.crab3
+DEBUG 2025-07-02 21:26:04.582 UTC: 	 Checking credentials
+DEBUG 2025-07-02 21:26:04.582 UTC: 	 Found proxy file /tmp/x509up_u875172
+DEBUG 2025-07-02 21:26:04.582 UTC: 	 Making sure it has proper VOMS extension
+DEBUG 2025-07-02 21:26:04.582 UTC: 	 Executing command :
+ voms-proxy-info --vo --file /tmp/x509up_u875172
+DEBUG 2025-07-02 21:26:04.607 UTC: 	 output : cms
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 21:26:04.607 UTC: 	 Getting proxy life time left
+DEBUG 2025-07-02 21:26:04.608 UTC: 	 Executing command :
+ voms-proxy-info --actimeleft --timeleft --file /tmp/x509up_u875172
+DEBUG 2025-07-02 21:26:04.631 UTC: 	 output : 598888
+598887
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 21:26:04.631 UTC: 	 Proxy valid for 166:21:27 hours
+DEBUG 2025-07-02 21:26:04.632 UTC: 	 Encoded data for curl request: subresource=delegatedn
+DEBUG 2025-07-02 21:26:05.113 UTC: 	 Registering user credentials on myproxy for /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+DEBUG 2025-07-02 21:26:05.113 UTC: 	 Executing command :
+ voms-proxy-info --identity --file /tmp/x509up_u875172
+DEBUG 2025-07-02 21:26:05.138 UTC: 	 output : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 21:26:05.138 UTC: 	 Getting myproxy life time left for 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-02 21:26:05.138 UTC: 	 Executing command :
+ myproxy-info -s myproxy.cern.ch -l 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-02 21:26:08.053 UTC: 	 output : username: 5ecefdd9bea902c90adb814aee6716dd0f360701
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  timeleft: 681:50:18  (28.4 days)
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 21:26:08.053 UTC: 	 Myproxy is valid: 2454600
+DEBUG 2025-07-02 21:26:08.053 UTC: 	 Result of myproxy credential check:
+  Credential exists on myproxy: username: 5ecefdd9bea902c90adb814aee6716dd0f360701  - validity: 28 days, 9:50:00
+DEBUG 2025-07-02 21:26:08.054 UTC: 	 Encoded data for curl request: subresource=search&workflow=250702_194611%3Aawesolek_crab_promptD0ToKPi_PT-40
+DEBUG 2025-07-02 21:26:08.463 UTC: 	 Command use: resubmit
+DEBUG 2025-07-02 21:26:08.463 UTC: 	 Options use: ['Run3_D0_MC/crab_promptD0ToKPi_PT-40/']
+DEBUG 2025-07-02 21:26:08.463 UTC: 	 Encoded data for curl request: subresource=version
+DEBUG 2025-07-02 21:26:08.903 UTC: 	 CRABClient version: v3.250522
+DEBUG 2025-07-02 21:26:08.903 UTC: 	 Instance is prod
+DEBUG 2025-07-02 21:26:08.903 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2025-07-02 21:26:08.903 UTC: 	 Command api workflow
+DEBUG 2025-07-02 21:26:08.912 UTC: 	 CRAB Client version: v3.250522
+DEBUG 2025-07-02 21:26:08.913 UTC: 	 Running on: Linux cms-fe00.rcac.purdue.edu 4.18.0-513.18.1.el8_9.x86_64 #1 SMP Wed Feb 21 21:34:36 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+DEBUG 2025-07-02 21:26:08.913 UTC: 	 Not using Singularity
+DEBUG 2025-07-02 21:26:08.913 UTC: 	 Operating System: Rocky Linux 8.9 (Green Obsidian)
+DEBUG 2025-07-02 21:26:08.913 UTC: 	 Executing command: 'status'
+DEBUG 2025-07-02 21:26:08.913 UTC: 	 Found CRAB cache file /home/awesole/.crab3
+DEBUG 2025-07-02 21:26:08.952 UTC: 	 Checking credentials
+DEBUG 2025-07-02 21:26:08.952 UTC: 	 Found proxy file /tmp/x509up_u875172
+DEBUG 2025-07-02 21:26:08.952 UTC: 	 Making sure it has proper VOMS extension
+DEBUG 2025-07-02 21:26:08.952 UTC: 	 Executing command :
+ voms-proxy-info --vo --file /tmp/x509up_u875172
+DEBUG 2025-07-02 21:26:08.977 UTC: 	 output : cms
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 21:26:08.977 UTC: 	 Getting proxy life time left
+DEBUG 2025-07-02 21:26:08.977 UTC: 	 Executing command :
+ voms-proxy-info --actimeleft --timeleft --file /tmp/x509up_u875172
+DEBUG 2025-07-02 21:26:09.000 UTC: 	 output : 598884
+598883
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 21:26:09.001 UTC: 	 Proxy valid for 166:21:23 hours
+DEBUG 2025-07-02 21:26:09.001 UTC: 	 Encoded data for curl request: subresource=delegatedn
+DEBUG 2025-07-02 21:26:09.395 UTC: 	 Registering user credentials on myproxy for /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+DEBUG 2025-07-02 21:26:09.395 UTC: 	 Executing command :
+ voms-proxy-info --identity --file /tmp/x509up_u875172
+DEBUG 2025-07-02 21:26:09.420 UTC: 	 output : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 21:26:09.420 UTC: 	 Getting myproxy life time left for 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-02 21:26:09.420 UTC: 	 Executing command :
+ myproxy-info -s myproxy.cern.ch -l 5ecefdd9bea902c90adb814aee6716dd0f360701
+DEBUG 2025-07-02 21:26:10.280 UTC: 	 output : username: 5ecefdd9bea902c90adb814aee6716dd0f360701
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod)-tw(01|02).cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-dev-tw(01|02|03|04).cern.ch|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=cmscrab/CN=(817881|373708)/CN=Robot: cms crab|/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=crabint1/CN=373708/CN=Robot: CMS CRAB Integration 1
+  timeleft: 681:50:16  (28.4 days)
+
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 21:26:10.280 UTC: 	 Myproxy is valid: 2454600
+DEBUG 2025-07-02 21:26:10.280 UTC: 	 Result of myproxy credential check:
+  Credential exists on myproxy: username: 5ecefdd9bea902c90adb814aee6716dd0f360701  - validity: 28 days, 9:50:00
+DEBUG 2025-07-02 21:26:10.281 UTC: 	 Retrieving username ...
+DEBUG 2025-07-02 21:26:10.281 UTC: 	 Retrieving username from CRIC...
+DEBUG 2025-07-02 21:26:14.052 UTC: 	 username is awesolek
+INFO 2025-07-02 21:26:16.802 UTC: 	 Rucio client intialized for account awesolek
+DEBUG 2025-07-02 21:26:16.803 UTC: 	 Command use: status
+DEBUG 2025-07-02 21:26:16.803 UTC: 	 Options use: ['-d', 'Run3_D0_MC/crab_promptD0ToKPi_PT-40/']
+DEBUG 2025-07-02 21:26:16.803 UTC: 	 Encoded data for curl request: subresource=version
+DEBUG 2025-07-02 21:26:17.173 UTC: 	 CRABClient version: v3.250522
+DEBUG 2025-07-02 21:26:17.173 UTC: 	 Instance is prod
+DEBUG 2025-07-02 21:26:17.173 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2025-07-02 21:26:17.173 UTC: 	 Command api workflow
+DEBUG 2025-07-02 21:26:17.173 UTC: 	 Encoded data for curl request: subresource=search&workflow=250702_194611%3Aawesolek_crab_promptD0ToKPi_PT-40
+DEBUG 2025-07-02 21:26:17.536 UTC: 	 Got information from server oracle database: {'desc': {'columns': ['tm_taskname', 'tm_activity', 'tm_task_status', 'tm_task_command', 'tm_start_time', 'tm_start_injection', 'tm_end_injection', 'tm_task_failure', 'tm_job_sw', 'tm_job_arch', 'tm_input_dataset', 'tm_nonvalid_input_dataset', 'tm_use_parent', 'tm_site_whitelist', 'tm_site_blacklist', 'tm_split_algo', 'tm_split_args', 'tm_user_sandbox', 'tm_cache_url', 'tm_username', 'tm_user_dn', 'tm_user_vo', 'tm_user_role', 'tm_user_group', 'tm_publish_name', 'tm_publish_groupname', 'tm_asyncdest', 'tm_dbs_url', 'tm_publish_dbs_url', 'tm_publication', 'tm_outfiles', 'tm_tfile_outfiles', 'tm_edm_outfiles', 'tm_job_type', 'tm_generator', 'tm_events_per_lumi', 'tm_arguments', 'tm_save_logs', 'tw_name', 'tm_user_infiles', 'tm_maxjobruntime', 'tm_numcores', 'tm_maxmemory', 'tm_priority', 'tm_output_dataset', 'tm_task_warnings', 'tm_user_webdir', 'tm_scriptexe', 'tm_scriptargs', 'tm_extrajdl', 'tm_collector', 'tm_schedd', 'tm_dry_run', 'tm_user_files', 'tm_transfer_outputs', 'tm_output_lfn', 'tm_ignore_locality', 'tm_fail_limit', 'tm_one_event_mode', 'tm_secondary_input_dataset', 'tm_primary_dataset', 'tm_last_publication', 'tm_debug_files', 'clusterid', 'tm_ignore_global_blacklist', 'tm_submitter_ip_addr', 'tm_totalunits', 'tm_ddm_reqid', 'tm_user_config', 'tm_transfer_container', 'tm_transfer_rule', 'tm_publish_rule', 'tm_multipub_rule', 'tm_job_min_microarch', 'tm_dagman_status', 'tm_num_jobs', 'tm_uploaded']}, 'result': ['250702_194611:awesolek_crab_promptD0ToKPi_PT-40', 'None', 'SUBMITTED', 'SUBMIT', '2025-07-02 19:46:11.789221', 'None', '2025-07-02 19:47:54.165265', 'None', 'CMSSW_13_2_11', 'el8_amd64_gcc11', '/promptD0ToKPi_PT-40_TuneCP5_5p36TeV_pythia8-evtgen/HINPbPbSpring23MiniAOD-132X_mcRun3_2023_realistic_HI_v9-v1/MINIAODSIM', 'F', '0', '[]', '[]', 'LumiBased', "{'halt_job_on_file_boundaries': False, 'splitOnRun': False, 'lumis_per_job': 1, 'runs': [], 'lumis': []}", '1799448d74f7374cb57ef7d5bb069718f3fe19c5d777936fca7d027b99e30630.tar.gz', 'https://cmsweb.cern.ch/S3/crabcache_prod', 'awesolek', '/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=awesolek/CN=874460/CN=Abigail Leigh Wesolek', 'cms', 'None', 'None', 'Run3_D0_MC-00000000000000000000000000000000', 'F', 'T2_US_Purdue', 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', 'F', '[]', "['TTree_MC.root']", "['edm_MC.root']", 'Analysis', 'pythia', 'None', '{}', 'T', 'crab-prod-tw02', '[]', '1250', '1', '2000', '10', "['/FakeDataset/fakefile-FakePublish-e545d9b0fb7e0f36ace680e993088976/USER']", '[]', 'http://vocms0198.cern.ch/mon/awesolek/250702_194611:awesolek_crab_promptD0ToKPi_PT-40', 'None', '[]', '[]', 'cmsgwms-collector-global.cern.ch:9620,cmsgwms-collector-global.fnal.gov:9620', 'crab3@vocms0198.cern.ch', 'F', '[]', 'T', '/store/user/awesolek/Run3_D0_MC', 'F', 'None', 'F', 'None', 'promptD0ToKPi_PT-40_TuneCP5_5p36TeV_pythia8-evtgen', 'None', 'bacf639d57685af57710df540debd3b25cb9757009a2b739100004745406ff0c.tar.gz', '120275575', 'F', '188.184.75.82', '0.0', 'None', '{"partialdataset": false, "requireaccelerator": false, "acceleratorparams": null, "inputblocks": null}', 'None', 'None', 'None', 'None', 'any', 'FAILED', '31', 'T']}
+INFO 2025-07-02 21:26:17.536 UTC: 	 CRAB project directory:		/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-40
+INFO 2025-07-02 21:26:17.536 UTC: 	 Task name:			250702_194611:awesolek_crab_promptD0ToKPi_PT-40
+INFO 2025-07-02 21:26:17.536 UTC: 	 Grid scheduler - Task Worker:	crab3@vocms0198.cern.ch - crab-prod-tw02
+INFO 2025-07-02 21:26:17.536 UTC: 	 Status on the CRAB server:	SUBMITTED
+INFO 2025-07-02 21:26:17.536 UTC: 	 Task URL to use for HELP:	https://cmsweb.cern.ch/crabserver/ui/task/250702_194611%3Aawesolek_crab_promptD0ToKPi_PT-40
+INFO 2025-07-02 21:26:17.555 UTC: 	 Dashboard monitoring URL:	https://monit-grafana.cern.ch/d/cmsTMDetail/cms-task-monitoring-task-view?orgId=11&var-user=awesolek&var-task=250702_194611%3Aawesolek_crab_promptD0ToKPi_PT-40&from=1751481971000&to=now
+DEBUG 2025-07-02 21:26:17.556 UTC: 	 The CRAB server submitted your task to the Grid scheduler (cluster ID: 120275575)
+DEBUG 2025-07-02 21:26:17.556 UTC: 	 Webdir is located at http://vocms0198.cern.ch/mon/awesolek/250702_194611:awesolek_crab_promptD0ToKPi_PT-40
+DEBUG 2025-07-02 21:26:17.556 UTC: 	 Encoded data for curl request: subresource=webdirprx&workflow=250702_194611%3Aawesolek_crab_promptD0ToKPi_PT-40
+DEBUG 2025-07-02 21:26:17.951 UTC: 	 Proxied webdir is located at https://cmsweb.cern.ch/scheddmon/0198/awesolek/250702_194611:awesolek_crab_promptD0ToKPi_PT-40
+DEBUG 2025-07-02 21:26:17.952 UTC: 	 Retrieving 'status_cache' file from https://cmsweb.cern.ch/scheddmon/0198/awesolek/250702_194611:awesolek_crab_promptD0ToKPi_PT-40/status_cache.pkl
+DEBUG 2025-07-02 21:26:17.952 UTC: 	 Will execute:
+curl -sS --capath /etc/grid-security/certificates --cert /tmp/x509up_u875172 --key /tmp/x509up_u875172 -o /tmp/crab_status-cache-47reiwk1.pkl -w %"{http_code}" "https://cmsweb.cern.ch/scheddmon/0198/awesolek/250702_194611:awesolek_crab_promptD0ToKPi_PT-40/status_cache.pkl"
+DEBUG 2025-07-02 21:26:17.952 UTC: 	 Executing command :
+ curl -sS --capath /etc/grid-security/certificates --cert /tmp/x509up_u875172 --key /tmp/x509up_u875172 -o /tmp/crab_status-cache-47reiwk1.pkl -w %"{http_code}" "https://cmsweb.cern.ch/scheddmon/0198/awesolek/250702_194611:awesolek_crab_promptD0ToKPi_PT-40/status_cache.pkl"
+DEBUG 2025-07-02 21:26:18.307 UTC: 	 output : 200
+ error: 
+ retcode : 0
+DEBUG 2025-07-02 21:26:18.307 UTC: 	 exitcode: 0
+stdout: 200
+stderr: 
+error details: 
+DEBUG 2025-07-02 21:26:18.308 UTC: 	 Got information from status cache file: {'3': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2180688], 'SubmitTimes': [1751485742.0], 'StartTimes': [1751485788.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [534.0], 'TotalSysCpuTimeHistory': [3.0], 'WallDurations': [8.0, 609.0], 'JobIds': ['120275647.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '5': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2262400], 'SubmitTimes': [1751485743.0], 'StartTimes': [1751485792.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [828.0], 'TotalSysCpuTimeHistory': [4.0], 'WallDurations': [9.0, 911.0], 'JobIds': ['120275649.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2500 MB). Will not retry it.', {}]}, '4': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2312820], 'SubmitTimes': [1751485743.0], 'StartTimes': [1751485789.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [537.0], 'TotalSysCpuTimeHistory': [6.0], 'WallDurations': [8.0, 610.0], 'JobIds': ['120275651.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2500 MB). Will not retry it.', {}]}, '7': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2114980], 'SubmitTimes': [1751485743.0], 'StartTimes': [1751485777.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [524.0], 'TotalSysCpuTimeHistory': [3.0], 'WallDurations': [8.0, 609.0], 'JobIds': ['120275653.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '2': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2019688], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485787.0], 'EndTimes': [1751486691.0], 'TotalUserCpuTimeHistory': [817], 'TotalSysCpuTimeHistory': [6], 'WallDurations': [9.0, 904.0], 'JobIds': ['120275654.0'], 'State': 'finished', 'RecordedSite': True, 'Error': [0, 'OK', {}]}, '1': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [1682668], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485788.0], 'EndTimes': [1751486391.0], 'TotalUserCpuTimeHistory': [518], 'TotalSysCpuTimeHistory': [4], 'WallDurations': [9.0, 603.0], 'JobIds': ['120275655.0'], 'State': 'finished', 'RecordedSite': True, 'Error': [0, 'OK', {}]}, '16': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2186780], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485777.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [217.0], 'TotalSysCpuTimeHistory': [3.0], 'WallDurations': [8.0, 308.0], 'JobIds': ['120275656.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '20': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2301904], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485777.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [513.0], 'TotalSysCpuTimeHistory': [3.0], 'WallDurations': [9.0, 611.0], 'JobIds': ['120275657.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2500 MB). Will not retry it.', {}]}, '12': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2233692], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485783.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [1865.0], 'TotalSysCpuTimeHistory': [13.0], 'WallDurations': [8.0, 2112.0], 'JobIds': ['120275658.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '6': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2278600], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485777.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [517.0], 'TotalSysCpuTimeHistory': [4.0], 'WallDurations': [9.0, 611.0], 'JobIds': ['120275659.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2500 MB). Will not retry it.', {}]}, '11': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2085408], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485778.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [226.0], 'TotalSysCpuTimeHistory': [2.0], 'WallDurations': [8.0, 308.0], 'JobIds': ['120275660.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '19': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2151236], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485778.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [208.0], 'TotalSysCpuTimeHistory': [2.0], 'WallDurations': [8.0, 309.0], 'JobIds': ['120275661.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '10': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2166992], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485777.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [514.0], 'TotalSysCpuTimeHistory': [4.0], 'WallDurations': [8.0, 609.0], 'JobIds': ['120275662.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '18': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2141548], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485777.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [205.0], 'TotalSysCpuTimeHistory': [2.0], 'WallDurations': [9.0, 311.0], 'JobIds': ['120275663.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '17': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [1818544], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485778.0], 'EndTimes': [1751487112.0], 'TotalUserCpuTimeHistory': [917], 'TotalSysCpuTimeHistory': [6], 'WallDurations': [9.0, 1334.0], 'JobIds': ['120275664.0'], 'State': 'finished', 'RecordedSite': True, 'Error': [0, 'OK', {}]}, '8': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2218184], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485787.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [527.0], 'TotalSysCpuTimeHistory': [4.0], 'WallDurations': [9.0, 612.0], 'JobIds': ['120275665.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '9': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2061772], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485787.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [232.0], 'TotalSysCpuTimeHistory': [2.0], 'WallDurations': [10.0, 310.0], 'JobIds': ['120275666.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '14': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2195452], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485787.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [516.0], 'TotalSysCpuTimeHistory': [4.0], 'WallDurations': [8.0, 608.0], 'JobIds': ['120275667.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '13': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_SGrid_RALPP', 'T2_UK_SGrid_RALPP'], 'ResidentSetSize': [2121164], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485787.0], 'EndTimes': [1751486549.0], 'TotalUserCpuTimeHistory': [686], 'TotalSysCpuTimeHistory': [4], 'WallDurations': [8.0, 762.0], 'JobIds': ['120275668.0'], 'State': 'finished', 'RecordedSite': True, 'Error': [0, 'OK', {}]}, '15': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2439076], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485779.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [852.0], 'TotalSysCpuTimeHistory': [8.0], 'WallDurations': [9.0, 1212.0], 'JobIds': ['120275669.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2500 MB). Will not retry it.', {}]}, '26': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2343012], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485787.0], 'EndTimes': [1751486474.0], 'TotalUserCpuTimeHistory': [567], 'TotalSysCpuTimeHistory': [4], 'WallDurations': [9.0, 687.0], 'JobIds': ['120275670.0'], 'State': 'finished', 'RecordedSite': True, 'Error': [0, 'OK', {}]}, '24': {'Retries': 1, 'Restarts': 0, 'SiteHistory': ['Unknown', 'T2_UK_London_IC', 'T2_UK_London_IC', 'T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [819900, 1867568], 'SubmitTimes': [1751485744.0, 1751486778.0], 'StartTimes': [1751485882.0, 1751486796.0], 'EndTimes': [1751486708.0, 1751487260.0], 'TotalUserCpuTimeHistory': [12, 364.0], 'TotalSysCpuTimeHistory': [1, 3.0], 'WallDurations': [8.0, 222.85057592391968, 826.0, 9.0, 464.0], 'JobIds': ['120275671.0', '120276190.0'], 'State': 'finished', 'RecordedSite': True, 'Error': [0, 'OK', {}]}, '28': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2159304], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485788.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [823.0], 'TotalSysCpuTimeHistory': [5.0], 'WallDurations': [9.0, 911.0], 'JobIds': ['120275672.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '22': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2276072], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485788.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [632.0], 'TotalSysCpuTimeHistory': [5.0], 'WallDurations': [8.0, 911.0], 'JobIds': ['120275673.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2500 MB). Will not retry it.', {}]}, '23': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2197216], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485788.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [448.0], 'TotalSysCpuTimeHistory': [3.0], 'WallDurations': [8.0, 610.0], 'JobIds': ['120275674.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '25': {'Retries': 1, 'Restarts': 0, 'SiteHistory': ['Unknown', 'T2_UK_London_IC', 'T2_UK_London_IC', 'T3_UK_ScotGrid_GLA', 'T3_UK_ScotGrid_GLA'], 'ResidentSetSize': [813288, 2114188], 'SubmitTimes': [1751485744.0, 1751486823.0], 'StartTimes': [1751485868.0, 1751486991.0, -1], 'EndTimes': [1751486753.0], 'TotalUserCpuTimeHistory': [9, 142.0], 'TotalSysCpuTimeHistory': [2, 3.0], 'WallDurations': [8.0, 236.85057592391968, 885.0, 8.0, 309.0], 'JobIds': ['120275675.0', '120276244.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2250 MB). Will not retry it.', {}]}, '30': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2386316], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485787.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [511.0], 'TotalSysCpuTimeHistory': [4.0], 'WallDurations': [9.0, 611.0], 'JobIds': ['120275676.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2500 MB). Will not retry it.', {}]}, '31': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2356328], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485787.0], 'EndTimes': [1751486634.0], 'TotalUserCpuTimeHistory': [614], 'TotalSysCpuTimeHistory': [5], 'WallDurations': [9.0, 847.0], 'JobIds': ['120275677.0'], 'State': 'finished', 'RecordedSite': True, 'Error': [0, 'OK', {}]}, '27': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2385700], 'SubmitTimes': [1751485744.0], 'StartTimes': [1751485789.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [504.0], 'TotalSysCpuTimeHistory': [4.0], 'WallDurations': [9.0, 610.0], 'JobIds': ['120275678.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2500 MB). Will not retry it.', {}]}, '21': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2290460], 'SubmitTimes': [1751485745.0], 'StartTimes': [1751485789.0], 'EndTimes': [1751486657.0], 'TotalUserCpuTimeHistory': [612], 'TotalSysCpuTimeHistory': [5], 'WallDurations': [8.0, 868.0], 'JobIds': ['120275679.0'], 'State': 'finished', 'RecordedSite': True, 'Error': [0, 'OK', {}]}, '29': {'Retries': 0, 'Restarts': 0, 'SiteHistory': ['T2_UK_London_IC', 'T2_UK_London_IC'], 'ResidentSetSize': [2398472], 'SubmitTimes': [1751485745.0], 'StartTimes': [1751485788.0], 'EndTimes': [], 'TotalUserCpuTimeHistory': [487.0], 'TotalSysCpuTimeHistory': [4.0], 'WallDurations': [10.0, 612.0], 'JobIds': ['120275680.0'], 'State': 'failed', 'RecordedSite': True, 'Error': [50660, 'Job killed by HTCondor due to excessive memory use (RSS=2500 MB). Will not retry it.', {}]}}
+INFO 2025-07-02 21:26:18.308 UTC: 	 Status on the scheduler:	FAILED
+INFO 2025-07-02 21:26:18.308 UTC: 	 
+Jobs status:                    failed       		 74.2% (23/31)
+INFO 2025-07-02 21:26:18.308 UTC: 	 				finished     		 25.8% ( 8/31)
+INFO 2025-07-02 21:26:18.309 UTC: 	 
+No publication information (publication has been disabled in the CRAB configuration file)
+INFO 2025-07-02 21:26:18.309 UTC: 	 
+Error Summary: (use crab status --verboseErrors for details about the errors)
+
+23 jobs failed with exit code 50660
+
+Have a look at https://twiki.cern.ch/twiki/bin/viewauth/CMSPublic/JobExitCodes for a description of the exit codes.
+INFO 2025-07-02 21:26:18.310 UTC: 	 
+Warning: the max jobs runtime is less than 30% of the task requested value (1250 min), please consider to request a lower value for failed jobs (allowed through crab resubmit) and/or improve the jobs splitting (e.g. config.Data.splitting = 'Automatic') in a new task.
+INFO 2025-07-02 21:26:18.310 UTC: 	 
+Summary of run jobs:
+ * Memory: 2301MB min, 2381MB max, 2134MB ave
+ * Runtime: 0:05:08 min, 0:35:12 max, 0:11:40 ave
+ * CPU eff: 47% min, 91% max, 81% ave
+ * Waste: 0:40:53 (10% of total)
+
+DEBUG 2025-07-02 21:26:18.311 UTC: 	 Requesting resubmission of failed jobs in task 250702_194611:awesolek_crab_promptD0ToKPi_PT-40
+INFO 2025-07-02 21:26:18.311 UTC: 	 Sending resubmit request to the server.
+DEBUG 2025-07-02 21:26:18.311 UTC: 	 Submitting {'workflow': '250702_194611:awesolek_crab_promptD0ToKPi_PT-40', 'subresource': 'resubmit2', 'jobids': ['3', '5', '4', '7', '16', '20', '12', '6', '11', '19', '10', '18', '8', '9', '14', '15', '28', '22', '23', '25', '30', '27', '29'], 'publication': 0} 
+DEBUG 2025-07-02 21:26:18.311 UTC: 	 Encoded data for curl request: workflow=250702_194611%3Aawesolek_crab_promptD0ToKPi_PT-40&subresource=resubmit2&publication=0&jobids=3&jobids=5&jobids=4&jobids=7&jobids=16&jobids=20&jobids=12&jobids=6&jobids=11&jobids=19&jobids=10&jobids=18&jobids=8&jobids=9&jobids=14&jobids=15&jobids=28&jobids=22&jobids=23&jobids=25&jobids=30&jobids=27&jobids=29
+DEBUG 2025-07-02 21:26:18.668 UTC: 	 Result: {'desc': {'columns': ['tm_site_blacklist', 'tm_site_whitelist', 'tm_maxjobruntime', 'tm_maxmemory', 'tm_numcores', 'tm_priority']}, 'result': [{'result': 'ok'}]}
+INFO 2025-07-02 21:26:18.668 UTC: 	 Resubmit request sent to the server.
+INFO 2025-07-02 21:26:18.668 UTC: 	 Please use ' crab status ' to check how the resubmission process proceeds.
+Notice it may take a couple of minutes for the resubmission to get fully processed.
+INFO 2025-07-02 21:26:18.674 UTC: 	 Log file is /home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/crab/Run3_D0_MC/crab_promptD0ToKPi_PT-40/crab.log

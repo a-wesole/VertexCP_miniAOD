@@ -69,6 +69,8 @@ D0Fitter::D0Fitter(const edm::ParameterSet &theParameters, edm::ConsumesCollecto
   token_tracks_pf = iC.consumes<std::vector<pat::PackedCandidate>>(theParameters.getParameter<edm::InputTag>("trackRecoAlgorithm"));
   token_vertices = iC.consumes<reco::VertexCollection>(theParameters.getParameter<edm::InputTag>("vertexRecoAlgorithm"));
   token_dedx = iC.consumes<edm::ValueMap<reco::DeDxData>>(edm::InputTag("dedxHarmonic2"));
+  chi2Map_  = iC.consumes< edm::ValueMap< float > >(theParameters.getParameter< edm::InputTag >( "TrackChi2Label" ) );
+
 
   // Second, initialize post-fit cuts
   mPiKCutMin = theParameters.getParameter<double>(string("mPiKCutMin"));
@@ -107,7 +109,7 @@ D0Fitter::~D0Fitter()
 void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
 {
 
-  // if (iEvent.id().event() != 128304341) return;
+  // if (iEvent.id().event() != 199502708) return;
   using std::cout;
   using std::endl;
   using std::vector;
@@ -124,6 +126,8 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
 
   ESHandle<MagneticField> bFieldHandle;
   Handle<edm::ValueMap<reco::DeDxData>> dEdxHandle;
+  edm::Handle<edm::ValueMap<float>> chi2Handle;
+
 
   // Get the tracks, vertices from the event, and get the B-field record
   //  from the EventSetup
@@ -131,6 +135,8 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
   iEvent.getByToken(token_vertices, theVertexHandle);
   iEvent.getByToken(token_beamSpot, theBeamSpotHandle);
   iEvent.getByToken(token_dedx, dEdxHandle);
+  iEvent.getByToken(chi2Map_, chi2Handle);
+
 
   if (!packedHandle.isValid() || packedHandle->empty())
     return;
@@ -148,6 +154,9 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
   double zVtxError = -999.0;
   double dzvtx = -999, dxyvtx = -999;
   double dzerror = -999, dxyerror = -999;
+  double trk_chi2 = -999;
+  int count = 0;
+
 
   const reco::VertexCollection vtxCollection = *(theVertexHandle.product());
   reco::VertexCollection::const_iterator vtxPrimary = vtxCollection.begin();
@@ -200,9 +209,17 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
     if (cand.pt() < tkPtCut || fabs(cand.eta()) > tkEtaCut)
       continue;
 
+    if (chi2Handle.isValid() && !chi2Handle.failedToGet()) {
+      trk_chi2 = (*chi2Handle)[ptr];
+    }
+    else {
+      trk_chi2 = cand.pseudoTrack().normalizedChi2();
+    }
+
     // Optional quality proxies via pseudoTrack and bestTrack
 
-    if (cand.pseudoTrack().normalizedChi2() < tkChi2Cut &&
+    // if  (cand.pseudoTrack().normalizedChi2() < tkChi2Cut &&
+    if  (trk_chi2 < tkChi2Cut &&
         cand.pseudoTrack().numberOfValidHits() >= tkNhitsCut &&
         cand.pseudoTrack().ptError() / cand.pt() < tkPtErrCut &&
         cand.pt() > tkPtCut && fabs(cand.eta()) < tkEtaCut)
@@ -231,11 +248,10 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
   float negCandMass[2] = {kaonMassD0, piMassD0};
   float posCandMass_sigma[2] = {piMassD0_sigma, kaonMassD0_sigma};
   float negCandMass_sigma[2] = {kaonMassD0_sigma, piMassD0_sigma};
-    int pdg_id[2] = {421, -421};
-  int neg_pdg_id[2] = {321, 211};
-  int pos_pdg_id[2] = {211, -321};
+  int pdg_id[2] = {421, -421};
+  int pos_pdg_id[2] = {211, 321};
+  int neg_pdg_id[2] = {-321,-211};
 
-  int count = 0;
   // cout << "input_daughter_tracks.size() = " << input_daughter_tracks.size() << endl;
   for (unsigned int trdx1 = 0; trdx1 < input_daughter_tracks.size(); trdx1++)
   {
@@ -244,10 +260,22 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
       edm::Ptr<pat::PackedCandidate> dau1 = input_daughter_tracks[trdx1];
       edm::Ptr<pat::PackedCandidate> dau2 = input_daughter_tracks[trdx2];
 
-      const pat::PackedCandidate &tk1 = *dau1;
-      const pat::PackedCandidate &tk2 = *dau2;
-      // todayt change again better to use pointers to the real packed candidates
+      pat::PackedCandidate tk1, tk2;
+      // tk1 = *dau1;
+      // tk2 = *dau2;
+      if (dau1->charge() > 0 && dau2->charge() < 0) {
+       tk1 = *dau1;
+       tk2 = *dau2;
+      }
+      else if (dau1->charge() < 0 && dau2->charge() > 0 ) {
+       tk1 = *dau2;
+       tk2 = *dau1;
+      }
+      else 
+        continue;
+      //same sign or zero-charge is skipped
 
+      // cout << "crash here 1" << endl;
       if (tk1.pt() + tk2.pt() < tkPtSumCut)
         continue;
       if (fabs(tk1.eta() - tk2.eta()) > tkEtaDiffCut)
@@ -526,8 +554,23 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
 
         // Add the two daughters
 
-        theD0.addDaughter( *dau1);
-        theD0.addDaughter( *dau2); //today change this dereferences the edm::Ptr into a packedCanididate and passes that object into add Daughter 
+         /*
+         theD0.addDaughter( *dau1);
+         theD0.addDaughter( *dau2);
+         */
+        // cout << "--------------" << endl;
+        // cout << "before assigning charges : daughter 1 charge = " << tk1->charge() << " and daughter 2 charge = " << tk2->charge() << endl;
+        // cout << "before assignmennt the pdgs are : daughter 1 pdg = " << tk1->pdgId() << " and daughter 2 pdg = " << tk2->pdgId() << endl;
+        tk1.setPdgId(pos_pdg_id[i]);
+        // tk1->setCharge(1);
+        tk2.setPdgId(neg_pdg_id[i]);
+        // tk2->setCharge(-1);
+        // cout << "the updated pdgid : daughter 1 pdgid = " << tk1->pdgId() << " and daughter 2 charge = " << tk2->charge() << endl;
+        // cout << "the updated charges : daughter 1 charge = " << tk1->charge() << " and daughter 2 charge = " << tk2->charge() << endl;
+        theD0.addDaughter(tk1);
+        theD0.addDaughter(tk2); //today change this dereferences the edm::Ptr into a packedCanididate and passes that object into add Daughter 
+        // cout << "the assigned pdgs are : daughter 1 pdg = " << theD0.daughter(0)->pdgId() << " and daughter 2 pdg = " << theD0.daughter(1)->pdgId() << endl;
+        // cout << "the charges after adding daughters are (1)(-1): daughter 1 charge = " << theD0.daughter(0)->charge() << " and daughter 2 charge = " << theD0.daughter(1)->charge() << endl;
 
         // Vertex coordinates & covariance
         theD0.addUserFloat("vtxX", d0Vtx.x());
@@ -557,14 +600,14 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
         if (fabs(theD0.mass() - d0MassD0) < d0MassCut)
         {
           theD0s.push_back(theD0); //today change we need to remove the * since theD0 is now direct packedcandidiate 
-          count += 1;
+          //count += 1;
         }
         // if(theD0)  delete theD0;
 
       }
     }
   }
-  // cout << "event number = " << iEvent.id().event() << " [D0Fitter] - found " << count << " D0 candidates." << endl;
+//   cout << "event number = " << iEvent.id().event() << " number of times chimap was diff from norm chi2 =  " << count << "." << endl;
 }
 // Get methods
 

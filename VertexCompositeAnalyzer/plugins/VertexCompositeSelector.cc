@@ -135,16 +135,34 @@ private:
   }
 
 public:
-  BDTHandler(const string &filename)
+  BDTHandler(bool useAnyMVA_, const edm::ParameterSet &iConfig)
   {
-    loadCuts(filename);
+	  if (useAnyMVA_) {
+		  std::string bdt_cuts_path = "";
+		  if(iConfig.exists("bdtCutsFile")){
+			  std::string cuts_filename = iConfig.getParameter<std::string>("bdtCutsFile");
+			  edm::FileInPath fip(Form("VertexCompositeAnalysis/VertexCompositeAnalyzer/data/%s", cuts_filename.c_str()));
+			  bdt_cuts_path = fip.fullPath();
+			  std::ifstream testFile(bdt_cuts_path);
+			  if (!testFile.good())
+			  {
+				  throw cms::Exception("Configuration") << "cannot find BDT cuts in : " << bdt_cuts_path;
+			  }
+			  testFile.close();
+		  }
+
+		  loadCuts(bdt_cuts_path);
+	  }
   }
 
-  void loadCuts(const string &filename)
+  void loadCuts(const string &cuts_filename)
   {
-    ifstream file(filename);
+    ifstream file(cuts_filename);
+    cout << "the following should be path to csv file" << endl; 
+    cout << "cuts filename: " << cuts_filename << endl;
     if (!file.is_open())
-      cerr << "error no csv file" << endl;
+      throw cms::Exception("Configuration") << "cannot find BDT cuts in : " << cuts_filename << endl;
+      // cerr << "error no csv file" << endl;
     string line;
 
     while (getline(file, line))
@@ -194,7 +212,8 @@ private:
   std::vector<std::string> theInputVars;
   vector<double> inputValues;
   ReadBDT *mva;
-  BDTHandler bdt;
+  std::unique_ptr<BDTHandler> bdt;
+  // BDTHandler bdt;
   std::vector<std::string> input_names_;
   std::vector<std::string> output_names_;
   std::vector<std::vector<int64_t>> input_shapes_;
@@ -369,7 +388,8 @@ private:
 //
 
 VertexCompositeSelector::VertexCompositeSelector(const edm::ParameterSet &iConfig, const ONNXRuntime *cache)
-    : bdt("../../VertexCompositeAnalyzer/data/bdt_cuts.csv"), input_shapes_(), onnxRuntime_(cache)
+    //: bdt("../../VertexCompositeAnalyzer/data/bdt_cuts.csv"), input_shapes_(), onnxRuntime_(cache)
+    :  input_shapes_(), onnxRuntime_(cache)
 {
   string a1 = "log3ddls";
   string a2 = "nVtxProb";
@@ -484,6 +504,9 @@ VertexCompositeSelector::VertexCompositeSelector(const edm::ParameterSet &iConfi
       throw cms::Exception("Configuration") << "onnxModelName not provided in ParameterSet";
     }
   }
+  // bdt = BDTHandler(bdt_cuts_path);
+  bdt = std::make_unique<BDTHandler>(useAnyMVA_, iConfig);
+
 
   d0IDName_ = (iConfig.getParameter<edm::InputTag>("VertexCompositeCollection")).instance();
 
@@ -959,18 +982,16 @@ void VertexCompositeSelector::fillRECO(edm::Event &iEvent, const edm::EventSetup
       inputValues.push_back(centrality);
       inputValues.push_back(y);
       mva_value = mva->GetMvaValue(inputValues);
-      bdt_cut_value = bdt.getBDTCut(y, centrality, pt);
+      bdt_cut_value = bdt->getBDTCut(y, centrality, pt);
+      
+     
       // if (mva_value <= bdt_cut_value || onnxVal <= mvaCut_)
-      //   continue;
-      /*
-         cout << "---------------------------" << endl;
-         cout << "y && cent && pt = " << y << " && " << centrality << " && " << pt << endl;
-         cout << "bdt_weight = " << mva_value << endl;
-         cout << "bdt_cut_value = " << bdt_cut_value << endl;
-         */
-      if (bdt_cut_value < -1)
-        continue;
+       if (mva_value <= bdt_cut_value )
+         continue;
+      //if (bdt_cut_value < -1)
+        //continue;
 
+     // cout << "candidate passed the cuts no problem" << endl;
       theMVANew.push_back(mva_value);
       theMVANew_xg.push_back(onnxVal);
     }

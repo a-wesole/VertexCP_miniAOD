@@ -119,6 +119,8 @@ private:
   edm::EDGetTokenT<reco::VertexCollection> token_vertices;
   edm::EDGetTokenT<edm::ValueMap<reco::DeDxData>> token_dedx;
   edm::EDGetTokenT<reco::BeamSpot> token_beamSpot;
+  edm::EDGetTokenT< edm::ValueMap< float > > chi2Map_;
+
 
   // Cuts
   double mPiKCutMin;

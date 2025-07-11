@@ -23,12 +23,12 @@ process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 132X, data")
 
 # Limit the output messages
 process.load('FWCore.MessageService.MessageLogger_cfi')
-process.MessageLogger.cerr.FwkReport.reportEvery = 10
+process.MessageLogger.cerr.FwkReport.reportEvery = 100
 process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
-process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(100))
+process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
 process.TFileService = cms.Service("TFileService",
-    fileName =cms.string('TTree_wBDT_abbycheck.root'))
+    fileName =cms.string('TTree.root'))
 
 
 # Define the input source
@@ -38,12 +38,18 @@ process.source = cms.Source("PoolSource",
     #fileNames = cms.untracked.vstring('file:output_withMC.root'  # Use the EDM output file
     fileNames = cms.untracked.vstring(
        #'root://xrootd-cms.infn.it//store/mc/HINPbPbSpring23MiniAOD/promptD0ToKPi_PT-1_TuneCP5_5p36TeV_pythia8-evtgen/MINIAODSIM/132X_mcRun3_2023_realistic_HI_v9-v2/2560000/04335bea-a283-40ea-a050-d71e1b7fac6b.root'
-       #'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/668/00000/06179488-b7e6-44f6-bec9-eb242a290ffd.root'
-        #'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/375/055/00000/2d8cd07d-f92f-44df-8e0f-eb28dca3108b.root'
-        'file:2d8cd07d-f92f-44df-8e0f-eb28dca3108b.root'
+       #'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/681/00000/89587dae-c774-4489-a9ea-130849a72872.root'
+       'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/668/00000/06179488-b7e6-44f6-bec9-eb242a290ffd.root'
+
+    #'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/375/055/00000/2d8cd07d-f92f-44df-8e0f-eb28dca3108b.root'
+        #'file:2d8cd07d-f92f-44df-8e0f-eb28dca3108b.root'
 
 
     ),
+        lumisToProcess = cms.untracked.VLuminosityBlockRange(
+        '374668:372-374668:372'  # run:lumiFirst - run:lumiLast
+    )
+
             #eventsToProcess = cms.untracked.VEventRange('375055:201:128206575')  # Replace with your specific run, lumi, event numbers    
 )
 
@@ -68,7 +74,7 @@ process.centralityBin.centralityVariable = cms.string("HFtowers")
 
 # Add PbPb collision event selection
 process.load('VertexCompositeAnalysis.VertexCompositeProducer.collisionEventSelection_cff')
-process.load('VertexCompositeAnalysis.VertexCompositeProducer.hfCoincFilter_cff')
+# process.load('VertexCompositeAnalysis.VertexCompositeProducer.hfCoincFilter_cff')
 process.load('VertexCompositeAnalysis.VertexCompositeProducer.hffilter_cfi')
 
 from HLTrigger.HLTfilters.hltHighLevel_cfi import hltHighLevel
@@ -91,6 +97,7 @@ from VertexCompositeAnalysis.VertexCompositeProducer.PATAlgos_cff import changeT
 VertexCollection_PAT = "offlineSlimmedPrimaryVertices"
 TrackCollection_PAT = "packedPFCandidates"
 GenParticleCollection_PAT = "prunedGenParticles"
+TrkChi2Label = "packedPFCandidateTrackChi2"
 
 
 # Define the analysis steps
@@ -101,6 +108,7 @@ process.generalD0CandidatesNew = process.generalD0Candidates.clone()
 process.generalD0CandidatesNew.trackRecoAlgorithm = cms.InputTag(TrackCollection_PAT)
 process.generalD0CandidatesNew.vertexRecoAlgorithm = cms.InputTag(VertexCollection_PAT)
 process.generalD0CandidatesNew.GenParticleCollection = cms.untracked.InputTag(GenParticleCollection_PAT)
+process.generalD0CandidatesNew.TrackChi2Label = cms.InputTag(TrkChi2Label)
 process.generalD0CandidatesNew.tkEtaDiffCut = cms.double(999.9)
 process.generalD0CandidatesNew.tkNhitsCut = cms.int32(11)
 process.generalD0CandidatesNew.tkPtErrCut = cms.double(0.1)
@@ -133,10 +141,11 @@ process.d0selectorNewReduced.cand3DPointingAngleMax = cms.untracked.double(1.0)
 process.d0selectorNewReduced.input_names = cms.vstring('input')
 process.d0selectorNewReduced.output_names = cms.vstring('probabilities')
 process.d0selectorNewReduced.onnxModelFileName = cms.string("XGBoost_Model_0428_0_OnlyPrompt.onnx")
-process.d0selectorNewReduced.mvaCut = cms.double(0.4)
+process.d0selectorNewReduced.bdtCutsFile = cms.string("bdt_cuts.csv")
+process.d0selectorNewReduced.mvaCut = cms.double(0.9)
 process.d0selectorNewReduced.trkNHitMin = cms.untracked.int32(11)
 process.d0selectorNewReduced.isCentrality = cms.bool(True) # Centrality 
-process.d0selectorNewReduced.useAnyMVA = cms.bool(True); #only set true if you are assigning BDT values  +++change 
+process.d0selectorNewReduced.useAnyMVA = cms.bool(True)#only set true if you are assigning BDT values  +++change 
 
 process.d0ana_newreduced = process.d0ana.clone()
 #process.d0ana_newreduced.VertexCompositeCollection = cms.untracked.InputTag("d0selectorNewReduced:D0")
@@ -179,10 +188,10 @@ changeToMiniAOD(process)
 process.options.numberOfThreads = 1
 
 process.output = cms.OutputModule("PoolOutputModule",
-    fileName = cms.untracked.string('edm_wBDT_abbycheck.root'),
+    fileName = cms.untracked.string('edm.root'),
         outputCommands = cms.untracked.vstring( #which data to include and exclude 
         "drop *", #no data is kept unless explicitly specified
-        'keep *_generalD0CandidatesNew_D0_*', 
+        #'keep *_generalD0CandidatesNew_D0_*', 
         'keep *_d0selectorNewReduced_*_*',  # Keep the MVA collection (adjust the label)
 
         )

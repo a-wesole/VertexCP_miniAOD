@@ -24,10 +24,12 @@ for var in branches:
     # Draw histograms
     h1 = ROOT.TH1F("h1", f"{var}", 100, t1.GetMinimum(var), t1.GetMaximum(var))
     h2 = ROOT.TH1F("h2", f"{var}", 100, t2.GetMinimum(var), t2.GetMaximum(var))
+    h1.SetMinimum(0.0)
+    h2.SetMinimum(0.0)
 
     
-    t1.Draw(f"{var} >> h1", "", "goff")
-    t2.Draw(f"{var} >> h2", "", "goff")
+    t1.Draw(f"{var} >> h1")
+    t2.Draw(f"{var} >> h2")
 
     # Style tree2
     h2.SetMarkerStyle(20)

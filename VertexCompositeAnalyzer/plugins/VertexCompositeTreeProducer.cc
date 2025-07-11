@@ -511,6 +511,7 @@ VertexCompositeTreeProducer::fillRECO(const edm::Event& iEvent, const edm::Event
 	//RECO Candidate info
 	candSize = D0candidates_->size();
 
+	//  cout << "for event number " << iEvent.id().event() << " found " << candSize << " D0 candidates in tree producer" << endl;
 	for(unsigned it=0; it<D0candidates_->size(); ++it){
 
 		const pat::CompositeCandidate & trk = (*D0candidates_)[it];
@@ -569,6 +570,9 @@ VertexCompositeTreeProducer::fillRECO(const edm::Event& iEvent, const edm::Event
 		
 		const reco::Candidate* cand2 = trk.daughter(1);
 		const pat::PackedCandidate* reco_d2 = dynamic_cast<const pat::PackedCandidate*>(cand2);
+
+		int reco_d1_charge = TMath::Sign(1, reco_d1->pdgId());
+		int reco_d2_charge = TMath::Sign(1, reco_d2->pdgId());
 		
 		//const pat::PackedCandidate* reco_d3 = nullptr;
 		if (threeProngDecay_) { 
@@ -612,13 +616,16 @@ VertexCompositeTreeProducer::fillRECO(const edm::Event& iEvent, const edm::Event
 				const reco::Candidate * gen_d1 = genD0.daughter(0);
 				const reco::Candidate * gen_d2 = genD0.daughter(1);
 
-
 				if( !(fabs(gen_d1->pdgId())==PID_dau1_ && fabs(gen_d2->pdgId())==PID_dau2_) && !(fabs(gen_d2->pdgId())==PID_dau1_ && fabs(gen_d1->pdgId())==PID_dau2_)) continue; //make sure k pi pairs              
+				// cout << "reco d1 pid =" << reco_d1->pdgId() << " and 2 " << reco_d2->pdgId() << endl;
+				// cout << "gen d1 pid =" << gen_d1->pdgId() << " and 2 " << gen_d2->pdgId() << endl;
 
-				if(((reco_d1->charge() == gen_d1->charge() && reco_d2->charge() == gen_d2->charge()) || (reco_d1->charge() == gen_d2->charge() && reco_d2->charge() == gen_d1->charge()))) {
+				// if(((reco_d1->charge() == gen_d1->charge() && reco_d2->charge() == gen_d2->charge()) || (reco_d1->charge() == gen_d2->charge() && reco_d2->charge() == gen_d1->charge()))) {
+				if(((reco_d1_charge == gen_d1->charge() && reco_d2_charge == gen_d2->charge()) || (reco_d1_charge == gen_d2->charge() && reco_d2_charge == gen_d1->charge()))) {
+					// cout << "okay we passed the charge statement " << endl;
 
 
-					if(reco_d1->charge() == gen_d1->charge())
+					if(reco_d1_charge == gen_d1->charge())
 					{
 						double deltaR = sqrt(pow(reco_d1->eta()-gen_d1->eta(),2)+pow(reco_d1->phi()-gen_d1->phi(),2));
 						if(deltaR > deltaR_) continue; //check deltaR matching
@@ -628,6 +635,7 @@ VertexCompositeTreeProducer::fillRECO(const edm::Event& iEvent, const edm::Event
 						if(deltaR > deltaR_) continue; //check deltaR matching
 						if(fabs((reco_d2->pt()-gen_d2->pt())/reco_d2->pt()) > 0.2) continue; //check deltaPt matching
 
+						cout << "SIIIIIIIGNAL -- let's go baby!!" << endl;
 						matchGEN[it] = true; //matched gen
 						if(reco_d1->pdgId() != gen_d1->pdgId()) isSwap[it] = true;
 						genDecayLength(it, genD0);
@@ -657,6 +665,7 @@ VertexCompositeTreeProducer::fillRECO(const edm::Event& iEvent, const edm::Event
 						if(deltaR > deltaR_) continue; //check deltaR matching
 						if(fabs((reco_d2->pt()-gen_d1->pt())/reco_d2->pt()) > 0.2) continue; //check deltaPt matching
 
+						cout << "SIIIIIIIGNAL -- let's go baby!!" << endl;
 						matchGEN[it] = true; //matched gen
 						if(reco_d1->pdgId() != gen_d2->pdgId()) isSwap[it] = true;
 						genDecayLength(it, genD0);
@@ -677,6 +686,11 @@ VertexCompositeTreeProducer::fillRECO(const edm::Event& iEvent, const edm::Event
 					}
 
 
+				}
+				else{
+
+			    //  cout << "did not pass same charge! error! reco d1 charge =" << reco_d1->charge() << " and 2 " << reco_d2->charge() << endl;
+				// cout << "gen d1 charge =" << gen_d1->charge() << " and 2 " << gen_d2->charge() << endl;
 				}
 			} //loop over all gen particles -- to find known D0->kPi pairs  
 			idmom_reco[it] = trk.pdgId(); 
@@ -714,8 +728,10 @@ VertexCompositeTreeProducer::fillRECO(const edm::Event& iEvent, const edm::Event
 		phi2[it] = reco_d2->phi();
 
 		//charge
-		charge1[it] = reco_d1->charge();
-		charge2[it] = reco_d2->charge();
+		// charge1[it] = reco_d1->charge();
+		// charge2[it] = reco_d2->charge();
+		charge1[it] = reco_d1_charge;
+		charge2[it] = reco_d2_charge;
 
 
 		pid1[it] = -99999;
