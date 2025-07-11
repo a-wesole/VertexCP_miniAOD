@@ -8,8 +8,10 @@ $D^{0} \to K+\pi$
 But other branches can easily be added in the future.  You want to check the origianl branch for more information.
 
 The code been edited to produce skimmedEDM and TTree simultaneously.  
-The code is updated for miniAOD input. i.e.) using packedPFCandidates and OfflineSlimmedPrimaryVertices instead of GeneralTracks and OfflinePrimaryVertices.
-VertexCompositeProducer/test/run_edm_TTree.py
+
+
+--The code is updated for miniAOD input. i.e.) using packedPFCandidates and OfflineSlimmedPrimaryVertices instead of GeneralTracks and OfflinePrimaryVertices.
+--see the notesOfAllChanges.txt for all updates made to this code from the original VCAnalyzer 
 
 
 
