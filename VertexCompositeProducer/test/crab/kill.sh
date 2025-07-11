@@ -1,0 +1,9 @@
+crab kill D0_mc_TTree_PT-0/crab_mcTTree
+crab kill D0_mc_TTree_PT-1/crab_mcTTree
+crab kill D0_mc_TTree_PT-10/crab_mcTTree
+crab kill D0_mc_TTree_PT-20/crab_mcTTree
+crab kill D0_mc_TTree_PT-30/crab_mcTTree
+crab kill D0_mc_TTree_PT-40/crab_mcTTree
+crab kill D0_mc_TTree_PT-60/crab_mcTTree
+crab kill D0_mc_TTree_PT-8/crab_mcTTree
+crab kill D0_mc_TTree_PT-80/crab_mcTTree
