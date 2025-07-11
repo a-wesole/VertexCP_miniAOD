@@ -173,9 +173,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
   }
   else
   {
-    // 2out << "vtxCollection.size() = " << vtxCollection.size() << endl;
-    // cout << "vtxPrimary->isFake() = " << vtxPrimary->isFake() << endl;
-    // cout << "vtxPrimary->tracksSize() = " << vtxPrimary->tracksSize() << endl;
     isVtxPV = 0;
     xVtx = theBeamSpotHandle->position().x();
     yVtx = theBeamSpotHandle->position().y();
@@ -191,13 +188,8 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
   std::vector<edm::Ptr<pat::PackedCandidate>> input_daughter_tracks; //today change, we are chaging from copy of pat::packedCand to pointers of the real packedCandidates, helpful for memory management and speed
 
   // --note input_daughter_tracks holds smart pointers edm::Ptr<> to them orginal objects
-  // cout << "- begin [debug] -" << endl;
-  // cout << "[debug] packedHandle.size() = " << packedHandle->size() << endl;
-  // cout << "[debug] dauLongImpactSigCut = " << dauLongImpactSigCut << endl;
-  // cout << "[debug] dauTransImpactSigCut = " << dauTransImpactSigCut << endl;
   for (size_t i = 0; i < packedHandle->size(); ++i) // for all tracks
   {
-    // cout << " [debug] raw track [i] = " << i << endl;
     edm::Ptr<pat::PackedCandidate> ptr(packedHandle, i);
     const auto &cand = *ptr; // get track
 
@@ -234,8 +226,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
     // double dxyerror = sqrt(cand.d0Error() * cand.d0Error() + xVtxError * yVtxError);
     dzerror = TMath::Sqrt(cand.pseudoTrack().dzError()*cand.pseudoTrack().dzError() + zVtxError*zVtxError);
     dxyerror = TMath::Sqrt(cand.pseudoTrack().dxyError()*cand.pseudoTrack().dxyError() + xVtxError*yVtxError);
-    // cout << "$$$$$$ abby check here please  $$$$$ dzerror = " << dzerror << endl;
-    // cout << "$$$$$$ abby check here please  $$$$$ dxyerror = " << dxyerror << endl;
     double dauLongImpactSig = dzvtx / dzerror;
     double dauTransImpactSig = dxyvtx / dxyerror;
 
@@ -252,7 +242,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
   int pos_pdg_id[2] = {211, 321};
   int neg_pdg_id[2] = {-321,-211};
 
-  // cout << "input_daughter_tracks.size() = " << input_daughter_tracks.size() << endl;
   for (unsigned int trdx1 = 0; trdx1 < input_daughter_tracks.size(); trdx1++)
   {
     for (unsigned int trdx2 = trdx1 + 1; trdx2 < input_daughter_tracks.size(); trdx2++)
@@ -275,7 +264,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
         continue;
       //same sign or zero-charge is skipped
 
-      // cout << "crash here 1" << endl;
       if (tk1.pt() + tk2.pt() < tkPtSumCut)
         continue;
       if (fabs(tk1.eta() - tk2.eta()) > tkEtaDiffCut)
@@ -288,14 +276,12 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
         continue;
       if (isWrongSign && q1 * q2 != 1)
         continue;
-      // cout << "abby check 4" << endl;
 
       reco::TransientTrack tt1(tk1.pseudoTrack(), magField);
       reco::TransientTrack tt2(tk2.pseudoTrack(), magField);
 
       if (!tt1.impactPointTSCP().isValid() || !tt2.impactPointTSCP().isValid())
         continue;
-        // cout << "abby check 5" << endl;
 
       // DCA calculation
       FreeTrajectoryState state1 = tt1.impactPointTSCP().theState();
@@ -305,21 +291,16 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
       cApp.calculate(state1, state2);
       if (!cApp.status())
         continue;
-        // cout << "abby check 6" << endl;
 
       float dca = fabs(cApp.distance());
       GlobalPoint cxPt = cApp.crossingPoint();
       if (dca < 0. || dca > tkDCACut)
         continue;
-        // cout << "abby check 7" << endl;
 
-      // abby -- up to here is updated loooooooooooooooooooooooooook
 
       if (sqrt(cxPt.x() * cxPt.x() + cxPt.y() * cxPt.y()) > 120. || std::abs(cxPt.z()) > 300.)
         continue;
-      // cout << "abby check 8" << endl;
 
-      // cout << "cut 6" << endl;
 
       // Assign mass hypotheses for the two combinations: [K-, π+] and [π-, K+]
 
@@ -361,12 +342,9 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
 
       if ((mass1 > mPiKCutMax || mass1 < mPiKCutMin) && (mass2 > mPiKCutMax || mass2 < mPiKCutMin))
         continue;
-      // cout << "abby check 9" << endl;
 
-      // cout << "cut 7a -- need to come abck and fix this " << endl;
       if (totalPt < dPtCut)
         continue;
-      // cout << "abby check 10" << endl;
       // the above keeps the pairs that align with k mass and pi mass and assigned pid
 
       // Create the vertex fitter object and vertex the tracks
@@ -403,23 +381,19 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
 
         if (!d0Vertex->isValid())
           continue;
-          // cout << "abby check 11" << endl;
 
         d0Vertex->movePointerToTheTop();
         RefCountedKinematicParticle d0Cand = d0Vertex->currentParticle();
         if (!d0Cand->currentState().isValid())
           continue;
-          // cout << "abby check 12" << endl;
 
         RefCountedKinematicVertex d0DecayVertex = d0Vertex->currentDecayVertex();
         if (!d0DecayVertex->vertexIsValid())
           continue;
-          // cout << "abby check 13" << endl;
 
         float d0C2Prob = TMath::Prob(d0DecayVertex->chiSquared(), d0DecayVertex->degreesOfFreedom());
         if (d0C2Prob < VtxChiProbCut)
           continue;
-          // cout << "abby check 14" << endl;
 
         d0Vertex->movePointerToTheFirstChild();
         RefCountedKinematicParticle posCand = d0Vertex->currentParticle();
@@ -428,9 +402,7 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
 
         if (!posCand->currentState().isValid() || !negCand->currentState().isValid())
           continue;
-          // cout << "abby check 15" << endl;
 
-        // cout << "cut 8" << endl;
         KinematicParameters posCandKP = posCand->currentState().kinematicParameters();
         KinematicParameters negCandKP = negCand->currentState().kinematicParameters();
         // Grab basic objects
@@ -500,7 +472,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
             lVtxMag / sigmaLvtxMag < lVtxSigCut ||
             cos(d0Angle3D) < collinCut3D || cos(d0Angle2D) < collinCut2D || d0Angle3D > alphaCut || d0Angle2D > alpha2DCut)
           continue;
-          // cout << "abby check 16" << endl;
 
 
 
@@ -511,9 +482,7 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
                                RecoVertex::convertPos(vtxPrimary->position()));
         if (!tsos.isValid())
           continue;
-        // cout << "abby check 17" << endl;
 
-        // cout << "cut 10" << endl;
         Measurement1D cur3DIP;
         VertexDistance3D a3d;
         GlobalPoint refPoint = tsos.globalPosition();
@@ -543,7 +512,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
         double sigma_y2 = posErr.cyy() + negErr.cyy();
 
         double dcaError = sqrt(sigma_x2 * cxPt.x() * cxPt.x() + sigma_y2 * cxPt.y() * cxPt.y()) / dca;
-        // cout << "+_+_+_+_ dca = " << dca << " +- " << dcaError << endl;
 
         // Create CompositeCandidate
         pat::CompositeCandidate theD0; //today change, we only need make_unique if theD0s is holding pointers, but it does not it holds actual composite canididates so we do not need
@@ -554,23 +522,10 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
 
         // Add the two daughters
 
-         /*
-         theD0.addDaughter( *dau1);
-         theD0.addDaughter( *dau2);
-         */
-        // cout << "--------------" << endl;
-        // cout << "before assigning charges : daughter 1 charge = " << tk1->charge() << " and daughter 2 charge = " << tk2->charge() << endl;
-        // cout << "before assignmennt the pdgs are : daughter 1 pdg = " << tk1->pdgId() << " and daughter 2 pdg = " << tk2->pdgId() << endl;
         tk1.setPdgId(pos_pdg_id[i]);
-        // tk1->setCharge(1);
         tk2.setPdgId(neg_pdg_id[i]);
-        // tk2->setCharge(-1);
-        // cout << "the updated pdgid : daughter 1 pdgid = " << tk1->pdgId() << " and daughter 2 charge = " << tk2->charge() << endl;
-        // cout << "the updated charges : daughter 1 charge = " << tk1->charge() << " and daughter 2 charge = " << tk2->charge() << endl;
         theD0.addDaughter(tk1);
         theD0.addDaughter(tk2); //today change this dereferences the edm::Ptr into a packedCanididate and passes that object into add Daughter 
-        // cout << "the assigned pdgs are : daughter 1 pdg = " << theD0.daughter(0)->pdgId() << " and daughter 2 pdg = " << theD0.daughter(1)->pdgId() << endl;
-        // cout << "the charges after adding daughters are (1)(-1): daughter 1 charge = " << theD0.daughter(0)->charge() << " and daughter 2 charge = " << theD0.daughter(1)->charge() << endl;
 
         // Vertex coordinates & covariance
         theD0.addUserFloat("vtxX", d0Vtx.x());
@@ -588,7 +543,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
         theD0.addUserFloat("dxyvtx", dxyvtx);
         theD0.addUserFloat("dzError", dzerror);
         theD0.addUserFloat("dxyError", dxyerror);
-        // cout << " [D0Fitter] - vtxX = " << decayPos.x() << endl;
 
         for (int ii = 0; ii < 3; ++ii)
         {
@@ -607,7 +561,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
       }
     }
   }
-//   cout << "event number = " << iEvent.id().event() << " number of times chimap was diff from norm chi2 =  " << count << "." << endl;
 }
 // Get methods
 

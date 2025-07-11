@@ -162,7 +162,6 @@ public:
     cout << "cuts filename: " << cuts_filename << endl;
     if (!file.is_open())
       throw cms::Exception("Configuration") << "cannot find BDT cuts in : " << cuts_filename << endl;
-      // cerr << "error no csv file" << endl;
     string line;
 
     while (getline(file, line))
@@ -213,11 +212,9 @@ private:
   vector<double> inputValues;
   ReadBDT *mva;
   std::unique_ptr<BDTHandler> bdt;
-  // BDTHandler bdt;
   std::vector<std::string> input_names_;
   std::vector<std::string> output_names_;
   std::vector<std::vector<int64_t>> input_shapes_;
-  // FloatArrays data_;
   std::string onnxModelPath_;
   const ONNXRuntime *onnxRuntime_;
 
@@ -355,10 +352,8 @@ private:
 
   // tokens
   edm::EDGetTokenT<reco::VertexCollection> tok_offlinePV_;
-  // edm::EDGetTokenT<reco::TrackCollection> tok_generalTrk_;
   edm::EDGetTokenT<std::vector<pat::PackedCandidate>> tok_generalTrk_;
   edm::EDGetTokenT<pat::CompositeCandidateCollection> patCompositeCandidateCollection_Token_;
-  // edm::EDGetTokenT<reco::VertexCompositeCandidateCollection> recoVertexCompositeCandidateCollection_Token_;
   edm::EDGetTokenT<MVACollection> MVAValues_Token_;
   edm::EDGetTokenT<edm::ValueMap<reco::DeDxData>> Dedx_Token1_;
   edm::EDGetTokenT<edm::ValueMap<reco::DeDxData>> Dedx_Token2_;
@@ -368,8 +363,6 @@ private:
 
   std::string d0IDName_;
 
-  // abby
-  // then need to convert PAT candidates to reco candidates
   pat::CompositeCandidateCollection theGoodCandidates;
   MVACollection theMVANew;
   MVACollection theMVANew_xg;
@@ -388,7 +381,6 @@ private:
 //
 
 VertexCompositeSelector::VertexCompositeSelector(const edm::ParameterSet &iConfig, const ONNXRuntime *cache)
-    //: bdt("../../VertexCompositeAnalyzer/data/bdt_cuts.csv"), input_shapes_(), onnxRuntime_(cache)
     :  input_shapes_(), onnxRuntime_(cache)
 {
   string a1 = "log3ddls";
@@ -504,7 +496,6 @@ VertexCompositeSelector::VertexCompositeSelector(const edm::ParameterSet &iConfi
       throw cms::Exception("Configuration") << "onnxModelName not provided in ParameterSet";
     }
   }
-  // bdt = BDTHandler(bdt_cuts_path);
   bdt = std::make_unique<BDTHandler>(useAnyMVA_, iConfig);
 
 
@@ -568,7 +559,6 @@ void VertexCompositeSelector::produce(edm::Event &iEvent, const edm::EventSetup 
   using namespace edm;
 
   edm::Handle<pat::CompositeCandidateCollection> patCandidates;
-  // iEvent.getByToken(recoVertexCompositeCandidateCollection_Token_, patCandidates);
   iEvent.getByToken(patCompositeCandidateCollection_Token_, patCandidates);
 
   if (!patCandidates.isValid())
@@ -611,7 +601,6 @@ void VertexCompositeSelector::fillRECO(edm::Event &iEvent, const edm::EventSetup
   edm::Handle<reco::VertexCollection> vertices;
   iEvent.getByToken(tok_offlinePV_, vertices);
 
-  // edm::Handle<reco::TrackCollection> tracks;
   edm::Handle<pat::PackedCandidateCollection> tracks;
   iEvent.getByToken(tok_generalTrk_, tracks);
 
@@ -685,15 +674,10 @@ void VertexCompositeSelector::fillRECO(edm::Event &iEvent, const edm::EventSetup
     double pz = trk.pz();
     mass = trk.mass();
 
-    // today change
-    //   we need to do dynmic cast to pat::PackedCandidate because trk.daughter(0) gives a pointer in the base class reco::Candidate
-    //  even though we attached specifically pat::PackedCandidate as daughter. so we need to specifiy.
-    // in essence the daughter is a pat::PackedCandidate but the reco::Candidate pointer does not know that, so down_cast makes it so.
 
     auto const *d1 = dynamic_cast<const pat::PackedCandidate *>(trk.daughter(0));
     auto const *d2 = dynamic_cast<const pat::PackedCandidate *>(trk.daughter(1));
 
-    // get the pseudotrack which  has error estimates and number of hits for example.
     auto pseudoTrk1 = d1->pseudoTrack(); // today change
     auto pseudoTrk2 = d2->pseudoTrack(); // today change
 
@@ -834,33 +818,6 @@ void VertexCompositeSelector::fillRECO(edm::Event &iEvent, const edm::EventSetup
     // trk dEdx
     H2dedx1 = -999.9;
     T4dedx1 = -999.9;
-    /*
-    if (usePID_)
-    {
-      if (dEdxHandle1.isValid())
-      {
-        const edm::ValueMap<reco::DeDxData> dEdxTrack = *dEdxHandle1.product();
-        H2dedx1 = dEdxTrack[trkRef1].dEdx();
-        //today change to trkRef1. mostly renamed to understand better
-        if (H2dedx1 > (2.8 / pow(pt1 * cosh(eta1), 0.4) + 0.2) && H2dedx1 < (2.8 / pow(pt1 * cosh(eta1), 0.9) + 1.8) && H2dedx1 > (2.8 / pow(0.75, 0.4) + 0.2))
-        {
-          isKaonD1 = true;
-          isPionD1 = false;
-        }
-        if ((H2dedx1 < (2.8 / pow(pt1 * cosh(eta1), 0.4) + 0.2) || H2dedx1 < (2.8 / pow(0.75, 0.4) + 0.2)) && H2dedx1 > 0)
-        {
-          isPionD1 = true;
-          isKaonD1 = false;
-        }
-      }
-
-      if (dEdxHandle2.isValid())
-      {
-        const edm::ValueMap<reco::DeDxData> dEdxTrack = *dEdxHandle2.product();
-        T4dedx1 = dEdxTrack[trkRef1].dEdx();
-      }
-      }
-      */
 
     H2dedx1 = -999.9;
     T4dedx1 = -999.9;
@@ -871,10 +828,6 @@ void VertexCompositeSelector::fillRECO(edm::Event &iEvent, const edm::EventSetup
     double dxybest1 = d1->pseudoTrack().dxy(bestvtx); // today change
     double dzerror1 = TMath::Sqrt(d1->pseudoTrack().dzError() * d1->pseudoTrack().dzError() + bestvzError * bestvzError);
     double dxyerror1 = TMath::Sqrt(d1->pseudoTrack().dxyError()*d1->pseudoTrack().dxyError() + bestvxError*bestvyError);
-    // double dzerror1 = std::sqrt(pseudoTrk1.dzError() * pseudoTrk1.dzError() + bestvzError * bestvzError);
-    // double dxyerror1 = std::sqrt(pseudoTrk1.d0Error() * pseudoTrk1.d0Error() + bestvxError * bestvyError);
-    // cout << "$$$$$$ abby check here please  $$$$$ dzerror1 = " << dzerror1 << endl;
-    // cout << "$$$$$$ abby check here please  $$$$$ dxyerror1 = " << dxyerror1 << endl;
 
     dzos1 = dzbest1 / dzerror1;
     dxyos1 = dxybest1 / dxyerror1;
@@ -890,50 +843,11 @@ void VertexCompositeSelector::fillRECO(edm::Event &iEvent, const edm::EventSetup
     H2dedx2 = -999.9;
     T4dedx2 = -999.9;
 
-    /*
-    if (usePID_)
-    {
-      if (dEdxHandle1.isValid())
-      {
-        const edm::ValueMap<reco::DeDxData> dEdxTrack = *dEdxHandle1.product();
-        H2dedx2 = dEdxTrack[ trkRef2].dEdx();
-        //today change see above.
-
-        if (H2dedx2 > (2.8 / pow(pt2 * cosh(eta2), 0.4) + 0.2) && H2dedx2 < (2.8 / pow(pt2 * cosh(eta2), 0.9) + 1.8) && H2dedx2 > (2.8 / pow(0.75, 0.4) + 0.2))
-        {
-          isKaonD2 = true;
-          isPionD2 = false;
-        }
-        if ((H2dedx2 < (2.8 / pow(pt2 * cosh(eta2), 0.4) + 0.2) || H2dedx2 < (2.8 / pow(0.75, 0.4) + 0.2)) && H2dedx2 > 0)
-        {
-          isPionD2 = true;
-          isKaonD2 = false;
-        }
-      }
-
-      if (dEdxHandle2.isValid())
-      {
-        const edm::ValueMap<reco::DeDxData> dEdxTrack = *dEdxHandle2.product();
-        T4dedx2 = dEdxTrack[ trkRef2].dEdx();
-      }
-
-      if (flavor > 0 && (!isPionD1 || !isKaonD2))
-        continue;
-      if (flavor < 0 && (!isPionD2 || !isKaonD1))
-        continue;
-    }
-        */
 
     double dzbest2 = d2->pseudoTrack().dz(bestvtx);    // today change
     double dxybest2 = d2->pseudoTrack().dxy(bestvtx); // today change
     double dzerror2 = TMath::Sqrt(d2->pseudoTrack().dzError() * d2->pseudoTrack().dzError() + bestvzError * bestvzError);
     double dxyerror2 = TMath::Sqrt(d2->pseudoTrack().dxyError()*d2->pseudoTrack().dxyError() + bestvxError*bestvyError);
-    // cout << "$$$$$$ abby check here please  $$$$$ dzerror2 = " << dzerror2 << endl;
-    // cout << "$$$$$$ abby check here please  $$$$$ dxyerror2 = " << dxyerror2 << endl;
-    // double dzbest2 = d2->dz(bestvtx);
-    // double dxybest2 = d2->dxy(bestvtx);
-    // double dzerror2 = std::sqrt(pseudoTrk2.dzError() * pseudoTrk2.dzError() + bestvzError * bestvzError);
-    // double dxyerror2 = std::sqrt(pseudoTrk2.d0Error() * pseudoTrk2.d0Error() + bestvxError * bestvyError);
 
     dzos2 = dzbest2 / dzerror2;
     dxyos2 = dxybest2 / dxyerror2;
