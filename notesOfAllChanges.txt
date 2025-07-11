@@ -1,0 +1,67 @@
+------------
+section 1: changes from original code shared from KoreaUniversity collaborators 
+the original code from them can be found here: https://github.com/vince502/VertexCompositeAnalysis/tree/13_2_X
+
+the code that has been updated for D0 and simplified can be found here: https://github.com/a-wesole/VertexCP_2023_PbPb_D0_production.git
+
+changes that was made between the two versions: 
+	- added TMVA BDT training & cuts csv file 
+		- training variables: Log(3DDecayLengthSignificance) , VtxProb, 3DPointingAngle, Dtrk1Pt, Dtrk2Pt, XyDCASigD1, XyDCASigD2, ZDCASigD1, ZDCASigD2, pT, centrality, y
+	- added XGBoost BDT training (via J. Lee and S. Lee)
+		- all BDT training is completed in Selector.cc
+        - simplified and cleaned code (removed unnecessary variables and files)
+	- rewrote gen matching logic to accomodate for more than gen candidate
+	- updated to include centrality 
+	- write to edm and TTree file
+	- save pat::Composite Candidate to edm (previously was reco::VertexCompositeCandidate)
+	- matched all cuts to those in Dfinder (note: alpha2D, Dpt, TrkEtaMaxDiff)
+	- corrected mother_pdgID() (for reco && gen) 
+	- added assigned pdgID() but reco_d1 and reco_d2
+	- added 20 more missing branches that are needed in Dfinder
+		- BSx, BSy, BSz, Ddca, 3DDecayLengthError, 2DDecayLengthError, DlxyBS, DlxyBSErr, idD1_reco, idD2_reco, 
+                  Dtrk1Dz1, Dtrk2Dz1, Dtrk1Dxy1, Dtrk2Dxy1, Dtrk1DzError1, Dtrk2DzError1, Dtrk1DxyError1, Dtrk2DxyError1, Deta
+
+-----------
+
+
+----------
+*Section 2: changes made when switching from AOD format to miniAOD format*
+
+- previously the code was written to analyze AOD files (outdated and slow)
+- need to change to analyze miniAOD files (current, compact, fast)
+
+- specific changes and notes are as follows:
+	- change the input tags: (old -> new)
+		- trackRecoAlgorithm: generalTracks -> packedPFCandidates
+			- token_tracks_pf = iC.consumes<std::vector<pat::PackedCandidate>>(theParameters.getParameter<edm::InputTag>("trackRecoAlgorithm"));
+			- in D0Fitter we had to change dau1 and dau2 to be edm::Ptr<pat::PackedCandidate>
+			- and tk1, tk2 to be pat::PackedCandidate (previously recoChargedCandidate), addDaughter(tk1) addDaughter(tk2)
+			- to get track details we do tk1.pseudoTrack() (previously was d1->get<reco::TrackRef>()
+
+		- VertexRecoAlgorithm: offlinePrimaryVertices -> OfflineSlimmedPrimaryVertices
+			- token_vertices = iC.consumes<reco::VertexCollection>(theParameters.getParameter<edm::InputTag>("vertexRecoAlgorithm"));
+			- if (vtxCollection.size() > 0 && !vtxPrimary->isFake() )
+			- previously was vtxPrimary->tracksSize()>=2  - no longer applicable for offlineSlimmed, size always = 0 bc it is slimmed 			
+
+       		 - gen particle collection: genParticle -> prunedGenParticles
+			- no changes in gen matching logic
+			- in D0Fitter.cc you need  tk1.setPdgId(pos_pdg_id[i]);
+
+        - implemented chi2Map in accordance with Dfinder (in D0Fitter.cc)
+
+	- cannot have dEdx for packedPFCandidates (Nihar has explanation)
+
+	- updated formulas for dzerror annd dxy error to match Dfinder
+		- was: double dxyerror = sqrt(cand.d0Error() * cand.d0Error() + xVtxError * yVtxError);
+			     dzerror = sqrt(cand.dzError() * cand.dzError() + zVtxError * zVtxError);
+		- is:         dzerror = TMath::Sqrt(cand.pseudoTrack().dzError()*cand.pseudoTrack().dzError() + zVtxError*zVtxError);
+  		             dxyerror = TMath::Sqrt(cand.pseudoTrack().dxyError()*cand.pseudoTrack().dxyError() + xVtxError*yVtxError);
+
+        
+
+
+	
+
+---------
+
+
