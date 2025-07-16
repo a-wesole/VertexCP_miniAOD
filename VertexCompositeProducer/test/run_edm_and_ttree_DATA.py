@@ -46,8 +46,8 @@ process.source = cms.Source("PoolSource",
 
 
     ),
-        lumisToProcess = cms.untracked.VLuminosityBlockRange(
-        '374668:372-374668:372'  # run:lumiFirst - run:lumiLast
+        #lumisToProcess = cms.untracked.VLuminosityBlockRange(
+        #'374668:372-374668:372'  # run:lumiFirst - run:lumiLast
         )
 
             #eventsToProcess = cms.untracked.VEventRange('375055:201:128206575')  # Replace with your specific run, lumi, event numbers    
