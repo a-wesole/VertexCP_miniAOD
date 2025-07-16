@@ -899,11 +899,10 @@ void VertexCompositeSelector::fillRECO(edm::Event &iEvent, const edm::EventSetup
       bdt_cut_value = bdt->getBDTCut(y, centrality, pt);
       
      
-      // if (mva_value <= bdt_cut_value || onnxVal <= mvaCut_)
-       if (mva_value <= bdt_cut_value )
-         continue;
-      //if (bdt_cut_value < -1)
-        //continue;
+       if (mva_value <= bdt_cut_value || onnxVal <= mvaCut_)
+       //if (mva_value <= bdt_cut_value )
+      //if (bdt_cut_value < -2)
+        continue;
 
      // cout << "candidate passed the cuts no problem" << endl;
       theMVANew.push_back(mva_value);

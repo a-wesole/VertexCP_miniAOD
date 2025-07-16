@@ -23,7 +23,7 @@ process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 132X, data")
 
 # Limit the output messages
 process.load('FWCore.MessageService.MessageLogger_cfi')
-process.MessageLogger.cerr.FwkReport.reportEvery = 100
+process.MessageLogger.cerr.FwkReport.reportEvery = 5000
 process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
@@ -48,7 +48,7 @@ process.source = cms.Source("PoolSource",
     ),
         lumisToProcess = cms.untracked.VLuminosityBlockRange(
         '374668:372-374668:372'  # run:lumiFirst - run:lumiLast
-    )
+        )
 
             #eventsToProcess = cms.untracked.VEventRange('375055:201:128206575')  # Replace with your specific run, lumi, event numbers    
 )
@@ -148,7 +148,6 @@ process.d0selectorNewReduced.isCentrality = cms.bool(True) # Centrality
 process.d0selectorNewReduced.useAnyMVA = cms.bool(True)#only set true if you are assigning BDT values  +++change 
 
 process.d0ana_newreduced = process.d0ana.clone()
-#process.d0ana_newreduced.VertexCompositeCollection = cms.untracked.InputTag("d0selectorNewReduced:D0")
 process.d0ana_newreduced.trackRecoAlgorithm = cms.InputTag(TrackCollection_PAT)
 process.d0ana_newreduced.vertexRecoAlgorithm = cms.InputTag(VertexCollection_PAT)
 process.d0ana_newreduced.GenParticleCollection = cms.untracked.InputTag(GenParticleCollection_PAT)
