@@ -184,7 +184,7 @@ process.EventInfoAnalysis = cms.EndPath(process.eventinfoana)
 process.schedule = cms.Schedule(process.EventSelections, process.EventInfoAnalysis)
 
 changeToMiniAOD(process)
-process.options.numberOfThreads = 1
+process.options.numberOfThreads = 4
 
 process.output = cms.OutputModule("PoolOutputModule",
     fileName = cms.untracked.string('edm.root'),
