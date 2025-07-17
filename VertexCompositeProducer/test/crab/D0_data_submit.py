@@ -8,14 +8,14 @@ config.General.transferLogs = True
 
 config.JobType.pluginName = 'Analysis'
 config.JobType.psetName = '/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_DATA.py'
-config.JobType.numCores = 4
-config.JobType.maxMemoryMB = 4000
+#config.JobType.numCores = 4
+#config.JobType.maxMemoryMB = 4000
 config.JobType.allowUndistributedCMSSW = True
 
 config.Data.inputDataset = '/HIPhysicsRawPrime0/HIRun2023A-PromptReco-v2/MINIAOD' 
 config.Data.inputDBS = 'global'
 config.Data.splitting = 'LumiBased'
-config.Data.unitsPerJob = 15 
+config.Data.unitsPerJob = 5 
 config.Data.lumiMask = 'Cert_Collisions2023HI_374288_375823_Golden.json'
 config.Data.outLFNDirBase = '/store/user/awesolek/D0_2023PbPb' 
 config.Data.publication = True
