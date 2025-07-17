@@ -7,7 +7,7 @@ config.General.transferOutputs = True
 config.General.transferLogs = True
 
 config.JobType.pluginName = 'Analysis'
-config.JobType.psetName = '/home/awesole/VertexCP_2/CMSSW_13_2_11/src/VertexCompositeAnalysis/VertexCompositeProducer/test/run_edm_and_ttree_DATA.py'
+config.JobType.psetName = '../run_edm_and_ttree_DATA.py'
 #config.JobType.numCores = 4
 #config.JobType.maxMemoryMB = 4000
 config.JobType.allowUndistributedCMSSW = True
