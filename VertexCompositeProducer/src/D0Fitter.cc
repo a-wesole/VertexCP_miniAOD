@@ -109,7 +109,7 @@ D0Fitter::~D0Fitter()
 void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
 {
 
-  // if (iEvent.id().event() != 199502708) return;
+  // if (iEvent.id().event() != 42371649) return;
   using std::cout;
   using std::endl;
   using std::vector;
@@ -173,6 +173,7 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
   }
   else
   {
+    //cout << "fake vertex" << endl;
     isVtxPV = 0;
     xVtx = theBeamSpotHandle->position().x();
     yVtx = theBeamSpotHandle->position().y();
@@ -250,8 +251,8 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
       edm::Ptr<pat::PackedCandidate> dau2 = input_daughter_tracks[trdx2];
 
       pat::PackedCandidate tk1, tk2;
-      // tk1 = *dau1;
-      // tk2 = *dau2;
+      //tk1 = *dau1;
+      //tk2 = *dau2;
       if (dau1->charge() > 0 && dau2->charge() < 0) {
        tk1 = *dau1;
        tk2 = *dau2;

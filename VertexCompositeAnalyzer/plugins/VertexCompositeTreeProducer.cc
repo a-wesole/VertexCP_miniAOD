@@ -517,12 +517,12 @@ VertexCompositeTreeProducer::fillRECO(const edm::Event& iEvent, const edm::Event
 		const pat::CompositeCandidate & trk = (*D0candidates_)[it];
 		double secvz=-999.9, secvx=-999.9, secvy=-999.9;
 		secvz = trk.userFloat("vtxZ"); secvx = trk.userFloat("vtxX"); secvy = trk.userFloat("vtxY");
-		// bestvz = trk.userFloat("bestvtxZ");
-		// bestvx = trk.userFloat("bestvtxX");
-		// bestvy = trk.userFloat("bestvtxY");
-		// bestvzError = trk.userFloat("zVtxError");
-		// bestvxError = trk.userFloat("xVtxError");
-		// bestvyError = trk.userFloat("yVtxError");
+		bestvz = trk.userFloat("bestvtxZ");
+		 bestvx = trk.userFloat("bestvtxX");
+		 bestvy = trk.userFloat("bestvtxY");
+		 bestvzError = trk.userFloat("zVtxError");
+		 bestvxError = trk.userFloat("xVtxError");
+		 bestvyError = trk.userFloat("yVtxError");
 
 		reco::Vertex::CovarianceMatrix sec_covariance;
 		for (int i = 0; i < 3; i++)

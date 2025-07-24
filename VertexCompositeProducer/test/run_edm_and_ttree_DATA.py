@@ -38,8 +38,9 @@ process.source = cms.Source("PoolSource",
     #fileNames = cms.untracked.vstring('file:output_withMC.root'  # Use the EDM output file
     fileNames = cms.untracked.vstring(
        #'root://xrootd-cms.infn.it//store/mc/HINPbPbSpring23MiniAOD/promptD0ToKPi_PT-1_TuneCP5_5p36TeV_pythia8-evtgen/MINIAODSIM/132X_mcRun3_2023_realistic_HI_v9-v2/2560000/04335bea-a283-40ea-a050-d71e1b7fac6b.root'
+       'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/951/00000/717c1c52-b5a8-4864-89c1-bde6e4184087.root'
        #'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/681/00000/89587dae-c774-4489-a9ea-130849a72872.root'
-       'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/668/00000/06179488-b7e6-44f6-bec9-eb242a290ffd.root'
+       #'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/668/00000/06179488-b7e6-44f6-bec9-eb242a290ffd.root'
 
     #'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/375/055/00000/2d8cd07d-f92f-44df-8e0f-eb28dca3108b.root'
         #'file:2d8cd07d-f92f-44df-8e0f-eb28dca3108b.root'
@@ -47,7 +48,7 @@ process.source = cms.Source("PoolSource",
 
     ),
         #lumisToProcess = cms.untracked.VLuminosityBlockRange(
-        #'374668:372-374668:372'  # run:lumiFirst - run:lumiLast
+        #'374951:30-374951:30'  # run:lumiFirst - run:lumiLast
         #)
 
             #eventsToProcess = cms.untracked.VEventRange('375055:201:128206575')  # Replace with your specific run, lumi, event numbers    
@@ -128,44 +129,45 @@ process.load("VertexCompositeAnalysis.VertexCompositeAnalyzer.d0analyzer_tree_cf
 process.load("VertexCompositeAnalysis.VertexCompositeAnalyzer.eventinfotree_cff")
 
 
-process.d0selectorNewReduced = process.d0selector.clone()
-process.d0selectorNewReduced.trackRecoAlgorithm = cms.InputTag(TrackCollection_PAT)
-process.d0selectorNewReduced.vertexRecoAlgorithm = cms.InputTag(VertexCollection_PAT)
-process.d0selectorNewReduced.GenParticleCollection = cms.untracked.InputTag(GenParticleCollection_PAT)
-process.d0selectorNewReduced.D0 = cms.InputTag("generalD0CandidatesNew:D0")
-process.d0selectorNewReduced.DCAValCollection = cms.InputTag("generalD0CandidatesNew:DCAValuesD0")
-process.d0selectorNewReduced.DCAErrCollection = cms.InputTag("generalD0CandidatesNew:DCAErrorsD0")
-process.d0selectorNewReduced.D0 = cms.InputTag("generalD0CandidatesNew:D0")
-process.d0selectorNewReduced.cand3DDecayLengthSigMin = cms.untracked.double(0.)
-process.d0selectorNewReduced.cand3DPointingAngleMax = cms.untracked.double(1.0)
-process.d0selectorNewReduced.input_names = cms.vstring('input')
-process.d0selectorNewReduced.output_names = cms.vstring('probabilities')
-process.d0selectorNewReduced.onnxModelFileName = cms.string("XGBoost_Model_0428_0_OnlyPrompt.onnx")
-process.d0selectorNewReduced.bdtCutsFile = cms.string("bdt_cuts.csv")
-process.d0selectorNewReduced.mvaCut = cms.double(0.9)
-process.d0selectorNewReduced.trkNHitMin = cms.untracked.int32(11)
-process.d0selectorNewReduced.isCentrality = cms.bool(True) # Centrality 
-process.d0selectorNewReduced.useAnyMVA = cms.bool(True)#only set true if you are assigning BDT values  +++change 
-
-process.d0ana_newreduced = process.d0ana.clone()
-process.d0ana_newreduced.trackRecoAlgorithm = cms.InputTag(TrackCollection_PAT)
-process.d0ana_newreduced.vertexRecoAlgorithm = cms.InputTag(VertexCollection_PAT)
-process.d0ana_newreduced.GenParticleCollection = cms.untracked.InputTag(GenParticleCollection_PAT)
-process.d0ana_newreduced.D0 = cms.untracked.InputTag("d0selectorNewReduced:D0")
-process.d0ana_newreduced.DCAValCollection = cms.InputTag("d0selectorNewReduced:DCAValuesNewD0")
-process.d0ana_newreduced.DCAErrCollection = cms.InputTag("d0selectorNewReduced:DCAErrorsNewD0")
-process.d0ana_newreduced.isCentrality = cms.bool(True) # Centrality 
-process.d0ana_newreduced.centralityBinLabel = cms.InputTag("centralityBin", "HFtowers")#centrality
-process.d0ana_newreduced.centralitySrc = cms.InputTag("hiCentrality") #central
-process.d0ana_newreduced.doGenNtuple = cms.untracked.bool(False) #MConly
-process.d0ana_newreduced.doGenMatching = cms.untracked.bool(False) #MConly
-process.d0ana_newreduced.useAnyMVA = cms.bool(True); #only set true if you are assigning BDT values +++ change  
-process.d0ana_newreduced.MVACollection = cms.InputTag("d0selectorNewReduced:MVAValuesNewD0:ANASKIM")
-process.d0ana_newreduced.MVACollection2 = cms.InputTag("d0selectorNewReduced:MVAValuesNewD02:ANASKIM")
+process.d0Selector = process.d0selector.clone()
+process.d0Selector.trackRecoAlgorithm = cms.InputTag(TrackCollection_PAT)
+process.d0Selector.vertexRecoAlgorithm = cms.InputTag(VertexCollection_PAT)
+process.d0Selector.GenParticleCollection = cms.untracked.InputTag(GenParticleCollection_PAT)
+process.d0Selector.D0 = cms.InputTag("generalD0CandidatesNew:D0")
+process.d0Selector.DCAValCollection = cms.InputTag("generalD0CandidatesNew:DCAValuesD0")
+process.d0Selector.DCAErrCollection = cms.InputTag("generalD0CandidatesNew:DCAErrorsD0")
+process.d0Selector.D0 = cms.InputTag("generalD0CandidatesNew:D0")
+process.d0Selector.cand3DDecayLengthSigMin = cms.untracked.double(0.)
+process.d0Selector.cand3DPointingAngleMax = cms.untracked.double(1.0)
+process.d0Selector.input_names = cms.vstring('input')
+process.d0Selector.output_names = cms.vstring('probabilities')
+process.d0Selector.onnxModelFileName = cms.string("XGBoost_Model_0428_0_OnlyPrompt.onnx")
+process.d0Selector.bdtCutsFile = cms.string("bdt_cuts.csv")
+process.d0Selector.mvaCut = cms.double(0.9)
+process.d0Selector.trkNHitMin = cms.untracked.int32(11)
+process.d0Selector.isCentrality = cms.bool(True) # Centrality 
+process.d0Selector.useAnyMVA = cms.bool(True)#only set true if you are assigning BDT values  +++change 
+process.d0Selector.applyXGB = cms.bool(True)#only set true if you are assigning XGB values
 
 
-process.d0ana_seq2 = cms.Sequence(process.d0selectorNewReduced * process.d0ana_newreduced)
-#process.d0ana_seq2 = cms.Sequence(process.d0selectorNewReduced) 
+process.d0Analyzer = process.d0ana.clone()
+process.d0Analyzer.trackRecoAlgorithm = cms.InputTag(TrackCollection_PAT)
+process.d0Analyzer.vertexRecoAlgorithm = cms.InputTag(VertexCollection_PAT)
+process.d0Analyzer.GenParticleCollection = cms.untracked.InputTag(GenParticleCollection_PAT)
+process.d0Analyzer.D0 = cms.untracked.InputTag("d0Selector:D0")
+process.d0Analyzer.DCAValCollection = cms.InputTag("d0Selector:DCAValuesNewD0")
+process.d0Analyzer.DCAErrCollection = cms.InputTag("d0Selector:DCAErrorsNewD0")
+process.d0Analyzer.isCentrality = cms.bool(True) # Centrality 
+process.d0Analyzer.centralityBinLabel = cms.InputTag("centralityBin", "HFtowers")#centrality
+process.d0Analyzer.centralitySrc = cms.InputTag("hiCentrality") #central
+process.d0Analyzer.doGenNtuple = cms.untracked.bool(False) #MConly
+process.d0Analyzer.doGenMatching = cms.untracked.bool(False) #MConly
+process.d0Analyzer.useAnyMVA = cms.bool(True); #only set true if you are assigning BDT values +++ change  
+process.d0Analyzer.MVACollection = cms.InputTag("d0Selector:MVAValuesNewD0:ANASKIM")
+process.d0Analyzer.MVACollection2 = cms.InputTag("d0Selector:MVAValuesNewD02:ANASKIM")
+
+
+process.d0ana_seq2 = cms.Sequence(process.d0Selector * process.d0Analyzer)
 
 #eventinfoana must be in EndPath, and process.eventinfoana.selectEvents must be the name of eventFilter_HM Path
 process.eventinfoana.selectEvents = cms.untracked.string('EventSelections')
