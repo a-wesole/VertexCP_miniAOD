@@ -23,10 +23,10 @@ process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 132X, data")
 
 # Limit the output messages
 process.load('FWCore.MessageService.MessageLogger_cfi')
-process.MessageLogger.cerr.FwkReport.reportEvery = 100
+process.MessageLogger.cerr.FwkReport.reportEvery = 5000
 process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
-process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(10000))
+process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
 process.TFileService = cms.Service("TFileService",
     fileName =cms.string('TTree.root'))
 
@@ -186,14 +186,14 @@ process.EventInfoAnalysis = cms.EndPath(process.eventinfoana)
 process.schedule = cms.Schedule(process.EventSelections, process.EventInfoAnalysis)
 
 changeToMiniAOD(process)
-process.options.numberOfThreads = 1
+process.options.numberOfThreads = 2
 
 process.output = cms.OutputModule("PoolOutputModule",
     fileName = cms.untracked.string('edm.root'),
         outputCommands = cms.untracked.vstring( #which data to include and exclude 
         "drop *", #no data is kept unless explicitly specified
         #'keep *_generalD0CandidatesNew_D0_*', 
-        'keep *_d0Selector*_*',  # Keep the MVA collection (adjust the label)
+        'keep *_d0Selector_*_*',  # Keep the MVA collection (adjust the label)
 
         )
 )
