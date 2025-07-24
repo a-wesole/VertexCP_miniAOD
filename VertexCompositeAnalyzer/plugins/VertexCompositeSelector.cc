@@ -862,7 +862,7 @@ void VertexCompositeSelector::fillRECO(edm::Event &iEvent, const edm::EventSetup
 		if (useAnyMVA_ )
 		{
 
-			if (applyXGB_ && pt > 2 && abs(y) < 1.6){
+			if (applyXGB_ && pt > 2 && abs(y) < 1.5){
 				cms::Ort::FloatArrays data_;
 				data_.emplace_back(19, 0);
 				std::vector<float> &onnxVals_ = data_[0];
