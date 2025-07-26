@@ -868,7 +868,7 @@ void VertexCompositeSelector::fillRECO(edm::Event &iEvent, const edm::EventSetup
 				std::vector<float> &onnxVals_ = data_[0];
 				onnxVals_[0] = pt;
 				onnxVals_[1] = y;
-				onnxVals_[2] = vtxChi2;
+				onnxVals_[2] = VtxProb;
 				onnxVals_[3] = centrality;
 				onnxVals_[4] = agl;
 				onnxVals_[5] = agl_abs;
