@@ -191,14 +191,14 @@ class BDTHandler
 		}
 };
 
-class VertexCompositeSelector : public edm::stream::EDProducer<edm::GlobalCache<ONNXRuntime>>
+class VCSelector_D02kpi : public edm::stream::EDProducer<edm::GlobalCache<ONNXRuntime>>
 {
 
 	public:
-		explicit VertexCompositeSelector(const edm::ParameterSet &, const ONNXRuntime *cache);
+		explicit VCSelector_D02kpi(const edm::ParameterSet &, const ONNXRuntime *cache);
 		static std::unique_ptr<ONNXRuntime> initializeGlobalCache(const edm::ParameterSet &);
 		static void globalEndJob(const ONNXRuntime *);
-		~VertexCompositeSelector();
+		~VCSelector_D02kpi();
 
 		using MVACollection = std::vector<float>;
 
@@ -382,7 +382,7 @@ class VertexCompositeSelector : public edm::stream::EDProducer<edm::GlobalCache<
 // constructors and destructor
 //
 
-VertexCompositeSelector::VertexCompositeSelector(const edm::ParameterSet &iConfig, const ONNXRuntime *cache)
+VCSelector_D02kpi::VCSelector_D02kpi(const edm::ParameterSet &iConfig, const ONNXRuntime *cache)
 	:  input_shapes_(), onnxRuntime_(cache)
 {
 	string a1 = "log3ddls";
@@ -515,7 +515,7 @@ VertexCompositeSelector::VertexCompositeSelector(const edm::ParameterSet &iConfi
 	isKaonD1 = false;
 	isKaonD2 = false;
 }
-std::unique_ptr<ONNXRuntime> VertexCompositeSelector::initializeGlobalCache(const edm::ParameterSet &iConfig)
+std::unique_ptr<ONNXRuntime> VCSelector_D02kpi::initializeGlobalCache(const edm::ParameterSet &iConfig)
 {
 	bool useAnyMVA = iConfig.exists("useAnyMVA") ? iConfig.getParameter<bool>("useAnyMVA") : false;
 
@@ -542,9 +542,9 @@ std::unique_ptr<ONNXRuntime> VertexCompositeSelector::initializeGlobalCache(cons
 
 	return nullptr;
 }
-void VertexCompositeSelector::globalEndJob(const ONNXRuntime *cache) {}
+void VCSelector_D02kpi::globalEndJob(const ONNXRuntime *cache) {}
 
-VertexCompositeSelector::~VertexCompositeSelector()
+VCSelector_D02kpi::~VCSelector_D02kpi()
 {
 
 	// do anything here that needs to be done at desctruction time
@@ -556,7 +556,7 @@ VertexCompositeSelector::~VertexCompositeSelector()
 //
 
 // ------------ method called to for each event  ------------
-void VertexCompositeSelector::produce(edm::Event &iEvent, const edm::EventSetup &iSetup)
+void VCSelector_D02kpi::produce(edm::Event &iEvent, const edm::EventSetup &iSetup)
 {
 
 	using std::vector;
@@ -567,7 +567,7 @@ void VertexCompositeSelector::produce(edm::Event &iEvent, const edm::EventSetup 
 
 	if (!patCandidates.isValid())
 	{
-		edm::LogError("VertexCompositeSelector") << "Error: patCandidates collection not found!";
+		edm::LogError("VCSelector_D02kpi") << "Error: patCandidates collection not found!";
 		return;
 	}
 
@@ -599,7 +599,7 @@ void VertexCompositeSelector::produce(edm::Event &iEvent, const edm::EventSetup 
 	}
 }
 
-void VertexCompositeSelector::fillRECO(edm::Event &iEvent, const edm::EventSetup &iSetup)
+void VCSelector_D02kpi::fillRECO(edm::Event &iEvent, const edm::EventSetup &iSetup)
 {
 	// get collections
 	edm::Handle<reco::VertexCollection> vertices;
@@ -924,16 +924,16 @@ void VertexCompositeSelector::fillRECO(edm::Event &iEvent, const edm::EventSetup
 
 // ------------ method called once each job just before starting event
 // loop  ------------
-void VertexCompositeSelector::beginJob()
+void VCSelector_D02kpi::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event
 // loop  ------------
-void VertexCompositeSelector::endJob()
+void VCSelector_D02kpi::endJob()
 {
 }
 
 // define this as a plug-in
 #include "FWCore/PluginManager/interface/ModuleDef.h"
-DEFINE_FWK_MODULE(VertexCompositeSelector);
+DEFINE_FWK_MODULE(VCSelector_D02kpi);

@@ -1,7 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 
 
-d0ana = cms.EDAnalyzer('VertexCompositeTreeProducer',
+d0ana = cms.EDAnalyzer('VCTreeProducer_D02kpi',
   doRecoNtuple = cms.untracked.bool(True),
   doGenNtuple = cms.untracked.bool(False),
   doGenMatching = cms.untracked.bool(False),

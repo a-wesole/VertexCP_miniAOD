@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms
 
-d0selector = cms.EDProducer('VertexCompositeSelector',
+d0selector = cms.EDProducer('VCSelector_D02kpi',
   doGenMatching = cms.untracked.bool(False),
   hasSwap = cms.untracked.bool(True),
   decayInGen = cms.untracked.bool(False),
