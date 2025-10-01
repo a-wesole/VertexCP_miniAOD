@@ -30,17 +30,15 @@ process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(100))
 
 process.TFileService = cms.Service("TFileService",
-    fileName =cms.string('TTreeData_Lc_tkpt1_dpt4_maxcand20k_evt100_sept24_v3.root'))
+    fileName =cms.string('TTree_Lc_data.root'))
 
 
 # Define the input source
 
 process.source = cms.Source("PoolSource",
     duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
-    #fileNames = cms.untracked.vstring('file:output_withMC.root'  # Use the EDM output file
     fileNames = cms.untracked.vstring(
         'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime1/MINIAOD/PromptReco-v2/000/374/681/00000/cd44e980-d445-4a15-9ec1-22b1b7b85253.root'
-        #'/store/hidata/HIRun2023A/HIPhysicsRawPrime1/MINIAOD/PromptReco-v2/000/374/668/00000/08a9673f-ec31-4ebf-ab32-7bbd13cbfc1c.root'
     ),
         #eventsToProcess = cms.untracked.VEventRange('1:1430:199505260')  # Replace with your specific run, lumi, event numbers
 )
@@ -53,8 +51,6 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '132X_dataRun3_Prompt_v7', '')
-#process.GlobalTag = GlobalTag(process.GlobalTag, '132X_dataRun3_Prompt_v6', '')
-#process.HiForestInfo.GlobalTagLabel = process.GlobalTag.globaltag
 
 
 # Define centrality binning
@@ -67,10 +63,6 @@ process.centralityBin.centralityVariable = cms.string("HFtowers")
 # =============== Import Sequences =====================
 
 # Add PbPb collision event selection
-#process.load('VertexCompositeAnalysis.VertexCompositeProducer.collisionEventSelection_cff')
-#process.load('VertexCompositeAnalysis.VertexCompositeProducer.hfCoincFilter_cff')
-#process.load('VertexCompositeAnalysis.VertexCompositeProducer.hffilter_cfi')
-
 process.load('HeavyIonsAnalysis.EventAnalysis.skimanalysis_cfi')
 process.load('HeavyIonsAnalysis.EventAnalysis.collisionEventSelection_cff')
 process.load('HeavyIonsAnalysis.EventAnalysis.hffilter_cfi')
@@ -78,8 +70,6 @@ process.load('HeavyIonsAnalysis.EventAnalysis.clusterCompatibilityFilter_cfi')
 process.load('HeavyIonsAnalysis.EventAnalysis.hievtanalyzer_data_cfi')
 process.load('HeavyIonsAnalysis.EventAnalysis.hltanalysis_cfi')
 
-#from HeavyIonsAnalysis.EventAnalysis.hltobject_cfi import trigger_list_data_2023_skimmed
-#process.hltobject.triggerNames = trigger_list_data_2023_skimmed
 
 from HLTrigger.HLTfilters.hltHighLevel_cfi import hltHighLevel
 process.hltFilter = hltHighLevel.clone(
@@ -87,8 +77,6 @@ process.hltFilter = hltHighLevel.clone(
         "HLT_HIMinimumBias*"
     ]
 )
-#process.eventFilter_HM = cms.Sequence(process.hltFilter)
-
 
 process.event_filters = cms.Sequence(
     process.primaryVertexFilter *
@@ -119,7 +107,6 @@ process.generalLamC3PCandidatesNew.tkPtCut = cms.double(1.0)#checked
 process.generalLamC3PCandidatesNew.alphaCut = cms.double(1.0) #checked
 process.generalLamC3PCandidatesNew.alpha2DCut = cms.double(999.9)
 process.generalLamC3PCandidatesNew.dPtCut = cms.double(4.0) #checked
-#process.generalLamC3PCandidatesNew.lamCMassCut = cms.double(0.125)
 process.generalLamC3PCandidatesNew.VtxChiProbCut = cms.double(0.010) #checked
 
 
@@ -139,8 +126,6 @@ process.lamc3pselector.DCAValCollection = cms.InputTag("generalLamC3PCandidatesN
 process.lamc3pselector.DCAErrCollection = cms.InputTag("generalLamC3PCandidatesNew:DCAErrorsLamC3P")
 process.lamc3pselector.cand3DDecayLengthSigMin = cms.untracked.double(0.0)
 process.lamc3pselector.cand3DPointingAngleMax = cms.untracked.double(1.0)
-#process.lamc3pselector.useAnyMVA = cms.bool(False)
-#process.lamc3pselector.trkNHitMin = cms.untracked.int32(11)
 process.lamc3pselector.trkNHitMin = cms.untracked.int32(-1)
 
 
@@ -156,8 +141,6 @@ process.LamC3PAna.centralityBinLabel = cms.InputTag("centralityBin", "HFtowers")
 process.LamC3PAna.centralitySrc = cms.InputTag("hiCentrality") #central
 process.LamC3PAna.doGenNtuple = cms.untracked.bool(False) #MConly
 process.LamC3PAna.doGenMatching = cms.untracked.bool(False) #MConly
-#process.LamC3PAna.useAnyMVA = cms.bool(False); #only set true if you are assigning BDT values +++ change  
-#process.LamC3PAna.MVACollection = cms.InputTag("lamc3pselector:MVAValuesNewLamC3P:ANASKIM")
 
 
 process.LamC3Pana_seq2 = cms.Sequence(process.lamc3pselector * process.LamC3PAna)
@@ -183,11 +166,11 @@ changeToMiniAOD(process)
 process.options.numberOfThreads = 1
 
 process.output = cms.OutputModule("PoolOutputModule",
-    fileName = cms.untracked.string('edm.root'),
+    fileName = cms.untracked.string('edm_Lc_data.root'),
         outputCommands = cms.untracked.vstring( #which data to include and exclude 
         "drop *", #no data is kept unless explicitly specified
-        'keep *_lamc3pselector_LamC3P_*',  # Keep the first collection
-        'keep *_generalLamC3PCandidatesNew_LamC3P_*' 
+        'keep *_lamc3pselector_LamC3P_*',  #keep output from fitter.cc
+        'keep *_generalLamC3PCandidatesNew_LamC3P_*'  #keep output from sellector.cc
         )
 )
 

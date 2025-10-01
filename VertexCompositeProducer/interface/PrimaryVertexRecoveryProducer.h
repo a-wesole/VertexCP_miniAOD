@@ -1,3 +1,7 @@
+//////////////////////////////////////////////////////
+// this file is primarily unchanged from the original 
+// best not to mess with it unless you know what you are doing
+//////////////////////////////////////////////////////
 // -*- C++ -*-
 //
 // Package:    PrimaryVertexProducer
@@ -29,7 +33,6 @@
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
-//#include "RecoVertex/PrimaryVertexProducer/interface/PrimaryVertexProducerAlgorithm.h"
 #include "TrackingTools/TransientTrack/interface/TransientTrack.h"
 #include "RecoVertex/PrimaryVertexProducer/interface/TrackFilterForPVFindingBase.h"
 #include "RecoVertex/PrimaryVertexProducer/interface/TrackClusterizerInZ.h"
@@ -43,7 +46,6 @@
 #include "RecoVertex/PrimaryVertexProducer/interface/DAClusterizerInZ.h"
 #include "RecoVertex/KalmanVertexFit/interface/KalmanVertexFitter.h"
 #include "RecoVertex/AdaptiveVertexFit/interface/AdaptiveVertexFitter.h"
-//#include "RecoVertex/VertexTools/interface/VertexDistanceXY.h"
 #include "RecoVertex/VertexPrimitives/interface/VertexException.h"
 #include <algorithm>
 #include "RecoVertex/PrimaryVertexProducer/interface/VertexHigherPtSquared.h"

@@ -1,3 +1,7 @@
+#Author: Nihar Saha
+
+# This file contains the default values of parameters passed to VertexCompositeAnalyzer/plugins/VCSelector_LamC3P.cc
+#if no other values are specfied in the config file, these will be used.
 import FWCore.ParameterSet.Config as cms
 
 
@@ -17,7 +21,6 @@ lamc3pana = cms.EDAnalyzer('VCTreeProducer_LamC3P',
 
   VertexCollection = cms.InputTag("offlineSlimmedPrimaryVertices"),
   TrackCollection = cms.InputTag("packedPFCandidates"),
-  #VertexCompositeCollection = cms.InputTag("generalLamC3PCandidatesNew:LamC3P"),
 
   isCentrality = cms.bool(True),
   centralityBinLabel = cms.InputTag("centralityBin","HFtowers"),
@@ -25,7 +28,6 @@ lamc3pana = cms.EDAnalyzer('VCTreeProducer_LamC3P',
   centMin = cms.untracked.int32(0),
   centMax = cms.untracked.int32(1000),
                            
-  #LamC3P = cms.InputTag("LamC3Pselector:LamC3P"),
   GenParticleCollection = cms.InputTag("prunedGenParticles"),
   BSLabel = cms.InputTag("offlineBeamSpot"),
   MuonCollection = cms.untracked.InputTag("null"),

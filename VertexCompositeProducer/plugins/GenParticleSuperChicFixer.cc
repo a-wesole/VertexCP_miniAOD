@@ -1,3 +1,7 @@
+//////////////////////////////////////////////////////
+// this file is primarily unchanged from the original 
+// best not to mess with it unless you know what you are doing
+//////////////////////////////////////////////////////
 #include "FWCore/Framework/interface/stream/EDProducer.h"
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"

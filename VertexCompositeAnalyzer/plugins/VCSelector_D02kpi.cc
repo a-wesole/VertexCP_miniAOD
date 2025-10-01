@@ -1,3 +1,31 @@
+////////////////////
+// Orgininal author: Abby Wesolek 
+// last updates: 01 October 2025 
+// contact:abigail.leigh.wesolek@cern.ch
+////////////////////
+////////////////////
+////////////////////
+// this selector.cc applies cuts to the reconstructed D0 candidates
+// currently the only cut that is applied is the mva and mva_xg cuts 
+// these are for TMVA BDT and XGBoost BDT trainings
+// these cuts are applied with an OR meaning as long as the candidate passes one of the two mva cuts it is kept
+// all other cuts have minimal cut values, so minimall, in fact, they have no effect
+// to apply those cuts one needs to change the cut values in the VertexCompositeAnalyzer/python/d0selector_cfi.py file 
+////////////////////
+// the XGBoost code implementation: Junseok Lee
+// last updates: 05 June 2025
+// contact: junseok.lee@cern.ch
+/////////////////////
+// the output of this code consists of 3 collections all of which are stored in the edm.root file
+// 1. the selected D0 candidates after cuts (vector<pat::CompositeCandidate>  -- D0)
+//   -- line 610
+// 2. the TMVA BDT values for each D0 candidate (vector<float> -- MVAValuesNewD0)
+//   -- line 620
+// 3. the XGBoost BDT values for each D0 candidate (vector<float> -- MVAValuesNewD02) 
+//   -- line 621
+// (hint: see VertexCompositeProducer/test/run_edm_and_ttree_DATA_forD0.py for more details)
+///////////////////////
+
 // system include files
 #include <memory>
 #include <string>
@@ -682,8 +710,8 @@ void VCSelector_D02kpi::fillRECO(edm::Event &iEvent, const edm::EventSetup &iSet
 		auto const *d1 = dynamic_cast<const pat::PackedCandidate *>(trk.daughter(0));
 		auto const *d2 = dynamic_cast<const pat::PackedCandidate *>(trk.daughter(1));
 
-		auto pseudoTrk1 = d1->pseudoTrack(); // today change
-		auto pseudoTrk2 = d2->pseudoTrack(); // today change
+		auto pseudoTrk1 = d1->pseudoTrack(); 
+		auto pseudoTrk2 = d2->pseudoTrack(); 
 
 		if (!d1)
 		{
@@ -828,8 +856,8 @@ void VCSelector_D02kpi::fillRECO(edm::Event &iEvent, const edm::EventSetup &iSet
 		math::XYZPoint bestvtx(bestvx, bestvy, bestvz);
 
 
-		double dzbest1 = d1->pseudoTrack().dz(bestvtx); // today change
-		double dxybest1 = d1->pseudoTrack().dxy(bestvtx); // today change
+		double dzbest1 = d1->pseudoTrack().dz(bestvtx); 
+		double dxybest1 = d1->pseudoTrack().dxy(bestvtx); 
 		double dzerror1 = TMath::Sqrt(d1->pseudoTrack().dzError() * d1->pseudoTrack().dzError() + bestvzError * bestvzError);
 		double dxyerror1 = TMath::Sqrt(d1->pseudoTrack().dxyError()*d1->pseudoTrack().dxyError() + bestvxError*bestvyError);
 
@@ -848,8 +876,8 @@ void VCSelector_D02kpi::fillRECO(edm::Event &iEvent, const edm::EventSetup &iSet
 		T4dedx2 = -999.9;
 
 
-		double dzbest2 = d2->pseudoTrack().dz(bestvtx);    // today change
-		double dxybest2 = d2->pseudoTrack().dxy(bestvtx); // today change
+		double dzbest2 = d2->pseudoTrack().dz(bestvtx);    
+		double dxybest2 = d2->pseudoTrack().dxy(bestvtx); 
 		double dzerror2 = TMath::Sqrt(d2->pseudoTrack().dzError() * d2->pseudoTrack().dzError() + bestvzError * bestvzError);
 		double dxyerror2 = TMath::Sqrt(d2->pseudoTrack().dxyError()*d2->pseudoTrack().dxyError() + bestvxError*bestvyError);
 
@@ -858,7 +886,6 @@ void VCSelector_D02kpi::fillRECO(edm::Event &iEvent, const edm::EventSetup &iSet
 
 		mva_value = -999.9;
 		onnxVal = -999.9;
-		// if (useAnyMVA_ && onnxRuntime_)
 		if (useAnyMVA_ )
 		{
 
@@ -891,14 +918,14 @@ void VCSelector_D02kpi::fillRECO(edm::Event &iEvent, const edm::EventSetup &iSet
 			}
 
 			inputValues.clear();
-			inputValues.push_back(log10(dlos)); // 00
-			inputValues.push_back(VtxProb);     // 01
-			inputValues.push_back(agl_abs);     // 02
-			inputValues.push_back(pt1);         // 03
-			inputValues.push_back(pt2);         // 04
-			inputValues.push_back(dxyos1);      // 04
-			inputValues.push_back(dxyos2);      // 04
-			inputValues.push_back(dzos1);       // 04
+			inputValues.push_back(log10(dlos)); 
+			inputValues.push_back(VtxProb);     
+			inputValues.push_back(agl_abs);     
+			inputValues.push_back(pt1);         
+			inputValues.push_back(pt2);         
+			inputValues.push_back(dxyos1);      
+			inputValues.push_back(dxyos2);      
+			inputValues.push_back(dzos1);       
 			inputValues.push_back(dzos2);
 			inputValues.push_back(pt);
 			inputValues.push_back(centrality);
@@ -908,16 +935,12 @@ void VCSelector_D02kpi::fillRECO(edm::Event &iEvent, const edm::EventSetup &iSet
 
 
 			if (mva_value <= bdt_cut_value && onnxVal <= mvaCut_)
-			//if (mva_value <= bdt_cut_value )
-		        //if (bdt_cut_value < -2)
-			continue;
+				continue;
 
-			// cout << "candidate passed the cuts no problem" << endl;
 			theMVANew.push_back(mva_value);
 			theMVANew_xg.push_back(onnxVal);
 		}
 
-		// select MVA value
 		theGoodCandidates.push_back(trk);
 	}
 }

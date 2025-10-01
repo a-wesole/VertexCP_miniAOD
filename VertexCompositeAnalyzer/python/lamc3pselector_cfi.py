@@ -1,3 +1,7 @@
+#Author: Nihar Saha
+
+# This file contains the default values of parameters passed to VertexCompositeAnalyzer/plugins/VCTreeProducer_LamC3P.cc
+#if no other values are specfied in the config file, these will be used.
 import FWCore.ParameterSet.Config as cms
 
 lamc3pselector = cms.EDProducer('VCSelector_LamC3P',
@@ -20,7 +24,6 @@ lamc3pselector = cms.EDProducer('VCSelector_LamC3P',
   VertexCollection = cms.InputTag("offlineSlimmedPrimaryVertices"),
   TrackCollection = cms.InputTag("packedPFCandidates"),
   VertexCompositeCollection = cms.InputTag("generalLamC3PCandidatesNew:LamC3P"),
-  #LamC3P = cms.untracked.InputTag("generalLamC3PCandidatesNew:LamC3P"),
   GenParticleCollection = cms.InputTag("prunedGenParticles"),
   MuonCollection = cms.untracked.InputTag("null"),  
   doMuon = cms.untracked.bool(False),
@@ -35,8 +38,6 @@ lamc3pselector = cms.EDProducer('VCSelector_LamC3P',
   mvaMax = cms.untracked.double(999.9),
   mvaMin = cms.untracked.double(-999.9),
   mvaCuts = cms.vdouble(-1.,0,0,0,0),
-                                #  BDTCutFileName = cms.string(''),
-
   trkHighPurity = cms.untracked.bool(True),
   trkPMin = cms.untracked.double(0.),
   trkPtMin = cms.untracked.double(0.),

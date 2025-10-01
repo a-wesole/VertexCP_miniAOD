@@ -32,19 +32,15 @@ process.maxEvents = cms.untracked.PSet(
 )
 
 process.TFileService = cms.Service("TFileService",
-    fileName =cms.string('TTreeMC_VCP_tkpt1_dpt4_MAXGEN20k_swap_evt1000_sept24.root'))
-    #fileName =cms.string('test.root'))
+    fileName =cms.string('TTree_Lc_mc.root'))
 
 
 # Define- the input source
 
 process.source = cms.Source("PoolSource",
     duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
-    #fileNames = cms.untracked.vstring('file:output_withMC.root'  # Use the EDM output file
     fileNames = cms.untracked.vstring(
-        #'/store/mc/HINPbPbSpring23MiniAOD/promptLambdaCToPKPi_Pthat0_PT-4_TuneCP5_5p36TeV_pythia8-evtgen/MINIAODSIM/132X_mcRun3_2023_realistic_HI_v9-v2/2560000/01a42d92-92c3-47e8-b8cc-a6872e9edb50.root'
         '/store/mc/HINPbPbSpring23MiniAOD/promptLambdaCToPKPi_Pthat0_PT-4_TuneCP5_5p36TeV_pythia8-evtgen/MINIAODSIM/132X_mcRun3_2023_realistic_HI_v9-v2/2560000/0e323a62-f3c5-49d6-8e18-6247ba7fc298.root'
-        #'file:/home/saha115/Purdue/Lc_Run3/Dfinder/CMSSW_13_2_4/src/dfinder/01a42d92-92c3-47e8-b8cc-a6872e9edb50.root'
     ),
         #eventsToProcess = cms.untracked.VEventRange('1:1430:199505260')  # Replace with your specific run, lumi, event numbers
 )
@@ -74,9 +70,6 @@ process.centralityBin.centralityVariable = cms.string("HFtowers")
 process.load('VertexCompositeAnalysis.VertexCompositeProducer.collisionEventSelection_cff')
 process.load('VertexCompositeAnalysis.VertexCompositeProducer.hfCoincFilter_cff')
 process.load('VertexCompositeAnalysis.VertexCompositeProducer.hffilter_cfi')
-
-#from HeavyIonsAnalysis.EventAnalysis.hltobject_cfi import trigger_list_data_2023_skimmed
-#process.hltobject.triggerNames = trigger_list_data_2023_skimmed
 
 from HLTrigger.HLTfilters.hltHighLevel_cfi import hltHighLevel
 process.hltFilter = hltHighLevel.clone(
@@ -116,8 +109,6 @@ process.generalLamC3PCandidatesNew.tkPtCut = cms.double(1.0)#checked
 process.generalLamC3PCandidatesNew.alphaCut = cms.double(0.30) #checked
 process.generalLamC3PCandidatesNew.alpha2DCut = cms.double(999.9)
 process.generalLamC3PCandidatesNew.dPtCut = cms.double(4.0) #checked
-#process.generalLamC3PCandidatesNew.mPiKCutMin = cms.double(1.74)
-#process.generalLamC3PCandidatesNew.mPiKCutMax = cms.double(2.00)
 process.generalLamC3PCandidatesNew.lamCMassCut = cms.double(0.125)
 process.generalLamC3PCandidatesNew.VtxChiProbCut = cms.double(0.010) #checked
 
@@ -138,8 +129,6 @@ process.lamc3pselector.DCAValCollection = cms.InputTag("generalLamC3PCandidatesN
 process.lamc3pselector.DCAErrCollection = cms.InputTag("generalLamC3PCandidatesNew:DCAErrorsLamC3P")
 process.lamc3pselector.cand3DDecayLengthSigMin = cms.untracked.double(0.)
 process.lamc3pselector.cand3DPointingAngleMax = cms.untracked.double(1.0)
-#process.lamc3pselector.useAnyMVA = cms.bool(False)
-#process.lamc3pselector.trkNHitMin = cms.untracked.int32(11)
 process.lamc3pselector.trkNHitMin = cms.untracked.int32(-1)
 process.lamc3pselector.isCentrality = cms.bool(True) # Centrality
 process.lamc3pselector.centralityBinLabel = cms.InputTag("centralityBin", "HFtowers")#centrality
@@ -157,13 +146,9 @@ process.LamC3PAna.DCAErrCollection = cms.InputTag("lamc3pselector:DCAErrorsNewLa
 process.LamC3PAna.isCentrality = cms.bool(True) # Centrality
 process.LamC3PAna.centralityBinLabel = cms.InputTag("centralityBin", "HFtowers")#centrality
 process.LamC3PAna.centralitySrc = cms.InputTag("hiCentrality") #central
-#process.LamC3PAna.centMin = cms.untracked.int(0)
-#process.LamC3PAna.centMax = cms.untracked.int(200)
 
 process.LamC3PAna.doGenNtuple = cms.untracked.bool(True) #MConly
 process.LamC3PAna.doGenMatching = cms.untracked.bool(True) #MConly
-#process.LamC3PAna.useAnyMVA = cms.bool(False); #only set true if you are assigning BDT values +++ change  
-#process.LamC3PAna.MVACollection = cms.InputTag("lamc3pselector:MVAValuesNewLamC3P:ANASKIM")
 
 
 process.LamC3Pana_seq2 = cms.Sequence(process.lamc3pselector * process.LamC3PAna)
@@ -189,11 +174,11 @@ changeToMiniAOD(process)
 process.options.numberOfThreads = 1
 
 process.output = cms.OutputModule("PoolOutputModule",
-    fileName = cms.untracked.string('edm_MC.root'),
+    fileName = cms.untracked.string('edm_Lc_mc.root'),
         outputCommands = cms.untracked.vstring( #which data to include and exclude 
         "drop *", #no data is kept unless explicitly specified
-        'keep *_lamc3pselector_LamC3P_*',  # Keep the first collection
-        'keep *_generalLamC3PCandidatesNew_LamC3P_*' 
+        'keep *_lamc3pselector_LamC3P_*',  # from selector.cc
+        'keep *_generalLamC3PCandidatesNew_LamC3P_*' #from fitter.cc 
         )
 )
 

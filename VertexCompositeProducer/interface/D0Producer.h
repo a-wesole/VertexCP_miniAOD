@@ -14,6 +14,7 @@
 // Original Author:  Wei Li
 //
 //
+/// Later Changes by: Abby Wesolek
 
 #ifndef VertexCompositeAnalysis__D0_PRODUCER_H
 #define VertexCompositeAnalysis__D0_PRODUCER_H

@@ -1,3 +1,7 @@
+#Author: Abby Wesolek
+
+# This file contains the default values of parameters passed to VertexCompositeAnalyzer/plugins/VCSelelctor_D02kpi.cc
+#if no other values are specfied in the config file, these will be used.
 import FWCore.ParameterSet.Config as cms
 
 d0selector = cms.EDProducer('VCSelector_D02kpi',

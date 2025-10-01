@@ -1,3 +1,4 @@
+# this code had minor changes from the original file, best not to mess with it unless you know what you're doing
 import FWCore.ParameterSet.Config as cms
 
 eventinfoana = cms.EDAnalyzer('EventInfoTreeProducer',

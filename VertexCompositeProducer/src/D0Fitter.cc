@@ -1,3 +1,19 @@
+////////////////////
+// Orgininal author: Abby Wesolek
+// last updates: 01 October 2025
+// contact:abigail.leigh.wesolek@cern.ch
+////////////////////
+////////////////////
+////////////////////
+// this fitter.cc reconstructs D0 candidates from 2 tracks in accordance with the D0->k,pi channnel
+// theD0 is a pat::CompositeCandidate
+// the daughters are pat::PackedCandidates
+// the output from this file can be saved to the edm.root file
+// i.e.) vector<pat::CompositeCandidate>      "generalD0CandidatesNew"   "D0"
+// this can be configured in (VertexCompositeProducer/test/run_edm_and_ttree_DATA_forD0.py)
+// note the output from this file is all reconstructed D0 candidates, cuts are applied next in the selector.cc
+////////////////////
+
 // -*- C++ -*-
 //
 // Package:    VertexCompositeProducer
@@ -216,8 +232,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
       // primary cahnges for today!!
       dzvtx = cand.pseudoTrack().dz(bestvtx);
       dxyvtx = cand.pseudoTrack().dxy(bestvtx);
-      // double dzerror = sqrt(cand.dzError() * cand.dzError() + zVtxError * zVtxError);
-      // double dxyerror = sqrt(cand.d0Error() * cand.d0Error() + xVtxError * yVtxError);
       dzerror = TMath::Sqrt(cand.pseudoTrack().dzError() * cand.pseudoTrack().dzError() + zVtxError * zVtxError);
       dxyerror = TMath::Sqrt(cand.pseudoTrack().dxyError() * cand.pseudoTrack().dxyError() + xVtxError * yVtxError);
       double dauLongImpactSig = dzvtx / dzerror;
@@ -244,8 +258,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
       edm::Ptr<pat::PackedCandidate> dau2 = input_daughter_tracks[trdx2];
 
       pat::PackedCandidate tk1, tk2;
-      // tk1 = *dau1;
-      // tk2 = *dau2;
       if (dau1->charge() > 0 && dau2->charge() < 0)
       {
         tk1 = *dau1;
@@ -258,7 +270,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
       }
       else
         continue;
-      // same sign or zero-charge is skipped
 
       if (tk1.pt() + tk2.pt() < tkPtSumCut)
         continue;
@@ -500,7 +511,7 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
         double dcaError = sqrt(sigma_x2 * cxPt.x() * cxPt.x() + sigma_y2 * cxPt.y() * cxPt.y()) / dca;
 
         // Create CompositeCandidate
-        pat::CompositeCandidate theD0; // today change, we only need make_unique if theD0s is holding pointers, but it does not it holds actual composite canididates so we do not need
+        pat::CompositeCandidate theD0;
         theD0.setP4(d0P4);
         theD0.setPdgId(pdg_id[i]);
         theD0.addUserFloat("track3DDCA", dca);
@@ -513,7 +524,7 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
         tk1.setPdgId(pos_pdg_id[i]);
         tk2.setPdgId(neg_pdg_id[i]);
         theD0.addDaughter(tk1);
-        theD0.addDaughter(tk2); // today change this dereferences the edm::Ptr into a packedCanididate and passes that object into add Daughter
+        theD0.addDaughter(tk2);
 
         // Vertex coordinates & covariance
         theD0.addUserFloat("vtxX", d0Vtx.x());
@@ -541,10 +552,8 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
         }
         if (fabs(theD0.mass() - d0MassD0) < d0MassCut)
         {
-          theD0s.push_back(theD0); // today change we need to remove the * since theD0 is now direct packedcandidiate
-          // count += 1;
+          theD0s.push_back(theD0);
         }
-        // if(theD0)  delete theD0;
       }
     }
   }

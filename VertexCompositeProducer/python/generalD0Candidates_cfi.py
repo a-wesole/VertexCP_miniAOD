@@ -1,3 +1,7 @@
+#Author: Abby Wesolek
+
+# This file contains the default values of parameters passed to VertexCompositeProducer/src/D0Fitter.cc
+#if no other values are specfied in the config file, these will be used.
 import FWCore.ParameterSet.Config as cms
 
 generalD0Candidates = cms.EDProducer("D0Producer",
@@ -39,8 +43,6 @@ generalD0Candidates = cms.EDProducer("D0Producer",
     dPtCut = cms.double(0.0),
 
     isWrongSign = cms.bool(False),
-
-# MVA 
 
     useAnyMVA = cms.bool(False),
     mvaType = cms.string('BDT'), 

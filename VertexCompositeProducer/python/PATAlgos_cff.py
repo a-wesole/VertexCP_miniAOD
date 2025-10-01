@@ -1,3 +1,4 @@
+#some of the latter lines were outdated and needed to be commented out
 import FWCore.ParameterSet.Config as cms
 
 def doPATMuons(process):

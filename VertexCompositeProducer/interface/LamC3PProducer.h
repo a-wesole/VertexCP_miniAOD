@@ -5,15 +5,16 @@
 // 
 /**\class LamC3PProducer LamC3PProducer.h VertexCompositeAnalysis/VertexCompositeProducer/interface/LamC3PProducer.h
 
- Description: <one line class summary>
+Description: <one line class summary>
 
- Implementation:
-     <Notes on implementation>
+Implementation:
+<Notes on implementation>
 */
 //
 // Original Author:  Wei Li 
 //
 //
+// Later Changes by: Nihar Saha
 
 #ifndef VertexCompositeAnalysis__LAMC3P_PRODUCER_H
 #define VertexCompositeAnalysis__LAMC3P_PRODUCER_H
@@ -38,24 +39,22 @@
 #include "VertexCompositeAnalysis/VertexCompositeProducer/interface/LamC3PFitter.h"
 
 class LamC3PProducer : public edm::one::EDProducer<> {
-public:
-  using MVACollection = std::vector<float>;
+	public:
+		using MVACollection = std::vector<float>;
 
-  explicit LamC3PProducer(const edm::ParameterSet&);
-  ~LamC3PProducer();
+		explicit LamC3PProducer(const edm::ParameterSet&);
+		~LamC3PProducer();
 
-private:
-  //virtual void beginJob() ;
-  virtual void beginJob();
-  virtual void produce(edm::Event&, const edm::EventSetup&);
-  virtual void endJob() ;
+	private:
+		virtual void beginJob();
+		virtual void produce(edm::Event&, const edm::EventSetup&);
+		virtual void endJob() ;
 
-  bool useAnyMVA_;
+		bool useAnyMVA_;
 
-  std::vector<std::vector<int>> selectedTkhidxSetVec;
-  
-  LamC3PFitter theCandidates; 
-//  edm::ParameterSet theParams;
+		std::vector<std::vector<int>> selectedTkhidxSetVec;
+
+		LamC3PFitter theCandidates; 
 };
 
 #endif

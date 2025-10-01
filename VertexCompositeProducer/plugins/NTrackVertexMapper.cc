@@ -1,3 +1,7 @@
+//////////////////////////////////////////////////////
+// this file is primarily unchanged from the original 
+// best not to mess with it unless you know what you are doing
+//////////////////////////////////////////////////////
 // -*- C++ -*-
 //
 // Package:    NTrackVertexMapper

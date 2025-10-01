@@ -28,24 +28,15 @@ process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
 process.TFileService = cms.Service("TFileService",
-    fileName =cms.string('TTree.root'))
+    fileName =cms.string('TTree_D0_data.root'))
 
 
 # Define the input source
 
 process.source = cms.Source("PoolSource",
     duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
-    #fileNames = cms.untracked.vstring('file:output_withMC.root'  # Use the EDM output file
     fileNames = cms.untracked.vstring(
-       #'root://xrootd-cms.infn.it//store/mc/HINPbPbSpring23MiniAOD/promptD0ToKPi_PT-1_TuneCP5_5p36TeV_pythia8-evtgen/MINIAODSIM/132X_mcRun3_2023_realistic_HI_v9-v2/2560000/04335bea-a283-40ea-a050-d71e1b7fac6b.root'
        'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/951/00000/717c1c52-b5a8-4864-89c1-bde6e4184087.root'
-       #'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/681/00000/89587dae-c774-4489-a9ea-130849a72872.root'
-       #'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/668/00000/06179488-b7e6-44f6-bec9-eb242a290ffd.root'
-
-    #'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/375/055/00000/2d8cd07d-f92f-44df-8e0f-eb28dca3108b.root'
-        #'file:2d8cd07d-f92f-44df-8e0f-eb28dca3108b.root'
-
-
     ),
         #lumisToProcess = cms.untracked.VLuminosityBlockRange(
         #'374951:30-374951:30'  # run:lumiFirst - run:lumiLast
@@ -75,7 +66,6 @@ process.centralityBin.centralityVariable = cms.string("HFtowers")
 
 # Add PbPb collision event selection
 process.load('VertexCompositeAnalysis.VertexCompositeProducer.collisionEventSelection_cff')
-# process.load('VertexCompositeAnalysis.VertexCompositeProducer.hfCoincFilter_cff')
 process.load('VertexCompositeAnalysis.VertexCompositeProducer.hffilter_cfi')
 
 from HLTrigger.HLTfilters.hltHighLevel_cfi import hltHighLevel
@@ -179,7 +169,6 @@ process.EventSelections = cms.Path(
     process.event_filters * 
     process.generalD0CandidatesNew *
     process.d0ana_seq2 
-    #process.generalD0CandidatesNew 
 )
 
 process.EventInfoAnalysis = cms.EndPath(process.eventinfoana)
@@ -189,11 +178,11 @@ changeToMiniAOD(process)
 process.options.numberOfThreads = 2
 
 process.output = cms.OutputModule("PoolOutputModule",
-    fileName = cms.untracked.string('edm.root'),
+    fileName = cms.untracked.string('edm_D0_data.root'),
         outputCommands = cms.untracked.vstring( #which data to include and exclude 
         "drop *", #no data is kept unless explicitly specified
-        #'keep *_generalD0CandidatesNew_D0_*', 
-        'keep *_d0Selector_*_*',  # Keep the MVA collection (adjust the label)
+        #'keep *_generalD0CandidatesNew_D0_*', # Keep everything from D0Fitter.cc 
+        'keep *_d0Selector_*_*',  # Keep everything from selector.cc
 
         )
 )

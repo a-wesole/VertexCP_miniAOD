@@ -19,13 +19,11 @@
 
 // Constructor
 LamC3PProducer::LamC3PProducer(const edm::ParameterSet& iConfig) :
-  //theVees(iConfig, consumesCollector())
 theCandidates(iConfig, consumesCollector(), selectedTkhidxSetVec)
 {
   useAnyMVA_ = false;
   if(iConfig.exists("useAnyMVA")) useAnyMVA_ = iConfig.getParameter<bool>("useAnyMVA");
  
-  //produces< reco::VertexCompositeCandidateCollection >("LamC3P");
   produces< std::vector<pat::CompositeCandidate> >("LamC3P");
   if(useAnyMVA_) produces<MVACollection>("MVAValuesLamC3P");
 }
@@ -42,17 +40,8 @@ LamC3PProducer::~LamC3PProducer() {
 void LamC3PProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
    using namespace edm;
 
-   // Create LamC3PFitter object which reconstructs the vertices and creates
-   // LamC3PFitter theVees(theParams, iEvent, iSetup);
-   
    theCandidates.fitAll(iEvent, iSetup);
 
-   // Create auto_ptr for each collection to be stored in the Event
-   // std::auto_ptr< reco::VertexCompositeCandidateCollection >
-   // lamCCandidates( new reco::VertexCompositeCandidateCollection );
-
-
-   //auto lamCCandidates = std::make_unique<reco::VertexCompositeCandidateCollection>();
    auto LamC3PCandidates = std::make_unique<pat::CompositeCandidateCollection>();
    LamC3PCandidates->reserve( theCandidates.getLamC3P().size() );
 
@@ -73,7 +62,6 @@ void LamC3PProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) 
 }
 
 
-//void LamC3PProducer::beginJob() {
 void LamC3PProducer::beginJob() {
 }
 

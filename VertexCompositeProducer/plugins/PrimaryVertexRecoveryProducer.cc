@@ -1,3 +1,7 @@
+//////////////////////////////////////////////////////
+// this file is primarily unchanged from the original 
+// best not to mess with it unless you know what you are doing
+//////////////////////////////////////////////////////
 #include "VertexCompositeAnalysis/VertexCompositeProducer/interface/PrimaryVertexRecoveryProducer.h"
 
 #include "DataFormats/VertexReco/interface/Vertex.h"

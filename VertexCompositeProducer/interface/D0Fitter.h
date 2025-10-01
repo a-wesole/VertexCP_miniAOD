@@ -14,6 +14,7 @@
 // Original Author:  Wei Li
 //
 //
+///// Later Changes by: Abby Wesolek
 
 #ifndef VertexCompositeAnalysis__D0_FITTER_H
 #define VertexCompositeAnalysis__D0_FITTER_H
@@ -53,7 +54,6 @@
 #include "RecoVertex/VertexPrimitives/interface/ConvertToFromReco.h"
 #include "DataFormats/GeometryCommonDetAlgo/interface/Measurement1D.h"
 
-// #include "DataFormats/Candidate/interface/VertexCompositeCandidate.h"
 #include "DataFormats/PatCandidates/interface/CompositeCandidate.h"
 #include "DataFormats/RecoCandidate/interface/RecoChargedCandidate.h"
 #include "DataFormats/Math/interface/angle.h"
@@ -63,11 +63,9 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include "Geometry/CommonDetUnit/interface/TrackingGeometry.h"
-// #include "Geometry/CommonDetUnit/interface/GeomDetUnit.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "Geometry/CommonDetUnit/interface/GeomDet.h"
-// #include "Geometry/TrackerGeometryBuilder/interface/GluedGeomDet.h"
 
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 
@@ -114,7 +112,6 @@ private:
 
   edm::InputTag recoAlg;
   edm::InputTag vtxAlg;
-  //edm::EDGetTokenT<reco::TrackCollection> token_tracks;
   edm::EDGetTokenT<std::vector<pat::PackedCandidate>> token_tracks_pf;
   edm::EDGetTokenT<reco::VertexCollection> token_vertices;
   edm::EDGetTokenT<edm::ValueMap<reco::DeDxData>> token_dedx;

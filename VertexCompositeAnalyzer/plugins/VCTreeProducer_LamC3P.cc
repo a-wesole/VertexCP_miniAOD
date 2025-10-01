@@ -212,7 +212,7 @@ class VCTreeProducer_LamC3P : public edm::one::EDAnalyzer<> {
 		virtual void endJob() ;
 		virtual void initTree();
 
-  void genDecayLength(const uint&, const reco::GenParticle&, CandidateData&);
+		void genDecayLength(const uint&, const reco::GenParticle&, CandidateData&);
 
 		// ----------member data ---------------------------
 
@@ -221,8 +221,8 @@ class VCTreeProducer_LamC3P : public edm::one::EDAnalyzer<> {
 
 		TTree* VertexCompositeNtuple;
 
-                CandidateData candInfo; 
-                bool saveTree_;
+		CandidateData candInfo; 
+		bool saveTree_;
 
 		//options
 		bool doRecoNtuple_;
@@ -231,8 +231,8 @@ class VCTreeProducer_LamC3P : public edm::one::EDAnalyzer<> {
 		bool dogenmatchingtof_;
 		bool hasswap_;
 		bool decayingen_;
-                bool threeProngDecay_;
-                int PID_;
+		bool threeProngDecay_;
+		int PID_;
 		int PID_dau1_;
 		int PID_dau2_;
 		int PID_dau3_;
@@ -245,12 +245,12 @@ class VCTreeProducer_LamC3P : public edm::one::EDAnalyzer<> {
 
 		//tree branches
 		//event info
-                int   centMin_;
-                int centMax_;
+		int   centMin_;
+		int centMax_;
 		int centrality;
 		int Ntrkoffline;
 		int Npixel;
-                float HFsumET;//Nihar
+		float HFsumET;
 		float HFsumETPlus;
 		float HFsumETMinus;
 		float ZDCPlus;
@@ -277,126 +277,121 @@ class VCTreeProducer_LamC3P : public edm::one::EDAnalyzer<> {
 
 
 
-  
-
-void manageVectorsSize(CandidateData& data, size_t newSize) {
-
-    // Now resize all vectors to the new size
-    data.mva.resize(newSize);
-    data.pt.resize(newSize);
-    data.eta.resize(newSize);
-    data.phi.resize(newSize);
-    data.flavor.resize(newSize);
-    data.y.resize(newSize);
-    data.mass.resize(newSize);
-    data.VtxProb.resize(newSize);
-    data.dlos.resize(newSize);
-    data.dl.resize(newSize);
-    data.dlerror.resize(newSize);
-    data.DlxyBS.resize(newSize);
-    data.DlxyBSErr.resize(newSize);
-    data.vtxChi2.resize(newSize);
-    data.ndf.resize(newSize);
-    data.agl_abs.resize(newSize);
-    data.Ddca.resize(newSize);
-    data.ip3d.resize(newSize);
-    data.ip3derr.resize(newSize);
-    data.agl2D_abs.resize(newSize);
-    data.dlos2D.resize(newSize);
-    data.dl2D.resize(newSize);
-    data.dl2Derror.resize(newSize);
-    data.isSwap.resize(newSize);
-    data.matchGEN.resize(newSize);
-    data.idmom_reco.resize(newSize);
-    data.idd1_reco.resize(newSize);
-    data.idd2_reco.resize(newSize);
-    data.idd3_reco.resize(newSize);
-
-    data.gen_agl_abs.resize(newSize);
-    data.gen_agl2D_abs.resize(newSize);
-    data.gen_dl.resize(newSize);
-    data.gen_dl2D.resize(newSize);
-
-    data.dzos1.resize(newSize);
-    data.dzos2.resize(newSize);
-    data.dzos3.resize(newSize);
-    data.dxyos1.resize(newSize);
-    data.dxyos2.resize(newSize);
-    data.dxyos3.resize(newSize);
-    data.pt1.resize(newSize);
-    data.pt2.resize(newSize);
-    data.pt3.resize(newSize);
-    data.ptErr1.resize(newSize);
-    data.ptErr2.resize(newSize);
-    data.ptErr3.resize(newSize);
-    data.p1.resize(newSize);
-    data.p2.resize(newSize);
-    data.p3.resize(newSize);
-    data.Dtrk1Dz1.resize(newSize);
-    data.Dtrk2Dz1.resize(newSize);
-    data.Dtrk3Dz1.resize(newSize);
-    data.Dtrk1Dxy1.resize(newSize);
-    data.Dtrk2Dxy1.resize(newSize);
-    data.Dtrk3Dxy1.resize(newSize);
-    data.Dtrk1DzError1.resize(newSize);
-    data.Dtrk2DzError1.resize(newSize);
-    data.Dtrk3DzError1.resize(newSize);
-    data.Dtrk1DxyError1.resize(newSize);
-    data.Dtrk2DxyError1.resize(newSize);
-    data.Dtrk3DxyError1.resize(newSize);
-    data.eta1.resize(newSize);
-    data.eta2.resize(newSize);
-    data.eta3.resize(newSize);
-    data.phi1.resize(newSize);
-    data.phi2.resize(newSize);
-    data.phi3.resize(newSize);
-    data.charge1.resize(newSize);
-    data.charge2.resize(newSize);
-    data.charge3.resize(newSize);
-    data.pid1.resize(newSize);
-    data.pid2.resize(newSize);
-    data.pid3.resize(newSize);
-    data.tof1.resize(newSize);
-    data.tof2.resize(newSize);
-    data.tof3.resize(newSize);
-    data.H2dedx1.resize(newSize);
-    data.H2dedx2.resize(newSize);
-    data.H2dedx3.resize(newSize);
-    data.T4dedx1.resize(newSize);
-    data.T4dedx2.resize(newSize);
-    data.T4dedx3.resize(newSize);
-    data.trkChi1.resize(newSize);
-    data.trkChi2.resize(newSize);
-    data.trkChi3.resize(newSize);
-
-    data.pt_gen.resize(newSize);
-    data.eta_gen.resize(newSize);
-    data.idmom.resize(newSize);
-    data.y_gen.resize(newSize);
-    data.phi_gen.resize(newSize);
-    data.iddau1.resize(newSize);
-    data.iddau2.resize(newSize);
-    data.iddau3.resize(newSize);
-}
-
-  
-                //vector for gen match
-  
-                vector< vector<double> > *pVect;
-                vector<double> *Dvector1;
-                vector<double> *Dvector2;
-                vector<double> *Dvector3;
-                vector<int> *pVectIDmom;
 
 
-		
+		void manageVectorsSize(CandidateData& data, size_t newSize) {
+
+			data.mva.resize(newSize);
+			data.pt.resize(newSize);
+			data.eta.resize(newSize);
+			data.phi.resize(newSize);
+			data.flavor.resize(newSize);
+			data.y.resize(newSize);
+			data.mass.resize(newSize);
+			data.VtxProb.resize(newSize);
+			data.dlos.resize(newSize);
+			data.dl.resize(newSize);
+			data.dlerror.resize(newSize);
+			data.DlxyBS.resize(newSize);
+			data.DlxyBSErr.resize(newSize);
+			data.vtxChi2.resize(newSize);
+			data.ndf.resize(newSize);
+			data.agl_abs.resize(newSize);
+			data.Ddca.resize(newSize);
+			data.ip3d.resize(newSize);
+			data.ip3derr.resize(newSize);
+			data.agl2D_abs.resize(newSize);
+			data.dlos2D.resize(newSize);
+			data.dl2D.resize(newSize);
+			data.dl2Derror.resize(newSize);
+			data.isSwap.resize(newSize);
+			data.matchGEN.resize(newSize);
+			data.idmom_reco.resize(newSize);
+			data.idd1_reco.resize(newSize);
+			data.idd2_reco.resize(newSize);
+			data.idd3_reco.resize(newSize);
+
+			data.gen_agl_abs.resize(newSize);
+			data.gen_agl2D_abs.resize(newSize);
+			data.gen_dl.resize(newSize);
+			data.gen_dl2D.resize(newSize);
+
+			data.dzos1.resize(newSize);
+			data.dzos2.resize(newSize);
+			data.dzos3.resize(newSize);
+			data.dxyos1.resize(newSize);
+			data.dxyos2.resize(newSize);
+			data.dxyos3.resize(newSize);
+			data.pt1.resize(newSize);
+			data.pt2.resize(newSize);
+			data.pt3.resize(newSize);
+			data.ptErr1.resize(newSize);
+			data.ptErr2.resize(newSize);
+			data.ptErr3.resize(newSize);
+			data.p1.resize(newSize);
+			data.p2.resize(newSize);
+			data.p3.resize(newSize);
+			data.Dtrk1Dz1.resize(newSize);
+			data.Dtrk2Dz1.resize(newSize);
+			data.Dtrk3Dz1.resize(newSize);
+			data.Dtrk1Dxy1.resize(newSize);
+			data.Dtrk2Dxy1.resize(newSize);
+			data.Dtrk3Dxy1.resize(newSize);
+			data.Dtrk1DzError1.resize(newSize);
+			data.Dtrk2DzError1.resize(newSize);
+			data.Dtrk3DzError1.resize(newSize);
+			data.Dtrk1DxyError1.resize(newSize);
+			data.Dtrk2DxyError1.resize(newSize);
+			data.Dtrk3DxyError1.resize(newSize);
+			data.eta1.resize(newSize);
+			data.eta2.resize(newSize);
+			data.eta3.resize(newSize);
+			data.phi1.resize(newSize);
+			data.phi2.resize(newSize);
+			data.phi3.resize(newSize);
+			data.charge1.resize(newSize);
+			data.charge2.resize(newSize);
+			data.charge3.resize(newSize);
+			data.pid1.resize(newSize);
+			data.pid2.resize(newSize);
+			data.pid3.resize(newSize);
+			data.tof1.resize(newSize);
+			data.tof2.resize(newSize);
+			data.tof3.resize(newSize);
+			data.H2dedx1.resize(newSize);
+			data.H2dedx2.resize(newSize);
+			data.H2dedx3.resize(newSize);
+			data.T4dedx1.resize(newSize);
+			data.T4dedx2.resize(newSize);
+			data.T4dedx3.resize(newSize);
+			data.trkChi1.resize(newSize);
+			data.trkChi2.resize(newSize);
+			data.trkChi3.resize(newSize);
+
+			data.pt_gen.resize(newSize);
+			data.eta_gen.resize(newSize);
+			data.idmom.resize(newSize);
+			data.y_gen.resize(newSize);
+			data.phi_gen.resize(newSize);
+			data.iddau1.resize(newSize);
+			data.iddau2.resize(newSize);
+			data.iddau3.resize(newSize);
+		}
+
+
+		vector< vector<double> > *pVect;
+		vector<double> *Dvector1;
+		vector<double> *Dvector2;
+		vector<double> *Dvector3;
+		vector<int> *pVectIDmom;
+
+
+
 		bool isSkimMVA_;
 		bool isCentrality_;
-                //bool isData_cent_;
-                //bool isMC_cent_;
 		bool doGenNtuple_;
-                bool useAnyMVA_;
-                bool doGenMatching_;
+		bool useAnyMVA_;
+		bool doGenMatching_;
 		bool decayInGen_;
 
 		edm::Handle<int> cbin_;
@@ -405,10 +400,7 @@ void manageVectorsSize(CandidateData& data, size_t newSize) {
 		edm::EDGetTokenT<reco::VertexCollection> tok_offlinePV_;
 		edm::EDGetTokenT<std::vector<pat::PackedCandidate>> tok_generalTrk_;
 		edm::EDGetTokenT<pat::CompositeCandidateCollection> patCompositeCandidateCollection_Token_;
-                //edm::EDGetTokenT<MVACollection> MVAValues_Token_;
 
-                //edm::EDGetTokenT<edm::ValueMap<reco::DeDxData> > Dedx_Token1_;
-                //edm::EDGetTokenT<edm::ValueMap<reco::DeDxData> > Dedx_Token2_;
 		edm::EDGetTokenT<reco::GenParticleCollection> tok_genParticle_;
 
 		edm::EDGetTokenT<int> tok_centBinLabel_;
@@ -416,7 +408,6 @@ void manageVectorsSize(CandidateData& data, size_t newSize) {
 
 		edm::EDGetTokenT<reco::EvtPlaneCollection> tok_eventplaneSrc_;
 
-		//abby
 		edm::EDGetTokenT< reco::BeamSpot > bsLabel_;
 
 };
@@ -437,19 +428,12 @@ VCTreeProducer_LamC3P::VCTreeProducer_LamC3P(const edm::ParameterSet& iConfig)
 
 	saveTree_ = iConfig.getUntrackedParameter<bool>("saveTree");
 	threeProngDecay_ = iConfig.getUntrackedParameter<bool>("threeProngDecay");
-	//useAnyMVA_ = iConfig.getParameter<bool>("useAnyMVA");
 	isSkimMVA_ = iConfig.getUntrackedParameter<bool>("isSkimMVA"); 
 	isCentrality_ = iConfig.getParameter<bool>("isCentrality");
-	//isData_cent_=iConfig.getUntrackedParameter<bool>("isData_cent");
-	//isMC_cent_=iConfig.getUntrackedParameter<bool>("isMC_cent");
-
-	//useAnyMVA_ = iConfig.getParameter<bool>("useAnyMVA");
-	
-	  //cut variables
 
 	centMin_ = iConfig.getUntrackedParameter<int>("centMin");
 	centMax_ = iConfig.getUntrackedParameter<int>("centMax");
-    
+
 	multMax_ = iConfig.getUntrackedParameter<double>("multMax", -1);
 	multMin_ = iConfig.getUntrackedParameter<double>("multMin", -1);
 	deltaR_ = iConfig.getUntrackedParameter<double>("deltaR", 0.02);
@@ -459,27 +443,14 @@ VCTreeProducer_LamC3P::VCTreeProducer_LamC3P(const edm::ParameterSet& iConfig)
 	tok_offlinePV_ = consumes<reco::VertexCollection>(iConfig.getParameter<edm::InputTag>("VertexCollection"));
 	tok_generalTrk_ = consumes<std::vector<pat::PackedCandidate>>(iConfig.getParameter<edm::InputTag>("TrackCollection"));
 	patCompositeCandidateCollection_Token_ = consumes<pat::CompositeCandidateCollection>(iConfig.getParameter<edm::InputTag>("LamC3P"));
-	//MVAValues_Token_ = consumes<MVACollection>(iConfig.getParameter<edm::InputTag>("MVACollection"));
-	//Dedx_Token1_ = consumes<edm::ValueMap<reco::DeDxData> >(edm::InputTag("dedxHarmonic2"));
-	//Dedx_Token2_ = consumes<edm::ValueMap<reco::DeDxData> >(edm::InputTag("dedxTruncated40"));
 	tok_genParticle_ = consumes<reco::GenParticleCollection>(edm::InputTag(iConfig.getParameter<edm::InputTag>("GenParticleCollection")));
-	//abby
 	bsLabel_        = consumes< reco::BeamSpot >(iConfig.getParameter<edm::InputTag>("BSLabel"));
 
-	
-	
 	if(isCentrality_)
-	  {
-	    tok_centBinLabel_ = consumes<int>(iConfig.getParameter<edm::InputTag>("centralityBinLabel"));
-	    tok_centSrc_ = consumes<reco::Centrality>(iConfig.getParameter<edm::InputTag>("centralitySrc"));
-	  }
-	
-	
-	//if(useAnyMVA_ && iConfig.exists("MVACollection"))
-	//	MVAValues_Token_ = consumes<MVACollection>(iConfig.getParameter<edm::InputTag>("MVACollection"));
-
-	
-	
+	{
+		tok_centBinLabel_ = consumes<int>(iConfig.getParameter<edm::InputTag>("centralityBinLabel"));
+		tok_centSrc_ = consumes<reco::Centrality>(iConfig.getParameter<edm::InputTag>("centralitySrc"));
+	}
 
 }
 
@@ -502,17 +473,13 @@ void
 VCTreeProducer_LamC3P::analyze(const edm::Event& iEvent, const edm::EventSetup&
 		iSetup)
 {
+	using std::vector;
+	using namespace edm;
+	using namespace reco;
 
-  //std::cout << "[DEBUG] doGenMatching_ = " << doGenMatching_<< std::endl;
-  
-  
-  using std::vector;
-  using namespace edm;
-  using namespace reco;
-  
-  if(doRecoNtuple_) fillRECO(iEvent,iSetup);
-  
-  if(saveTree_) VertexCompositeNtuple->Fill();
+	if(doRecoNtuple_) fillRECO(iEvent,iSetup);
+
+	if(saveTree_) VertexCompositeNtuple->Fill();
 }
 
 void VCTreeProducer_LamC3P::fillRECO(const edm::Event& iEvent, const edm::EventSetup& iSetup)
@@ -523,54 +490,21 @@ void VCTreeProducer_LamC3P::fillRECO(const edm::Event& iEvent, const edm::EventS
 	using std::cout;
 	using std::endl;
 #endif
-	//get collections
 	edm::Handle<reco::VertexCollection> vertices;
 	iEvent.getByToken(tok_offlinePV_,vertices);
 
 	edm::Handle<reco::BeamSpot> beamSpotHandle;
 	iEvent.getByToken(bsLabel_, beamSpotHandle);
-	
+
 	edm::Handle<pat::CompositeCandidateCollection> lamC3Pcandidates;
 	iEvent.getByToken(patCompositeCandidateCollection_Token_,lamC3Pcandidates);
 
-	/*if (!lamC3Pcandidates.isValid() || lamC3Pcandidates->empty()) {
-	  edm::LogWarning("LamC3PAna") << "No LamC3P candidates in this event"<<iEvent.id();
-	  return;
-	  }*/
-	
 	const pat::CompositeCandidateCollection * lamC3Pcandidates_ = lamC3Pcandidates.product();
-
-
-
-	//auto mvavalues = iEvent.getHandle(MVAValues_Token_);
-	//edm::Handle<MVACollection> mvavalues;
-
-	/*if (useAnyMVA_) {
-	  
-	  iEvent.getByToken(MVAValues_Token_,mvavalues);
-	  assert((*mvavalues).size() == lamC3Pcandidates_->size());
-	  }*/
-	
 
 	edm::Handle<reco::GenParticleCollection> genpars;	
 	if (doGenMatching_) {
-	  iEvent.getByToken(tok_genParticle_, genpars);
+		iEvent.getByToken(tok_genParticle_, genpars);
 	}
-
-	/*edm::Handle<edm::ValueMap<reco::DeDxData> > dEdxHandle1;
-	iEvent.getByToken(Dedx_Token1_, dEdxHandle1);
-	if (!dEdxHandle1.isValid()) {
-	  edm::LogWarning("LamC3PAna") << "dEdxHandle1 not valid!";
-	  // skip or continue safely
-	}
- 
-	edm::Handle<edm::ValueMap<reco::DeDxData> > dEdxHandle2;
-	iEvent.getByToken(Dedx_Token2_, dEdxHandle2);
-	if (!dEdxHandle2.isValid()) {
-	  edm::LogWarning("LamC3PAna") << "dEdxHandle2 not valid!";
-	  // skip or continue safely
-	  }*/
-
 
 #ifdef DEBUG
 	cout << "Loaded tokens" << endl;
@@ -590,520 +524,429 @@ void VCTreeProducer_LamC3P::fillRECO(const edm::Event& iEvent, const edm::EventS
 		Ntrkoffline = (cent.isValid() ? cent->Ntracks() : -1);
 
 		edm::Handle<int> cbin;
-	  
+
 		iEvent.getByToken(tok_centBinLabel_, cbin);
 		centrality = (cbin.isValid() ? *cbin : -1);
-		//if(isData_cent_){centrality = (cbin.isValid() ? *cbin : -1);}
-		//if(isMC_cent_){centrality = getHiBinFromhiHF(HFsumET);}
-		//cout<<"isMC_cent_="<<isMC_cent_<<"isData_cent_="<<isData_cent_<<endl;
 	}
-	
-	//if(centrality!=-1 && (centrality >= centMax_ || centrality < centMin_)) return;
 
-	
+
+
 	//best vertex
 	BSx=-999.9; BSy=-999.9; BSz=-999.9;
 	BSxerror=-999.9; BSyerror=-999.9; BSzerror=-999.9;
-	//reco::BeamSpot beamSpot;
 
 	float BSdxdz = -999.9;
 	float BSdydz = -999.9;
 	bestvz=-999.9; bestvx=-999.9; bestvy=-999.9;
 	bestvzError=-999.9, bestvxError=-999.9, bestvyError=-999.9;
 
-	//const reco::Vertex & vtx;
-	//const reco::BeamSpot & beamSpot;
-	
-	//if (!vertices.isValid() || vertices->empty()) continue; 
-	//if (!beamSpotHandle.isValid()) continue;
-	
-	  const reco::Vertex & vtx = (*vertices)[0];
-	//reco::Vertex & vtx = vertices->front();
-	  bestvx = vtx.x();
-	  bestvy = vtx.y();
-	  bestvz = vtx.z();
+	const reco::Vertex & vtx = (*vertices)[0];
+	bestvx = vtx.x();
+	bestvy = vtx.y();
+	bestvz = vtx.z();
 
-	  bestvxError = vtx.xError();
-	  bestvyError = vtx.yError();
-	  bestvzError = vtx.zError();
-	
-	  float xlxyBS = -999.9;
-	  float ylxyBS = -999.9;
-	  float vtxYXErr = -999.9;
-	  float vtxXErr = -999.9;
-	  float vtxYErr = -999.9;
+	bestvxError = vtx.xError();
+	bestvyError = vtx.yError();
+	bestvzError = vtx.zError();
+
+	float xlxyBS = -999.9;
+	float ylxyBS = -999.9;
+	float vtxYXErr = -999.9;
+	float vtxXErr = -999.9;
+	float vtxYErr = -999.9;
 
 
-	  reco::BeamSpot beamSpot = *beamSpotHandle;
-	  reco::Vertex theBeamSpotV(beamSpot.position(), beamSpot.covariance3D());
-	  
-	    BSx      = beamSpot.x0();
-	    BSy      = beamSpot.y0();
-	    BSz      = beamSpot.z0();
-	    BSxerror = beamSpot.x0Error();
-	    BSyerror = beamSpot.y0Error();
-	    BSzerror = beamSpot.z0Error();
-	    BSdxdz   = beamSpot.dxdz();
-	    BSdydz   = beamSpot.dydz();
+	reco::BeamSpot beamSpot = *beamSpotHandle;
+	reco::Vertex theBeamSpotV(beamSpot.position(), beamSpot.covariance3D());
+
+	BSx      = beamSpot.x0();
+	BSy      = beamSpot.y0();
+	BSz      = beamSpot.z0();
+	BSxerror = beamSpot.x0Error();
+	BSyerror = beamSpot.y0Error();
+	BSzerror = beamSpot.z0Error();
+	BSdxdz   = beamSpot.dxdz();
+	BSdydz   = beamSpot.dydz();
 
 
-	    //RECO Candidate info
-	    candSize = lamC3Pcandidates_->size();	
-	    //Resize the vectors
-	    manageVectorsSize(candInfo, candSize);
-
-	    
-	    for(int it=0; it<candSize; ++it){
-
-	      //if (candSize >= MAXCAN) break;
-	  
-	  const pat::CompositeCandidate & trk = (*lamC3Pcandidates_)[it];
+	//RECO Candidate info
+	candSize = lamC3Pcandidates_->size();	
+	manageVectorsSize(candInfo, candSize);
 
 
-	  double secvz=-999.9, secvx=-999.9, secvy=-999.9;
-	  secvz = trk.userFloat("vtxZ"); secvx = trk.userFloat("vtxX"); secvy = trk.userFloat("vtxY");
-	  bestvz = trk.userFloat("bestvtxZ");
-	  bestvx = trk.userFloat("bestvtxX");
-	  bestvy = trk.userFloat("bestvtxY");
-	  bestvzError = trk.userFloat("zVtxError");
-	  bestvxError = trk.userFloat("xVtxError");
-	  bestvyError = trk.userFloat("yVtxError");
-	  
+	for(int it=0; it<candSize; ++it){
 
-	  reco::Vertex::CovarianceMatrix sec_covariance;
-	  for (int i = 0; i < 3; i++)
-	    {
-	      for (int j = 0; j < 3; j++)
+
+		const pat::CompositeCandidate & trk = (*lamC3Pcandidates_)[it];
+
+
+		double secvz=-999.9, secvx=-999.9, secvy=-999.9;
+		secvz = trk.userFloat("vtxZ"); secvx = trk.userFloat("vtxX"); secvy = trk.userFloat("vtxY");
+		bestvz = trk.userFloat("bestvtxZ");
+		bestvx = trk.userFloat("bestvtxX");
+		bestvy = trk.userFloat("bestvtxY");
+		bestvzError = trk.userFloat("zVtxError");
+		bestvxError = trk.userFloat("xVtxError");
+		bestvyError = trk.userFloat("yVtxError");
+
+
+		reco::Vertex::CovarianceMatrix sec_covariance;
+		for (int i = 0; i < 3; i++)
 		{
-		  sec_covariance(i, j) = trk.userFloat("vertexCovariance_" + std::to_string(i) + "_" + std::to_string(j));
+			for (int j = 0; j < 3; j++)
+			{
+				sec_covariance(i, j) = trk.userFloat("vertexCovariance_" + std::to_string(i) + "_" + std::to_string(j));
+			}
 		}
-	    }
-	  
-	  vtxYXErr = sec_covariance(1, 0);
-	  vtxXErr = sec_covariance(0, 0);
-	  vtxYErr = sec_covariance(1, 1);
 
-	  	  
-	  candInfo.eta[it] = trk.eta();
-	  candInfo.y[it] = trk.rapidity();
-	  candInfo.pt[it] = trk.pt();
-	  candInfo.phi[it] = trk.phi();
-	  candInfo.flavor[it] = trk.pdgId()/abs(trk.pdgId());
-	  
-	  //mva[it] = 0.0;
-	  //if(useAnyMVA_) mva[it] = (*mvavalues)[it];
+		vtxYXErr = sec_covariance(1, 0);
+		vtxXErr = sec_covariance(0, 0);
+		vtxYErr = sec_covariance(1, 1);
 
 
-	  double px = trk.px();
-	  double py = trk.py();
-	  double pz = trk.pz();
-	  candInfo.mass[it] = trk.mass();
-	  
-	  if (candInfo.mass[it] == 0) {
-	    cout << "Error break" << endl;
-	  }
-	  
+		candInfo.eta[it] = trk.eta();
+		candInfo.y[it] = trk.rapidity();
+		candInfo.pt[it] = trk.pt();
+		candInfo.phi[it] = trk.phi();
+		candInfo.flavor[it] = trk.pdgId()/abs(trk.pdgId());
 
-	  const pat::PackedCandidate* reco_d1 = dynamic_cast<const pat::PackedCandidate*>(trk.daughter(0));
-	  const pat::PackedCandidate* reco_d2 = dynamic_cast<const pat::PackedCandidate*>(trk.daughter(1));
-	  const pat::PackedCandidate* reco_d3 = nullptr;
-	  
-	  if (threeProngDecay_) {
-	    reco_d3 = dynamic_cast<const pat::PackedCandidate*>(trk.daughter(2)); 
-	  }
+		double px = trk.px();
+		double py = trk.py();
+		double pz = trk.pz();
+		candInfo.mass[it] = trk.mass();
 
-	  //Note: This is very important to assign the charge based on pdgId!!!
-	  //Note: Without this we can't get correct charge assignment based on permutation!!
-	  int reco_d1_charge = TMath::Sign(1, reco_d1->pdgId());
-	  int reco_d2_charge = TMath::Sign(1, reco_d2->pdgId());
-	  int reco_d3_charge = TMath::Sign(1, reco_d3->pdgId());
-	  
-
-	
-	  
-	  //Gen-matching!!	  
-	  candInfo.matchGEN[it] = false;
-	  candInfo.isSwap[it] = false;
-	  candInfo.idmom_reco[it] = -77;
-	  candInfo.idd1_reco[it] = -77;
-	  candInfo.idd2_reco[it] = -77;
-	  candInfo.idd3_reco[it] = -77;
-	  
-	  candInfo.pt_gen[it] = -999.9;
-	  candInfo.eta_gen[it] = -999.9;
-	  candInfo.idmom[it] = -999;
-	  candInfo.y_gen[it] = -999.9;
-	  candInfo.phi_gen[it] = -999.9;
-	  candInfo.iddau1[it] = -999;
-	  candInfo.iddau2[it] = -999;
-	  candInfo.iddau3[it] = -999;
-	  
-
-	if(doGenMatching_){
-	    
-            if(!genpars.isValid()){
-	      cout<<"Gen matching cannot be done without Gen collection!!"<<endl;
-	      return;
-	    }
-	    
-	    for(unsigned genPair=0; genPair<genpars->size(); ++genPair){
-	      
-	      const reco::GenParticle & genLamC = (*genpars)[genPair];
-	    
-	      if(fabs(genLamC.pdgId()) != PID_) continue;
-
-	      
-		const reco::Candidate * gen_d1 = genLamC.daughter(0);
-		const reco::Candidate * gen_d2 = genLamC.daughter(1);
-		const reco::Candidate * gen_d3 = genLamC.daughter(2);
-		
-
-		bool passPID = (
-				(fabs(gen_d1->pdgId())==PID_dau1_ && fabs(gen_d2->pdgId())==PID_dau2_ && fabs(gen_d3->pdgId())==PID_dau3_) ||
-				(fabs(gen_d1->pdgId())==PID_dau1_ && fabs(gen_d2->pdgId())==PID_dau3_ && fabs(gen_d3->pdgId())==PID_dau2_) ||
-				(fabs(gen_d1->pdgId())==PID_dau2_ && fabs(gen_d2->pdgId())==PID_dau1_ && fabs(gen_d3->pdgId())==PID_dau3_) ||
-				(fabs(gen_d1->pdgId())==PID_dau2_ && fabs(gen_d2->pdgId())==PID_dau3_ && fabs(gen_d3->pdgId())==PID_dau1_) ||
-				(fabs(gen_d1->pdgId())==PID_dau3_ && fabs(gen_d2->pdgId())==PID_dau1_ && fabs(gen_d3->pdgId())==PID_dau2_) ||
-				(fabs(gen_d1->pdgId())==PID_dau3_ && fabs(gen_d2->pdgId())==PID_dau2_ && fabs(gen_d3->pdgId())==PID_dau1_)
-				);
-		if(!passPID) continue;
+		if (candInfo.mass[it] == 0) {
+			cout << "Error break" << endl;
+		}
 
 
-		// To check all 6 charge permutations
-		struct CandidateCombo { 
-		  const reco::Candidate* g1; 
-		  const reco::Candidate* g2; 
-		  const reco::Candidate* g3; 
-		};
+		const pat::PackedCandidate* reco_d1 = dynamic_cast<const pat::PackedCandidate*>(trk.daughter(0));
+		const pat::PackedCandidate* reco_d2 = dynamic_cast<const pat::PackedCandidate*>(trk.daughter(1));
+		const pat::PackedCandidate* reco_d3 = nullptr;
 
+		if (threeProngDecay_) {
+			reco_d3 = dynamic_cast<const pat::PackedCandidate*>(trk.daughter(2)); 
+		}
 
-		std::vector<CandidateCombo> gen_combos = {
-		  {gen_d1, gen_d2, gen_d3},
-		  {gen_d1, gen_d3, gen_d2},
-		  {gen_d2, gen_d1, gen_d3},
-		  {gen_d2, gen_d3, gen_d1},
-		  {gen_d3, gen_d1, gen_d2},
-		  {gen_d3, gen_d2, gen_d1}
-		  };
-		
-
-		for(auto &c : gen_combos) {
-		  
-		  
-		  if(reco_d1_charge!=c.g1->charge() || reco_d2_charge!=c.g2->charge() || reco_d3_charge!=c.g3->charge()) continue; 
-
-		  double dR1 = reco::deltaR(*reco_d1, *c.g1);
-		  if(dR1 >= deltaR_) continue;
-		  if(fabs((reco_d1->pt() - c.g1->pt()) / reco_d1->pt()) >=0.2) continue;
-		  double dR2 = reco::deltaR(*reco_d2, *c.g2);
-		  if(dR2 >= deltaR_) continue;
-		  if(fabs((reco_d2->pt() - c.g2->pt()) / reco_d2->pt()) >= 0.2) continue;
-		  double dR3 = reco::deltaR(*reco_d3, *c.g3);
-		  if(dR3 >= deltaR_) continue;
-		  if(fabs((reco_d3->pt() - c.g3->pt()) / reco_d3->pt()) >= 0.2) continue;
-		  
-		  
-		  candInfo.matchGEN[it] = true;
-
-
-		  if(reco_d1->pdgId() != c.g1->pdgId() ||
-		     reco_d2->pdgId() != c.g2->pdgId() ||
-		     reco_d3->pdgId() != c.g3->pdgId()) {
-		    candInfo.isSwap[it] = true;
-		  }
-		  
-
-            // =======================================================================
-            //  vvv  DEFINITIVE DEBUG PRINTOUT FOR MATCHED CANDIDATES  vvv
-            // =======================================================================
-            //std::cout << "\n\n==================== [MATCH FOUND for Reco Cand " << it << "] ====================" << std::endl;
-
-	    std::cout << "\n\n==================== [MATCH FOUND] Event: " << iEvent.id().run() << ":" << iEvent.id().luminosityBlock() << ":" << iEvent.id().event()
-                      << " | Reco Cand index: " << it << " ====================" << std::endl;
-	    if (candInfo.isSwap[it]) { std::cout << "DECISION: SWAP" << std::endl; }
-            else { std::cout << "DECISION: CORRECT MATCH" << std::endl; }
-            std::cout << "------------------------------------------------------------------------------------------" << std::endl;
-            std::cout << "Particle | Hypothesized Reco (PDG ID, Chg, pT) | True Gen (PDG ID, Chg, pT)" << std::endl;
-            std::cout << "------------------------------------------------------------------------------------------" << std::endl;
-            // Mother
-            std::cout << "Mother   | " << std::setw(6) << trk.pdgId() << ", " << std::setw(3) << trk.charge() << ", " << std::fixed << std::setprecision(3) << std::setw(7) << trk.pt() << "   |   "
-                      << std::setw(6) << genLamC.pdgId() << ", " << std::setw(3) << genLamC.charge() << ", " << std::fixed << std::setprecision(3) << std::setw(7) << genLamC.pt() << std::endl;
-            std::cout << "------------------------------------------------------------------------------------------" << std::endl;
-            // Daughter 1
-            std::cout << "Daught 1 | " << std::setw(6) << reco_d1->pdgId() << ", " << std::setw(3) << reco_d1_charge << ", " << std::fixed << std::setprecision(3) << std::setw(7) << reco_d1->pt() << "   |   "
-                      << std::setw(6) << c.g1->pdgId() << ", " << std::setw(3) << c.g1->charge() << ", " << std::fixed << std::setprecision(3) << std::setw(7) << c.g1->pt() << std::endl;
-            // Daughter 2
-            std::cout << "Daught 2 | " << std::setw(6) << reco_d2->pdgId() << ", " << std::setw(3) << reco_d2_charge << ", " << std::fixed << std::setprecision(3) << std::setw(7) << reco_d2->pt() << "   |   "
-                      << std::setw(6) << c.g2->pdgId() << ", " << std::setw(3) << c.g2->charge() << ", " << std::fixed << std::setprecision(3) << std::setw(7) << c.g2->pt() << std::endl;
-            // Daughter 3
-            std::cout << "Daught 3 | " << std::setw(6) << reco_d3->pdgId() << ", " << std::setw(3) << reco_d3_charge << ", " << std::fixed << std::setprecision(3) << std::setw(7) << reco_d3->pt() << "   |   "
-                      << std::setw(6) << c.g3->pdgId() << ", " << std::setw(3) << c.g3->charge() << ", " << std::fixed << std::setprecision(3) << std::setw(7) << c.g3->pt() << std::endl;
-            std::cout << "==========================================================================================" << std::endl;
-
-
-		  if(decayInGen_){
-		    candInfo.iddau1[it] = c.g1->pdgId();
-		    candInfo.iddau2[it] = c.g2->pdgId();
-		    candInfo.iddau3[it] = c.g3->pdgId();
-		  }
-		    
-
-		    genDecayLength(it, genLamC, candInfo);
-		    
-		    candInfo.pt_gen[it] = genLamC.pt();
-		    candInfo.eta_gen[it] = genLamC.eta();
-		    candInfo.y_gen[it] = genLamC.rapidity();
-		    candInfo.phi_gen[it] = genLamC.phi();
-		    candInfo.idmom[it] = genLamC.pdgId();
-		
-		    candInfo.idmom_reco[it] = trk.pdgId();                                                                
-		    candInfo.idd1_reco[it] = reco_d1->pdgId();
-		    candInfo.idd2_reco[it] = reco_d2->pdgId();
-		    candInfo.idd3_reco[it] = reco_d3->pdgId();
-
-		    // Found our match, so break from the inner gen_combos loop
-		    break;
-		}// End gen combo loop
-
-		if(candInfo.matchGEN[it]) break;
-		
-			    
-	    }// End genPair
-
-	}//End doGenMatching!
+		//Note: This is very important to assign the charge based on pdgId!!!
+		//Note: Without this we can't get correct charge assignment based on permutation!!
+		int reco_d1_charge = TMath::Sign(1, reco_d1->pdgId());
+		int reco_d2_charge = TMath::Sign(1, reco_d2->pdgId());
+		int reco_d3_charge = TMath::Sign(1, reco_d3->pdgId());
 
 
 
-	  double pxd1 = reco_d1->px();
-	  double pyd1 = reco_d1->py();
-	  double pzd1 = reco_d1->pz();
-	  double pxd2 = reco_d2->px();
-	  double pyd2 = reco_d2->py();
-	  double pzd2 = reco_d2->pz();
-	  
-	  
-	  TVector3 dauvec1(pxd1,pyd1,pzd1);
-	  TVector3 dauvec2(pxd2,pyd2,pzd2);
 
-	  
-	  //pt
-	  candInfo.pt1[it] = reco_d1->pt();
-	  candInfo.pt2[it] = reco_d2->pt();
-	  
-	  //momentum
-	  candInfo.p1[it] = reco_d1->p();
-	  candInfo.p2[it] = reco_d2->p();
+		//Gen-matching!!	  
+		candInfo.matchGEN[it] = false;
+		candInfo.isSwap[it] = false;
+		candInfo.idmom_reco[it] = -77;
+		candInfo.idd1_reco[it] = -77;
+		candInfo.idd2_reco[it] = -77;
+		candInfo.idd3_reco[it] = -77;
 
-	  //eta
-	  candInfo.eta1[it] = reco_d1->eta();
-	  candInfo.eta2[it] = reco_d2->eta();
-	  
-	  //phi
-	  candInfo.phi1[it] = reco_d1->phi();
-	  candInfo.phi2[it] = reco_d2->phi();
-	  
-	  //charge
-	  candInfo.charge1[it] = reco_d1->charge();
-	  candInfo.charge2[it] = reco_d2->charge();
-	  
-	  double pxd3 = -999.9;
-	  double pyd3 = -999.9;
-	  double pzd3 = -999.9;
-
-	  
-	  if(threeProngDecay_ )
-	    {
-
-	      pxd3 = reco_d3->px();
-	      pyd3 = reco_d3->py();
-	      pzd3 = reco_d3->pz();
-	      candInfo.pt3[it] = reco_d3->pt();
-	      candInfo.p3[it] = reco_d3->p();
-	      candInfo.eta3[it] = reco_d3->eta();
-	      candInfo.phi3[it] = reco_d3->phi();
-	      candInfo.charge3[it] = reco_d3->charge();
-	      TVector3 dauvec3(pxd3,pyd3,pzd3);
-	    }
-	  
-	  
-	  
-	  candInfo.pid1[it] = -99999;
-	  candInfo.pid2[it] = -99999;
-	  candInfo.pid3[it] = -99999;
-
-	  	  
-	  //vtxChi2
-	  candInfo.vtxChi2[it] = trk.userFloat("vtxChi2");
-	  candInfo.ndf[it] = trk.userFloat("vtxNdof");
-	  candInfo.VtxProb[it] = TMath::Prob(candInfo.vtxChi2[it],candInfo.ndf[it]);
+		candInfo.pt_gen[it] = -999.9;
+		candInfo.eta_gen[it] = -999.9;
+		candInfo.idmom[it] = -999;
+		candInfo.y_gen[it] = -999.9;
+		candInfo.phi_gen[it] = -999.9;
+		candInfo.iddau1[it] = -999;
+		candInfo.iddau2[it] = -999;
+		candInfo.iddau3[it] = -999;
 
 
-	  //PAngle
-	  TVector3 ptosvec(secvx-bestvx,secvy-bestvy,secvz-bestvz);
-	  TVector3 secvec(px,py,pz);
-	  
-	  TVector3 ptosvec2D(secvx-bestvx,secvy-bestvy,0);
-	  TVector3 secvec2D(px,py,0);
-	  
-	  
-	  candInfo.agl_abs[it] = secvec.Angle(ptosvec);
-	  candInfo.Ddca[it] = ptosvec.Mag() * TMath::Sin(candInfo.agl_abs[it]);
-	  candInfo.ip3d[it] = trk.userFloat("ip3d");
-	  candInfo.ip3derr[it] = trk.userFloat("ip3derr");
+		if(doGenMatching_){
 
-	  candInfo.agl2D_abs[it] = secvec2D.Angle(ptosvec2D);
-	  	  
-	  float r2lxyBS = (secvx-BSx-(secvz-BSz)*BSdxdz) * (secvx-BSx-(secvz-BSz)*BSdxdz) + (secvy-BSy-(secvz-BSz)*BSdydz) * (secvy-BSy-(secvz-BSz)*BSdydz);
-	  xlxyBS = secvx-BSx - (secvz-BSz)*BSdxdz;
-	  ylxyBS = secvy-BSy - (secvz-BSz)*BSdydz;
-	  //abby std::cout << "r2lxyBS = " << r2lxyBS << std::endl;
-	  candInfo.DlxyBS[it] = static_cast<float>(TMath::Sqrt(r2lxyBS));
-	  candInfo.DlxyBSErr[it] = static_cast<float>(TMath::Sqrt ((1./r2lxyBS) * ((xlxyBS*xlxyBS)*vtxXErr + (2*xlxyBS*ylxyBS)*vtxYXErr + (ylxyBS*ylxyBS)*vtxYErr)));
+			if(!genpars.isValid()){
+				cout<<"Gen matching cannot be done without Gen collection!!"<<endl;
+				return;
+			}
+
+			for(unsigned genPair=0; genPair<genpars->size(); ++genPair){
+
+				const reco::GenParticle & genLamC = (*genpars)[genPair];
+
+				if(fabs(genLamC.pdgId()) != PID_) continue;
 
 
-	  //Decay length 3D
-	  typedef ROOT::Math::SMatrix<double, 3, 3, ROOT::Math::MatRepSym<double, 3> > SMatrixSym3D;
-	  typedef ROOT::Math::SVector<double, 3> SVector3;
-	  typedef ROOT::Math::SVector<double, 6> SVector6;
-	  
-
-	  SMatrixSym3D totalCov = vtx.covariance() + sec_covariance;
-	  SVector3 distanceVector(secvx-bestvx,secvy-bestvy,secvz-bestvz);
-	  
-	  candInfo.dl[it] = ROOT::Math::Mag(distanceVector);
-	  candInfo.dlerror[it] = sqrt(ROOT::Math::Similarity(totalCov, distanceVector))/candInfo.dl[it];
-	  
-	  candInfo.dlos[it] = candInfo.dl[it]/candInfo.dlerror[it];
-	  
-
-	  //Decay length 2D
-	  
-	  SVector6 v1(vtx.covariance(0,0), vtx.covariance(0,1),vtx.covariance(1,1),0,0,0);
-	  SVector6 v2(sec_covariance(0,0), sec_covariance(0,1),sec_covariance(1,1),0,0,0);
-
-	  SMatrixSym3D sv1(v1);
-	  SMatrixSym3D sv2(v2);
-
-	  SMatrixSym3D totalCov2D = sv1 + sv2;
-	  SVector3 distanceVector2D(secvx-bestvx,secvy-bestvy,0);
-	  
-	  candInfo.dl2D[it] = ROOT::Math::Mag(distanceVector2D);
-	  candInfo.dl2Derror[it] = sqrt(ROOT::Math::Similarity(totalCov2D, distanceVector2D))/candInfo.dl2D[it];
-	  
-	  candInfo.dlos2D[it] = candInfo.dl2D[it]/candInfo.dl2Derror[it];
-	  
-
-	  //trk info
-	  //const pat::CompositeCandidate* reco_d1 = dynamic_cast<const pat::CompositeCandidate*>(reco_d1);
-	  //const reco::Track& pseudoTrk1 = original_track_d1->pseudoTrack();
-	  const reco::Track& pseudoTrk1 = reco_d1->pseudoTrack();
+				const reco::Candidate * gen_d1 = genLamC.daughter(0);
+				const reco::Candidate * gen_d2 = genLamC.daughter(1);
+				const reco::Candidate * gen_d3 = genLamC.daughter(2);
 
 
-	  //trk quality
-	  candInfo.trkChi1[it] = pseudoTrk1.normalizedChi2();
-	  candInfo.ptErr1[it] = pseudoTrk1.ptError();
-	  //nhit1[it] = pseudoTrk1.hitPattern().numberOfValidHits();
-	  //trkquality1[it] = pseudoTrk1.quality(reco::TrackBase::highPurity);
-	  //trkChi1[it] = reco_d1->normalizedChi2();
-	  //ptErr1[it] = reco_d1->ptError();
-	  
-	  
-	  //secvz = trk.vz(); secvx = trk.vx(); secvy = trk.vy();
-	  	  
-	  //DCA
-	  math::XYZPoint bestvtx(bestvx,bestvy,bestvz);
-	  math::XYZPoint BS_vtx(BSx,BSy,BSz);
-	  
+				bool passPID = (
+						(fabs(gen_d1->pdgId())==PID_dau1_ && fabs(gen_d2->pdgId())==PID_dau2_ && fabs(gen_d3->pdgId())==PID_dau3_) ||
+						(fabs(gen_d1->pdgId())==PID_dau1_ && fabs(gen_d2->pdgId())==PID_dau3_ && fabs(gen_d3->pdgId())==PID_dau2_) ||
+						(fabs(gen_d1->pdgId())==PID_dau2_ && fabs(gen_d2->pdgId())==PID_dau1_ && fabs(gen_d3->pdgId())==PID_dau3_) ||
+						(fabs(gen_d1->pdgId())==PID_dau2_ && fabs(gen_d2->pdgId())==PID_dau3_ && fabs(gen_d3->pdgId())==PID_dau1_) ||
+						(fabs(gen_d1->pdgId())==PID_dau3_ && fabs(gen_d2->pdgId())==PID_dau1_ && fabs(gen_d3->pdgId())==PID_dau2_) ||
+						(fabs(gen_d1->pdgId())==PID_dau3_ && fabs(gen_d2->pdgId())==PID_dau2_ && fabs(gen_d3->pdgId())==PID_dau1_)
+					       );
+				if(!passPID) continue;
 
-	  double dzbest1 = pseudoTrk1.dz(bestvtx);	  // today change
-	  double dxybest1 = pseudoTrk1.dxy(bestvtx); // today change
-	  double dzerror1 = std::sqrt(pseudoTrk1.dzError() * pseudoTrk1.dzError() + bestvzError * bestvzError);
-	  double dxyerror1 = std::sqrt(pseudoTrk1.dxyError() * pseudoTrk1.dxyError() + bestvxError * bestvyError);
-	  
-	  candInfo.dzos1[it] = dzbest1/dzerror1;
-	  candInfo.dxyos1[it] = dxybest1/dxyerror1;
-	  candInfo.Dtrk1Dz1[it] = 1.0*dzbest1;
-	  candInfo.Dtrk1Dxy1[it] = dxybest1;
-	  candInfo.Dtrk1DzError1[it] = dzerror1;
-	  candInfo.Dtrk1DxyError1[it] = dxyerror1;
-	 	  
 
-	  //const pat::CompositeCandidate* reco_d2 = dynamic_cast<const pat::CompositeCandidate*>(reco_d2);
-	  //const reco::Track& pseudoTrk2 = original_track_d2->pseudoTrack();
-	  const reco::Track& pseudoTrk2 = reco_d2->pseudoTrack();
-	  candInfo.trkChi2[it] = pseudoTrk2.normalizedChi2();
-	  candInfo.ptErr2[it] = pseudoTrk2.ptError();
-	  //nhit2[it] = pseudoTrk2.hitPattern().numberOfValidHits();
-	  //trkquality2[it] = pseudoTrk2.quality(reco::TrackBase::highPurity);
-		  
-	  //track Chi2
-	  //trkChi2[it] = reco_d2->normalizedChi2();
-	  
-	  //track pT error
-	  //ptErr2[it] = reco_d2->ptError();
-	  
-	  //vertexCovariance 00-xError 11-y 22-z
-	  //secvz = trk.vz(); secvx = trk.vx(); secvy = trk.vy();
-	  //std::cout<<"CHECK-11"<<" for event "<<iEvent.id().event()<<std::endl;
-		  
+				// To check all 6 charge permutations
+				struct CandidateCombo { 
+					const reco::Candidate* g1; 
+					const reco::Candidate* g2; 
+					const reco::Candidate* g3; 
+				};
 
-	  double dzbest2 = pseudoTrk2.dz(bestvtx);	  // today change
-	  double dxybest2 = pseudoTrk2.dxy(bestvtx); // today change
-	  double dzerror2 = TMath::Sqrt(pseudoTrk2.dzError() * pseudoTrk2.dzError() + bestvzError * bestvzError);
-	  double dxyerror2 = TMath::Sqrt(pseudoTrk2.dxyError() * pseudoTrk2.dxyError() + bestvxError * bestvyError);
 
-	  candInfo.dzos2[it] = dzbest2/dzerror2;
-	  candInfo.dxyos2[it] = dxybest2/dxyerror2;
-	  candInfo.Dtrk2Dz1[it] = 1.0*dzbest2;
-	  candInfo.Dtrk2Dxy1[it] = dxybest2;
-	  candInfo.Dtrk2DzError1[it] = dzerror2;
-	  candInfo.Dtrk2DxyError1[it] = dxyerror2;
+				std::vector<CandidateCombo> gen_combos = {
+					{gen_d1, gen_d2, gen_d3},
+					{gen_d1, gen_d3, gen_d2},
+					{gen_d2, gen_d1, gen_d3},
+					{gen_d2, gen_d3, gen_d1},
+					{gen_d3, gen_d1, gen_d2},
+					{gen_d3, gen_d2, gen_d1}
+				};
+
+
+				for(auto &c : gen_combos) {
+
+
+					if(reco_d1_charge!=c.g1->charge() || reco_d2_charge!=c.g2->charge() || reco_d3_charge!=c.g3->charge()) continue; 
+
+					double dR1 = reco::deltaR(*reco_d1, *c.g1);
+					if(dR1 >= deltaR_) continue;
+					if(fabs((reco_d1->pt() - c.g1->pt()) / reco_d1->pt()) >=0.2) continue;
+					double dR2 = reco::deltaR(*reco_d2, *c.g2);
+					if(dR2 >= deltaR_) continue;
+					if(fabs((reco_d2->pt() - c.g2->pt()) / reco_d2->pt()) >= 0.2) continue;
+					double dR3 = reco::deltaR(*reco_d3, *c.g3);
+					if(dR3 >= deltaR_) continue;
+					if(fabs((reco_d3->pt() - c.g3->pt()) / reco_d3->pt()) >= 0.2) continue;
+
+
+					candInfo.matchGEN[it] = true;
+
+
+					if(reco_d1->pdgId() != c.g1->pdgId() ||
+							reco_d2->pdgId() != c.g2->pdgId() ||
+							reco_d3->pdgId() != c.g3->pdgId()) {
+						candInfo.isSwap[it] = true;
+					}
+
+					if(decayInGen_){
+						candInfo.iddau1[it] = c.g1->pdgId();
+						candInfo.iddau2[it] = c.g2->pdgId();
+						candInfo.iddau3[it] = c.g3->pdgId();
+					}
+
+
+					genDecayLength(it, genLamC, candInfo);
+
+					candInfo.pt_gen[it] = genLamC.pt();
+					candInfo.eta_gen[it] = genLamC.eta();
+					candInfo.y_gen[it] = genLamC.rapidity();
+					candInfo.phi_gen[it] = genLamC.phi();
+					candInfo.idmom[it] = genLamC.pdgId();
+
+					candInfo.idmom_reco[it] = trk.pdgId();                                                                
+					candInfo.idd1_reco[it] = reco_d1->pdgId();
+					candInfo.idd2_reco[it] = reco_d2->pdgId();
+					candInfo.idd3_reco[it] = reco_d3->pdgId();
+
+					break;
+				}// End gen combo loop
+
+				if(candInfo.matchGEN[it]) break;
+
+
+			}// End genPair
+
+		}//End doGenMatching!
 
 
 
-	  if (threeProngDecay_){
+		double pxd1 = reco_d1->px();
+		double pyd1 = reco_d1->py();
+		double pzd1 = reco_d1->pz();
+		double pxd2 = reco_d2->px();
+		double pyd2 = reco_d2->py();
+		double pzd2 = reco_d2->pz();
 
-	      const reco::Track& pseudoTrk3 = reco_d3->pseudoTrack();
-	      candInfo.trkChi3[it] = pseudoTrk3.normalizedChi2();
-	      candInfo.ptErr3[it] = pseudoTrk3.ptError();
-	      //nhit2[it] = pseudoTrk2.hitPattern().numberOfValidHits();
-	      //trkquality2[it] = pseudoTrk2.quality(reco::TrackBase::highPurity);
-	      
-	      //track Chi2
-	      //trkChi2[it] = reco_d2->normalizedChi2();
-	      
-	      //track pT error
-	      //ptErr2[it] = reco_d2->ptError();
-	      
-	      //vertexCovariance 00-xError 11-y 22-z
-	      //secvz = trk.vz(); secvx = trk.vx(); secvy = trk.vy();
-	      
-	      
-	      
-	      double dzbest3 = pseudoTrk3.dz(bestvtx);	  // today change
-	      double dxybest3 = pseudoTrk3.dxy(bestvtx); // today change
-	      double dzerror3 = TMath::Sqrt(pseudoTrk3.dzError() * pseudoTrk3.dzError() + bestvzError * bestvzError);
-	      double dxyerror3 = TMath::Sqrt(pseudoTrk3.dxyError() * pseudoTrk3.dxyError() + bestvxError * bestvyError);
-	      
-	      candInfo.dzos3[it] = dzbest3/dzerror3;
-	      candInfo.dxyos3[it] = dxybest3/dxyerror3;
-	      candInfo.Dtrk3Dz1[it] = 1.0*dzbest3;
-	      candInfo.Dtrk3Dxy1[it] = dxybest3;
-	      candInfo.Dtrk3DzError1[it] = dzerror3;
-	      candInfo.Dtrk3DxyError1[it] = dxyerror3;
-	      
 
-	  }
-	  
-	  
-       	  
+		TVector3 dauvec1(pxd1,pyd1,pzd1);
+		TVector3 dauvec2(pxd2,pyd2,pzd2);
+
+
+		//pt
+		candInfo.pt1[it] = reco_d1->pt();
+		candInfo.pt2[it] = reco_d2->pt();
+
+		//momentum
+		candInfo.p1[it] = reco_d1->p();
+		candInfo.p2[it] = reco_d2->p();
+
+		//eta
+		candInfo.eta1[it] = reco_d1->eta();
+		candInfo.eta2[it] = reco_d2->eta();
+
+		//phi
+		candInfo.phi1[it] = reco_d1->phi();
+		candInfo.phi2[it] = reco_d2->phi();
+
+		//charge
+		candInfo.charge1[it] = reco_d1->charge();
+		candInfo.charge2[it] = reco_d2->charge();
+
+		double pxd3 = -999.9;
+		double pyd3 = -999.9;
+		double pzd3 = -999.9;
+
+
+		if(threeProngDecay_ )
+		{
+
+			pxd3 = reco_d3->px();
+			pyd3 = reco_d3->py();
+			pzd3 = reco_d3->pz();
+			candInfo.pt3[it] = reco_d3->pt();
+			candInfo.p3[it] = reco_d3->p();
+			candInfo.eta3[it] = reco_d3->eta();
+			candInfo.phi3[it] = reco_d3->phi();
+			candInfo.charge3[it] = reco_d3->charge();
+			TVector3 dauvec3(pxd3,pyd3,pzd3);
+		}
+
+
+
+		candInfo.pid1[it] = -99999;
+		candInfo.pid2[it] = -99999;
+		candInfo.pid3[it] = -99999;
+
+
+		//vtxChi2
+		candInfo.vtxChi2[it] = trk.userFloat("vtxChi2");
+		candInfo.ndf[it] = trk.userFloat("vtxNdof");
+		candInfo.VtxProb[it] = TMath::Prob(candInfo.vtxChi2[it],candInfo.ndf[it]);
+
+
+		//PAngle
+		TVector3 ptosvec(secvx-bestvx,secvy-bestvy,secvz-bestvz);
+		TVector3 secvec(px,py,pz);
+
+		TVector3 ptosvec2D(secvx-bestvx,secvy-bestvy,0);
+		TVector3 secvec2D(px,py,0);
+
+
+		candInfo.agl_abs[it] = secvec.Angle(ptosvec);
+		candInfo.Ddca[it] = ptosvec.Mag() * TMath::Sin(candInfo.agl_abs[it]);
+		candInfo.ip3d[it] = trk.userFloat("ip3d");
+		candInfo.ip3derr[it] = trk.userFloat("ip3derr");
+
+		candInfo.agl2D_abs[it] = secvec2D.Angle(ptosvec2D);
+
+		float r2lxyBS = (secvx-BSx-(secvz-BSz)*BSdxdz) * (secvx-BSx-(secvz-BSz)*BSdxdz) + (secvy-BSy-(secvz-BSz)*BSdydz) * (secvy-BSy-(secvz-BSz)*BSdydz);
+		xlxyBS = secvx-BSx - (secvz-BSz)*BSdxdz;
+		ylxyBS = secvy-BSy - (secvz-BSz)*BSdydz;
+		candInfo.DlxyBS[it] = static_cast<float>(TMath::Sqrt(r2lxyBS));
+		candInfo.DlxyBSErr[it] = static_cast<float>(TMath::Sqrt ((1./r2lxyBS) * ((xlxyBS*xlxyBS)*vtxXErr + (2*xlxyBS*ylxyBS)*vtxYXErr + (ylxyBS*ylxyBS)*vtxYErr)));
+
+
+		//Decay length 3D
+		typedef ROOT::Math::SMatrix<double, 3, 3, ROOT::Math::MatRepSym<double, 3> > SMatrixSym3D;
+		typedef ROOT::Math::SVector<double, 3> SVector3;
+		typedef ROOT::Math::SVector<double, 6> SVector6;
+
+
+		SMatrixSym3D totalCov = vtx.covariance() + sec_covariance;
+		SVector3 distanceVector(secvx-bestvx,secvy-bestvy,secvz-bestvz);
+
+		candInfo.dl[it] = ROOT::Math::Mag(distanceVector);
+		candInfo.dlerror[it] = sqrt(ROOT::Math::Similarity(totalCov, distanceVector))/candInfo.dl[it];
+
+		candInfo.dlos[it] = candInfo.dl[it]/candInfo.dlerror[it];
+
+
+		//Decay length 2D
+
+		SVector6 v1(vtx.covariance(0,0), vtx.covariance(0,1),vtx.covariance(1,1),0,0,0);
+		SVector6 v2(sec_covariance(0,0), sec_covariance(0,1),sec_covariance(1,1),0,0,0);
+
+		SMatrixSym3D sv1(v1);
+		SMatrixSym3D sv2(v2);
+
+		SMatrixSym3D totalCov2D = sv1 + sv2;
+		SVector3 distanceVector2D(secvx-bestvx,secvy-bestvy,0);
+
+		candInfo.dl2D[it] = ROOT::Math::Mag(distanceVector2D);
+		candInfo.dl2Derror[it] = sqrt(ROOT::Math::Similarity(totalCov2D, distanceVector2D))/candInfo.dl2D[it];
+
+		candInfo.dlos2D[it] = candInfo.dl2D[it]/candInfo.dl2Derror[it];
+
+
+		const reco::Track& pseudoTrk1 = reco_d1->pseudoTrack();
+
+
+		candInfo.trkChi1[it] = pseudoTrk1.normalizedChi2();
+		candInfo.ptErr1[it] = pseudoTrk1.ptError();
+
+		//DCA
+		math::XYZPoint bestvtx(bestvx,bestvy,bestvz);
+		math::XYZPoint BS_vtx(BSx,BSy,BSz);
+
+
+		double dzbest1 = pseudoTrk1.dz(bestvtx);	  
+		double dxybest1 = pseudoTrk1.dxy(bestvtx); 
+		double dzerror1 = std::sqrt(pseudoTrk1.dzError() * pseudoTrk1.dzError() + bestvzError * bestvzError);
+		double dxyerror1 = std::sqrt(pseudoTrk1.dxyError() * pseudoTrk1.dxyError() + bestvxError * bestvyError);
+
+		candInfo.dzos1[it] = dzbest1/dzerror1;
+		candInfo.dxyos1[it] = dxybest1/dxyerror1;
+		candInfo.Dtrk1Dz1[it] = 1.0*dzbest1;
+		candInfo.Dtrk1Dxy1[it] = dxybest1;
+		candInfo.Dtrk1DzError1[it] = dzerror1;
+		candInfo.Dtrk1DxyError1[it] = dxyerror1;
+
+
+		const reco::Track& pseudoTrk2 = reco_d2->pseudoTrack();
+		candInfo.trkChi2[it] = pseudoTrk2.normalizedChi2();
+		candInfo.ptErr2[it] = pseudoTrk2.ptError();
+
+		double dzbest2 = pseudoTrk2.dz(bestvtx);	  
+		double dxybest2 = pseudoTrk2.dxy(bestvtx); 
+		double dzerror2 = TMath::Sqrt(pseudoTrk2.dzError() * pseudoTrk2.dzError() + bestvzError * bestvzError);
+		double dxyerror2 = TMath::Sqrt(pseudoTrk2.dxyError() * pseudoTrk2.dxyError() + bestvxError * bestvyError);
+
+		candInfo.dzos2[it] = dzbest2/dzerror2;
+		candInfo.dxyos2[it] = dxybest2/dxyerror2;
+		candInfo.Dtrk2Dz1[it] = 1.0*dzbest2;
+		candInfo.Dtrk2Dxy1[it] = dxybest2;
+		candInfo.Dtrk2DzError1[it] = dzerror2;
+		candInfo.Dtrk2DxyError1[it] = dxyerror2;
+
+
+
+		if (threeProngDecay_){
+
+			const reco::Track& pseudoTrk3 = reco_d3->pseudoTrack();
+			candInfo.trkChi3[it] = pseudoTrk3.normalizedChi2();
+			candInfo.ptErr3[it] = pseudoTrk3.ptError();
+
+			double dzbest3 = pseudoTrk3.dz(bestvtx);	  
+			double dxybest3 = pseudoTrk3.dxy(bestvtx); 
+			double dzerror3 = TMath::Sqrt(pseudoTrk3.dzError() * pseudoTrk3.dzError() + bestvzError * bestvzError);
+			double dxyerror3 = TMath::Sqrt(pseudoTrk3.dxyError() * pseudoTrk3.dxyError() + bestvxError * bestvyError);
+
+			candInfo.dzos3[it] = dzbest3/dzerror3;
+			candInfo.dxyos3[it] = dxybest3/dxyerror3;
+			candInfo.Dtrk3Dz1[it] = 1.0*dzbest3;
+			candInfo.Dtrk3Dxy1[it] = dxybest3;
+			candInfo.Dtrk3DzError1[it] = dzerror3;
+			candInfo.Dtrk3DxyError1[it] = dxyerror3;
+		}
+
+
+
 #ifdef DEBUG
-	  cout << "Done reco single iter" << endl;
+		cout << "Done reco single iter" << endl;
 #endif
-	  	  
+
 	}// Candidate loop
 
-	//std::cout<<"Finished Tree producer loop"<<std::endl;
 #ifdef DEBUG
 	cout << "Fill reco done" << endl;
 #endif
@@ -1113,7 +956,7 @@ void VCTreeProducer_LamC3P::fillRECO(const edm::Event& iEvent, const edm::EventS
 
 
 // ------------ method called once each job just before starting event loop  ------------
-void
+	void
 VCTreeProducer_LamC3P::beginJob()
 {
 	TH1D::SetDefaultSumw2();
@@ -1127,7 +970,7 @@ VCTreeProducer_LamC3P::beginJob()
 	if(saveTree_) initTree();
 }
 
-void 
+	void 
 VCTreeProducer_LamC3P::initTree()
 { 
 	VertexCompositeNtuple = fs->make< TTree>("VertexCompositeNtuple","VertexCompositeNtuple");
@@ -1157,83 +1000,79 @@ VCTreeProducer_LamC3P::initTree()
 		VertexCompositeNtuple->Branch("BSzErr",&BSzerror,"BSzErr/F");
 		VertexCompositeNtuple->Branch("candSize",&candSize,"candSize/I");
 		if(isCentrality_) VertexCompositeNtuple->Branch("centrality",&centrality,"centrality/I");
-		// particle info
 		VertexCompositeNtuple->Branch("pT", &candInfo.pt);
 		VertexCompositeNtuple->Branch("y", &candInfo.y);
 		VertexCompositeNtuple->Branch("phi", &candInfo.phi);
 		VertexCompositeNtuple->Branch("mass", &candInfo.mass);
-		//if(useAnyMVA_) VertexCompositeNtuple->Branch("mva",&mva,"mva[candSize]/F");
-		//if(useAnyMVA_) VertexCompositeNtuple->Branch("mva",&candInfo.mva");
 
 		if(!isSkimMVA_)  
 		{
 			//Composite candidate info RECO
-		  VertexCompositeNtuple->Branch("flavor", &candInfo.flavor);
-		  VertexCompositeNtuple->Branch("eta", &candInfo.eta);
-		  VertexCompositeNtuple->Branch("VtxProb", &candInfo.VtxProb);
-		  VertexCompositeNtuple->Branch("VtxChi2", &candInfo.vtxChi2);
-		  VertexCompositeNtuple->Branch("3DPointingAngle", &candInfo.agl_abs);
-		  VertexCompositeNtuple->Branch("Ddca", &candInfo.Ddca);
-		  VertexCompositeNtuple->Branch("ip3d", &candInfo.ip3d);
-		  VertexCompositeNtuple->Branch("ip3derr", &candInfo.ip3derr);
-		  VertexCompositeNtuple->Branch("2DPointingAngle", &candInfo.agl2D_abs);
-		  VertexCompositeNtuple->Branch("3DDecayLengthSignificance", &candInfo.dlos);
-		  VertexCompositeNtuple->Branch("3DDecayLength", &candInfo.dl);
-		  VertexCompositeNtuple->Branch("3DDecayLengthError", &candInfo.dlerror);
-		  VertexCompositeNtuple->Branch("2DDecayLengthSignificance", &candInfo.dlos2D);
-		  VertexCompositeNtuple->Branch("2DDecayLength", &candInfo.dl2D);
-		  VertexCompositeNtuple->Branch("2DDecayLengthError", &candInfo.dl2Derror);
-		  VertexCompositeNtuple->Branch("DlxyBS", &candInfo.DlxyBS);
-		  VertexCompositeNtuple->Branch("DlxyBSErr", &candInfo.DlxyBSErr);
-		  VertexCompositeNtuple->Branch("zDCASignificanceDaugther1", &candInfo.dzos1);
-		  VertexCompositeNtuple->Branch("xyDCASignificanceDaugther1", &candInfo.dxyos1);
-		  VertexCompositeNtuple->Branch("pTD1", &candInfo.pt1);
-		  VertexCompositeNtuple->Branch("pTerrD1", &candInfo.ptErr1);
-		  VertexCompositeNtuple->Branch("EtaD1", &candInfo.eta1);
-		  VertexCompositeNtuple->Branch("PhiD1", &candInfo.phi1);
-		  VertexCompositeNtuple->Branch("dedxHarmonic2D1", &candInfo.H2dedx1);
-		  VertexCompositeNtuple->Branch("zDCASignificanceDaugther2", &candInfo.dzos2);
-		  VertexCompositeNtuple->Branch("xyDCASignificanceDaugther2", &candInfo.dxyos2);
-		  VertexCompositeNtuple->Branch("pTD2", &candInfo.pt2);
-		  VertexCompositeNtuple->Branch("pTerrD2", &candInfo.ptErr2);
-		  VertexCompositeNtuple->Branch("EtaD2", &candInfo.eta2);
-		  VertexCompositeNtuple->Branch("PhiD2", &candInfo.phi2);
-		  VertexCompositeNtuple->Branch("dedxHarmonic2D2", &candInfo.H2dedx2);
-		  VertexCompositeNtuple->Branch("Dtrk1Dz1", &candInfo.Dtrk1Dz1);
-		  VertexCompositeNtuple->Branch("Dtrk2Dz1", &candInfo.Dtrk2Dz1);
-		  VertexCompositeNtuple->Branch("Dtrk1Dxy1", &candInfo.Dtrk1Dxy1);
-		  VertexCompositeNtuple->Branch("Dtrk2Dxy1", &candInfo.Dtrk2Dxy1);
-		  VertexCompositeNtuple->Branch("Dtrk1DzError1", &candInfo.Dtrk1DzError1);
-		  VertexCompositeNtuple->Branch("Dtrk2DzError1", &candInfo.Dtrk2DzError1);
-		  VertexCompositeNtuple->Branch("Dtrk1DxyError1", &candInfo.Dtrk1DxyError1);
-		  VertexCompositeNtuple->Branch("Dtrk2DxyError1", &candInfo.Dtrk2DxyError1);
-		  
-		  if(threeProngDecay_){
-		    VertexCompositeNtuple->Branch("pTD3", &candInfo.pt3);
-		    VertexCompositeNtuple->Branch("pTerrD3", &candInfo.ptErr3);
-		    VertexCompositeNtuple->Branch("EtaD3", &candInfo.eta3);
-		    VertexCompositeNtuple->Branch("PhiD3", &candInfo.phi3);
-		    
-		    // VertexCompositeNtuple->Branch("dedxHarmonic2D3", &candInfo.H2dedx3);
-		    VertexCompositeNtuple->Branch("Dtrk3Dz1", &candInfo.Dtrk3Dz1);
-			  VertexCompositeNtuple->Branch("Dtrk3Dxy1", &candInfo.Dtrk3Dxy1);
-			  VertexCompositeNtuple->Branch("Dtrk3DzError1", &candInfo.Dtrk3DzError1);
-			  VertexCompositeNtuple->Branch("Dtrk3DxyError1", &candInfo.Dtrk3DxyError1);
-			  
+			VertexCompositeNtuple->Branch("flavor", &candInfo.flavor);
+			VertexCompositeNtuple->Branch("eta", &candInfo.eta);
+			VertexCompositeNtuple->Branch("VtxProb", &candInfo.VtxProb);
+			VertexCompositeNtuple->Branch("VtxChi2", &candInfo.vtxChi2);
+			VertexCompositeNtuple->Branch("3DPointingAngle", &candInfo.agl_abs);
+			VertexCompositeNtuple->Branch("Ddca", &candInfo.Ddca);
+			VertexCompositeNtuple->Branch("ip3d", &candInfo.ip3d);
+			VertexCompositeNtuple->Branch("ip3derr", &candInfo.ip3derr);
+			VertexCompositeNtuple->Branch("2DPointingAngle", &candInfo.agl2D_abs);
+			VertexCompositeNtuple->Branch("3DDecayLengthSignificance", &candInfo.dlos);
+			VertexCompositeNtuple->Branch("3DDecayLength", &candInfo.dl);
+			VertexCompositeNtuple->Branch("3DDecayLengthError", &candInfo.dlerror);
+			VertexCompositeNtuple->Branch("2DDecayLengthSignificance", &candInfo.dlos2D);
+			VertexCompositeNtuple->Branch("2DDecayLength", &candInfo.dl2D);
+			VertexCompositeNtuple->Branch("2DDecayLengthError", &candInfo.dl2Derror);
+			VertexCompositeNtuple->Branch("DlxyBS", &candInfo.DlxyBS);
+			VertexCompositeNtuple->Branch("DlxyBSErr", &candInfo.DlxyBSErr);
+			VertexCompositeNtuple->Branch("zDCASignificanceDaugther1", &candInfo.dzos1);
+			VertexCompositeNtuple->Branch("xyDCASignificanceDaugther1", &candInfo.dxyos1);
+			VertexCompositeNtuple->Branch("pTD1", &candInfo.pt1);
+			VertexCompositeNtuple->Branch("pTerrD1", &candInfo.ptErr1);
+			VertexCompositeNtuple->Branch("EtaD1", &candInfo.eta1);
+			VertexCompositeNtuple->Branch("PhiD1", &candInfo.phi1);
+			VertexCompositeNtuple->Branch("dedxHarmonic2D1", &candInfo.H2dedx1);
+			VertexCompositeNtuple->Branch("zDCASignificanceDaugther2", &candInfo.dzos2);
+			VertexCompositeNtuple->Branch("xyDCASignificanceDaugther2", &candInfo.dxyos2);
+			VertexCompositeNtuple->Branch("pTD2", &candInfo.pt2);
+			VertexCompositeNtuple->Branch("pTerrD2", &candInfo.ptErr2);
+			VertexCompositeNtuple->Branch("EtaD2", &candInfo.eta2);
+			VertexCompositeNtuple->Branch("PhiD2", &candInfo.phi2);
+			VertexCompositeNtuple->Branch("dedxHarmonic2D2", &candInfo.H2dedx2);
+			VertexCompositeNtuple->Branch("Dtrk1Dz1", &candInfo.Dtrk1Dz1);
+			VertexCompositeNtuple->Branch("Dtrk2Dz1", &candInfo.Dtrk2Dz1);
+			VertexCompositeNtuple->Branch("Dtrk1Dxy1", &candInfo.Dtrk1Dxy1);
+			VertexCompositeNtuple->Branch("Dtrk2Dxy1", &candInfo.Dtrk2Dxy1);
+			VertexCompositeNtuple->Branch("Dtrk1DzError1", &candInfo.Dtrk1DzError1);
+			VertexCompositeNtuple->Branch("Dtrk2DzError1", &candInfo.Dtrk2DzError1);
+			VertexCompositeNtuple->Branch("Dtrk1DxyError1", &candInfo.Dtrk1DxyError1);
+			VertexCompositeNtuple->Branch("Dtrk2DxyError1", &candInfo.Dtrk2DxyError1);
+
+			if(threeProngDecay_){
+				VertexCompositeNtuple->Branch("pTD3", &candInfo.pt3);
+				VertexCompositeNtuple->Branch("pTerrD3", &candInfo.ptErr3);
+				VertexCompositeNtuple->Branch("EtaD3", &candInfo.eta3);
+				VertexCompositeNtuple->Branch("PhiD3", &candInfo.phi3);
+
+				VertexCompositeNtuple->Branch("Dtrk3Dz1", &candInfo.Dtrk3Dz1);
+				VertexCompositeNtuple->Branch("Dtrk3Dxy1", &candInfo.Dtrk3Dxy1);
+				VertexCompositeNtuple->Branch("Dtrk3DzError1", &candInfo.Dtrk3DzError1);
+				VertexCompositeNtuple->Branch("Dtrk3DxyError1", &candInfo.Dtrk3DxyError1);
+
 			}
 
 			if(doGenMatching_)
 			{
-			  VertexCompositeNtuple->Branch("isSwap", &candInfo.isSwap);
-			  VertexCompositeNtuple->Branch("idmom_reco", &candInfo.idmom_reco);
-			  VertexCompositeNtuple->Branch("idD1_reco", &candInfo.idd1_reco);
-			  VertexCompositeNtuple->Branch("idD2_reco", &candInfo.idd2_reco);
-			  VertexCompositeNtuple->Branch("idD3_reco", &candInfo.idd3_reco);
-			  VertexCompositeNtuple->Branch("matchGEN", &candInfo.matchGEN);
-			  VertexCompositeNtuple->Branch("gen3DPointingAngle", &candInfo.gen_agl_abs);
-			  VertexCompositeNtuple->Branch("gen2DPointingAngle", &candInfo.gen_agl2D_abs);
-			  VertexCompositeNtuple->Branch("gen3DDecayLength", &candInfo.gen_dl);
-			  VertexCompositeNtuple->Branch("gen2DDecayLength", &candInfo.gen_dl2D);
+				VertexCompositeNtuple->Branch("isSwap", &candInfo.isSwap);
+				VertexCompositeNtuple->Branch("idmom_reco", &candInfo.idmom_reco);
+				VertexCompositeNtuple->Branch("idD1_reco", &candInfo.idd1_reco);
+				VertexCompositeNtuple->Branch("idD2_reco", &candInfo.idd2_reco);
+				VertexCompositeNtuple->Branch("idD3_reco", &candInfo.idd3_reco);
+				VertexCompositeNtuple->Branch("matchGEN", &candInfo.matchGEN);
+				VertexCompositeNtuple->Branch("gen3DPointingAngle", &candInfo.gen_agl_abs);
+				VertexCompositeNtuple->Branch("gen2DPointingAngle", &candInfo.gen_agl2D_abs);
+				VertexCompositeNtuple->Branch("gen3DDecayLength", &candInfo.gen_dl);
+				VertexCompositeNtuple->Branch("gen2DDecayLength", &candInfo.gen_dl2D);
 			}
 
 		}
@@ -1242,17 +1081,17 @@ VCTreeProducer_LamC3P::initTree()
 
 	if(doGenNtuple_)
 	{
-	  VertexCompositeNtuple->Branch("pT_gen", &candInfo.pt_gen);
-	  VertexCompositeNtuple->Branch("eta_gen", &candInfo.eta_gen);
-	  VertexCompositeNtuple->Branch("y_gen", &candInfo.y_gen);
-	  VertexCompositeNtuple->Branch("phi_gen", &candInfo.phi_gen);
-	  VertexCompositeNtuple->Branch("MotherID_gen", &candInfo.idmom);	  
-	  if(decayInGen_)
-	    { 
-	      VertexCompositeNtuple->Branch("DauID1_gen", &candInfo.iddau1);
-	      VertexCompositeNtuple->Branch("DauID2_gen", &candInfo.iddau2);
-	      VertexCompositeNtuple->Branch("DauID3_gen", &candInfo.iddau3);
-	    }
+		VertexCompositeNtuple->Branch("pT_gen", &candInfo.pt_gen);
+		VertexCompositeNtuple->Branch("eta_gen", &candInfo.eta_gen);
+		VertexCompositeNtuple->Branch("y_gen", &candInfo.y_gen);
+		VertexCompositeNtuple->Branch("phi_gen", &candInfo.phi_gen);
+		VertexCompositeNtuple->Branch("MotherID_gen", &candInfo.idmom);	  
+		if(decayInGen_)
+		{ 
+			VertexCompositeNtuple->Branch("DauID1_gen", &candInfo.iddau1);
+			VertexCompositeNtuple->Branch("DauID2_gen", &candInfo.iddau2);
+			VertexCompositeNtuple->Branch("DauID3_gen", &candInfo.iddau3);
+		}
 	}
 }
 
@@ -1266,28 +1105,28 @@ VCTreeProducer_LamC3P::endJob() {
 
 
 void VCTreeProducer_LamC3P::genDecayLength(const uint& it, const reco::GenParticle& gCand, CandidateData& candInfo) {
- 
-    candInfo.gen_dl[it] = -99.9;
-    candInfo.gen_agl_abs[it] = -99.9;
-    candInfo.gen_dl2D[it] = -99.9;
-    candInfo.gen_agl2D_abs[it] = -99.9;
 
-    if (gCand.numberOfDaughters() == 0 || !gCand.daughter(0)) return;
+	candInfo.gen_dl[it] = -99.9;
+	candInfo.gen_agl_abs[it] = -99.9;
+	candInfo.gen_dl2D[it] = -99.9;
+	candInfo.gen_agl2D_abs[it] = -99.9;
 
-    const auto& dauVtx = gCand.daughter(0)->vertex();
-    TVector3 ptosvec(dauVtx.X(), dauVtx.Y(), dauVtx.Z());
-    TVector3 secvec(gCand.px(), gCand.py(), gCand.pz());
+	if (gCand.numberOfDaughters() == 0 || !gCand.daughter(0)) return;
 
-    // Use the struct object to access and modify the vectors
-    candInfo.gen_agl_abs[it] = secvec.Angle(ptosvec);
-    candInfo.gen_dl[it] = ptosvec.Mag();
-    
-    TVector3 ptosvec2D(dauVtx.X(), dauVtx.Y(), 0.0);
-    TVector3 secvec2D(gCand.px(), gCand.py(), 0.0);
-    
-    // Use the struct object to access and modify the vectors
-    candInfo.gen_agl2D_abs[it] = secvec2D.Angle(ptosvec2D);
-    candInfo.gen_dl2D[it] = ptosvec2D.Mag();
+	const auto& dauVtx = gCand.daughter(0)->vertex();
+	TVector3 ptosvec(dauVtx.X(), dauVtx.Y(), dauVtx.Z());
+	TVector3 secvec(gCand.px(), gCand.py(), gCand.pz());
+
+	// Use the struct object to access and modify the vectors
+	candInfo.gen_agl_abs[it] = secvec.Angle(ptosvec);
+	candInfo.gen_dl[it] = ptosvec.Mag();
+
+	TVector3 ptosvec2D(dauVtx.X(), dauVtx.Y(), 0.0);
+	TVector3 secvec2D(gCand.px(), gCand.py(), 0.0);
+
+	// Use the struct object to access and modify the vectors
+	candInfo.gen_agl2D_abs[it] = secvec2D.Angle(ptosvec2D);
+	candInfo.gen_dl2D[it] = ptosvec2D.Mag();
 }
 
 //define this as a plug-in

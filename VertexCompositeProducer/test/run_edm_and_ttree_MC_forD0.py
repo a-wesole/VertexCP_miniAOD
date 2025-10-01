@@ -30,20 +30,14 @@ process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32((-1))) 
 process.TFileService = cms.Service("TFileService",
-    fileName =cms.string('TTree_MC.root'))
+    fileName =cms.string('TTree_D0_mc.root'))
 
 
 # Define the input source
 
 process.source = cms.Source("PoolSource",
-    #duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
     fileNames = cms.untracked.vstring(
-           #'root://xrootd-cms.infn.it//store/mc/HINPbPbSpring23MiniAOD/promptD0ToKPi_PT-1_TuneCP5_5p36TeV_pythia8-evtgen/MINIAODSIM/132X_mcRun3_2023_realistic_HI_v9-v2/2560000/04335bea-a283-40ea-a050-d71e1b7fac6b.root'
            'root://xrootd-cms.infn.it//store/mc/HINPbPbSpring23MiniAOD/promptD0ToKPi_PT-1_TuneCP5_5p36TeV_pythia8-evtgen/MINIAODSIM/132X_mcRun3_2023_realistic_HI_v9-v2/2560000/51425c83-3b0f-4c4f-85de-961c0b3af5fb.root'
-
-       # 'file:04335bea-a283-40ea-a050-d71e1b7fac6b.root'
-       #'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/668/00000/06179488-b7e6-44f6-bec9-eb242a290ffd.root'
-       # 'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/375/055/00000/2d8cd07d-f92f-44df-8e0f-eb28dca3108b.root'
     ),
         # eventsToProcess = cms.untracked.VEventRange('1:1430:199502708')  # Replace with your specific run, lumi, event numbers
 )
@@ -112,7 +106,6 @@ process.load("VertexCompositeAnalysis.VertexCompositeProducer.generalD0Candidate
 process.generalD0CandidatesNew = process.generalD0Candidates.clone()
 process.generalD0CandidatesNew.trackRecoAlgorithm = cms.InputTag(TrackCollection_PAT)
 process.generalD0CandidatesNew.vertexRecoAlgorithm = cms.InputTag(VertexCollection_PAT)
-# process.generalD0CandidatesNew.GenParticleCollection = cms.untracked.InputTag(GenParticleCollection_PAT)
 process.generalD0CandidatesNew.TrackChi2Label = cms.InputTag(TrkChi2Label)
 process.generalD0CandidatesNew.tkEtaDiffCut = cms.double(999.9)
 process.generalD0CandidatesNew.tkNhitsCut = cms.int32(11)
@@ -154,7 +147,6 @@ process.d0selectorNewReduced.useAnyMVA = cms.bool(False); #only set true if you 
 process.d0ana_newreduced = process.d0ana.clone()
 process.d0ana_newreduced.trackRecoAlgorithm = cms.InputTag(TrackCollection_PAT)
 process.d0ana_newreduced.vertexRecoAlgorithm = cms.InputTag(VertexCollection_PAT)
-# process.d0ana_newreduced.GenParticleCollection = cms.untracked.InputTag(GenParticleCollection_PAT)
 process.d0ana_newreduced.D0 = cms.untracked.InputTag("d0selectorNewReduced:D0")
 process.d0ana_newreduced.DCAValCollection = cms.InputTag("d0selectorNewReduced:DCAValuesNewD0")
 process.d0ana_newreduced.DCAErrCollection = cms.InputTag("d0selectorNewReduced:DCAErrorsNewD0")
@@ -175,8 +167,6 @@ process.eventinfoana.selectEvents = cms.untracked.string('EventSelections')
 process.eventinfoana.stageL1Trigger = cms.uint32(2)
 process.EventSelections = cms.Path(
     process.centralityBin *
-    #process.eventFilter_HLT *
-    #process.event_filters * 
     process.generalD0CandidatesNew *
     process.d0ana_seq2 
 )
@@ -190,18 +180,16 @@ changeToMiniAOD(process)
 process.options.numberOfThreads = 1
 
 process.output = cms.OutputModule("PoolOutputModule",
-    fileName = cms.untracked.string('edm_MC.root'),
+    fileName = cms.untracked.string('edm_D0_mc.root'),
         outputCommands = cms.untracked.vstring( #which data to include and exclude 
         "drop *", #no data is kept unless explicitly specified
-        'keep *_d0selectorNewReduced_*_*',  # Keep the first collection
+        'keep *_d0selectorNewReduced_*_*',  #keep only from D0selector
         )
 )
 
 process.outputPath = cms.EndPath(process.output)
 process.schedule.append(process.outputPath)
 
-#print("Events in d0ana:", process.d0ana_seq2.size())
-#print("Events in eventinfoana:", process.eventinfoana.size())
 
 
 
