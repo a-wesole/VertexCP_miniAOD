@@ -48,6 +48,7 @@
 #include "TrackingTools/PatternTools/interface/TSCBLBuilderNoMaterial.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 
+#include "Utils.h"
 //
 // constants, enums and typedefs
 //
@@ -94,6 +95,7 @@ private:
   uint candSize;
   bool  trigHLT[MAXTRG];
   bool  evtSel[MAXSEL];
+  float HFsumET;
   float HFsumETPlus;
   float HFsumETMinus;
   float ZDCPlus;
@@ -156,9 +158,9 @@ EventInfoTreeProducer::EventInfoTreeProducer(const edm::ParameterSet& iConfig) :
   tok_tracks_ = consumes<reco::TrackCollection>(edm::InputTag(iConfig.getUntrackedParameter<edm::InputTag>("TrackCollection")));
 
   isCentrality_ = (iConfig.exists("isCentrality") ? iConfig.getParameter<bool>("isCentrality") : false);
-  cout << " &&&&&&&&&&&&&&&&&& " << endl;
-  cout << "isCentrality_ = " << isCentrality_ << endl;
-  cout << " &&&&&&&&&&&&&&&&&& " << endl;
+ 
+
+
   if(isCentrality_)
   {
     tok_centBinLabel_ = consumes<int>(iConfig.getParameter<edm::InputTag>("centralityBinLabel"));
@@ -283,6 +285,7 @@ EventInfoTreeProducer::fillRECO(const edm::Event& iEvent, const edm::EventSetup&
   {
     edm::Handle<reco::Centrality> cent;
     iEvent.getByToken(tok_centSrc_, cent);
+    HFsumET = (cent.isValid() ? cent->EtHFtowerSum() : -1.);
     HFsumETPlus = (cent.isValid() ? cent->EtHFtowerSumPlus() : -1.);
     HFsumETMinus = (cent.isValid() ? cent->EtHFtowerSumMinus() : -1.);
     Npixel = (cent.isValid() ? cent->multiplicityPixel() : -1);
@@ -293,6 +296,9 @@ EventInfoTreeProducer::fillRECO(const edm::Event& iEvent, const edm::EventSetup&
     edm::Handle<int> cbin;
     iEvent.getByToken(tok_centBinLabel_, cbin);
     centrality = (cbin.isValid() ? *cbin : -1);
+
+
+
   }
   
   NtrkHP = -1;
@@ -365,6 +371,7 @@ EventInfoTreeProducer::initTree()
   {
     EventInfoNtuple->Branch("centrality",&centrality,"centrality/S");
     EventInfoNtuple->Branch("Npixel",&Npixel,"Npixel/I");
+    EventInfoNtuple->Branch("HFsumET",&HFsumET,"HFsumET/F");
     EventInfoNtuple->Branch("HFsumETPlus",&HFsumETPlus,"HFsumETPlus/F");
     EventInfoNtuple->Branch("HFsumETMinus",&HFsumETMinus,"HFsumETMinus/F");
     EventInfoNtuple->Branch("ZDCPlus",&ZDCPlus,"ZDCPlus/F");

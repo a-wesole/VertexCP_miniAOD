@@ -28,8 +28,6 @@
 
 #include "DataFormats/ParticleFlowCandidate/interface/PFCandidate.h"
 
-
-
 #include "Geometry/CommonDetUnit/interface/GlobalTrackingGeometry.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "TrackingTools/TrajectoryState/interface/TrajectoryStateTransform.h"
@@ -69,8 +67,7 @@ D0Fitter::D0Fitter(const edm::ParameterSet &theParameters, edm::ConsumesCollecto
   token_tracks_pf = iC.consumes<std::vector<pat::PackedCandidate>>(theParameters.getParameter<edm::InputTag>("trackRecoAlgorithm"));
   token_vertices = iC.consumes<reco::VertexCollection>(theParameters.getParameter<edm::InputTag>("vertexRecoAlgorithm"));
   token_dedx = iC.consumes<edm::ValueMap<reco::DeDxData>>(edm::InputTag("dedxHarmonic2"));
-  chi2Map_  = iC.consumes< edm::ValueMap< float > >(theParameters.getParameter< edm::InputTag >( "TrackChi2Label" ) );
-
+  chi2Map_ = iC.consumes<edm::ValueMap<float>>(theParameters.getParameter<edm::InputTag>("TrackChi2Label"));
 
   // Second, initialize post-fit cuts
   mPiKCutMin = theParameters.getParameter<double>(string("mPiKCutMin"));
@@ -98,7 +95,6 @@ D0Fitter::D0Fitter(const edm::ParameterSet &theParameters, edm::ConsumesCollecto
   alphaCut = theParameters.getParameter<double>(string("alphaCut"));
   alpha2DCut = theParameters.getParameter<double>(string("alpha2DCut"));
   isWrongSign = theParameters.getParameter<bool>(string("isWrongSign"));
-
 }
 
 D0Fitter::~D0Fitter()
@@ -128,7 +124,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
   Handle<edm::ValueMap<reco::DeDxData>> dEdxHandle;
   edm::Handle<edm::ValueMap<float>> chi2Handle;
 
-
   // Get the tracks, vertices from the event, and get the B-field record
   //  from the EventSetup
   iEvent.getByToken(token_tracks_pf, packedHandle);
@@ -136,7 +131,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
   iEvent.getByToken(token_beamSpot, theBeamSpotHandle);
   iEvent.getByToken(token_dedx, dEdxHandle);
   iEvent.getByToken(chi2Map_, chi2Handle);
-
 
   if (!packedHandle.isValid() || packedHandle->empty())
     return;
@@ -155,13 +149,11 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
   double dzvtx = -999, dxyvtx = -999;
   double dzerror = -999, dxyerror = -999;
   double trk_chi2 = -999;
-  int count = 0;
-
 
   const reco::VertexCollection vtxCollection = *(theVertexHandle.product());
   reco::VertexCollection::const_iterator vtxPrimary = vtxCollection.begin();
 
-  if (vtxCollection.size() > 0 && !vtxPrimary->isFake() )
+  if (vtxCollection.size() > 0 && !vtxPrimary->isFake())
   {
     isVtxPV = 1;
     xVtx = vtxPrimary->x();
@@ -173,7 +165,7 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
   }
   else
   {
-    //cout << "fake vertex" << endl;
+    // cout << "fake vertex" << endl;
     isVtxPV = 0;
     xVtx = theBeamSpotHandle->position().x();
     yVtx = theBeamSpotHandle->position().y();
@@ -186,7 +178,7 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
 
   // Loop over PackedCandidates and apply preselection cuts to identify good D0 daughter tracks
 
-  std::vector<edm::Ptr<pat::PackedCandidate>> input_daughter_tracks; //today change, we are chaging from copy of pat::packedCand to pointers of the real packedCandidates, helpful for memory management and speed
+  std::vector<edm::Ptr<pat::PackedCandidate>> input_daughter_tracks; // today change, we are chaging from copy of pat::packedCand to pointers of the real packedCandidates, helpful for memory management and speed
 
   // --note input_daughter_tracks holds smart pointers edm::Ptr<> to them orginal objects
   for (size_t i = 0; i < packedHandle->size(); ++i) // for all tracks
@@ -202,38 +194,39 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
     if (cand.pt() < tkPtCut || fabs(cand.eta()) > tkEtaCut)
       continue;
 
-    if (chi2Handle.isValid() && !chi2Handle.failedToGet()) {
+    if (chi2Handle.isValid() && !chi2Handle.failedToGet())
+    {
       trk_chi2 = (*chi2Handle)[ptr];
     }
-    else {
+    else
+    {
       trk_chi2 = cand.pseudoTrack().normalizedChi2();
     }
 
     // Optional quality proxies via pseudoTrack and bestTrack
 
     // if  (cand.pseudoTrack().normalizedChi2() < tkChi2Cut &&
-    if  (trk_chi2 < tkChi2Cut &&
+    if (trk_chi2 < tkChi2Cut &&
         cand.pseudoTrack().numberOfValidHits() >= tkNhitsCut &&
         cand.pseudoTrack().ptError() / cand.pt() < tkPtErrCut &&
         cand.pt() > tkPtCut && fabs(cand.eta()) < tkEtaCut)
     {
 
+      // Impact parameter significance cuts
+      // primary cahnges for today!!
+      dzvtx = cand.pseudoTrack().dz(bestvtx);
+      dxyvtx = cand.pseudoTrack().dxy(bestvtx);
+      // double dzerror = sqrt(cand.dzError() * cand.dzError() + zVtxError * zVtxError);
+      // double dxyerror = sqrt(cand.d0Error() * cand.d0Error() + xVtxError * yVtxError);
+      dzerror = TMath::Sqrt(cand.pseudoTrack().dzError() * cand.pseudoTrack().dzError() + zVtxError * zVtxError);
+      dxyerror = TMath::Sqrt(cand.pseudoTrack().dxyError() * cand.pseudoTrack().dxyError() + xVtxError * yVtxError);
+      double dauLongImpactSig = dzvtx / dzerror;
+      double dauTransImpactSig = dxyvtx / dxyerror;
 
-    // Impact parameter significance cuts
-    //primary cahnges for today!!
-    dzvtx = cand.pseudoTrack().dz(bestvtx);
-    dxyvtx = cand.pseudoTrack().dxy(bestvtx);
-    // double dzerror = sqrt(cand.dzError() * cand.dzError() + zVtxError * zVtxError);
-    // double dxyerror = sqrt(cand.d0Error() * cand.d0Error() + xVtxError * yVtxError);
-    dzerror = TMath::Sqrt(cand.pseudoTrack().dzError()*cand.pseudoTrack().dzError() + zVtxError*zVtxError);
-    dxyerror = TMath::Sqrt(cand.pseudoTrack().dxyError()*cand.pseudoTrack().dxyError() + xVtxError*yVtxError);
-    double dauLongImpactSig = dzvtx / dzerror;
-    double dauTransImpactSig = dxyvtx / dxyerror;
-
-    if (fabs(dauTransImpactSig) > dauTransImpactSigCut && fabs(dauLongImpactSig) > dauLongImpactSigCut)
-    input_daughter_tracks.push_back(ptr);
+      if (fabs(dauTransImpactSig) > dauTransImpactSigCut && fabs(dauLongImpactSig) > dauLongImpactSigCut)
+        input_daughter_tracks.push_back(ptr);
     }
-  } //prelimanry loop 
+  } // prelimanry loop
 
   float posCandMass[2] = {piMassD0, kaonMassD0};
   float negCandMass[2] = {kaonMassD0, piMassD0};
@@ -241,7 +234,7 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
   float negCandMass_sigma[2] = {kaonMassD0_sigma, piMassD0_sigma};
   int pdg_id[2] = {421, -421};
   int pos_pdg_id[2] = {211, 321};
-  int neg_pdg_id[2] = {-321,-211};
+  int neg_pdg_id[2] = {-321, -211};
 
   for (unsigned int trdx1 = 0; trdx1 < input_daughter_tracks.size(); trdx1++)
   {
@@ -251,19 +244,21 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
       edm::Ptr<pat::PackedCandidate> dau2 = input_daughter_tracks[trdx2];
 
       pat::PackedCandidate tk1, tk2;
-      //tk1 = *dau1;
-      //tk2 = *dau2;
-      if (dau1->charge() > 0 && dau2->charge() < 0) {
-       tk1 = *dau1;
-       tk2 = *dau2;
+      // tk1 = *dau1;
+      // tk2 = *dau2;
+      if (dau1->charge() > 0 && dau2->charge() < 0)
+      {
+        tk1 = *dau1;
+        tk2 = *dau2;
       }
-      else if (dau1->charge() < 0 && dau2->charge() > 0 ) {
-       tk1 = *dau2;
-       tk2 = *dau1;
+      else if (dau1->charge() < 0 && dau2->charge() > 0)
+      {
+        tk1 = *dau2;
+        tk2 = *dau1;
       }
-      else 
+      else
         continue;
-      //same sign or zero-charge is skipped
+      // same sign or zero-charge is skipped
 
       if (tk1.pt() + tk2.pt() < tkPtSumCut)
         continue;
@@ -298,10 +293,8 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
       if (dca < 0. || dca > tkDCACut)
         continue;
 
-
       if (sqrt(cxPt.x() * cxPt.x() + cxPt.y() * cxPt.y()) > 120. || std::abs(cxPt.z()) > 300.)
         continue;
-
 
       // Assign mass hypotheses for the two combinations: [K-, π+] and [π-, K+]
 
@@ -319,7 +312,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
       }
 
       TLorentzVector sum = p4_kaon + p4_pion;
-      double mass = sum.M();
 
       auto ts1 = tt1.trajectoryStateClosestToPoint(cxPt);
       auto ts2 = tt2.trajectoryStateClosestToPoint(cxPt);
@@ -367,11 +359,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
       for (int i = 0; i < 2; i++)
       {
         std::vector<RefCountedKinematicParticle> d0Particles;
-
-        float massPos = posCandMass[i];
-        float massNeg = negCandMass[i];
-        float sigmaPos = posCandMass_sigma[i];
-        float sigmaNeg = negCandMass_sigma[i];
 
         d0Particles.push_back(pFactory.particle(posTT, posCandMass[i], chi, ndf, posCandMass_sigma[i]));
         d0Particles.push_back(pFactory.particle(negTT, negCandMass[i], chi, ndf, negCandMass_sigma[i]));
@@ -474,8 +461,6 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
             cos(d0Angle3D) < collinCut3D || cos(d0Angle2D) < collinCut2D || d0Angle3D > alphaCut || d0Angle2D > alpha2DCut)
           continue;
 
-
-
         // // 3D IP wrt PV
         AnalyticalImpactPointExtrapolator extrap(magField);
         TrajectoryStateOnSurface tsos =
@@ -515,18 +500,20 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
         double dcaError = sqrt(sigma_x2 * cxPt.x() * cxPt.x() + sigma_y2 * cxPt.y() * cxPt.y()) / dca;
 
         // Create CompositeCandidate
-        pat::CompositeCandidate theD0; //today change, we only need make_unique if theD0s is holding pointers, but it does not it holds actual composite canididates so we do not need
+        pat::CompositeCandidate theD0; // today change, we only need make_unique if theD0s is holding pointers, but it does not it holds actual composite canididates so we do not need
         theD0.setP4(d0P4);
         theD0.setPdgId(pdg_id[i]);
         theD0.addUserFloat("track3DDCA", dca);
         theD0.addUserFloat("track3DDCAErr", dcaError);
+        theD0.addUserFloat("ip3d", cur3DIP.value());
+        theD0.addUserFloat("ip3derr", cur3DIP.error());
 
         // Add the two daughters
 
         tk1.setPdgId(pos_pdg_id[i]);
         tk2.setPdgId(neg_pdg_id[i]);
         theD0.addDaughter(tk1);
-        theD0.addDaughter(tk2); //today change this dereferences the edm::Ptr into a packedCanididate and passes that object into add Daughter 
+        theD0.addDaughter(tk2); // today change this dereferences the edm::Ptr into a packedCanididate and passes that object into add Daughter
 
         // Vertex coordinates & covariance
         theD0.addUserFloat("vtxX", d0Vtx.x());
@@ -554,11 +541,10 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
         }
         if (fabs(theD0.mass() - d0MassD0) < d0MassCut)
         {
-          theD0s.push_back(theD0); //today change we need to remove the * since theD0 is now direct packedcandidiate 
-          //count += 1;
+          theD0s.push_back(theD0); // today change we need to remove the * since theD0 is now direct packedcandidiate
+          // count += 1;
         }
         // if(theD0)  delete theD0;
-
       }
     }
   }

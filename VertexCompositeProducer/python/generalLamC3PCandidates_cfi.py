@@ -3,16 +3,17 @@ import FWCore.ParameterSet.Config as cms
 generalLamC3PCandidates = cms.EDProducer("LamC3PProducer",
                                      
     # InputTag that tells which TrackCollection to use for vertexing
-    trackRecoAlgorithm = cms.InputTag('generalTracks'),
-    vertexRecoAlgorithm = cms.InputTag('offlinePrimaryVertices'),
+    #trackRecoAlgorithm = cms.InputTag('generalTracks'),
+                                         vertexRecoAlgorithm = cms.InputTag('offlineSlimmedPrimaryVertices'),
+                                         trackRecoAlgorithm = cms.InputTag('packedPFCandidates'),
+                                         TrackChi2Label = cms.InputTag("packedPFCandidateTrackChi2"),                               
+                                         trackQualities = cms.vstring('highPurity'),
 
-    trackQualities = cms.vstring('highPurity'),
-                                     
     tkChi2Cut = cms.double(7), #trk Chi2 <
-    tkNhitsCut = cms.int32(5), #trk Nhits >=
+    tkNhitsCut = cms.int32(11), #trk Nhits >=
     tkPtErrCut = cms.double(9999.0), #trk pT err <
-    tkPtCut = cms.double(0.3), #trk pT >
-    tkEtaCut = cms.double(999.0), #trk abs(eta) <
+    tkPtCut = cms.double(1.0), #trk pT >
+    tkEtaCut = cms.double(2.4), #trk abs(eta) <
 #    tkPtSumCut = cms.double(0.0), 
 #    tkEtaDiffCut = cms.double(999.0), 
 
@@ -41,8 +42,11 @@ generalLamC3PCandidates = cms.EDProducer("LamC3PProducer",
     dPt3Cut = cms.double(1.0),
 
     isWrongSign = cms.bool(False),
-
-# MVA 
+    #Nihar
+    dPtCut = cms.double(1.0),
+    dRapidityCut = cms.double(10.0),
+                                         
+    # MVA 
 
     useAnyMVA = cms.bool(False),
     mvaType = cms.string('BDT'), 
