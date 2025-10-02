@@ -113,7 +113,7 @@ process.generalLamC3PCandidatesNew.VtxChiProbCut = cms.double(0.010) #checked
 # produce LamC3P trees
 process.load("VertexCompositeAnalysis.VertexCompositeAnalyzer.lamc3pselector_cff")
 process.load("VertexCompositeAnalysis.VertexCompositeAnalyzer.lamc3panalyzer_tree_cff")
-process.load("VertexCompositeAnalysis.VertexCompositeAnalyzer.lamc3peventinfotree_cff")
+process.load("VertexCompositeAnalysis.VertexCompositeAnalyzer.eventinfotree_cff")
 
 
 
