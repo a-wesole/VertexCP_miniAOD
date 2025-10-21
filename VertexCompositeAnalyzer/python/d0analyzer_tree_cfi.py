@@ -28,4 +28,4 @@ d0ana = cms.EDAnalyzer('VCTreeProducer_D02kpi',
   useAnyMVA = cms.bool(False),
   isSkimMVA = cms.untracked.bool(False),
   MVACollection = cms.InputTag("generalD0CandidatesNew:MVAValues")
-                              )
+)
