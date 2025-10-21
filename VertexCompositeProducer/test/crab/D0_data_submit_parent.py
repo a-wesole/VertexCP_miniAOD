@@ -7,7 +7,7 @@ config.General.transferOutputs = True
 config.General.transferLogs = True
 
 config.JobType.pluginName = 'Analysis'
-config.JobType.psetName = '../run_edm_and_ttree_DATA_wDCVP.py'
+config.JobType.psetName = '../run_edm_and_ttree_DATA_forD0_withParentFile_andZDC_andEP.py'
 #config.JobType.numCores = 2
 #config.JobType.maxMemoryMB = 4000
 config.JobType.allowUndistributedCMSSW = True
