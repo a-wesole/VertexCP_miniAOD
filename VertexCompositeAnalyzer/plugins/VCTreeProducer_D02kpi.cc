@@ -90,262 +90,284 @@ using namespace std;
 
 class VCTreeProducer_D02kpi : public edm::one::EDAnalyzer<>
 {
-	public:
-		explicit VCTreeProducer_D02kpi(const edm::ParameterSet &);
-		~VCTreeProducer_D02kpi();
+public:
+  explicit VCTreeProducer_D02kpi(const edm::ParameterSet &);
+  ~VCTreeProducer_D02kpi();
+  
+  using MVACollection = std::vector<float>;
+  
+  void resize_the_vectors(int newSize);
+  void clear_the_vectors();
+private:
+  virtual void beginJob();
+  virtual void analyze(const edm::Event &, const edm::EventSetup &);
+  virtual void fillRECO(const edm::Event &, const edm::EventSetup &);
+  virtual void endJob();
+  virtual void initTree();
+  void genDecayLength(const uint &, const reco::GenParticle &);
+  
+  // ----------member data ---------------------------
+  
+  edm::Service<TFileService> fs;
+  
+  TTree *VertexCompositeNtuple;
+  bool saveTree_;
+  
+  // options
+  bool doRecoNtuple_;
+  bool dogenntuple_;
+  bool dogenmatching_;
+  bool dogenmatchingtof_;
+  bool hasswap_;
+  bool decayingen_;
+  int PID_;
+  int PID_dau1_;
+  int PID_dau2_;
+  
+  // cut variables
+  double multMax_;
+  double multMin_;
+  double deltaR_; 
+  
+  // tree branches
+  // event info
+  int centrality;
+  int Ntrkoffline;
+  int Npixel;
+  float HFsumETPlus;
+  float HFsumETMinus;
+  float ZDCPlus;
+  float ZDCMinus;
+  float bestvx;
+  float bestvy;
+  float bestvz;
+  float bestvxError;
+  float bestvyError;
+  float bestvzError;
+  float BSx;
+  float BSy;
+  float BSz;
+  float BSxerror;
+  float BSyerror;
+  float BSzerror;
+  int candSize;
+  float ephfpAngle[3];
+  float ephfmAngle[3];
+  float ephfpQ[3];
+  float ephfmQ[3];
+  float ephfpSumW;
+  float ephfmSumW;
+  
+  // Composite candidate info
+  std::vector<float> mva;
+  std::vector<float> mva_xg;
+  std::vector<float> pt;
+  std::vector<float> eta;
+  std::vector<float> phi;
+  std::vector<float> flavor;
+  std::vector<float> y;
+  std::vector<float> mass;
+  std::vector<float> VtxProb;
+  std::vector<float> dlos;
+  std::vector<float> dl;
+  std::vector<float> dlerror;
+  std::vector<float> DlxyBS;
+  std::vector<float> DlxyBSErr;
+  std::vector<float> vtxChi2;
+  std::vector<float> ndf;
+  std::vector<float> agl_abs;
+  std::vector<float> ip3d;
+  std::vector<float> ip3derr;
+  std::vector<float> agl2D_abs;
+  std::vector<float> dlos2D;
+  std::vector<float> dl2D;
+  std::vector<float> dl2Derror;
+  std::vector<bool> isSwap;
+  std::vector<bool> matchGEN;
+  std::vector<int> idmom_reco;
+  std::vector<int> idd1_reco;
+  std::vector<int> idd2_reco;
+  std::vector<float> gen_agl_abs;
+  std::vector<float> gen_agl2D_abs;
+  std::vector<float> gen_dl;
+  std::vector<float> gen_dl2D;
+  std::vector<float> twoTrackDCA;
 
-		using MVACollection = std::vector<float>;
+  // dau info
+  std::vector<float> dzos1;
+  std::vector<float> dzos2;
+  std::vector<float> dxyos1;
+  std::vector<float> dxyos2;
+  std::vector<float> pt1;
+  std::vector<float> pt2;
+  std::vector<float> ptErr1;
+  std::vector<float> ptErr2;
+  std::vector<float> p1;
+  std::vector<float> p2;
+  std::vector<float> Dtrk1Dz1;
+  std::vector<float> Dtrk2Dz1;
+  std::vector<float> Dtrk1Dxy1;
+  std::vector<float> Dtrk2Dxy1;
+  std::vector<float> Dtrk1DzError1;
+  std::vector<float> Dtrk2DzError1;
+  std::vector<float> Dtrk1DxyError1;
+  std::vector<float> Dtrk2DxyError1;
+  std::vector<float> eta1;
+  std::vector<float> eta2;
+  std::vector<float> phi1;
+  std::vector<float> phi2;
+  std::vector<int> charge1;
+  std::vector<int> charge2;
+  std::vector<int> pid1;
+  std::vector<int> pid2;
+  std::vector<float> tof1;
+  std::vector<float> tof2;
+  std::vector<float> H2dedx1;
+  std::vector<float> H2dedx2;
+  std::vector<float> T4dedx1;
+  std::vector<float> T4dedx2;
+  std::vector<float> trkChi1;
+  std::vector<float> trkChi2;
+  
+  // gen info
+  std::vector<float> pt_gen;
+  std::vector<float> eta_gen;
+  std::vector<int> idmom;
+  std::vector<float> y_gen;
+  std::vector<float> phi_gen;
+  std::vector<int> iddau1;
+  std::vector<int> iddau2;
+  
+  bool useAnyMVA_;
+  bool isSkimMVA_;
+  bool isCentrality_;
+  bool doGenNtuple_;
+  bool doGenMatching_;
+  bool decayInGen_;
+  
+  edm::Handle<int> cbin_;
+  
+  // tokens
+  edm::EDGetTokenT<reco::VertexCollection> tok_offlinePV_;
+  edm::EDGetTokenT<std::vector<pat::PackedCandidate>> tok_generalTrk_;
+  edm::EDGetTokenT<pat::CompositeCandidateCollection> patCompositeCandidateCollection_Token_;
+  
+  edm::EDGetTokenT<MVACollection> MVAValues_Token_;
+  edm::EDGetTokenT<MVACollection> MVAValues_Token_2;
+  
+  edm::EDGetTokenT<edm::ValueMap<reco::DeDxData>> Dedx_Token1_;
+  edm::EDGetTokenT<edm::ValueMap<reco::DeDxData>> Dedx_Token2_;
+  edm::EDGetTokenT<reco::GenParticleCollection> tok_genParticle_;
+  
+  edm::EDGetTokenT<int> tok_centBinLabel_;
+  edm::EDGetTokenT<reco::Centrality> tok_centSrc_;
+  
+  edm::EDGetTokenT<reco::EvtPlaneCollection> tok_eventplaneSrc_;
+  
+  edm::EDGetTokenT<reco::BeamSpot> bsLabel_;
 
-		void resize_the_vectors(int newSize);
 
-	private:
-		virtual void beginJob();
-		virtual void analyze(const edm::Event &, const edm::EventSetup &);
-		virtual void fillRECO(const edm::Event &, const edm::EventSetup &);
-		virtual void endJob();
-		virtual void initTree();
-		void genDecayLength(const uint &, const reco::GenParticle &);
-
-		// ----------member data ---------------------------
-
-		edm::Service<TFileService> fs;
-
-		TTree *VertexCompositeNtuple;
-		bool saveTree_;
-
-		// options
-		bool doRecoNtuple_;
-		bool dogenntuple_;
-		bool dogenmatching_;
-		bool dogenmatchingtof_;
-		bool hasswap_;
-		bool decayingen_;
-		int PID_;
-		int PID_dau1_;
-		int PID_dau2_;
-
-		// cut variables
-		double multMax_;
-		double multMin_;
-		double deltaR_; 
-
-		// tree branches
-		// event info
-		int centrality;
-		int Ntrkoffline;
-		int Npixel;
-		float HFsumETPlus;
-		float HFsumETMinus;
-		float ZDCPlus;
-		float ZDCMinus;
-		float bestvx;
-		float bestvy;
-		float bestvz;
-		float bestvxError;
-		float bestvyError;
-		float bestvzError;
-		float BSx;
-		float BSy;
-		float BSz;
-		float BSxerror;
-		float BSyerror;
-		float BSzerror;
-		int candSize;
-		float ephfpAngle[3];
-		float ephfmAngle[3];
-		float ephfpQ[3];
-		float ephfmQ[3];
-		float ephfpSumW;
-		float ephfmSumW;
-
-		// Composite candidate info
-		std::vector<float> mva;
-		std::vector<float> mva_xg;
-		std::vector<float> pt;
-		std::vector<float> eta;
-		std::vector<float> phi;
-		std::vector<float> flavor;
-		std::vector<float> y;
-		std::vector<float> mass;
-		std::vector<float> VtxProb;
-		std::vector<float> dlos;
-		std::vector<float> dl;
-		std::vector<float> dlerror;
-		std::vector<float> DlxyBS;
-		std::vector<float> DlxyBSErr;
-		std::vector<float> vtxChi2;
-		std::vector<float> ndf;
-		std::vector<float> agl_abs;
-		std::vector<float> ip3d;
-		std::vector<float> ip3derr;
-		std::vector<float> agl2D_abs;
-		std::vector<float> dlos2D;
-		std::vector<float> dl2D;
-		std::vector<float> dl2Derror;
-		std::vector<bool> isSwap;
-		std::vector<bool> matchGEN;
-		std::vector<int> idmom_reco;
-		std::vector<int> idd1_reco;
-		std::vector<int> idd2_reco;
-		std::vector<float> gen_agl_abs;
-		std::vector<float> gen_agl2D_abs;
-		std::vector<float> gen_dl;
-		std::vector<float> gen_dl2D;
-		std::vector<float> twoTrackDCA;
-
-		// dau info
-		std::vector<float> dzos1;
-		std::vector<float> dzos2;
-		std::vector<float> dxyos1;
-		std::vector<float> dxyos2;
-		std::vector<float> pt1;
-		std::vector<float> pt2;
-		std::vector<float> ptErr1;
-		std::vector<float> ptErr2;
-		std::vector<float> p1;
-		std::vector<float> p2;
-		std::vector<float> Dtrk1Dz1;
-		std::vector<float> Dtrk2Dz1;
-		std::vector<float> Dtrk1Dxy1;
-		std::vector<float> Dtrk2Dxy1;
-		std::vector<float> Dtrk1DzError1;
-		std::vector<float> Dtrk2DzError1;
-		std::vector<float> Dtrk1DxyError1;
-		std::vector<float> Dtrk2DxyError1;
-		std::vector<float> eta1;
-		std::vector<float> eta2;
-		std::vector<float> phi1;
-		std::vector<float> phi2;
-		std::vector<int> charge1;
-		std::vector<int> charge2;
-		std::vector<int> pid1;
-		std::vector<int> pid2;
-		std::vector<float> tof1;
-		std::vector<float> tof2;
-		std::vector<float> H2dedx1;
-		std::vector<float> H2dedx2;
-		std::vector<float> T4dedx1;
-		std::vector<float> T4dedx2;
-		std::vector<float> trkChi1;
-		std::vector<float> trkChi2;
-
-		// gen info
-		std::vector<float> pt_gen;
-		std::vector<float> eta_gen;
-		std::vector<int> idmom;
-		std::vector<float> y_gen;
-		std::vector<float> phi_gen;
-		std::vector<int> iddau1;
-		std::vector<int> iddau2;
-
-		bool useAnyMVA_;
-		bool isSkimMVA_;
-		bool isCentrality_;
-		bool doGenNtuple_;
-		bool doGenMatching_;
-		bool decayInGen_;
-
-		edm::Handle<int> cbin_;
-
-		// tokens
-		edm::EDGetTokenT<reco::VertexCollection> tok_offlinePV_;
-		edm::EDGetTokenT<std::vector<pat::PackedCandidate>> tok_generalTrk_;
-		edm::EDGetTokenT<pat::CompositeCandidateCollection> patCompositeCandidateCollection_Token_;
-
-		edm::EDGetTokenT<MVACollection> MVAValues_Token_;
-		edm::EDGetTokenT<MVACollection> MVAValues_Token_2;
-
-		edm::EDGetTokenT<edm::ValueMap<reco::DeDxData>> Dedx_Token1_;
-		edm::EDGetTokenT<edm::ValueMap<reco::DeDxData>> Dedx_Token2_;
-		edm::EDGetTokenT<reco::GenParticleCollection> tok_genParticle_;
-
-		edm::EDGetTokenT<int> tok_centBinLabel_;
-		edm::EDGetTokenT<reco::Centrality> tok_centSrc_;
-
-		edm::EDGetTokenT<reco::EvtPlaneCollection> tok_eventplaneSrc_;
-
-		edm::EDGetTokenT<reco::BeamSpot> bsLabel_;
-};
+  //Template function
+  template <typename Func>
+  void apply_to_vectors(Func f)
+  {
+    // Pass each vector to the function 'f'
+    f(mva);
+    f(mva_xg);
+    f(pt);
+    f(eta);
+    f(phi);
+    f(flavor);
+    f(y);
+    f(mass);
+    f(VtxProb);
+    f(dlos);
+    f(dl);
+    f(dlerror);
+    f(DlxyBS);
+    f(DlxyBSErr);
+    f(vtxChi2);
+    f(ndf);
+    f(agl_abs);
+    f(ip3d);
+    f(ip3derr);
+    f(agl2D_abs);
+    f(dlos2D);
+    f(dl2D);
+    f(dl2Derror);
+    f(isSwap);
+    f(matchGEN);
+    f(idmom_reco);
+    f(idd1_reco);
+    f(idd2_reco);
+    f(gen_agl_abs);
+    f(gen_agl2D_abs);
+    f(gen_dl);
+    f(gen_dl2D);
+    f(twoTrackDCA);
+    
+    f(dzos1);
+    f(dzos2);
+    f(dxyos1);
+    f(dxyos2);
+    f(pt1);
+    f(pt2);
+    f(ptErr1);
+    f(ptErr2);
+    f(p1);
+    f(p2);
+    f(Dtrk1Dz1);
+    f(Dtrk2Dz1);
+    f(Dtrk1Dxy1);
+    f(Dtrk2Dxy1);
+    f(Dtrk1DzError1);
+    f(Dtrk2DzError1);
+    f(Dtrk1DxyError1);
+    f(Dtrk2DxyError1);
+    f(eta1);
+    f(eta2);
+    f(phi1);
+    f(phi2);
+    f(charge1);
+    f(charge2);
+    f(pid1);
+    f(pid2);
+    f(tof1);
+    f(tof2);
+    f(H2dedx1);
+    f(H2dedx2);
+    f(T4dedx1);
+    f(T4dedx2);
+    f(trkChi1);
+    f(trkChi2);
+    
+    f(pt_gen);
+    f(eta_gen);
+    f(idmom);
+    f(y_gen);
+    f(phi_gen);
+    f(iddau1);
+    f(iddau2);
+  }
+  
+};//--EDAnalyzer
 
 void VCTreeProducer_D02kpi::resize_the_vectors(int newSize)
 {
-	mva.resize(newSize);
-	mva_xg.resize(newSize);
-	pt.resize(newSize);
-	eta.resize(newSize);
-	phi.resize(newSize);
-	flavor.resize(newSize);
-	y.resize(newSize);
-	mass.resize(newSize);
-	VtxProb.resize(newSize);
-	dlos.resize(newSize);
-	dl.resize(newSize);
-	dlerror.resize(newSize);
-	DlxyBS.resize(newSize);
-	DlxyBSErr.resize(newSize);
-	vtxChi2.resize(newSize);
-	ndf.resize(newSize);
-	agl_abs.resize(newSize);
-	ip3d.resize(newSize);
-	ip3derr.resize(newSize);
-	agl2D_abs.resize(newSize);
-	dlos2D.resize(newSize);
-	dl2D.resize(newSize);
-	dl2Derror.resize(newSize);
-	isSwap.resize(newSize);
-	matchGEN.resize(newSize);
-	idmom_reco.resize(newSize);
-	idd1_reco.resize(newSize);
-	idd2_reco.resize(newSize);
-	gen_agl_abs.resize(newSize);
-	gen_agl2D_abs.resize(newSize);
-	gen_dl.resize(newSize);
-	gen_dl2D.resize(newSize);
-	twoTrackDCA.resize(newSize);
-
-	dzos1.resize(newSize);
-	dzos2.resize(newSize);
-	dxyos1.resize(newSize);
-	dxyos2.resize(newSize);
-	pt1.resize(newSize);
-	pt2.resize(newSize);
-	ptErr1.resize(newSize);
-	ptErr2.resize(newSize);
-	p1.resize(newSize);
-	p2.resize(newSize);
-	Dtrk1Dz1.resize(newSize);
-	Dtrk2Dz1.resize(newSize);
-	Dtrk1Dxy1.resize(newSize);
-	Dtrk2Dxy1.resize(newSize);
-	Dtrk1DzError1.resize(newSize);
-	Dtrk2DzError1.resize(newSize);
-	Dtrk1DxyError1.resize(newSize);
-	Dtrk2DxyError1.resize(newSize);
-	eta1.resize(newSize);
-	eta2.resize(newSize);
-	phi1.resize(newSize);
-	phi2.resize(newSize);
-	charge1.resize(newSize);
-	charge2.resize(newSize);
-	pid1.resize(newSize);
-	pid2.resize(newSize);
-	tof1.resize(newSize);
-	tof2.resize(newSize);
-	H2dedx1.resize(newSize);
-	H2dedx2.resize(newSize);
-	T4dedx1.resize(newSize);
-	T4dedx2.resize(newSize);
-	trkChi1.resize(newSize);
-	trkChi2.resize(newSize);
-
-	pt_gen.resize(newSize);
-	eta_gen.resize(newSize);
-	idmom.resize(newSize);
-	y_gen.resize(newSize);
-	phi_gen.resize(newSize);
-	iddau1.resize(newSize);
-	iddau2.resize(newSize);
+    apply_to_vectors([newSize](auto& vec){
+		       vec.resize(newSize);
+		     });
 }
+
+void VCTreeProducer_D02kpi::clear_the_vectors()
+{
+  apply_to_vectors([](auto& vec) {
+		     vec.clear();
+		   });
+}
+
+
+
 
 VCTreeProducer_D02kpi::VCTreeProducer_D02kpi(const edm::ParameterSet &iConfig)
 {
@@ -418,7 +440,8 @@ void VCTreeProducer_D02kpi::analyze(const edm::Event &iEvent, const edm::EventSe
 	}
 
 	if (saveTree_)
-		VertexCompositeNtuple->Fill();
+	  VertexCompositeNtuple->Fill();
+
 }
 
 void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventSetup &iSetup)
@@ -439,16 +462,29 @@ void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventS
 
 	edm::Handle<pat::CompositeCandidateCollection> D0candidates;
 	iEvent.getByToken(patCompositeCandidateCollection_Token_, D0candidates);
-	const pat::CompositeCandidateCollection *D0candidates_ = D0candidates.product();
+
+	//This is done to handle candSize=0 events!
+    const pat::CompositeCandidateCollection* D0candidates_ = nullptr;
+    if (D0candidates.isValid()) {
+        D0candidates_ = D0candidates.product();
+	candSize = D0candidates_->size();
+    }
+    else {
+        edm::LogWarning("MissingProduct")
+            << "D0 collection not found in this event!"
+            << " (Run : Lumi : Event )=" <<"("<< iEvent.id().run()<<","<<iEvent.luminosityBlock()<<","<<iEvent.id().event()<<")"<<endl;
+	candSize=0;
+    }
 
 	edm::Handle<MVACollection> mvavalues;
 	edm::Handle<MVACollection> mvavalues_xg;
-	if (useAnyMVA_)
+	if (useAnyMVA_ && D0candidates_)
 	{
-		iEvent.getByToken(MVAValues_Token_, mvavalues);
-		iEvent.getByToken(MVAValues_Token_2, mvavalues_xg);
-		assert((*mvavalues).size() == D0candidates->size());
-		assert((*mvavalues_xg).size() == D0candidates->size());
+	  iEvent.getByToken(MVAValues_Token_, mvavalues);
+	  iEvent.getByToken(MVAValues_Token_2, mvavalues_xg);
+	  assert((*mvavalues).size() == D0candidates->size());
+	  assert((*mvavalues_xg).size() == D0candidates->size());
+
 	}
 
 	edm::Handle<reco::GenParticleCollection> genpars;
@@ -467,18 +503,18 @@ void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventS
 	centrality = -1;
 	if (isCentrality_)
 	{
-		edm::Handle<reco::Centrality> cent;
-		iEvent.getByToken(tok_centSrc_, cent);
-		HFsumETPlus = (cent.isValid() ? cent->EtHFtowerSumPlus() : -1.);
-		HFsumETMinus = (cent.isValid() ? cent->EtHFtowerSumMinus() : -1.);
-		Npixel = (cent.isValid() ? cent->multiplicityPixel() : -1);
-		ZDCPlus = (cent.isValid() ? cent->zdcSumPlus() : -1.);
-		ZDCMinus = (cent.isValid() ? cent->zdcSumMinus() : -1.);
-		Ntrkoffline = (cent.isValid() ? cent->Ntracks() : -1);
-
-		edm::Handle<int> cbin;
-		iEvent.getByToken(tok_centBinLabel_, cbin);
-		centrality = (cbin.isValid() ? *cbin : -1);
+	  edm::Handle<reco::Centrality> cent;
+	  iEvent.getByToken(tok_centSrc_, cent);
+	  HFsumETPlus = (cent.isValid() ? cent->EtHFtowerSumPlus() : -1.);
+	  HFsumETMinus = (cent.isValid() ? cent->EtHFtowerSumMinus() : -1.);
+	  Npixel = (cent.isValid() ? cent->multiplicityPixel() : -1);
+	  ZDCPlus = (cent.isValid() ? cent->zdcSumPlus() : -1.);
+	  ZDCMinus = (cent.isValid() ? cent->zdcSumMinus() : -1.);
+	  Ntrkoffline = (cent.isValid() ? cent->Ntracks() : -1);
+	  
+	  edm::Handle<int> cbin;
+	  iEvent.getByToken(tok_centBinLabel_, cbin);
+	  centrality = (cbin.isValid() ? *cbin : -1);
 	}
 
 
@@ -522,20 +558,24 @@ void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventS
 	BSdydz = beamSpot.dydz();
 
 	Ntrkoffline = 0;
-#ifdef DEBUG
+
+	/*#ifdef DEBUG
 	cout << "Calculated offline Ntrk's" << endl;
-#endif
-
-#ifdef DEBUG
+	#endif
+	
+	#ifdef DEBUG
 	cout << "Gen matching done" << endl;
-#endif
+	#endif
+	*/
 
-	candSize = D0candidates_->size();
+	//candSize = D0candidates_->size();
+	cout<<"CHECK-4"<<endl;
 	resize_the_vectors(candSize);
 
-	for (unsigned it = 0; it < D0candidates_->size(); ++it)
-	{
-
+	if (D0candidates_){
+	  for (unsigned it = 0; it < D0candidates_->size(); ++it)
+	    {
+	      
 		const pat::CompositeCandidate &trk = (*D0candidates_)[it];
 		double secvz = -999.9, secvx = -999.9, secvy = -999.9;
 		secvz = trk.userFloat("vtxZ");
@@ -580,6 +620,9 @@ void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventS
 		double py = trk.py();
 		double pz = trk.pz();
 		mass[it] = trk.mass();
+
+		ip3d[it] = trk.userFloat("ip3d");
+		ip3derr[it] = trk.userFloat("ip3derr");
 
 		const reco::Candidate *cand1 = trk.daughter(0);
 		const pat::PackedCandidate *reco_d1 = dynamic_cast<const pat::PackedCandidate *>(cand1);
@@ -756,9 +799,9 @@ void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventS
 		TVector3 secvec2D(px, py, 0);
 
 		agl_abs[it] = secvec.Angle(ptosvec);
-
 		agl2D_abs[it] = secvec2D.Angle(ptosvec2D);
 
+				
 		float r2lxyBS = (secvx - BSx - (secvz - BSz) * BSdxdz) * (secvx - BSx - (secvz - BSz) * BSdxdz) + (secvy - BSy - (secvz - BSz) * BSdydz) * (secvy - BSy - (secvz - BSz) * BSdydz);
 		xlxyBS = secvx - BSx - (secvz - BSz) * BSdxdz;
 		ylxyBS = secvy - BSy - (secvz - BSz) * BSdydz;
@@ -849,10 +892,13 @@ void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventS
 #ifdef DEBUG
 		cout << "Done reco single iter" << endl;
 #endif
-	}
+	    }//it candidate loop
+	}//if D0cand_
 #ifdef DEBUG
 	cout << "Fill reco done" << endl;
 #endif
+	
+	
 }
 
 // ------------ method called once each job just before starting event
