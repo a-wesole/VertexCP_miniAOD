@@ -28,7 +28,7 @@ process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(100))
 process.TFileService = cms.Service("TFileService",
-    fileName =cms.string('TTree.root'))
+    fileName =cms.string('TTree_new_Oct22.root'))
 
 
 # Define the input source
@@ -49,13 +49,14 @@ process.source = cms.Source("PoolSource",
                                 '/store/hidata/HIRun2023A/HIPhysicsRawPrime15/MINIAOD/PromptReco-v2/000/374/803/00000/9e7a82d7-b8a6-43f0-8a51-91c9e5c60422.root'
                             ),
 
+
                             #firstRun = cms.untracked.uint32(1)
                             #run: 374803 lumi: 522 event: 453201212
                             #lumisToProcess = cms.untracked.VLuminosityBlockRange(
                             #'374803:522'  # run:lumiFirst - run:lumiLast
                             #)
                             
-                            #eventsToProcess = cms.untracked.VEventRange('375164:32:20741185')  # Replace with your specific run, lumi, event numbers
+                            
                             #eventsToProcess = cms.untracked.VEventRange('374803:522:453201212')  # Replace with your specific run, lumi, event numbers    
 )
 
@@ -184,12 +185,13 @@ process.d0Analyzer.doGenMatching = cms.untracked.bool(False) #MConly
 process.d0Analyzer.useAnyMVA = cms.bool(True); #only set true if you are assigning BDT values +++ change  
 process.d0Analyzer.MVACollection = cms.InputTag("d0Selector:MVAValuesNewD0:ANASKIM")
 process.d0Analyzer.MVACollection2 = cms.InputTag("d0Selector:MVAValuesNewD02:ANASKIM")
+process.d0Analyzer.ip_tree = cms.bool(True)
 
 process.d0ana_seq = cms.Sequence(process.d0Analyzer)
 
 process.eventinfoana = process.eventinfoana.clone()
 process.eventinfoana.stageL1Trigger = cms.uint32(2)
-process.eventinfoana.VertexCollection = cms.untracked.InputTag("offlineSlimmedPrimaryVertices")
+process.eventinfoana.VertexCollection = cms.InputTag("offlineSlimmedPrimaryVertices")
 
 process.EventInfoAnalysis = cms.Sequence(process.eventinfoana)
 

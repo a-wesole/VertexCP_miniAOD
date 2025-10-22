@@ -23,12 +23,12 @@ process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 132X, data")
 
 # Limit the output messages
 process.load('FWCore.MessageService.MessageLogger_cfi')
-process.MessageLogger.cerr.FwkReport.reportEvery = 5000
+process.MessageLogger.cerr.FwkReport.reportEvery = 1
 process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
-process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
+process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(100))
 process.TFileService = cms.Service("TFileService",
-    fileName =cms.string('TTree_D0_data.root'))
+    fileName =cms.string('TTree_D0_data_Oct22.root'))
 
 
 # Define the input source
@@ -36,7 +36,7 @@ process.TFileService = cms.Service("TFileService",
 process.source = cms.Source("PoolSource",
     duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
     fileNames = cms.untracked.vstring(
-       'root://xrootd-cms.infn.it//store/hidata/HIRun2023A/HIPhysicsRawPrime0/MINIAOD/PromptReco-v2/000/374/951/00000/717c1c52-b5a8-4864-89c1-bde6e4184087.root'
+       '/store/hidata/HIRun2023A/HIPhysicsRawPrime15/MINIAOD/PromptReco-v2/000/374/803/00000/3a60ae33-ff73-4889-9a42-6ab394143524.root'
     ),
         #lumisToProcess = cms.untracked.VLuminosityBlockRange(
         #'374951:30-374951:30'  # run:lumiFirst - run:lumiLast
@@ -65,8 +65,12 @@ process.centralityBin.centralityVariable = cms.string("HFtowers")
 # =============== Import Sequences =====================
 
 # Add PbPb collision event selection
-process.load('VertexCompositeAnalysis.VertexCompositeProducer.collisionEventSelection_cff')
-process.load('VertexCompositeAnalysis.VertexCompositeProducer.hffilter_cfi')
+process.load('HeavyIonsAnalysis.EventAnalysis.skimanalysis_cfi')
+process.load('HeavyIonsAnalysis.EventAnalysis.collisionEventSelection_cff')
+process.load('HeavyIonsAnalysis.EventAnalysis.hffilter_cfi')
+process.load('HeavyIonsAnalysis.EventAnalysis.clusterCompatibilityFilter_cfi')
+process.load('HeavyIonsAnalysis.EventAnalysis.hievtanalyzer_data_cfi')
+process.load('HeavyIonsAnalysis.EventAnalysis.hltanalysis_cfi')
 
 from HLTrigger.HLTfilters.hltHighLevel_cfi import hltHighLevel
 process.hltFilter = hltHighLevel.clone(
@@ -82,7 +86,38 @@ process.event_filters = cms.Sequence(
     process.phfCoincFilter2Th4
 )
 
-from VertexCompositeAnalysis.VertexCompositeProducer.PATAlgos_cff import changeToMiniAOD
+process.load("RecoHI.HiEvtPlaneAlgos.HiEvtPlane_cfi")
+process.load("RecoHI.HiEvtPlaneAlgos.hiEvtPlaneFlat_cfi")
+
+process.hiEvtPlane.trackTag = cms.InputTag("packedPFCandidates")
+process.hiEvtPlane.vertexTag = cms.InputTag("offlineSlimmedPrimaryVertices")
+process.hiEvtPlaneFlat.vertexTag = cms.InputTag("offlineSlimmedPrimaryVertices")
+
+process.hiEvtPlane.loadDB = cms.bool(True)
+process.hiEvtPlaneFlat.centralityVariable=process.hiEvtPlane.centralityVariable
+process.hiEvtPlaneFlat.vertexTag=process.hiEvtPlane.vertexTag
+process.hiEvtPlaneFlat.flatminvtx=process.hiEvtPlane.flatminvtx
+process.hiEvtPlaneFlat.flatnvtxbins=process.hiEvtPlane.flatnvtxbins
+process.hiEvtPlaneFlat.flatdelvtx=process.hiEvtPlane.flatdelvtx
+process.hiEvtPlaneFlat.FlatOrder=process.hiEvtPlane.FlatOrder
+process.hiEvtPlaneFlat.CentBinCompression=process.hiEvtPlane.CentBinCompression
+process.hiEvtPlaneFlat.caloCentRef=process.hiEvtPlane.caloCentRef
+process.hiEvtPlaneFlat.caloCentRefWidth=process.hiEvtPlane.caloCentRefWidth
+
+process.CondDB.connect = "sqlite_file:HeavyIonRPRcd_PbPb2023_offline.db"
+process.PoolDBESSource = cms.ESSource("PoolDBESSource",
+                                      process.CondDB,
+                                      toGet = cms.VPSet(cms.PSet(record = cms.string('HeavyIonRPRcd'),
+                                                                 tag = cms.string('HeavyIonRPRcd')
+                                      )
+                                    )
+)
+process.es_prefer_flatparms = cms.ESPrefer('PoolDBESSource','')
+process.evtplane_seq = cms.Sequence(process.hiEvtPlane * process.hiEvtPlaneFlat)
+
+
+
+#from VertexCompositeAnalysis.VertexCompositeProducer.PATAlgos_cff import changeToMiniAOD
 
 
 VertexCollection_PAT = "offlineSlimmedPrimaryVertices"
@@ -155,26 +190,31 @@ process.d0Analyzer.doGenMatching = cms.untracked.bool(False) #MConly
 process.d0Analyzer.useAnyMVA = cms.bool(True); #only set true if you are assigning BDT values +++ change  
 process.d0Analyzer.MVACollection = cms.InputTag("d0Selector:MVAValuesNewD0:ANASKIM")
 process.d0Analyzer.MVACollection2 = cms.InputTag("d0Selector:MVAValuesNewD02:ANASKIM")
-
+process.d0Analyzer.ip_tree = cms.bool(False)
 
 process.d0ana_seq2 = cms.Sequence(process.d0Selector * process.d0Analyzer)
 
-#eventinfoana must be in EndPath, and process.eventinfoana.selectEvents must be the name of eventFilter_HM Path
-process.eventinfoana.selectEvents = cms.untracked.string('EventSelections')
-process.eventinfoana.stageL1Trigger = cms.uint32(2)
 
-process.EventSelections = cms.Path(
+process.eventinfoana = process.eventinfoana.clone()
+process.eventinfoana.stageL1Trigger = cms.uint32(2)
+process.eventinfoana.VertexCollection = cms.InputTag("offlineSlimmedPrimaryVertices")
+
+process.EventInfoAnalysis = cms.Sequence(process.eventinfoana)
+
+process.Ana_seq = cms.Path(
     process.centralityBin *
     process.eventFilter_HLT *
     process.event_filters * 
+    process.evtplane_seq *
     process.generalD0CandidatesNew *
-    process.d0ana_seq2 
+    process.d0ana_seq2 *
+    process.EventInfoAnalysis
 )
 
-process.EventInfoAnalysis = cms.EndPath(process.eventinfoana)
-process.schedule = cms.Schedule(process.EventSelections, process.EventInfoAnalysis)
+process.schedule = cms.Schedule(process.Ana_seq)
 
-changeToMiniAOD(process)
+
+#changeToMiniAOD(process)
 process.options.numberOfThreads = 2
 
 process.output = cms.OutputModule("PoolOutputModule",

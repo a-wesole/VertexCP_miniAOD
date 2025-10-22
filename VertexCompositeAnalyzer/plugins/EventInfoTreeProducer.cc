@@ -48,6 +48,7 @@
 #include "TrackingTools/PatternTools/interface/TSCBLBuilderNoMaterial.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 
+
 //
 // constants, enums and typedefs
 //
@@ -130,21 +131,7 @@ private:
   edm::EDGetTokenT<int> tok_centBinLabel_;
   edm::EDGetTokenT<reco::Centrality> tok_centSrc_;
   edm::EDGetTokenT<reco::EvtPlaneCollection> tok_eventplaneSrc_;
-  edm::EDGetTokenT<reco::TrackCollection> tok_tracks_;
 
-  //trigger
-  const std::vector<std::string> triggerNames_;
-  edm::EDGetTokenT<edm::TriggerResults> tok_triggerResults_;
-  const ushort NTRG_;
-
-  //event selection
-  const std::vector<std::string> eventFilters_;
-  edm::EDGetTokenT<edm::TriggerResults> tok_filterResults_;
-  const ushort NSEL_;
-  const std::string selectEvents_;
-
-  //prescale provider
-  HLTPrescaleProvider hltPrescaleProvider_;
 };
 
 //
@@ -155,18 +142,13 @@ private:
 // constructors and destructor
 //
 
-EventInfoTreeProducer::EventInfoTreeProducer(const edm::ParameterSet& iConfig) :
-  triggerNames_(iConfig.getUntrackedParameter<std::vector<std::string> >("triggerPathNames")),
-  NTRG_(triggerNames_.size()>MAXTRG ? MAXTRG : triggerNames_.size()),
-  eventFilters_(iConfig.getUntrackedParameter<std::vector<std::string> >("eventFilterNames")),
-  NSEL_(eventFilters_.size()>MAXSEL ? MAXSEL : eventFilters_.size()),
-  selectEvents_(iConfig.getUntrackedParameter<std::string>("selectEvents")),
-  hltPrescaleProvider_(iConfig, consumesCollector(), *this)
+
+EventInfoTreeProducer::EventInfoTreeProducer(const edm::ParameterSet& iConfig)
 {
   //input tokens
-  tok_offlineBS_ = consumes<reco::BeamSpot>(iConfig.getUntrackedParameter<edm::InputTag>("beamSpotSrc"));
-  tok_offlinePV_ = consumes<reco::VertexCollection>(iConfig.getUntrackedParameter<edm::InputTag>("VertexCollection"));
-  tok_tracks_ = consumes<reco::TrackCollection>(edm::InputTag(iConfig.getUntrackedParameter<edm::InputTag>("TrackCollection")));
+  tok_offlineBS_ = consumes<reco::BeamSpot>(iConfig.getParameter<edm::InputTag>("beamSpotSrc"));
+  tok_offlinePV_ = consumes<reco::VertexCollection>(iConfig.getParameter<edm::InputTag>("VertexCollection"));
+
 
   isCentrality_ = (iConfig.exists("isCentrality") ? iConfig.getParameter<bool>("isCentrality") : false);
 
@@ -179,8 +161,6 @@ EventInfoTreeProducer::EventInfoTreeProducer(const edm::ParameterSet& iConfig) :
   isEventPlane_ = (iConfig.exists("isEventPlane") ? iConfig.getParameter<bool>("isEventPlane") : false);
   if(isEventPlane_) tok_eventplaneSrc_ = consumes<reco::EvtPlaneCollection>(iConfig.getParameter<edm::InputTag>("eventplaneSrc"));
 
-  tok_triggerResults_ = consumes<edm::TriggerResults>(iConfig.getUntrackedParameter<edm::InputTag>("TriggerResultCollection"));
-  tok_filterResults_ = consumes<edm::TriggerResults>(iConfig.getUntrackedParameter<edm::InputTag>("FilterResultCollection"));
 }
 
 
@@ -201,15 +181,6 @@ EventInfoTreeProducer::~EventInfoTreeProducer()
 void
 EventInfoTreeProducer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-  //check event
-  /*if(selectEvents_!="")
-  {
-    edm::Handle<edm::TriggerResults> filterResults;
-    iEvent.getByToken(tok_filterResults_, filterResults);
-    const auto& filterNames = iEvent.triggerNames(*filterResults);
-    const auto& index = filterNames.triggerIndex(selectEvents_);
-    if(index<filterNames.size() && filterResults->wasrun(index) && !filterResults->accept(index)) return;
-    }*/
   fillRECO(iEvent, iSetup);
   EventInfoNtuple->Fill();
 }
@@ -253,15 +224,7 @@ EventInfoTreeProducer::fillRECO(const edm::Event& iEvent, const edm::EventSetup&
     centrality = (cbin.isValid() ? *cbin : -1);
   }
   
-  NtrkHP = -1;
-  edm::Handle<reco::TrackCollection> trackColl;
-  iEvent.getByToken(tok_tracks_, trackColl);
-  if(trackColl.isValid()) 
-  {
-    NtrkHP = 0;
-    for (const auto& trk : *trackColl) { if (trk.quality(reco::TrackBase::highPurity)) NtrkHP++; }
-  }
-
+ 
   if(isEventPlane_)
   {
     edm::Handle<reco::EvtPlaneCollection> eventplanes;
@@ -389,10 +352,11 @@ EventInfoTreeProducer::initTree()
 void 
 EventInfoTreeProducer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup)
 {
-  bool changed = true;
+  /*bool changed = true;
   EDConsumerBase::Labels triggerResultsLabel;
   EDConsumerBase::labelsForToken(tok_triggerResults_, triggerResultsLabel);
   hltPrescaleProvider_.init(iRun, iSetup, triggerResultsLabel.process, changed);
+  */
 }
 
 

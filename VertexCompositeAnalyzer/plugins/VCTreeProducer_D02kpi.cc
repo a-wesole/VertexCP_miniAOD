@@ -79,6 +79,26 @@
 #include "DataFormats/PatCandidates/interface/PackedGenParticle.h"
 #include "DataFormats/PatCandidates/interface/GenericParticle.h"
 
+
+#include "TrackingTools/TransientTrack/interface/TransientTrackBuilder.h"
+#include "TrackingTools/Records/interface/TransientTrackRecord.h"
+#include "MagneticField/Engine/interface/MagneticField.h"
+#include "MagneticField/Records/interface/IdealMagneticFieldRecord.h"
+#include "TrackingTools/PatternTools/interface/TrajectoryExtrapolatorToLine.h"
+#include "TrackingTools/TrajectoryState/interface/TrajectoryStateOnSurface.h"
+#include "RecoVertex/KinematicFit/interface/KinematicParticleVertexFitter.h"
+#include "RecoVertex/KinematicFitPrimitives/interface/KinematicParticleFactoryFromTransientTrack.h"
+#include "RecoVertex/KinematicFitPrimitives/interface/RefCountedKinematicParticle.h"
+#include "RecoVertex/KinematicFitPrimitives/interface/RefCountedKinematicTree.h"
+#include "RecoVertex/VertexTools/interface/VertexDistance3D.h"
+#include "DataFormats/VertexReco/interface/Vertex.h"
+#include "DataFormats/VertexReco/interface/VertexFwd.h"
+#include "RecoVertex/VertexPrimitives/interface/ConvertToFromReco.h"
+#include "RecoVertex/VertexPrimitives/interface/VertexState.h"
+#include "TrackingTools/GeomPropagators/interface/Propagator.h"
+#include "TrackingTools/MaterialEffects/interface/PropagatorWithMaterial.h"
+#include "TrackingTools/GeomPropagators/interface/AnalyticalImpactPointExtrapolator.h"
+
 #include <Math/Functions.h>
 #include <Math/SVector.h>   
 #include <Math/SMatrix.h>
@@ -263,8 +283,24 @@ private:
   edm::EDGetTokenT<reco::Centrality> tok_centSrc_;
   
   edm::EDGetTokenT<reco::EvtPlaneCollection> tok_eventplaneSrc_;
-  
   edm::EDGetTokenT<reco::BeamSpot> bsLabel_;
+
+  //For ip3d and ip3derr
+  bool ip_tree_;
+  std::unique_ptr<KinematicParticleVertexFitter> fitter_;
+  const edm::ESGetToken<MagneticField, IdealMagneticFieldRecord> bFieldToken_;
+  const edm::ESGetToken<TransientTrackBuilder, TransientTrackRecord> ttBuilderToken_;
+
+  
+  void calculate3DIP(
+		     const pat::CompositeCandidate& d0,
+		     const reco::Vertex& pv,
+		     const TransientTrackBuilder& ttBuilder,
+		     const MagneticField* magField,
+		     float& ip3d,     
+		     float& ip3derr   
+		     );
+
 
 
   //Template function
@@ -349,6 +385,9 @@ private:
     f(iddau1);
     f(iddau2);
   }
+
+
+  
   
 };//--EDAnalyzer
 
@@ -367,9 +406,82 @@ void VCTreeProducer_D02kpi::clear_the_vectors()
 }
 
 
+//+++++++++++++++++++++++++++++++++++++++
+void VCTreeProducer_D02kpi::calculate3DIP(
+    const pat::CompositeCandidate& d0,
+    const reco::Vertex& pv,
+    const TransientTrackBuilder& ttBuilder,
+    const MagneticField* magField,
+    float& ip3d,    
+    float& ip3derr  
+) {
+
+  KinematicParticleFactoryFromTransientTrack pFactory;
+  VertexDistance3D a3d;
+
+  const reco::Candidate* K_cand = d0.daughter(0);
+  const reco::Candidate* pi_cand = d0.daughter(1);
+
+  reco::TransientTrack K_transTrack;
+  reco::TransientTrack pi_transTrack;
+  try {
+    K_transTrack = ttBuilder.build(K_cand->bestTrack());
+    pi_transTrack = ttBuilder.build(pi_cand->bestTrack());
+  }
+  catch (const std::exception& e) {
+    return; 
+  }
 
 
-VCTreeProducer_D02kpi::VCTreeProducer_D02kpi(const edm::ParameterSet &iConfig)
+  std::vector<RefCountedKinematicParticle> d0Particles;
+  float K_mass = K_cand->mass();
+  float pi_mass = pi_cand->mass();
+  float K_sigma = 3.5E-7f; // Non-zero mass sigma
+  float pi_sigma = 1.6E-5f;
+
+  d0Particles.push_back(pFactory.particle(K_transTrack, K_mass, 0, 0, K_sigma));
+  d0Particles.push_back(pFactory.particle(pi_transTrack, pi_mass, 0, 0, pi_sigma));
+
+  RefCountedKinematicTree d0Vertex = fitter_->fit(d0Particles);
+  if (!d0Vertex->isValid()) {
+    return; 
+  }
+  d0Vertex->movePointerToTheTop();
+  RefCountedKinematicParticle d0Cand = d0Vertex->currentParticle();
+  if (!d0Cand->currentState().isValid()) {
+    return; 
+  }
+
+  VertexState primaryVertexState(RecoVertex::convertPos(pv.position()),
+                                 RecoVertex::convertError(pv.error()));
+
+  AnalyticalImpactPointExtrapolator extrap(magField);
+  
+  TrajectoryStateOnSurface tsos =
+      extrap.extrapolate(d0Cand->currentState().freeTrajectoryState(),
+                         RecoVertex::convertPos(pv.position()));
+  
+  if (!tsos.isValid()) {
+    return; 
+  }
+
+
+  VertexState extrapolatedVertexState(tsos.globalPosition(),
+                                      tsos.cartesianError().position());
+  
+  Measurement1D cur3DIP = a3d.distance(primaryVertexState, extrapolatedVertexState);
+
+  ip3d = cur3DIP.value();
+  ip3derr = cur3DIP.error();
+  
+  return; 
+  }
+//+++++++++++++++++++++++++++++++++
+
+
+VCTreeProducer_D02kpi::VCTreeProducer_D02kpi(const edm::ParameterSet &iConfig):
+  bFieldToken_(esConsumes<MagneticField, IdealMagneticFieldRecord>()),
+  ttBuilderToken_(esConsumes<TransientTrackBuilder, TransientTrackRecord>(edm::ESInputTag("", "TransientTrackBuilder")))
 {
 
 	// options
@@ -414,7 +526,13 @@ VCTreeProducer_D02kpi::VCTreeProducer_D02kpi(const edm::ParameterSet &iConfig)
 		MVAValues_Token_ = consumes<MVACollection>(iConfig.getParameter<edm::InputTag>("MVACollection"));
 		MVAValues_Token_2 = consumes<MVACollection>(iConfig.getParameter<edm::InputTag>("MVACollection2"));
 	}
+
+	fitter_ = std::make_unique<KinematicParticleVertexFitter>();
+	ip_tree_ = iConfig.getParameter<bool>("ip_tree");
+	
 }
+
+
 
 VCTreeProducer_D02kpi::~VCTreeProducer_D02kpi()
 {
@@ -496,6 +614,17 @@ void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventS
 
 	edm::Handle<edm::ValueMap<reco::DeDxData>> dEdxHandle2;
 	iEvent.getByToken(Dedx_Token2_, dEdxHandle2);
+
+
+	//+++++++++++++++++++++++++++++
+	//For ip3d+ip3derr from skimmed edm
+	const auto& ttBuilder = iSetup.getData(ttBuilderToken_);
+	const auto& bFieldHandle = iSetup.getData(bFieldToken_);
+	const MagneticField* magField = &bFieldHandle;
+	const auto& vertexHandle = iEvent.getHandle(tok_offlinePV_);
+	if (!vertexHandle.isValid() || vertexHandle->empty()) return;
+	//++++++++++++++++++++++++++++++++++++++++++
+	
 #ifdef DEBUG
 	cout << "Loaded tokens" << endl;
 #endif
@@ -559,17 +688,6 @@ void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventS
 
 	Ntrkoffline = 0;
 
-	/*#ifdef DEBUG
-	cout << "Calculated offline Ntrk's" << endl;
-	#endif
-	
-	#ifdef DEBUG
-	cout << "Gen matching done" << endl;
-	#endif
-	*/
-
-	//candSize = D0candidates_->size();
-	cout<<"CHECK-4"<<endl;
 	resize_the_vectors(candSize);
 
 	if (D0candidates_){
@@ -621,9 +739,18 @@ void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventS
 		double pz = trk.pz();
 		mass[it] = trk.mass();
 
-		ip3d[it] = trk.userFloat("ip3d");
-		ip3derr[it] = trk.userFloat("ip3derr");
 
+		if(ip_tree_){
+		  ip3d[it] = -999.0;
+		  ip3derr[it] = -999.0;		  
+		  calculate3DIP(trk, vtx, ttBuilder, magField, ip3d[it], ip3derr[it]);
+		}
+		else {
+		    ip3d[it] = trk.userFloat("ip3d");
+		    ip3derr[it] = trk.userFloat("ip3derr");
+		}
+
+		
 		const reco::Candidate *cand1 = trk.daughter(0);
 		const pat::PackedCandidate *reco_d1 = dynamic_cast<const pat::PackedCandidate *>(cand1);
 
