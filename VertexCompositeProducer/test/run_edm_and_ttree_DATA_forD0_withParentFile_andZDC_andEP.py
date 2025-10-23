@@ -26,9 +26,9 @@ process.load('FWCore.MessageService.MessageLogger_cfi')
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
 process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
-process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(100))
+process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
 process.TFileService = cms.Service("TFileService",
-    fileName =cms.string('TTree_new_Oct22.root'))
+    fileName =cms.string('TTree_fromEDM.root'))
 
 
 # Define the input source
@@ -57,7 +57,8 @@ process.source = cms.Source("PoolSource",
                             #)
                             
                             
-                            #eventsToProcess = cms.untracked.VEventRange('374803:522:453201212')  # Replace with your specific run, lumi, event numbers    
+                            #eventsToProcess = cms.untracked.VEventRange('374803:522:453201212')  # Replace with your specific run, lumi, event numbers
+                            #eventsToProcess = cms.untracked.VEventRange('374803:522:453813981')  # Replace with your specific run, lumi, event numbers    
 )
 
 
@@ -153,7 +154,7 @@ process.es_prefer_flatparms = cms.ESPrefer('PoolDBESSource','')
 process.evtplane_seq = cms.Sequence(process.hiEvtPlane * process.hiEvtPlaneFlat)
 
 
-from VertexCompositeAnalysis.VertexCompositeProducer.PATAlgos_cff import changeToMiniAOD
+#from VertexCompositeAnalysis.VertexCompositeProducer.PATAlgos_cff import changeToMiniAOD
 
 
 VertexCollection_PAT = "offlineSlimmedPrimaryVertices"
@@ -170,13 +171,7 @@ process.load("VertexCompositeAnalysis.VertexCompositeAnalyzer.d0analyzer_tree_cf
 process.load("VertexCompositeAnalysis.VertexCompositeAnalyzer.eventinfotree_cff")
 
 process.d0Analyzer = process.d0ana.clone()
-#process.d0Analyzer.trackRecoAlgorithm = cms.InputTag(TrackCollection_PAT)
-#process.d0Analyzer.vertexRecoAlgorithm = cms.InputTag(VertexCollection_PAT)
-#process.d0Analyzer.GenParticleCollection = cms.untracked.InputTag(GenParticleCollection_PAT)
 process.d0Analyzer.D0 = cms.untracked.InputTag("d0Selector:D0")
-#process.d0Analyzer.D0 = cms.untracked.InputTag("d0Selector:D0")
-#process.d0Analyzer.DCAValCollection = cms.InputTag("d0Selector:DCAValuesNewD0")
-#process.d0Analyzer.DCAErrCollection = cms.InputTag("d0Selector:DCAErrorsNewD0")
 process.d0Analyzer.isCentrality = cms.bool(True) # Centrality 
 process.d0Analyzer.centralityBinLabel = cms.InputTag("centralityBin", "HFtowers")#centrality
 process.d0Analyzer.centralitySrc = cms.InputTag("hiCentrality") #central
@@ -185,7 +180,7 @@ process.d0Analyzer.doGenMatching = cms.untracked.bool(False) #MConly
 process.d0Analyzer.useAnyMVA = cms.bool(True); #only set true if you are assigning BDT values +++ change  
 process.d0Analyzer.MVACollection = cms.InputTag("d0Selector:MVAValuesNewD0:ANASKIM")
 process.d0Analyzer.MVACollection2 = cms.InputTag("d0Selector:MVAValuesNewD02:ANASKIM")
-process.d0Analyzer.ip_tree = cms.bool(True)
+process.d0Analyzer.ip_tree = cms.bool(True) #True-> Get ip3d,ip3derr from TTree producer!
 
 process.d0ana_seq = cms.Sequence(process.d0Analyzer)
 

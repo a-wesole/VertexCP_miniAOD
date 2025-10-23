@@ -26,9 +26,9 @@ process.load('FWCore.MessageService.MessageLogger_cfi')
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
 process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
-process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(100))
+process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
 process.TFileService = cms.Service("TFileService",
-    fileName =cms.string('TTree_D0_data_Oct22.root'))
+    fileName =cms.string('TTree.root'))
 
 
 # Define the input source
@@ -42,7 +42,7 @@ process.source = cms.Source("PoolSource",
         #'374951:30-374951:30'  # run:lumiFirst - run:lumiLast
         #)
 
-            #eventsToProcess = cms.untracked.VEventRange('375055:201:128206575')  # Replace with your specific run, lumi, event numbers    
+        #eventsToProcess = cms.untracked.VEventRange('374803:522:453813981')  # Replace with your specific run, lumi, event numbers    
 )
 
 
@@ -190,7 +190,7 @@ process.d0Analyzer.doGenMatching = cms.untracked.bool(False) #MConly
 process.d0Analyzer.useAnyMVA = cms.bool(True); #only set true if you are assigning BDT values +++ change  
 process.d0Analyzer.MVACollection = cms.InputTag("d0Selector:MVAValuesNewD0:ANASKIM")
 process.d0Analyzer.MVACollection2 = cms.InputTag("d0Selector:MVAValuesNewD02:ANASKIM")
-process.d0Analyzer.ip_tree = cms.bool(False)
+process.d0Analyzer.ip_tree = cms.bool(False) #True only for TTree reproduction from skimmed edm!
 
 process.d0ana_seq2 = cms.Sequence(process.d0Selector * process.d0Analyzer)
 

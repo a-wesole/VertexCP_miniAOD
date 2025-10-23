@@ -20,7 +20,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
-
+#include <iomanip>
 #include <TH1.h>
 #include <TH2.h>
 #include <TTree.h>
@@ -287,19 +287,9 @@ private:
 
   //For ip3d and ip3derr
   bool ip_tree_;
-  std::unique_ptr<KinematicParticleVertexFitter> fitter_;
   const edm::ESGetToken<MagneticField, IdealMagneticFieldRecord> bFieldToken_;
-  const edm::ESGetToken<TransientTrackBuilder, TransientTrackRecord> ttBuilderToken_;
-
   
-  void calculate3DIP(
-		     const pat::CompositeCandidate& d0,
-		     const reco::Vertex& pv,
-		     const TransientTrackBuilder& ttBuilder,
-		     const MagneticField* magField,
-		     float& ip3d,     
-		     float& ip3derr   
-		     );
+  void calculate3DIP(const pat::CompositeCandidate& d0, const reco::Vertex& pv, const MagneticField* magField, float& ip3d,float& ip3derr);
 
 
 
@@ -410,7 +400,6 @@ void VCTreeProducer_D02kpi::clear_the_vectors()
 void VCTreeProducer_D02kpi::calculate3DIP(
     const pat::CompositeCandidate& d0,
     const reco::Vertex& pv,
-    const TransientTrackBuilder& ttBuilder,
     const MagneticField* magField,
     float& ip3d,    
     float& ip3derr  
@@ -419,56 +408,63 @@ void VCTreeProducer_D02kpi::calculate3DIP(
   KinematicParticleFactoryFromTransientTrack pFactory;
   VertexDistance3D a3d;
 
-  const reco::Candidate* K_cand = d0.daughter(0);
-  const reco::Candidate* pi_cand = d0.daughter(1);
 
+  const pat::PackedCandidate* K_cand = dynamic_cast<const pat::PackedCandidate*>(d0.daughter(0));
+  const pat::PackedCandidate* pi_cand = dynamic_cast<const pat::PackedCandidate*>(d0.daughter(1));
+  if (!K_cand || !pi_cand) return; 
+  
   reco::TransientTrack K_transTrack;
   reco::TransientTrack pi_transTrack;
+
   try {
-    K_transTrack = ttBuilder.build(K_cand->bestTrack());
-    pi_transTrack = ttBuilder.build(pi_cand->bestTrack());
+    K_transTrack = reco::TransientTrack(K_cand->pseudoTrack(), magField);
+    pi_transTrack = reco::TransientTrack(pi_cand->pseudoTrack(), magField);
+
   }
   catch (const std::exception& e) {
-    return; 
-  }
-
+    return;
+  } 
 
   std::vector<RefCountedKinematicParticle> d0Particles;
-  float K_mass = K_cand->mass();
-  float pi_mass = pi_cand->mass();
-  float K_sigma = 3.5E-7f; // Non-zero mass sigma
-  float pi_sigma = 1.6E-5f;
 
-  d0Particles.push_back(pFactory.particle(K_transTrack, K_mass, 0, 0, K_sigma));
-  d0Particles.push_back(pFactory.particle(pi_transTrack, pi_mass, 0, 0, pi_sigma));
+  const float piMassD0 = 0.13957018;
+  const float kaonMassD0 = 0.493677;
+  const float K_sigma = 1.6E-5f; 
+  const float pi_sigma = 3.5E-7f; 
 
-  RefCountedKinematicTree d0Vertex = fitter_->fit(d0Particles);
-  if (!d0Vertex->isValid()) {
-    return; 
-  }
+  float sigma1, sigma2;
+  float mass1, mass2;
+  
+  sigma1 = (std::abs(K_cand->pdgId()) == 321) ? K_sigma : pi_sigma;
+  sigma2 = (std::abs(pi_cand->pdgId()) == 321) ? K_sigma : pi_sigma;
+
+  mass1 = (std::abs(K_cand->pdgId()) == 321) ? kaonMassD0 : piMassD0;
+  mass2 = (std::abs(pi_cand->pdgId()) == 321) ? kaonMassD0 : piMassD0;
+  
+  d0Particles.push_back(pFactory.particle(K_transTrack, mass1, 0, 0, sigma1));
+  d0Particles.push_back(pFactory.particle(pi_transTrack, mass2, 0, 0, sigma2));
+
+  KinematicParticleVertexFitter fitter;
+  RefCountedKinematicTree d0Vertex = fitter.fit(d0Particles);
+  if (!d0Vertex->isValid()) return; 
+  
   d0Vertex->movePointerToTheTop();
   RefCountedKinematicParticle d0Cand = d0Vertex->currentParticle();
-  if (!d0Cand->currentState().isValid()) {
-    return; 
-  }
+  if (!d0Cand->currentState().isValid()) return; 
 
   VertexState primaryVertexState(RecoVertex::convertPos(pv.position()),
-                                 RecoVertex::convertError(pv.error()));
+  RecoVertex::convertError(pv.error()));
 
   AnalyticalImpactPointExtrapolator extrap(magField);
   
   TrajectoryStateOnSurface tsos =
       extrap.extrapolate(d0Cand->currentState().freeTrajectoryState(),
                          RecoVertex::convertPos(pv.position()));
+
+  if (!tsos.isValid()) return; 
   
-  if (!tsos.isValid()) {
-    return; 
-  }
-
-
   VertexState extrapolatedVertexState(tsos.globalPosition(),
                                       tsos.cartesianError().position());
-  
   Measurement1D cur3DIP = a3d.distance(primaryVertexState, extrapolatedVertexState);
 
   ip3d = cur3DIP.value();
@@ -480,8 +476,7 @@ void VCTreeProducer_D02kpi::calculate3DIP(
 
 
 VCTreeProducer_D02kpi::VCTreeProducer_D02kpi(const edm::ParameterSet &iConfig):
-  bFieldToken_(esConsumes<MagneticField, IdealMagneticFieldRecord>()),
-  ttBuilderToken_(esConsumes<TransientTrackBuilder, TransientTrackRecord>(edm::ESInputTag("", "TransientTrackBuilder")))
+  bFieldToken_(esConsumes<MagneticField, IdealMagneticFieldRecord>())
 {
 
 	// options
@@ -527,7 +522,6 @@ VCTreeProducer_D02kpi::VCTreeProducer_D02kpi(const edm::ParameterSet &iConfig):
 		MVAValues_Token_2 = consumes<MVACollection>(iConfig.getParameter<edm::InputTag>("MVACollection2"));
 	}
 
-	fitter_ = std::make_unique<KinematicParticleVertexFitter>();
 	ip_tree_ = iConfig.getParameter<bool>("ip_tree");
 	
 }
@@ -618,11 +612,10 @@ void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventS
 
 	//+++++++++++++++++++++++++++++
 	//For ip3d+ip3derr from skimmed edm
-	const auto& ttBuilder = iSetup.getData(ttBuilderToken_);
 	const auto& bFieldHandle = iSetup.getData(bFieldToken_);
 	const MagneticField* magField = &bFieldHandle;
 	const auto& vertexHandle = iEvent.getHandle(tok_offlinePV_);
-	if (!vertexHandle.isValid() || vertexHandle->empty()) return;
+	//if (!vertexHandle.isValid() || vertexHandle->empty()) return;
 	//++++++++++++++++++++++++++++++++++++++++++
 	
 #ifdef DEBUG
@@ -662,7 +655,7 @@ void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventS
 	bestvy = -500.9;
 	bestvzError = -999.9, bestvxError = -999.9, bestvyError = -999.9;
 
-	const reco::Vertex &vtx = (*vertices)[0]; 
+	const reco::Vertex& vtx = (*vertices)[0]; 
 	bestvz = vtx.z();
 	bestvx = vtx.x();
 	bestvy = vtx.y();
@@ -743,11 +736,13 @@ void VCTreeProducer_D02kpi::fillRECO(const edm::Event &iEvent, const edm::EventS
 		if(ip_tree_){
 		  ip3d[it] = -999.0;
 		  ip3derr[it] = -999.0;		  
-		  calculate3DIP(trk, vtx, ttBuilder, magField, ip3d[it], ip3derr[it]);
+		  calculate3DIP(trk, vtx, magField, ip3d[it], ip3derr[it]);		  
+
 		}
 		else {
 		    ip3d[it] = trk.userFloat("ip3d");
 		    ip3derr[it] = trk.userFloat("ip3derr");
+
 		}
 
 		
