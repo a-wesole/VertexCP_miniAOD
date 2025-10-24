@@ -16,14 +16,7 @@
  <br>
  
 This code was originally forked from:
-https://github.com/vince502/VertexCompositeAnalysis
- - branch = 13_2_X
-- It has since been heavily edited and simplified.
-- This code is updated for miniAOD input. i.e.) using ```packedPFCandidates``` and ```OfflineSlimmedPrimaryVertices``` instead of ```GeneralTracks``` and ```OfflinePrimaryVertices```
-- see the notesOfAllChanges.txt for a mostly comprehensive list of the changes and updates made to this code from the original VCAnalyzer, some of them may be missing.
-- For complete analysis, the HeavyIonsAnalysis package has been added. This is necessary for items such as Centrality.
-    
-- Resonace decay reconstruction algorithms with ```pat::CompositeCandiate``` collection in CMSSW 13_2_11. The package is fully orthogonal to the ```HiForest``` framework to be combined with other objects.
+https://github.com/NiharSaha/VertexCP_miniAOD/tree/D0analyzer_reproduction_TTree_skimmedEdm (Nihar Saha)
 
 -----------------------------------------------------------
 **This branch of the code is used for reproducing the TTrees to include some missing variables. It was written by Nihar Saha. 
