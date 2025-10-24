@@ -1,12 +1,13 @@
 ---------------------------------------------------------------------------------------------------------------
 <p align="center"> --------This code is written to process the 2023 PbPb Data-------------</p>
-<p align="center"> ----The output is a sychronized edm.root file and TTree.root file----</p>
+<p align="center"> ------------------The output is a updated TTree.root file----------------------</p>
 <p align="center"> ----------------The edm and root files are one-to-one------------------------</p>
-<p align="center"> ------------------Authors: A.Wesolek, N. Saha, J. Lee-------------------------- </p>
+<p align="center"> ------------------Authors: N. Saha, A. Wesolek -------------------------- </p>
 
  ---------------------------------------------------------------------------------------------------------------- 
-<p align="center"> abigail.leigh.wesolek@cern.ch </p>
 <p align="center"> nihar.ranjan.saha@cern.ch </p>
+<p align="center"> abigail.leigh.wesolek@cern.ch </p>
+
 
 ----------------------------------------------------------------------------------------------------------------
   
@@ -15,9 +16,11 @@
  <br>
  <br>
  
-This code was originally forked from:
-https://github.com/NiharSaha/VertexCP_miniAOD/tree/D0analyzer_reproduction_TTree_skimmedEdm (Nihar Saha)
-
+This code was originally cloned from:
+https://github.com/NiharSaha/VertexCP_miniAOD/tree/D0analyzer_reproduction_TTree_skimmedEdm
+Commit: 133bfac
+Author: Nihar Saha 
+ 
 -----------------------------------------------------------
 **This branch of the code is used for reproducing the TTrees to include some missing variables. It was written by Nihar Saha. 
   It reads in the previously produced edm.root files and the correctly associated miniAOD file ('parent file') and produces the d0Analyzer tree, event info tree and zdc tree.**
