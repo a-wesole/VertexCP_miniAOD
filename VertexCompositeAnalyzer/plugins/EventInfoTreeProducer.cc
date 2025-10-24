@@ -236,6 +236,7 @@ EventInfoTreeProducer::fillRECO(const edm::Event& iEvent, const edm::EventSetup&
     const reco::TrackBase::TrackQuality highPurity = reco::TrackBase::qualityByName("highPurity");
 
     for (const auto& trk : *trackColl) {
+        if (!trk.hasTrackDetails()) continue;  
         if (trk.charge() == 0) continue;
         if (trk.pseudoTrack().quality(highPurity)) {
             NtrkHP++;
