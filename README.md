@@ -15,10 +15,10 @@
  <br>
  <br>
  
-This code was originally cloned from:
-https://github.com/NiharSaha/VertexCP_miniAOD/tree/D0analyzer_reproduction_TTree_skimmedEdm
-Commit: 133bfac
-Author: Nihar Saha 
+This code was originally cloned from: <br>
+https://github.com/NiharSaha/VertexCP_miniAOD/tree/D0analyzer_reproduction_TTree_skimmedEdm <br>
+Commit: 133bfac <br>
+Author: Nihar Saha <br>
  
 -----------------------------------------------------------
 **This branch of the code is used for reproducing the TTrees to include some missing variables. It was written by Nihar Saha. 
