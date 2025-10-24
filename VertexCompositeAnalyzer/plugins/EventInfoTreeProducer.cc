@@ -47,7 +47,7 @@
 #include "TrackingTools/PatternTools/interface/ClosestApproachInRPhi.h"
 #include "TrackingTools/PatternTools/interface/TSCBLBuilderNoMaterial.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
-
+#include "DataFormats/PatCandidates/interface/PackedCandidate.h"
 
 //
 // constants, enums and typedefs
@@ -131,7 +131,8 @@ private:
   edm::EDGetTokenT<int> tok_centBinLabel_;
   edm::EDGetTokenT<reco::Centrality> tok_centSrc_;
   edm::EDGetTokenT<reco::EvtPlaneCollection> tok_eventplaneSrc_;
-
+  edm::EDGetTokenT<std::vector<pat::PackedCandidate>> tok_tracks_;
+  
 };
 
 //
@@ -148,6 +149,7 @@ EventInfoTreeProducer::EventInfoTreeProducer(const edm::ParameterSet& iConfig)
   //input tokens
   tok_offlineBS_ = consumes<reco::BeamSpot>(iConfig.getParameter<edm::InputTag>("beamSpotSrc"));
   tok_offlinePV_ = consumes<reco::VertexCollection>(iConfig.getParameter<edm::InputTag>("VertexCollection"));
+  tok_tracks_ = consumes<std::vector<pat::PackedCandidate>>(edm::InputTag(iConfig.getParameter<edm::InputTag>("TrackCollection")));
 
 
   isCentrality_ = (iConfig.exists("isCentrality") ? iConfig.getParameter<bool>("isCentrality") : false);
@@ -223,8 +225,24 @@ EventInfoTreeProducer::fillRECO(const edm::Event& iEvent, const edm::EventSetup&
     iEvent.getByToken(tok_centBinLabel_, cbin);
     centrality = (cbin.isValid() ? *cbin : -1);
   }
+
+  NtrkHP = -1;
+  edm::Handle<pat::PackedCandidateCollection> trackColl;
+  iEvent.getByToken(tok_tracks_, trackColl);
+  if (trackColl.isValid()) {
+
+    NtrkHP = 0;
+    
+    const reco::TrackBase::TrackQuality highPurity = reco::TrackBase::qualityByName("highPurity");
+
+    for (const auto& trk : *trackColl) {
+        if (trk.charge() == 0) continue;
+        if (trk.pseudoTrack().quality(highPurity)) {
+            NtrkHP++;
+        }
+    }
+  }
   
- 
   if(isEventPlane_)
   {
     edm::Handle<reco::EvtPlaneCollection> eventplanes;

@@ -186,7 +186,8 @@ process.d0ana_seq = cms.Sequence(process.d0Analyzer)
 
 process.eventinfoana = process.eventinfoana.clone()
 process.eventinfoana.stageL1Trigger = cms.uint32(2)
-process.eventinfoana.VertexCollection = cms.InputTag("offlineSlimmedPrimaryVertices")
+process.eventinfoana.VertexCollection = cms.InputTag(VertexCollection_PAT)
+process.eventinfoana.TrackCollection = cms.InputTag(TrackCollection_PAT)
 
 process.EventInfoAnalysis = cms.Sequence(process.eventinfoana)
 
