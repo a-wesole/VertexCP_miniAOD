@@ -6,7 +6,7 @@
 
  ---------------------------------------------------------------------------------------------------------------- 
 <p align="center"> abigail.leigh.wesolek@cern.ch </p>
-<p align="center"> nihar.ranjan.saha@cern.ch, junseok.lee@cern.ch </p>
+<p align="center"> nihar.ranjan.saha@cern.ch </p>
 
 ----------------------------------------------------------------------------------------------------------------
   
@@ -26,9 +26,8 @@ https://github.com/vince502/VertexCompositeAnalysis
 - Resonace decay reconstruction algorithms with ```pat::CompositeCandiate``` collection in CMSSW 13_2_11. The package is fully orthogonal to the ```HiForest``` framework to be combined with other objects.
 
 -----------------------------------------------------------
-
-This branch of the code is used for reproducing the TTrees to include some missing variables. It was written by Nihar Saha. 
-  It reads in the previously produced edm.root files and the correctly associated miniAOD file and produces the d0Analyzer tree, event info tree and zdc tree.  
+**This branch of the code is used for reproducing the TTrees to include some missing variables. It was written by Nihar Saha. 
+  It reads in the previously produced edm.root files and the correctly associated miniAOD file ('parent file') and produces the d0Analyzer tree, event info tree and zdc tree.**
 
 
 
