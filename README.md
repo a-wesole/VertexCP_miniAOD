@@ -37,9 +37,8 @@ cd CMSSW_13_2_11/src
 cmsenv
 
 #clone the repo
-git clone https://github.com/a-wesole/VertexCP_miniAOD.git VertexCompositeAnalysis
+git clone --branch TTreeReproduction_2023PbPb --single-branch https://github.com/a-wesole/VertexCP_miniAOD.git VertexCompositeAnalysis
 
-#run the setup.sh script this will add the HeavyIonsAnalysis from CmsHI github that is needed for centrality 
 cd VertexCompositeAnalysis
 ./setup.sh
 
@@ -51,11 +50,6 @@ scram b -j12
 
 cd VertexCompositeAnalysis/VertexCompositeProducer/test
 
-
-cmsRun run_edm_and_ttree_MC_forD0.py #for D0 MC
-cmsRun run_edm_and_ttree_DATA_forD0.py #for D0 data
-cmsRun run_edm_and_ttree_MC_forLc.py #for Lc MC
-cmsRun run_edm_and_ttree_DATA_forLc.py #for Lc data
 cmsRun /run_edm_and_ttree_DATA_forD0_withParentFile_andZDC_andEP.py #for reproduction of D0 data TTrees, including EP, ZDC. reads edm.root files from Selector as input, instead of miniAOD 
 
 
