@@ -6,7 +6,7 @@ read -p "Enter end number: " END
 
 # Validate that START and END are numbers
 if ! [[ "$START" =~ ^[0-9]+$ ]] || ! [[ "$END" =~ ^[0-9]+$ ]]; then
-    echo "❌ Error: Start and end must be integers."
+    echo "Error: Start and end must be integers."
     exit 1
 fi
 
@@ -19,9 +19,9 @@ for i in $(seq "$START" "$END"); do
         echo "Submitting $FILE..."
         crab submit "$FILE"
     else
-        echo "⚠️  File $FILE not found, skipping."
+        echo " File $FILE not found, skipping."
     fi
 done
 
-echo "🎉 Done submitting CRAB jobs!"
+echo "Done submitting CRAB jobs!"
 
