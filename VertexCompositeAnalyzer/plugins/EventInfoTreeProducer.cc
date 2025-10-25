@@ -226,15 +226,11 @@ EventInfoTreeProducer::fillRECO(const edm::Event& iEvent, const edm::EventSetup&
     centrality = (cbin.isValid() ? *cbin : -1);
   }
 
-  NtrkHP = -1;
+  NtrkHP = 0;
   edm::Handle<pat::PackedCandidateCollection> trackColl;
   iEvent.getByToken(tok_tracks_, trackColl);
   if (trackColl.isValid()) {
-
-    NtrkHP = 0;
-    
     const reco::TrackBase::TrackQuality highPurity = reco::TrackBase::qualityByName("highPurity");
-
     for (const auto& trk : *trackColl) {
         if (!trk.hasTrackDetails()) continue;  
         if (trk.charge() == 0) continue;
