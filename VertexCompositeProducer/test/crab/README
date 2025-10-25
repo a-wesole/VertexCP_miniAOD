@@ -1,0 +1,17 @@
+to submit crab jobs:
+./submit_crab_jobs.sh 
+
+you will be prompted for start and end number 
+the submit.sh will submit all the Prime that you include to start to end
+this is INLCUSIVE
+if you go beyond 31 it will not crash, just nothing will be submitted
+
+example start = 0, end = 3
+<< the bash script will do this for you >> 
+crab submit ...Prime0.py
+crab submit ...Prime1.py
+crab submit ...Prime2.py
+crab submit ...Prime3.py
+
+
+
