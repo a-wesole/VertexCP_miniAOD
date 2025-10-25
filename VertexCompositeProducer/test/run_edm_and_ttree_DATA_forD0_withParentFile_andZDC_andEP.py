@@ -166,7 +166,6 @@ TrkChi2Label = "packedPFCandidateTrackChi2"
 # Define the analysis steps
 
 ########## D0 candidate rereco ###############################################################
-process.load("VertexCompositeAnalysis.VertexCompositeAnalyzer.d0selector_cff")
 process.load("VertexCompositeAnalysis.VertexCompositeAnalyzer.d0analyzer_tree_cff")
 process.load("VertexCompositeAnalysis.VertexCompositeAnalyzer.eventinfotree_cff")
 
