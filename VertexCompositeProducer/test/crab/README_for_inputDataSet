@@ -1,0 +1,16 @@
+there are 32 scripts here, corresponding to the the 32 datasets of the 2023 data 
+each scipt needs the link to the published edm files in DAS
+
+the easiest way to do this is to cd to your crab project directory and edit the 'crab.log'
+then you should search for the 'DAS URL' 
+the line needed is the one directly above that 
+
+
+for example 
+'''
+Output dataset:                 /HIPhysicsRawPrime3/awesolek-HIPhysicsRawPrime3_D0_24July2025-8b581d8886e57c0efd46b0be657273da/USER
+Output dataset DAS URL:         https://cmsweb.cern.ch/das/request?input=%2FHIPhysicsRawPrime3%2Fawesolek-HIPhysicsRawPrime3_D0_24July2025-8b581d8886e57c0efd46b0be657273da%2FUSER&instance=prod%2Fphys03
+'''
+
+
+you just include the entire Output dataset in the empty line in the python file.
