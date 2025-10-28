@@ -24,7 +24,7 @@ git checkout $TEMP_BRANCH
 MERGE_BASE_BRANCH=$CURRENT_BRANCH
 MERGE_BASE=`git merge-base $FULL_BRANCH $MERGE_BASE_BRANCH`
 git cms-sparse-checkout $DEBUG_OPT $MERGE_BASE $FULL_BRANCH
-git sparse-checkout set HeavyIonsAnalysis/EventAnalysis HeavyIonsAnalysis/TrackAnalysis
+git sparse-checkout set HeavyIonsAnalysis/EventAnalysis HeavyIonsAnalysis/TrackAnalysis HeavyIonsAnalysis/ZDCAnalysis
 git read-tree -mu HEAD
 git merge $NO_COMMIT $MERGE_STRATEGY $STRATEGY_OPTION --no-ff -m "Merged $BRANCH from repository $GITHUB_USER with cms-merge-topic" $GITHUB_USER/$BRANCH
 git checkout $CURRENT_BRANCH
