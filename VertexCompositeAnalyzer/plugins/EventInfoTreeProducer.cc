@@ -115,12 +115,12 @@ private:
   //float ephfmQ3[3];
   float eptkAngle[2];
   float eptkQ[2];
-  float ephfpSumW;
-  float ephfmSumW;
-  float eptkSumW;
-  float ephfpSumW2;
-  float ephfmSumW2;
-  float eptkSumW2;
+  float ephfpSumW[3];
+  float ephfmSumW[3];
+  float eptkSumW[3];
+  float ephfpSumW2[3];
+  float ephfmSumW2[3];
+  float eptkSumW2[3];
   
   bool isCentrality_;
   bool isEventPlane_;
@@ -236,7 +236,8 @@ EventInfoTreeProducer::fillRECO(const edm::Event& iEvent, const edm::EventSetup&
     const reco::TrackBase::TrackQuality highPurity = reco::TrackBase::qualityByName("highPurity");
 
     for (const auto& trk : *trackColl) {
-        if (trk.charge() == 0) continue;
+      if (!trk.hasTrackDetails()) continue;
+      if (trk.charge() == 0) continue;
         if (trk.pseudoTrack().quality(highPurity)) {
             NtrkHP++;
         }
@@ -283,13 +284,27 @@ EventInfoTreeProducer::fillRECO(const edm::Event& iEvent, const edm::EventSetup&
     eptkQ[0] = (eventplanes.isValid() ? eptk2.q(2): -99.);
     eptkQ[1] = (eventplanes.isValid() ? eptk3.q(2): -99.);
 
-    ephfpSumW = (eventplanes.isValid() ? ephfp2.sumw() : -99.);
-    ephfmSumW = (eventplanes.isValid() ? ephfm2.sumw() : -99.);
-    eptkSumW  = (eventplanes.isValid() ? eptk2.sumw() : -99.);
+    ephfpSumW[0] = (eventplanes.isValid() ? ephfp1.sumw() : -99.);
+    ephfpSumW[1] = (eventplanes.isValid() ? ephfp2.sumw() : -99.);
+    ephfpSumW[2] = (eventplanes.isValid() ? ephfp3.sumw() : -99.);
 
-    ephfpSumW2 = (eventplanes.isValid() ? ephfp2.sumw2() : -99.);
-    ephfmSumW2 = (eventplanes.isValid() ? ephfm2.sumw2() : -99.);
-    eptkSumW2  = (eventplanes.isValid() ? eptk2.sumw2() : -99.);
+    ephfmSumW[0] = (eventplanes.isValid() ? ephfm1.sumw() : -99.);
+    ephfmSumW[1] = (eventplanes.isValid() ? ephfm2.sumw() : -99.);
+    ephfmSumW[2] = (eventplanes.isValid() ? ephfm3.sumw() : -99.);
+
+    eptkSumW[0]  = (eventplanes.isValid() ? eptk2.sumw() : -99.);
+    eptkSumW[1]  = (eventplanes.isValid() ? eptk3.sumw() : -99.);
+
+    ephfpSumW2[0] = (eventplanes.isValid() ? ephfp1.sumw2() : -99.);
+    ephfpSumW2[1] = (eventplanes.isValid() ? ephfp2.sumw2() : -99.);
+    ephfpSumW2[2] = (eventplanes.isValid() ? ephfp3.sumw2() : -99.);
+
+    ephfmSumW2[0] = (eventplanes.isValid() ? ephfm1.sumw2() : -99.);
+    ephfmSumW2[1] = (eventplanes.isValid() ? ephfm2.sumw2() : -99.);
+    ephfmSumW2[2] = (eventplanes.isValid() ? ephfm3.sumw2() : -99.);
+
+    eptkSumW2[0]  = (eventplanes.isValid() ? eptk2.sumw2() : -99.);
+    eptkSumW2[1]  = (eventplanes.isValid() ? eptk3.sumw2() : -99.);
   }
 
   nPV = vertices->size();
@@ -352,13 +367,14 @@ EventInfoTreeProducer::initTree()
     EventInfoNtuple->Branch("ephfmAngle",ephfmAngle,"ephfmAngle[3]/F");
     EventInfoNtuple->Branch("ephfpQ",ephfpQ,"ephfpQ[3]/F");
     EventInfoNtuple->Branch("ephfmQ",ephfmQ,"ephfmQ[3]/F");
-    EventInfoNtuple->Branch("ephfpSumW",&ephfpSumW,"ephfpSumW/F");
-    EventInfoNtuple->Branch("ephfmSumW",&ephfmSumW,"ephfmSumW/F");
-    EventInfoNtuple->Branch("ephfpSumW2",&ephfpSumW2,"ephfpSumW2/F");
-    EventInfoNtuple->Branch("ephfmSumW2",&ephfmSumW2,"ephfmSumW2/F");
+    EventInfoNtuple->Branch("ephfpSumW",ephfpSumW,"ephfpSumW[3]/F");
+    EventInfoNtuple->Branch("ephfmSumW",ephfmSumW,"ephfmSumW[3]/F");
+    EventInfoNtuple->Branch("ephfpSumW2",ephfpSumW2,"ephfpSumW2[3]/F");
+    EventInfoNtuple->Branch("ephfmSumW2",ephfmSumW2,"ephfmSumW2[3]/F");
     EventInfoNtuple->Branch("eptkAngle",eptkAngle,"eptkAngle[2]/F");
     EventInfoNtuple->Branch("eptkQ",eptkQ,"eptkQ[2]/F");
-    EventInfoNtuple->Branch("eptkSumW",&eptkSumW,"eptkSumW/F");
+    EventInfoNtuple->Branch("eptkSumW", eptkSumW, "eptkSumW[2]/F");
+    EventInfoNtuple->Branch("eptkSumW2", eptkSumW2, "eptkSumW2[2]/F");
   }
   //EventInfoNtuple->Branch("trigPrescale",trigPrescale,Form("trigPrescale[%d]/F",NTRG_));
   //EventInfoNtuple->Branch("trigHLT",trigHLT,Form("trigHLT[%d]/O",NTRG_));
