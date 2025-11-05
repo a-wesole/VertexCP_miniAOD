@@ -488,8 +488,10 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
         GlobalError vertexPositionErr = RecoVertex::convertError(vtxPrimary->error());
         cur3DIP = (a3d.distance(VertexState(vertexPosition, vertexPositionErr), VertexState(refPoint, refPointErr)));
 
-        // Two trkDCA
+	//GlobalVector bFieldVector = magField->inTesla(GlobalPoint(0,0,0));
 
+	
+        // Two trkDCA
         FreeTrajectoryState posStateNew = posTT.impactPointTSCP().theState();
         FreeTrajectoryState negStateNew = negTT.impactPointTSCP().theState();
         ClosestApproachInRPhi cApp;
@@ -552,7 +554,8 @@ void D0Fitter::fitAll(const edm::Event &iEvent, const edm::EventSetup &iSetup)
         }
         if (fabs(theD0.mass() - d0MassD0) < d0MassCut)
         {
-          theD0s.push_back(theD0);
+
+	  theD0s.push_back(theD0);
         }
       }
     }
