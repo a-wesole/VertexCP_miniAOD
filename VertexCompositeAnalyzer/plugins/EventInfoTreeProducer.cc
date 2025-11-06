@@ -191,120 +191,116 @@ EventInfoTreeProducer::analyze(const edm::Event& iEvent, const edm::EventSetup& 
 	void
 EventInfoTreeProducer::fillRECO(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-	//get collection
-	edm::Handle<reco::BeamSpot> beamspot;
-	iEvent.getByToken(tok_offlineBS_, beamspot);
-	edm::Handle<reco::VertexCollection> vertices;
-	iEvent.getByToken(tok_offlinePV_, vertices);
-	if(!vertices.isValid()) throw cms::Exception("EventInfoTreeProducer") << "Primary vertices  collection not found!" << std::endl;
+  //get collection
+  edm::Handle<reco::BeamSpot> beamspot;
+  iEvent.getByToken(tok_offlineBS_, beamspot);
+  edm::Handle<reco::VertexCollection> vertices;
+  iEvent.getByToken(tok_offlinePV_, vertices);
+  if(!vertices.isValid()) throw cms::Exception("EventInfoTreeProducer") << "Primary vertices  collection not found!" << std::endl;
 
-	runNb = iEvent.id().run();
-	eventNb = iEvent.id().event();
-	lsNb = iEvent.luminosityBlock();
-
-
-	centrality = -1;
-	if(isCentrality_)
-	{
-		edm::Handle<reco::Centrality> cent;
-		iEvent.getByToken(tok_centSrc_, cent);
-		HFsumETPlus = (cent.isValid() ? cent->EtHFtowerSumPlus() : -1.);
-		HFsumETMinus = (cent.isValid() ? cent->EtHFtowerSumMinus() : -1.);
-		HFsumET= (cent.isValid() ? cent->EtHFtowerSum() : -1.);
-		Npixel = (cent.isValid() ? cent->multiplicityPixel() : -1);
-		//ZDCPlus = (cent.isValid() ? cent->zdcSumPlus() : -1.);
-		//ZDCMinus = (cent.isValid() ? cent->zdcSumMinus() : -1.);
-		//ZDCsumE = (cent.isValid() ? cent->zdcSum() : -1.);
-
-		ZDCPlus = cent->zdcSumPlus();
-		ZDCMinus = cent->zdcSumMinus();
-		ZDCsumE = cent->zdcSum();
-		Ntrkoffline = (cent.isValid() ? cent->Ntracks() : -1);
-
-		edm::Handle<int> cbin;
-		iEvent.getByToken(tok_centBinLabel_, cbin);
-		centrality = (cbin.isValid() ? *cbin : -1);
-	}
-
-	NtrkHP = -1;
-	edm::Handle<pat::PackedCandidateCollection> trackColl;
-	iEvent.getByToken(tok_tracks_, trackColl);
-	if (trackColl.isValid()) {
-
-		NtrkHP = 0;
-
-		const reco::TrackBase::TrackQuality highPurity = reco::TrackBase::qualityByName("highPurity");
-
-		for (const auto& trk : *trackColl) {
-			if (!trk.hasTrackDetails()) continue;
-			if (trk.charge() == 0) continue;
-			if (trk.pseudoTrack().quality(highPurity)) {
-				NtrkHP++;
-			}
-		}
-	}
-
-	if(isEventPlane_)
-	{
-		edm::Handle<reco::EvtPlaneCollection> eventplanes;
-		iEvent.getByToken(tok_eventplaneSrc_, eventplanes);
-
-		//unsigned int collection_size = (*eventplanes).size();
-		//std::cout<<"EvtPlaneCollection size="<<collection_size<<std::endl;
-
-		const reco::EvtPlane & ephfp1 = (*eventplanes)[15];
-		const reco::EvtPlane & ephfm1 = (*eventplanes)[15];
-		const reco::EvtPlane & ephfp2 = (*eventplanes)[1];
-		const reco::EvtPlane & ephfm2 = (*eventplanes)[0];
-		const reco::EvtPlane & ephfp3 = (*eventplanes)[7];
-		const reco::EvtPlane & ephfm3 = (*eventplanes)[6];
-		const reco::EvtPlane & eptk2 = (*eventplanes)[3];
-		const reco::EvtPlane & eptk3 = (*eventplanes)[9];
-
-		ephfpAngle[0] = (eventplanes.isValid() ? ephfp1.angle(2) : -99.);
-		ephfpAngle[1] = (eventplanes.isValid() ? ephfp2.angle(2) : -99.);
-		ephfpAngle[2] = (eventplanes.isValid() ? ephfp3.angle(2) : -99.);
-
-		ephfmAngle[0] = (eventplanes.isValid() ? ephfm1.angle(2) : -99.);
-		ephfmAngle[1] = (eventplanes.isValid() ? ephfm2.angle(2) : -99.);
-		ephfmAngle[2] = (eventplanes.isValid() ? ephfm3.angle(2) : -99.);
-
-		ephfpQ[0] = (eventplanes.isValid() ? ephfp1.q(2) : -99.);
-		ephfpQ[1] = (eventplanes.isValid() ? ephfp2.q(2) : -99.);
-		ephfpQ[2] = (eventplanes.isValid() ? ephfp3.q(2) : -99.);
-
-		ephfmQ[0] = (eventplanes.isValid() ? ephfm1.q(2) : -99.);
-		ephfmQ[1] = (eventplanes.isValid() ? ephfm2.q(2) : -99.);
-		ephfmQ[2] = (eventplanes.isValid() ? ephfm3.q(2) : -99.);
+  runNb = iEvent.id().run();
+  eventNb = iEvent.id().event();
+  lsNb = iEvent.luminosityBlock();
 
 
-		eptkAngle[0] = (eventplanes.isValid() ? eptk2.angle(2): -99.);
-		eptkAngle[1] = (eventplanes.isValid() ? eptk3.angle(2): -99.);
+  centrality = -1;
+  if(isCentrality_)
+  {
+    edm::Handle<reco::Centrality> cent;
+    iEvent.getByToken(tok_centSrc_, cent);
+    HFsumETPlus = (cent.isValid() ? cent->EtHFtowerSumPlus() : -1.);
+    HFsumETMinus = (cent.isValid() ? cent->EtHFtowerSumMinus() : -1.);
+    HFsumET= (cent.isValid() ? cent->EtHFtowerSum() : -1.);
+    Npixel = (cent.isValid() ? cent->multiplicityPixel() : -1);
+    //ZDCPlus = (cent.isValid() ? cent->zdcSumPlus() : -1.);
+    //ZDCMinus = (cent.isValid() ? cent->zdcSumMinus() : -1.);
+    //ZDCsumE = (cent.isValid() ? cent->zdcSum() : -1.);
 
-		eptkQ[0] = (eventplanes.isValid() ? eptk2.q(2): -99.);
-		eptkQ[1] = (eventplanes.isValid() ? eptk3.q(2): -99.);
+    ZDCPlus = cent->zdcSumPlus();
+    ZDCMinus = cent->zdcSumMinus();
+    ZDCsumE = cent->zdcSum();
+    Ntrkoffline = (cent.isValid() ? cent->Ntracks() : -1);
+      
+    edm::Handle<int> cbin;
+    iEvent.getByToken(tok_centBinLabel_, cbin);
+    centrality = (cbin.isValid() ? *cbin : -1);
+  }
 
-		ephfpSumW = (eventplanes.isValid() ? ephfp2.sumw() : -99.);
-		ephfmSumW = (eventplanes.isValid() ? ephfm2.sumw() : -99.);
-		eptkSumW  = (eventplanes.isValid() ? eptk2.sumw() : -99.);
+  NtrkHP = 0;
+  edm::Handle<pat::PackedCandidateCollection> trackColl;
+  iEvent.getByToken(tok_tracks_, trackColl);
+  if (trackColl.isValid()) {
+    const reco::TrackBase::TrackQuality highPurity = reco::TrackBase::qualityByName("highPurity");
+    for (const auto& trk : *trackColl) {
+        if (!trk.hasTrackDetails()) continue;  
+        if (trk.charge() == 0) continue;
+        if (trk.pseudoTrack().quality(highPurity)) {
+            NtrkHP++;
+        }
+    }
+  }
+  
+  if(isEventPlane_)
+  {
+    edm::Handle<reco::EvtPlaneCollection> eventplanes;
+    iEvent.getByToken(tok_eventplaneSrc_, eventplanes);
 
-		ephfpSumW2 = (eventplanes.isValid() ? ephfp2.sumw2() : -99.);
-		ephfmSumW2 = (eventplanes.isValid() ? ephfm2.sumw2() : -99.);
-		eptkSumW2  = (eventplanes.isValid() ? eptk2.sumw2() : -99.);
-	}
+    //unsigned int collection_size = (*eventplanes).size();
+    //std::cout<<"EvtPlaneCollection size="<<collection_size<<std::endl;
+    
+    const reco::EvtPlane & ephfp1 = (*eventplanes)[15];
+    const reco::EvtPlane & ephfm1 = (*eventplanes)[15];
+    const reco::EvtPlane & ephfp2 = (*eventplanes)[1];
+    const reco::EvtPlane & ephfm2 = (*eventplanes)[0];
+    const reco::EvtPlane & ephfp3 = (*eventplanes)[7];
+    const reco::EvtPlane & ephfm3 = (*eventplanes)[6];
+    const reco::EvtPlane & eptk2 = (*eventplanes)[3];
+    const reco::EvtPlane & eptk3 = (*eventplanes)[9];
+    
+    ephfpAngle[0] = (eventplanes.isValid() ? ephfp1.angle(2) : -99.);
+    ephfpAngle[1] = (eventplanes.isValid() ? ephfp2.angle(2) : -99.);
+    ephfpAngle[2] = (eventplanes.isValid() ? ephfp3.angle(2) : -99.);
 
-	nPV = vertices->size();
+    ephfmAngle[0] = (eventplanes.isValid() ? ephfm1.angle(2) : -99.);
+    ephfmAngle[1] = (eventplanes.isValid() ? ephfm2.angle(2) : -99.);
+    ephfmAngle[2] = (eventplanes.isValid() ? ephfm3.angle(2) : -99.);
 
-	bestvz = -500.9, bestvx = -500.9, bestvy = -500.9;
-	bestvzError = -999.9, bestvxError = -999.9, bestvyError = -999.9;
+    ephfpQ[0] = (eventplanes.isValid() ? ephfp1.q(2) : -99.);
+    ephfpQ[1] = (eventplanes.isValid() ? ephfp2.q(2) : -99.);
+    ephfpQ[2] = (eventplanes.isValid() ? ephfp3.q(2) : -99.);
 
-	const reco::Vertex &vtx = (*vertices)[0]; 
-	bestvz = vtx.z();
-	bestvx = vtx.x();
-	bestvy = vtx.y();
-	bestvzError = vtx.zError();
-	bestvxError = vtx.xError();
-	bestvyError = vtx.yError();
+    ephfmQ[0] = (eventplanes.isValid() ? ephfm1.q(2) : -99.);
+    ephfmQ[1] = (eventplanes.isValid() ? ephfm2.q(2) : -99.);
+    ephfmQ[2] = (eventplanes.isValid() ? ephfm3.q(2) : -99.);
+    
+
+    eptkAngle[0] = (eventplanes.isValid() ? eptk2.angle(2): -99.);
+    eptkAngle[1] = (eventplanes.isValid() ? eptk3.angle(2): -99.);
+    
+    eptkQ[0] = (eventplanes.isValid() ? eptk2.q(2): -99.);
+    eptkQ[1] = (eventplanes.isValid() ? eptk3.q(2): -99.);
+
+    ephfpSumW = (eventplanes.isValid() ? ephfp2.sumw() : -99.);
+    ephfmSumW = (eventplanes.isValid() ? ephfm2.sumw() : -99.);
+    eptkSumW  = (eventplanes.isValid() ? eptk2.sumw() : -99.);
+
+    ephfpSumW2 = (eventplanes.isValid() ? ephfp2.sumw2() : -99.);
+    ephfmSumW2 = (eventplanes.isValid() ? ephfm2.sumw2() : -99.);
+    eptkSumW2  = (eventplanes.isValid() ? eptk2.sumw2() : -99.);
+  }
+
+  nPV = vertices->size();
+  
+  bestvz = -500.9, bestvx = -500.9, bestvy = -500.9;
+  bestvzError = -999.9, bestvxError = -999.9, bestvyError = -999.9;
+  
+  const reco::Vertex &vtx = (*vertices)[0]; 
+  bestvz = vtx.z();
+  bestvx = vtx.x();
+  bestvy = vtx.y();
+  bestvzError = vtx.zError();
+  bestvxError = vtx.xError();
+  bestvyError = vtx.yError();
 
 }
 
