@@ -111,8 +111,6 @@ private:
   float ephfmAngle[3];
   float ephfpQ[3];
   float ephfmQ[3];
-  //float ephfpQ3[3];
-  //float ephfmQ3[3];
   float eptkAngle[2];
   float eptkQ[2];
   float ephfpSumW[3];
@@ -250,8 +248,8 @@ EventInfoTreeProducer::fillRECO(const edm::Event& iEvent, const edm::EventSetup&
     //unsigned int collection_size = (*eventplanes).size();
     //std::cout<<"EvtPlaneCollection size="<<collection_size<<std::endl;
     
-    const reco::EvtPlane & ephfp1 = (*eventplanes)[15];
-    const reco::EvtPlane & ephfm1 = (*eventplanes)[15];
+    //const reco::EvtPlane & ephfp1 = (*eventplanes)[15];
+    //const reco::EvtPlane & ephfm1 = (*eventplanes)[15];
     const reco::EvtPlane & ephfp2 = (*eventplanes)[1];
     const reco::EvtPlane & ephfm2 = (*eventplanes)[0];
     const reco::EvtPlane & ephfp3 = (*eventplanes)[7];
@@ -259,19 +257,23 @@ EventInfoTreeProducer::fillRECO(const edm::Event& iEvent, const edm::EventSetup&
     const reco::EvtPlane & eptk2 = (*eventplanes)[3];
     const reco::EvtPlane & eptk3 = (*eventplanes)[9];
     
-    ephfpAngle[0] = (eventplanes.isValid() ? ephfp1.angle(2) : -99.);
+    //ephfpAngle[0] = (eventplanes.isValid() ? ephfp1.angle(2) : -99.);
+    ephfpAngle[0] = -99.0;
     ephfpAngle[1] = (eventplanes.isValid() ? ephfp2.angle(2) : -99.);
     ephfpAngle[2] = (eventplanes.isValid() ? ephfp3.angle(2) : -99.);
 
-    ephfmAngle[0] = (eventplanes.isValid() ? ephfm1.angle(2) : -99.);
+    //ephfmAngle[0] = (eventplanes.isValid() ? ephfm1.angle(2) : -99.);
+    ephfmAngle[0] = -99.0;
     ephfmAngle[1] = (eventplanes.isValid() ? ephfm2.angle(2) : -99.);
     ephfmAngle[2] = (eventplanes.isValid() ? ephfm3.angle(2) : -99.);
 
-    ephfpQ[0] = (eventplanes.isValid() ? ephfp1.q(2) : -99.);
+    //ephfpQ[0] = (eventplanes.isValid() ? ephfp1.q(2) : -99.);
+    ephfpQ[0] = -99.0;
     ephfpQ[1] = (eventplanes.isValid() ? ephfp2.q(2) : -99.);
     ephfpQ[2] = (eventplanes.isValid() ? ephfp3.q(2) : -99.);
 
-    ephfmQ[0] = (eventplanes.isValid() ? ephfm1.q(2) : -99.);
+    //ephfmQ[0] = (eventplanes.isValid() ? ephfm1.q(2) : -99.);
+    ephfmQ[0] = -99.0;
     ephfmQ[1] = (eventplanes.isValid() ? ephfm2.q(2) : -99.);
     ephfmQ[2] = (eventplanes.isValid() ? ephfm3.q(2) : -99.);
     
@@ -282,22 +284,26 @@ EventInfoTreeProducer::fillRECO(const edm::Event& iEvent, const edm::EventSetup&
     eptkQ[0] = (eventplanes.isValid() ? eptk2.q(2): -99.);
     eptkQ[1] = (eventplanes.isValid() ? eptk3.q(2): -99.);
 
-    ephfpSumW[0] = (eventplanes.isValid() ? ephfp1.sumw() : -99.);
+    //ephfpSumW[0] = (eventplanes.isValid() ? ephfp1.sumw() : -99.);
+    ephfpSumW[0] = -99.0;
     ephfpSumW[1] = (eventplanes.isValid() ? ephfp2.sumw() : -99.);
     ephfpSumW[2] = (eventplanes.isValid() ? ephfp3.sumw() : -99.);
 
-    ephfmSumW[0] = (eventplanes.isValid() ? ephfm1.sumw() : -99.);
+    //ephfmSumW[0] = (eventplanes.isValid() ? ephfm1.sumw() : -99.);
+    ephfmSumW[0] = -99.0;
     ephfmSumW[1] = (eventplanes.isValid() ? ephfm2.sumw() : -99.);
     ephfmSumW[2] = (eventplanes.isValid() ? ephfm3.sumw() : -99.);
 
     eptkSumW[0]  = (eventplanes.isValid() ? eptk2.sumw() : -99.);
     eptkSumW[1]  = (eventplanes.isValid() ? eptk3.sumw() : -99.);
 
-    ephfpSumW2[0] = (eventplanes.isValid() ? ephfp1.sumw2() : -99.);
+    //ephfpSumW2[0] = (eventplanes.isValid() ? ephfp1.sumw2() : -99.);
+    ephfpSumW2[0] = -99.0;
     ephfpSumW2[1] = (eventplanes.isValid() ? ephfp2.sumw2() : -99.);
     ephfpSumW2[2] = (eventplanes.isValid() ? ephfp3.sumw2() : -99.);
 
-    ephfmSumW2[0] = (eventplanes.isValid() ? ephfm1.sumw2() : -99.);
+    //ephfmSumW2[0] = (eventplanes.isValid() ? ephfm1.sumw2() : -99.);
+    ephfmSumW2[0] = -99.0;
     ephfmSumW2[1] = (eventplanes.isValid() ? ephfm2.sumw2() : -99.);
     ephfmSumW2[2] = (eventplanes.isValid() ? ephfm3.sumw2() : -99.);
 
